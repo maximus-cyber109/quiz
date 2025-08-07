@@ -26,7 +26,7 @@
         border-radius: 20px;
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         padding: 40px;
-        max-width: 600px;
+        max-width: 650px;
         width: 100%;
         position: relative;
         overflow: hidden;
@@ -62,6 +62,18 @@
         margin-bottom: 20px;
     }
 
+    .dental-wheel-wrapper .tries-counter {
+        background: linear-gradient(45deg, #28a745, #20c997);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        display: inline-block;
+        box-shadow: 0 3px 10px rgba(40, 167, 69, 0.3);
+    }
+
     .dental-wheel-wrapper .wheel-game-area {
         position: relative;
         margin: 30px auto;
@@ -69,8 +81,8 @@
     }
 
     .dental-wheel-wrapper .wheel-circle {
-        width: 300px;
-        height: 300px;
+        width: 320px;
+        height: 320px;
         border: 8px solid #333;
         border-radius: 50%;
         position: relative;
@@ -87,6 +99,7 @@
         );
         transition: transform 4s cubic-bezier(0.23, 1, 0.320, 1);
         transform-origin: center;
+        overflow: hidden;
     }
 
     .dental-wheel-wrapper .wheel-circle::after {
@@ -94,10 +107,10 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
         background: white;
-        border: 4px solid #333;
+        border: 5px solid #333;
         border-radius: 50%;
         transform: translate(-50%, -50%);
         z-index: 10;
@@ -110,35 +123,44 @@
         transform: translateX(-50%);
         width: 0;
         height: 0;
-        border-left: 15px solid transparent;
-        border-right: 15px solid transparent;
-        border-top: 30px solid #333;
+        border-left: 18px solid transparent;
+        border-right: 18px solid transparent;
+        border-top: 35px solid #333;
         z-index: 15;
     }
 
-    .dental-wheel-wrapper .wheel-text {
+    .dental-wheel-wrapper .wheel-segment {
         position: absolute;
-        width: 50%;
-        height: 50%;
-        transform-origin: right bottom;
+        top: 50%;
+        left: 50%;
+        width: 160px;
+        height: 160px;
+        transform-origin: 0 0;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
-        font-weight: bold;
-        font-size: 0.9rem;
-        color: white;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-        text-align: center;
+        padding-top: 20px;
     }
 
-    .dental-wheel-wrapper .text-1 { transform: rotate(22.5deg) translate(-60px, -60px); }
-    .dental-wheel-wrapper .text-2 { transform: rotate(67.5deg) translate(-60px, -60px); }
-    .dental-wheel-wrapper .text-3 { transform: rotate(112.5deg) translate(-60px, -60px); }
-    .dental-wheel-wrapper .text-4 { transform: rotate(157.5deg) translate(-60px, -60px); }
-    .dental-wheel-wrapper .text-5 { transform: rotate(202.5deg) translate(-60px, -60px); }
-    .dental-wheel-wrapper .text-6 { transform: rotate(247.5deg) translate(-60px, -60px); }
-    .dental-wheel-wrapper .text-7 { transform: rotate(292.5deg) translate(-60px, -60px); }
-    .dental-wheel-wrapper .text-8 { transform: rotate(337.5deg) translate(-60px, -60px); }
+    .dental-wheel-wrapper .wheel-text {
+        color: white;
+        font-weight: bold;
+        font-size: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        text-align: center;
+        line-height: 1.2;
+        transform: rotate(-22.5deg);
+        white-space: nowrap;
+    }
+
+    .dental-wheel-wrapper .segment-1 { transform: rotate(0deg); }
+    .dental-wheel-wrapper .segment-2 { transform: rotate(45deg); }
+    .dental-wheel-wrapper .segment-3 { transform: rotate(90deg); }
+    .dental-wheel-wrapper .segment-4 { transform: rotate(135deg); }
+    .dental-wheel-wrapper .segment-5 { transform: rotate(180deg); }
+    .dental-wheel-wrapper .segment-6 { transform: rotate(225deg); }
+    .dental-wheel-wrapper .segment-7 { transform: rotate(270deg); }
+    .dental-wheel-wrapper .segment-8 { transform: rotate(315deg); }
 
     .dental-wheel-wrapper .spin-button {
         background: linear-gradient(45deg, #667eea, #764ba2);
@@ -283,22 +305,19 @@
         }
         
         .dental-wheel-wrapper .wheel-circle {
-            width: 250px;
-            height: 250px;
+            width: 280px;
+            height: 280px;
+        }
+        
+        .dental-wheel-wrapper .wheel-segment {
+            width: 140px;
+            height: 140px;
+            padding-top: 15px;
         }
         
         .dental-wheel-wrapper .wheel-text {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
-        
-        .dental-wheel-wrapper .text-1 { transform: rotate(22.5deg) translate(-50px, -50px); }
-        .dental-wheel-wrapper .text-2 { transform: rotate(67.5deg) translate(-50px, -50px); }
-        .dental-wheel-wrapper .text-3 { transform: rotate(112.5deg) translate(-50px, -50px); }
-        .dental-wheel-wrapper .text-4 { transform: rotate(157.5deg) translate(-50px, -50px); }
-        .dental-wheel-wrapper .text-5 { transform: rotate(202.5deg) translate(-50px, -50px); }
-        .dental-wheel-wrapper .text-6 { transform: rotate(247.5deg) translate(-50px, -50px); }
-        .dental-wheel-wrapper .text-7 { transform: rotate(292.5deg) translate(-50px, -50px); }
-        .dental-wheel-wrapper .text-8 { transform: rotate(337.5deg) translate(-50px, -50px); }
     }
 
     @keyframes bounce {
@@ -338,28 +357,48 @@
             <p class="wheel-subtitle">Spin the wheel and win amazing dental care discounts!</p>
         </div>
         
+        <div class="tries-counter" id="triesCounter">
+            <i class="fas fa-star"></i> 5 Spins Remaining
+        </div>
+        
         <div class="wheel-rules">
             <h3><i class="fas fa-info-circle" style="color: #667eea;"></i> How to Play:</h3>
             <ul>
-                <li>Click the "Spin the Wheel" button below</li>
-                <li>Watch the wheel spin and land on your prize</li>
-                <li>Collect your exclusive discount coupon</li>
-                <li>Use your coupon on premium dental equipment</li>
-                <li>One spin per user - make it count!</li>
+                <li>You get 5 chances to spin the wheel</li>
+                <li>Each spin gives you a discount coupon</li>
+                <li>Collect multiple coupons for bigger savings</li>
+                <li>Use your coupons on premium dental equipment</li>
+                <li>Make the most of all 5 spins!</li>
             </ul>
         </div>
 
         <div class="wheel-game-area">
             <div class="wheel-pointer"></div>
             <div class="wheel-circle" id="wheelCircle">
-                <div class="wheel-text text-1">25% OFF</div>
-                <div class="wheel-text text-2">Free Ship</div>
-                <div class="wheel-text text-3">15% OFF</div>
-                <div class="wheel-text text-4">10% OFF</div>
-                <div class="wheel-text text-5">30% OFF</div>
-                <div class="wheel-text text-6">5% OFF</div>
-                <div class="wheel-text text-7">20% OFF</div>
-                <div class="wheel-text text-8">Try Again</div>
+                <div class="wheel-segment segment-1">
+                    <div class="wheel-text">25% OFF</div>
+                </div>
+                <div class="wheel-segment segment-2">
+                    <div class="wheel-text">Free Ship</div>
+                </div>
+                <div class="wheel-segment segment-3">
+                    <div class="wheel-text">15% OFF</div>
+                </div>
+                <div class="wheel-segment segment-4">
+                    <div class="wheel-text">10% OFF</div>
+                </div>
+                <div class="wheel-segment segment-5">
+                    <div class="wheel-text">30% OFF</div>
+                </div>
+                <div class="wheel-segment segment-6">
+                    <div class="wheel-text">5% OFF</div>
+                </div>
+                <div class="wheel-segment segment-7">
+                    <div class="wheel-text">20% OFF</div>
+                </div>
+                <div class="wheel-segment segment-8">
+                    <div class="wheel-text">Try Again</div>
+                </div>
             </div>
         </div>
 
@@ -375,8 +414,8 @@
                 <button class="action-btn" onclick="copyWheelCoupon()">
                     <i class="fas fa-copy"></i> Copy Code
                 </button>
-                <button class="action-btn" onclick="resetWheelGame()">
-                    <i class="fas fa-redo"></i> Close
+                <button class="action-btn" onclick="continueSpinning()">
+                    <i class="fas fa-redo"></i> Continue Spinning
                 </button>
             </div>
         </div>
@@ -384,8 +423,9 @@
 </div>
 
 <script>
-    let wheelHasSpun = false;
+    let remainingSpins = 5;
     let wheelIsSpinning = false;
+    let collectedCoupons = [];
 
     const wheelPrizes = [
         { text: '25% OFF', coupon: 'WHEEL25OFF', icon: '🎉' },
@@ -395,17 +435,17 @@
         { text: '30% OFF', coupon: 'WHEEL30OFF', icon: '🏆' },
         { text: '5% OFF', coupon: 'WHEEL5OFF', icon: '💳' },
         { text: '20% OFF', coupon: 'WHEEL20OFF', icon: '🎁' },
-        { text: 'Try Again', coupon: 'WHEEL5TRY', icon: '🔄' }
+        { text: 'Try Again', coupon: 'BONUS5OFF', icon: '🔄' }
     ];
 
-    // Simple user tracking for wheel
+    // Modified user tracking for 5 spins
     const WheelSecurity = {
         generateFingerprint() {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             ctx.textBaseline = 'top';
             ctx.font = '14px Arial';
-            ctx.fillText('DentalWheel2025', 2, 2);
+            ctx.fillText('DentalWheel5Spins', 2, 2);
             
             const fingerprint = canvas.toDataURL() + 
                                navigator.userAgent + 
@@ -422,40 +462,46 @@
             return Math.abs(hash).toString();
         },
 
-        hasSpun() {
+        getSpinsUsed() {
             try {
                 const fp = this.generateFingerprint();
-                const spun = JSON.parse(localStorage.getItem('dentalWheelSpun') || '[]');
-                return spun.includes(fp);
+                const spins = JSON.parse(localStorage.getItem('dentalWheelSpins') || '{}');
+                return spins[fp] || 0;
             } catch(e) {
-                return false;
+                return 0;
             }
         },
 
-        markSpun() {
+        incrementSpins() {
             try {
                 const fp = this.generateFingerprint();
-                const spun = JSON.parse(localStorage.getItem('dentalWheelSpun') || '[]');
-                if (!spun.includes(fp)) {
-                    spun.push(fp);
-                    localStorage.setItem('dentalWheelSpun', JSON.stringify(spun));
-                }
+                const spins = JSON.parse(localStorage.getItem('dentalWheelSpins') || '{}');
+                spins[fp] = (spins[fp] || 0) + 1;
+                localStorage.setItem('dentalWheelSpins', JSON.stringify(spins));
+                return spins[fp];
             } catch(e) {
-                console.log('Could not save wheel spin status');
+                return 1;
             }
         }
     };
 
-    function spinTheWheel() {
-        if (wheelIsSpinning) return;
-
-        // Check if user already spun
-        if (WheelSecurity.hasSpun()) {
-            alert('You have already spun the wheel! Each user gets one spin.');
-            return;
+    function updateTriesCounter() {
+        const counter = document.getElementById('triesCounter');
+        if (remainingSpins > 0) {
+            counter.innerHTML = `<i class="fas fa-star"></i> ${remainingSpins} Spins Remaining`;
+            counter.style.background = 'linear-gradient(45deg, #28a745, #20c997)';
+        } else {
+            counter.innerHTML = '<i class="fas fa-check"></i> All Spins Used';
+            counter.style.background = 'linear-gradient(45deg, #6c757d, #495057)';
         }
+    }
+
+    function spinTheWheel() {
+        if (wheelIsSpinning || remainingSpins <= 0) return;
 
         wheelIsSpinning = true;
+        remainingSpins--;
+        
         const wheel = document.getElementById('wheelCircle');
         const spinBtn = document.getElementById('spinButton');
         
@@ -478,8 +524,14 @@
             const prizeIndex = Math.floor((360 - normalizedRotation + 22.5) / 45) % 8;
             const prize = wheelPrizes[prizeIndex];
             
+            // Add coupon to collection
+            collectedCoupons.push(prize.coupon);
+            
             showWheelResult(prize);
-            WheelSecurity.markSpun();
+            updateTriesCounter();
+            
+            // Save spin count
+            WheelSecurity.incrementSpins();
         }, 4000);
     }
 
@@ -532,21 +584,36 @@
         }, 2000);
     }
 
-    function resetWheelGame() {
+    function continueSpinning() {
         document.getElementById('resultDisplay').classList.remove('show');
+        
         const spinBtn = document.getElementById('spinButton');
-        spinBtn.disabled = true;
-        spinBtn.innerHTML = '<i class="fas fa-check"></i> Already Spun';
-        spinBtn.style.opacity = '0.6';
+        if (remainingSpins > 0) {
+            spinBtn.disabled = false;
+            spinBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Spin Again';
+        } else {
+            spinBtn.disabled = true;
+            spinBtn.innerHTML = '<i class="fas fa-trophy"></i> All Spins Complete';
+            showFinalResults();
+        }
     }
 
-    // Check if user already spun on page load
+    function showFinalResults() {
+        setTimeout(() => {
+            alert(`🎉 Congratulations! You've collected ${collectedCoupons.length} coupons:\n\n${collectedCoupons.join('\n')}\n\nUse these codes for amazing dental equipment discounts!`);
+        }, 1000);
+    }
+
+    // Initialize on page load
     window.addEventListener('load', function() {
-        if (WheelSecurity.hasSpun()) {
+        const spinsUsed = WheelSecurity.getSpinsUsed();
+        remainingSpins = Math.max(0, 5 - spinsUsed);
+        updateTriesCounter();
+        
+        if (remainingSpins <= 0) {
             const spinBtn = document.getElementById('spinButton');
             spinBtn.disabled = true;
-            spinBtn.innerHTML = '<i class="fas fa-check"></i> Already Spun';
-            spinBtn.style.opacity = '0.6';
+            spinBtn.innerHTML = '<i class="fas fa-trophy"></i> All Spins Complete';
         }
     });
 
