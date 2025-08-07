@@ -327,6 +327,11 @@
             transform: translateX(0);
         }
     }
+
+    @keyframes fadeOut {
+        0% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(-20px); }
+    }
 </style>
 
 <div class="dental-wheel-wrapper">
@@ -571,23 +576,13 @@
         updateTriesCounter();
     });
 
-    // Add CSS for fade out animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes fadeOut {
-            0% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-20px); }
-        }
-    `;
-    document.head.appendChild(style);
-
     // Prevent basic cheating
     document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
     });
 
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') {
+        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
             e.preventDefault();
         }
     });
