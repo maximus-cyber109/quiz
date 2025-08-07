@@ -406,16 +406,18 @@
     let currentSpin = 0;
     let wheelIsSpinning = false;
     let collectedPrizes = [];
+    let totalRotation = 0; // Track cumulative rotation to prevent slowdown
 
+    // Fixed prize array that matches the wheel segments exactly
     const wheelPrizes = [
-        { text: '25% OFF', coupon: 'WHEEL25OFF', icon: '🎉' },
-        { text: 'Free Shipping', coupon: 'WHEELSHIP', icon: '🚚' },
-        { text: '15% OFF', coupon: 'WHEEL15OFF', icon: '💰' },
-        { text: '10% OFF', coupon: 'WHEEL10OFF', icon: '💸' },
-        { text: '30% OFF', coupon: 'WHEEL30OFF', icon: '🏆' },
-        { text: '5% OFF', coupon: 'WHEEL5OFF', icon: '💳' },
-        { text: '20% OFF', coupon: 'WHEEL20OFF', icon: '🎁' },
-        { text: 'Try Again', coupon: 'BONUS5OFF', icon: '🔄' }
+        { text: '25% OFF', coupon: 'WHEEL25OFF', icon: '🎉' },      // Segment 1 (0-45°)
+        { text: 'Free Shipping', coupon: 'WHEELSHIP', icon: '🚚' }, // Segment 2 (45-90°)
+        { text: '15% OFF', coupon: 'WHEEL15OFF', icon: '💰' },      // Segment 3 (90-135°)
+        { text: '10% OFF', coupon: 'WHEEL10OFF', icon: '💸' },      // Segment 4 (135-180°)
+        { text: '30% OFF', coupon: 'WHEEL30OFF', icon: '🏆' },      // Segment 5 (180-225°)
+        { text: '5% OFF', coupon: 'WHEEL5OFF', icon: '💳' },        // Segment 6 (225-270°)
+        { text: '20% OFF', coupon: 'WHEEL20OFF', icon: '🎁' },      // Segment 7 (270-315°)
+        { text: 'Try Again', coupon: 'BONUS5OFF', icon: '🔄' }      // Segment 8 (315-360°)
     ];
 
     function updateTriesCounter() {
@@ -443,21 +445,46 @@
         spinBtn.disabled = true;
         spinBtn.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Spinning...';
         
-        // Generate random spin (consistent speed for all spins)
-        const minRotations = 4; // Same rotations for all spins
+        // Generate random spin amount (not cumulative)
+        const minRotations = 4;
         const randomSection = Math.floor(Math.random() * 8);
-        const sectionDegrees = 45; // 360/8 sections
+        const sectionDegrees = 45;
         const extraSpin = Math.random() * sectionDegrees;
-        const finalRotation = (minRotations * 360) + (randomSection * sectionDegrees) + extraSpin;
+        const spinAmount = (minRotations * 360) + (randomSection * sectionDegrees) + extraSpin;
         
-        wheel.style.transform = `rotate(${finalRotation}deg)`;
+        // Add to total rotation to prevent reset/slowdown
+        totalRotation += spinAmount;
         
-        // Consistent 4-second spin duration for all spins
+        // Apply the new total rotation
+        wheel.style.transform = `rotate(${totalRotation}deg)`;
+        
         setTimeout(() => {
             wheelIsSpinning = false;
-            // Calculate which prize based on final rotation
-            const normalizedRotation = finalRotation % 360;
-            const prizeIndex = Math.floor((360 - normalizedRotation + 22.5) / 45) % 8;
+            
+            // Calculate final position (only the final rotation matters for prize)
+            const finalPosition = totalRotation % 360;
+            
+            // Correct prize calculation: wheel spins clockwise, pointer at top
+            // We need to determine which segment the top pointer lands on
+            let prizeIndex;
+            if (finalPosition >= 0 && finalPosition < 45) {
+                prizeIndex = 0; // 25% OFF
+            } else if (finalPosition >= 45 && finalPosition < 90) {
+                prizeIndex = 7; // Try Again  
+            } else if (finalPosition >= 90 && finalPosition < 135) {
+                prizeIndex = 6; // 20% OFF
+            } else if (finalPosition >= 135 && finalPosition < 180) {
+                prizeIndex = 5; // 5% OFF
+            } else if (finalPosition >= 180 && finalPosition < 225) {
+                prizeIndex = 4; // 30% OFF
+            } else if (finalPosition >= 225 && finalPosition < 270) {
+                prizeIndex = 3; // 10% OFF
+            } else if (finalPosition >= 270 && finalPosition < 315) {
+                prizeIndex = 2; // 15% OFF
+            } else {
+                prizeIndex = 1; // Free Shipping
+            }
+            
             const prize = wheelPrizes[prizeIndex];
             
             // Add prize to collection
@@ -476,7 +503,7 @@
                 spinBtn.innerHTML = '<i class="fas fa-trophy"></i> All Spins Complete';
             }
             
-        }, 4000); // Consistent 4-second duration for all spins
+        }, 4000);
     }
 
     function addPrizeToList(prize, spinNumber) {
@@ -536,7 +563,6 @@
     }
 
     function showCopySuccess() {
-        // Create a temporary success message
         const success = document.createElement('div');
         success.style.cssText = `
             position: fixed;
