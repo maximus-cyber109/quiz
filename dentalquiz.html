@@ -1,12 +1,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dental Quiz Challenge - Win Exclusive Rewards!</title>
+<title>PB DAYS: Pulse Edition - Dental Quiz Challenge</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
     /* Isolated quiz styles - won't affect existing site elements */
     .dental-quiz-wrapper {
         all: initial;
-        font-family: 'Arial', sans-serif;
+        font-family: 'Rajdhani', sans-serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
         display: flex;
@@ -26,7 +27,7 @@
         border-radius: 20px;
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         padding: 40px;
-        max-width: 800px;
+        max-width: 900px;
         width: 100%;
         position: relative;
         overflow: hidden;
@@ -43,22 +44,86 @@
         background: linear-gradient(45deg, #667eea, #764ba2);
     }
 
+    .dental-quiz-wrapper .pb-header {
+        text-align: center;
+        margin-bottom: 25px;
+        padding: 20px 0;
+        background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+        margin: -40px -40px 30px -40px;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .dental-quiz-wrapper .pb-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+
+    .dental-quiz-wrapper .pb-title {
+        font-family: 'Orbitron', monospace;
+        font-size: 2.8rem;
+        font-weight: 900;
+        margin-bottom: 5px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        letter-spacing: 2px;
+    }
+
+    .dental-quiz-wrapper .pb-dates {
+        font-family: 'Orbitron', monospace;
+        font-size: 1.2rem;
+        font-weight: 400;
+        margin-bottom: 10px;
+        opacity: 0.9;
+    }
+
+    .dental-quiz-wrapper .pb-tagline {
+        font-size: 1.1rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        animation: pulse 2s infinite;
+    }
+
+    .dental-quiz-wrapper .player-counter {
+        background: rgba(255,255,255,0.2);
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        display: inline-block;
+    }
+
     .dental-quiz-wrapper .quiz-header {
         text-align: center;
         margin-bottom: 30px;
     }
 
     .dental-quiz-wrapper .quiz-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         color: #333;
         margin-bottom: 10px;
-        font-weight: bold;
+        font-weight: 700;
+        font-family: 'Rajdhani', sans-serif;
     }
 
     .dental-quiz-wrapper .quiz-subtitle {
         color: #666;
         font-size: 1.2rem;
         margin-bottom: 20px;
+        font-weight: 400;
     }
 
     .dental-quiz-wrapper .timer-container {
@@ -78,12 +143,6 @@
         font-weight: bold;
         box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
         animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
     }
 
     .dental-quiz-wrapper .progress-bar {
@@ -118,6 +177,7 @@
         color: #333;
         line-height: 1.6;
         margin-bottom: 25px;
+        font-weight: 500;
     }
 
     .dental-quiz-wrapper .options-container {
@@ -201,6 +261,7 @@
         justify-content: center;
         gap: 20px;
         margin-top: 30px;
+        flex-wrap: wrap;
     }
 
     .dental-quiz-wrapper .btn {
@@ -213,6 +274,9 @@
         transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
     }
 
     .dental-quiz-wrapper .btn-primary {
@@ -233,6 +297,16 @@
 
     .dental-quiz-wrapper .btn-secondary:hover {
         background: #e9ecef;
+    }
+
+    .dental-quiz-wrapper .btn-success {
+        background: linear-gradient(45deg, #28a745, #20c997);
+        color: white;
+    }
+
+    .dental-quiz-wrapper .btn-warning {
+        background: linear-gradient(45deg, #ffc107, #fd7e14);
+        color: white;
     }
 
     .dental-quiz-wrapper .btn:disabled {
@@ -274,6 +348,7 @@
         font-size: 1.5rem;
         color: #667eea;
         margin-bottom: 30px;
+        font-weight: 600;
     }
 
     .dental-quiz-wrapper .reward-card {
@@ -326,6 +401,7 @@
         border-radius: 25px;
         cursor: pointer;
         transition: all 0.3s ease;
+        margin: 5px;
     }
 
     .dental-quiz-wrapper .copy-btn:hover {
@@ -400,14 +476,29 @@
         font-weight: bold;
     }
 
+    .dental-quiz-wrapper .creative-footer {
+        margin-top: 30px;
+        padding: 20px;
+        background: linear-gradient(45deg, #ff9a9e, #fecfef);
+        border-radius: 15px;
+        text-align: center;
+        color: #333;
+        font-style: italic;
+        font-weight: 500;
+    }
+
     @media (max-width: 768px) {
         .dental-quiz-wrapper .quiz-container {
             padding: 20px;
             margin: 10px;
         }
         
-        .dental-quiz-wrapper .quiz-title {
+        .dental-quiz-wrapper .pb-title {
             font-size: 2rem;
+        }
+        
+        .dental-quiz-wrapper .quiz-title {
+            font-size: 1.8rem;
         }
         
         .dental-quiz-wrapper .question-text {
@@ -426,7 +517,8 @@
         
         .dental-quiz-wrapper .btn {
             width: 100%;
-            max-width: 200px;
+            max-width: 300px;
+            margin: 5px 0;
         }
     }
 
@@ -444,14 +536,24 @@
 
 <div class="dental-quiz-wrapper">
     <div class="quiz-container">
+        <!-- PB DAYS Header -->
+        <div class="pb-header">
+            <h1 class="pb-title">PB DAYS: Pulse Edition</h1>
+            <div class="pb-dates">12-14 August</div>
+            <div class="pb-tagline">🎯 Superdeals • 🧠 Quizzes • 💰 Daily Jackpots</div>
+            <div class="player-counter" id="playerCounter">
+                <i class="fas fa-users"></i> <span id="playerCount">847</span> people played this quiz!
+            </div>
+        </div>
+
         <!-- Start Screen -->
         <div class="start-screen" id="startScreen">
             <div class="quiz-header">
                 <h1 class="quiz-title">
                     <i class="fas fa-tooth" style="color: #667eea;"></i>
-                    Dental Quiz Challenge
+                    Dental Knowledge Challenge
                 </h1>
-                <p class="quiz-subtitle">Test your dental knowledge and win exclusive rewards!</p>
+                <p class="quiz-subtitle">Test your dental expertise and unlock exclusive PB DAYS rewards!</p>
             </div>
             
             <div class="quiz-rules">
@@ -459,9 +561,9 @@
                 <ul>
                     <li>Answer 10 randomly selected dental questions</li>
                     <li>You have 2 minutes to complete the quiz</li>
-                    <li>Score 8/10 or higher for maximum rewards</li>
+                    <li>Higher scores unlock better rewards</li>
                     <li>Each question has only one correct answer</li>
-                    <li>One attempt per user - questions change on refresh</li>
+                    <li>Everyone gets at least one chance to play</li>
                 </ul>
             </div>
             
@@ -475,7 +577,7 @@
             <div class="quiz-header">
                 <h1 class="quiz-title">
                     <i class="fas fa-tooth" style="color: #667eea;"></i>
-                    Dental Quiz Challenge
+                    PB DAYS Quiz Challenge
                 </h1>
                 <div class="timer-container">
                     <div class="timer" id="timer">
@@ -514,7 +616,7 @@
             
             <div class="reward-card" id="rewardCard">
                 <div class="reward-content">
-                    <h3><i class="fas fa-gift"></i> Your Reward!</h3>
+                    <h3><i class="fas fa-gift"></i> Your PB DAYS Reward!</h3>
                     <p id="rewardText"></p>
                     <div class="coupon-code" id="couponCode"></div>
                     <button class="copy-btn" onclick="copyCoupon()">
@@ -524,10 +626,25 @@
             </div>
             
             <div class="quiz-actions">
+                <a href="https://pinkblue.in/cart" class="btn btn-success" target="_blank">
+                    <i class="fas fa-shopping-cart"></i> Checkout Now
+                </a>
+                <a href="https://pinkblue.in" class="btn btn-warning" target="_blank">
+                    <i class="fas fa-store"></i> Continue Shopping
+                </a>
+                <button class="btn btn-secondary" onclick="shareQuiz()">
+                    <i class="fas fa-share-alt"></i> Share with Friends
+                </button>
                 <button class="btn btn-primary" onclick="restartQuiz()">
-                    <i class="fas fa-redo"></i> Take Quiz Again
+                    <i class="fas fa-redo"></i> Try Again
                 </button>
             </div>
+        </div>
+
+        <!-- Creative Footer -->
+        <div class="creative-footer">
+            <p>🦷 "Life's too short for bad teeth... and boring quizzes!" 😄</p>
+            <small>Powered by PinkBlue.in - Where dental dreams come true! ✨</small>
         </div>
     </div>
 </div>
@@ -540,6 +657,27 @@
     let selectedAnswer = null;
     let quizCompleted = false;
     let questions = []; // Will be populated with random questions
+
+    // Player counter animation
+    function updatePlayerCounter() {
+        const minCount = 150;
+        const maxCount = 1000;
+        const currentCount = parseInt(document.getElementById('playerCount').textContent);
+        
+        // Random increment between 1-5
+        const increment = Math.floor(Math.random() * 5) + 1;
+        let newCount = currentCount + increment;
+        
+        // Reset if exceeds max
+        if (newCount > maxCount) {
+            newCount = minCount + Math.floor(Math.random() * 50);
+        }
+        
+        document.getElementById('playerCount').textContent = newCount;
+    }
+
+    // Update player count every 3-8 seconds
+    setInterval(updatePlayerCounter, Math.floor(Math.random() * 5000) + 3000);
 
     // Expanded question pool (30+ questions)
     const allQuestions = [
@@ -695,14 +833,14 @@
         }
     ];
 
-    // Anti-exploitation security measures
+    // Anti-exploitation security measures (modified to allow everyone at least one try)
     const QuizSecurity = {
         generateFingerprint() {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             ctx.textBaseline = 'top';
             ctx.font = '14px Arial';
-            ctx.fillText('DentalQuiz2025', 2, 2);
+            ctx.fillText('PBDaysQuiz2025', 2, 2);
             
             const fingerprint = canvas.toDataURL() + 
                                navigator.userAgent + 
@@ -722,16 +860,16 @@
         
         hasCompleted() {
             const fp = this.generateFingerprint();
-            const completed = JSON.parse(localStorage.getItem('dentalQuizCompleted') || '[]');
+            const completed = JSON.parse(localStorage.getItem('pbDaysQuizCompleted') || '[]');
             return completed.includes(fp);
         },
         
         markCompleted() {
             const fp = this.generateFingerprint();
-            const completed = JSON.parse(localStorage.getItem('dentalQuizCompleted') || '[]');
+            const completed = JSON.parse(localStorage.getItem('pbDaysQuizCompleted') || '[]');
             if (!completed.includes(fp)) {
                 completed.push(fp);
-                localStorage.setItem('dentalQuizCompleted', JSON.stringify(completed));
+                localStorage.setItem('pbDaysQuizCompleted', JSON.stringify(completed));
             }
         }
     };
@@ -743,12 +881,6 @@
     }
 
     function startQuiz() {
-        // Check if user has already completed the quiz
-        if (QuizSecurity.hasCompleted()) {
-            showCompletedMessage();
-            return;
-        }
-        
         // Generate fresh random questions for this attempt
         questions = getRandomQuestions(allQuestions, 10);
         
@@ -756,27 +888,6 @@
         document.getElementById('quizScreen').classList.add('show');
         startTimer();
         loadQuestion();
-    }
-
-    function showCompletedMessage() {
-        document.getElementById('startScreen').innerHTML = `
-            <div class="quiz-header">
-                <h1 class="quiz-title">
-                    <i class="fas fa-check-circle" style="color: #28a745;"></i>
-                    Quiz Already Completed!
-                </h1>
-                <p class="quiz-subtitle">You have already taken this quiz and earned your reward!</p>
-            </div>
-            <div class="reward-card">
-                <div class="reward-content">
-                    <h3><i class="fas fa-star"></i> Thank You for Participating!</h3>
-                    <p>Each user can only take the quiz once to ensure fairness. Check out our premium dental equipment with your earned discount!</p>
-                    <button class="btn btn-primary" onclick="window.location.href='/'">
-                        <i class="fas fa-shopping-cart"></i> Browse Products
-                    </button>
-                </div>
-            </div>
-        `;
     }
 
     function startTimer() {
@@ -887,38 +998,104 @@
         const rewardText = document.getElementById('rewardText');
         const couponCode = document.getElementById('couponCode');
         
-        if (score >= 8) {
-            resultsTitle.textContent = 'Excellent! You\'ve Won!';
-            rewardText.textContent = 'Congratulations! You\'ve unlocked a 25% discount on all premium dental equipment!';
-            couponCode.textContent = 'DENTAL25OFF';
+        // Updated reward system based on user requirements
+        if (score >= 9) {
+            resultsTitle.textContent = 'Outstanding Performance!';
+            rewardText.textContent = 'Amazing! You\'ve earned SpeedEndo Calcipro Rotary Files worth ₹1250 FREE with minimum purchase of ₹4999!';
+            couponCode.textContent = 'XML5KZ';
             rewardCard.style.display = 'block';
-        } else if (score >= 6) {
-            resultsTitle.textContent = 'Good Job!';
-            rewardText.textContent = 'Well done! You\'ve earned a 15% discount on selected items!';
-            couponCode.textContent = 'DENTAL15OFF';
+        } else if (score >= 7) {
+            resultsTitle.textContent = 'Excellent Work!';
+            rewardText.textContent = 'Great job! You\'ve unlocked 10% PB Cashback on your purchase!';
+            couponCode.textContent = 'ZYXW10';
+            rewardCard.style.display = 'block';
+        } else if (score === 6) {
+            resultsTitle.textContent = 'Well Done!';
+            rewardText.textContent = 'Congratulations! You\'ve won a FREE Flitt Burs Pack of 10 worth ₹499!';
+            couponCode.textContent = 'FLXMGH';
+            rewardCard.style.display = 'block';
+        } else if (score >= 4) {
+            resultsTitle.textContent = 'Good Effort!';
+            rewardText.textContent = 'Nice work! You\'ve earned 10% PB Cashback on your next order!';
+            couponCode.textContent = 'XMFHUI';
             rewardCard.style.display = 'block';
         } else {
             resultsTitle.textContent = 'Keep Learning!';
-            rewardText.textContent = 'Don\'t worry! Here\'s a 10% discount to help you get started with quality dental equipment!';
-            couponCode.textContent = 'DENTAL10OFF';
+            rewardText.textContent = 'Don\'t worry! Here\'s a Flat 5% Off to get you started with quality dental equipment!';
+            couponCode.textContent = '5XMHY';
             rewardCard.style.display = 'block';
         }
     }
 
     function copyCoupon() {
         const couponCode = document.getElementById('couponCode').textContent;
-        navigator.clipboard.writeText(couponCode).then(() => {
-            const copyBtn = document.querySelector('.copy-btn');
-            const originalText = copyBtn.innerHTML;
-            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-            setTimeout(() => {
-                copyBtn.innerHTML = originalText;
-            }, 2000);
-        });
+        
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(couponCode).then(() => {
+                showCopySuccess();
+            }).catch(() => {
+                fallbackCopy(couponCode);
+            });
+        } else {
+            fallbackCopy(couponCode);
+        }
+    }
+
+    function fallbackCopy(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+            document.execCommand('copy');
+            showCopySuccess();
+        } catch (err) {
+            alert('Coupon code: ' + text + '\n\nPlease copy this code manually.');
+        }
+        document.body.removeChild(textArea);
+    }
+
+    function showCopySuccess() {
+        const copyBtn = document.querySelector('.copy-btn');
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+            copyBtn.innerHTML = originalText;
+        }, 2000);
+    }
+
+    function shareQuiz() {
+        const scoreText = document.getElementById('scoreDisplay').textContent;
+        const couponText = document.getElementById('couponCode').textContent;
+        
+        // Create shareable text
+        const shareText = `🦷 I just scored ${score}/10 on the PB DAYS Dental Quiz and won "${couponText}"! \n\n🎯 Test your dental knowledge and win amazing rewards!\n\n#PBDays #DentalQuiz #PinkBlue`;
+        
+        if (navigator.share) {
+            navigator.share({
+                title: 'PB DAYS: Pulse Edition Quiz Results',
+                text: shareText,
+                url: window.location.href
+            });
+        } else {
+            // Fallback: copy to clipboard
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(shareText).then(() => {
+                    alert('Quiz results copied to clipboard! Share it with your friends!');
+                });
+            } else {
+                alert('Share this: ' + shareText);
+            }
+        }
     }
 
     function restartQuiz() {
-        // Reset quiz state but don't allow new completion if already completed
+        // Reset quiz state
         currentQuestion = 0;
         score = 0;
         timeLeft = 120;
@@ -926,14 +1103,7 @@
         quizCompleted = false;
         
         document.getElementById('resultsScreen').classList.remove('show');
-        
-        // Check if user has completed before
-        if (QuizSecurity.hasCompleted()) {
-            showCompletedMessage();
-        } else {
-            document.getElementById('startScreen').classList.remove('hidden');
-        }
-        
+        document.getElementById('startScreen').classList.remove('hidden');
         document.getElementById('quizScreen').classList.remove('show');
         clearInterval(timer);
     }
@@ -949,3 +1119,4 @@
         }
     });
 </script>
+
