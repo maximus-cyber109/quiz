@@ -1,732 +1,992 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PB DAYS: Pulse Edition - Neon Quiz Challenge</title>
+<title>PB DAYS: Pulse Edition - Ultimate Dental Challenge</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@thumbmarkjs/thumbmarkjs/dist/thumbmark.umd.js"></script>
 <style>
-    .quiz-wrapper {
-        all: initial;
-        font-family: 'Exo 2', sans-serif;
-        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0a0a0a 100%);
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        position: relative;
-        overflow-x: hidden;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
 
-    .quiz-wrapper::before {
-        content: '';
+    body {
+        font-family: 'Rajdhani', sans-serif;
+        background: #0a0a0f;
+        color: #ffffff;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
+
+    /* Animated Background */
+    .cosmic-bg {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: 
-            radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 50% 50%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
-        animation: bgPulse 4s ease-in-out infinite alternate;
-        pointer-events: none;
+        background: linear-gradient(45deg, 
+            #0a0a0f 0%, 
+            #1a0033 20%, 
+            #330066 40%, 
+            #000033 60%, 
+            #001133 80%, 
+            #0a0a0f 100%);
+        z-index: -2;
+        animation: cosmicShift 20s ease-in-out infinite;
     }
 
-    @keyframes bgPulse {
-        0% { opacity: 0.3; }
-        100% { opacity: 0.7; }
+    @keyframes cosmicShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
     }
 
-    .quiz-wrapper * {
-        box-sizing: border-box;
+    /* Floating Particles */
+    .particle {
+        position: fixed;
+        width: 4px;
+        height: 4px;
+        background: #00ffff;
+        border-radius: 50%;
+        box-shadow: 0 0 20px #00ffff;
+        animation: floatParticles 8s linear infinite;
+        z-index: -1;
     }
 
-    .quiz-container {
-        background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-        backdrop-filter: blur(20px);
-        border: 2px solid rgba(255,255,255,0.2);
+    @keyframes floatParticles {
+        0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
+    }
+
+    /* Main Container */
+    .neon-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+    }
+
+    /* Epic Header */
+    .cyber-header {
+        text-align: center;
+        padding: 60px 20px;
+        background: linear-gradient(135deg, 
+            rgba(0, 255, 255, 0.1) 0%, 
+            rgba(255, 0, 255, 0.1) 50%, 
+            rgba(255, 255, 0, 0.1) 100%);
         border-radius: 25px;
-        box-shadow: 
-            0 25px 50px rgba(0,0,0,0.5),
-            inset 0 1px 0 rgba(255,255,255,0.3),
-            0 0 50px rgba(0,255,255,0.2);
-        padding: 40px;
-        max-width: 1000px;
-        width: 100%;
+        border: 2px solid;
+        border-image: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00) 1;
+        margin-bottom: 40px;
         position: relative;
         overflow: hidden;
-        transform-style: preserve-3d;
-        animation: containerFloat 6s ease-in-out infinite;
     }
 
-    @keyframes containerFloat {
-        0%, 100% { transform: translateY(0px) rotateX(0deg); }
-        50% { transform: translateY(-10px) rotateX(1deg); }
-    }
-
-    .quiz-container::before {
+    .cyber-header::before {
         content: '';
         position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-        animation: shimmer 3s infinite;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(transparent, rgba(0, 255, 255, 0.1), transparent);
+        animation: headerSpin 10s linear infinite;
     }
 
-    @keyframes shimmer {
-        0% { left: -100%; }
-        100% { left: 100%; }
-    }
-
-    /* EPIC NEON TITLE */
-    .neon-header {
-        text-align: center;
-        margin-bottom: 40px;
-        perspective: 1000px;
+    @keyframes headerSpin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 
     .neon-title {
         font-family: 'Orbitron', monospace;
-        font-size: 4rem;
+        font-size: 4.5rem;
         font-weight: 900;
-        color: #fff;
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        margin: 0;
+        background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00, #00ffff);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: rainbowText 3s ease-in-out infinite;
+        text-shadow: 0 0 50px rgba(0, 255, 255, 0.8);
         position: relative;
-        display: inline-block;
-        text-shadow: 
-            0 0 5px #fff,
-            0 0 10px #fff,
-            0 0 15px #00ffff,
-            0 0 20px #00ffff,
-            0 0 25px #00ffff,
-            0 0 30px #00ffff,
-            0 0 35px #00ffff,
-            0 0 40px #00ffff;
-        animation: neonGlow 2s ease-in-out infinite alternate, neonFloat 3s ease-in-out infinite;
-        transform-style: preserve-3d;
+        z-index: 2;
+        letter-spacing: 3px;
     }
 
-    @keyframes neonGlow {
-        0% {
-            text-shadow: 
-                0 0 5px #fff,
-                0 0 10px #fff,
-                0 0 15px #00ffff,
-                0 0 20px #00ffff,
-                0 0 25px #00ffff,
-                0 0 30px #00ffff,
-                0 0 35px #00ffff,
-                0 0 40px #00ffff;
-        }
-        100% {
-            text-shadow: 
-                0 0 10px #fff,
-                0 0 20px #fff,
-                0 0 30px #00ffff,
-                0 0 40px #00ffff,
-                0 0 50px #00ffff,
-                0 0 60px #00ffff,
-                0 0 70px #00ffff,
-                0 0 80px #00ffff;
-        }
+    @keyframes rainbowText {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
     }
 
-    @keyframes neonFloat {
-        0%, 100% { transform: translateZ(0px) rotateY(0deg); }
-        50% { transform: translateZ(20px) rotateY(2deg); }
-    }
-
-    .pulse-edition {
+    .pulse-subtitle {
         font-family: 'Orbitron', monospace;
-        font-size: 1.8rem;
-        font-weight: 400;
+        font-size: 2rem;
         color: #ff00ff;
-        text-shadow: 
-            0 0 5px #ff00ff,
-            0 0 10px #ff00ff,
-            0 0 15px #ff00ff,
-            0 0 20px #ff00ff;
-        animation: pulseGlow 1.5s ease-in-out infinite alternate;
-        margin-top: 10px;
+        text-shadow: 0 0 30px #ff00ff;
+        animation: pulseGlow 2s ease-in-out infinite alternate;
+        margin: 20px 0;
+        position: relative;
+        z-index: 2;
     }
 
     @keyframes pulseGlow {
-        0% { opacity: 0.7; transform: scale(1); }
-        100% { opacity: 1; transform: scale(1.05); }
+        0% { text-shadow: 0 0 20px #ff00ff; transform: scale(1); }
+        100% { text-shadow: 0 0 40px #ff00ff; transform: scale(1.05); }
     }
 
-    .event-dates {
-        font-size: 1.2rem;
+    .event-info {
+        font-size: 1.3rem;
         color: #00ff00;
-        text-shadow: 0 0 10px #00ff00;
-        margin: 10px 0;
-        animation: dateFlicker 3s infinite;
-    }
-
-    @keyframes dateFlicker {
-        0%, 90%, 100% { opacity: 1; }
-        95% { opacity: 0.7; }
-    }
-
-    .tagline {
-        font-size: 1rem;
-        color: #ffff00;
-        text-shadow: 0 0 8px #ffff00;
-        font-weight: 600;
-        letter-spacing: 2px;
+        text-shadow: 0 0 20px #00ff00;
         margin: 15px 0;
-        animation: taglinePulse 2s ease-in-out infinite;
-    }
-
-    @keyframes taglinePulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.02); }
-    }
-
-    /* LIVE COUNTER */
-    .live-counter {
-        background: linear-gradient(145deg, rgba(0,255,0,0.2), rgba(0,200,0,0.1));
-        border: 2px solid rgba(0,255,0,0.5);
-        border-radius: 20px;
-        padding: 15px 25px;
-        color: #00ff00;
-        font-weight: 700;
-        text-shadow: 0 0 10px #00ff00;
-        display: inline-block;
-        margin: 20px 0;
-        animation: counterPulse 2s ease-in-out infinite;
-        box-shadow: 0 0 20px rgba(0,255,0,0.3);
-    }
-
-    @keyframes counterPulse {
-        0%, 100% { box-shadow: 0 0 20px rgba(0,255,0,0.3); }
-        50% { box-shadow: 0 0 30px rgba(0,255,0,0.6); }
-    }
-
-    /* 3D BUTTONS */
-    .btn-3d {
-        background: linear-gradient(145deg, #667eea, #764ba2);
-        border: none;
-        border-radius: 20px;
-        padding: 18px 35px;
-        color: white;
-        font-size: 1.2rem;
-        font-weight: 700;
-        cursor: pointer;
         position: relative;
-        transform-style: preserve-3d;
-        transition: all 0.3s ease;
-        box-shadow: 
-            0 8px 15px rgba(0,0,0,0.3),
-            inset 0 1px 0 rgba(255,255,255,0.3),
-            0 0 20px rgba(102,126,234,0.4);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin: 10px;
-        text-decoration: none;
-        display: inline-block;
-        text-align: center;
+        z-index: 2;
     }
 
-    .btn-3d:hover {
-        transform: translateY(-5px) rotateX(10deg);
-        box-shadow: 
-            0 15px 25px rgba(0,0,0,0.4),
-            inset 0 1px 0 rgba(255,255,255,0.4),
-            0 0 30px rgba(102,126,234,0.6);
-    }
-
-    .btn-3d:active {
-        transform: translateY(-2px) rotateX(5deg);
-    }
-
-    .btn-neon {
-        background: linear-gradient(145deg, transparent, rgba(0,255,255,0.1));
-        border: 2px solid #00ffff;
-        color: #00ffff;
-        text-shadow: 0 0 10px #00ffff;
-        box-shadow: 
-            0 0 20px rgba(0,255,255,0.4),
-            inset 0 0 20px rgba(0,255,255,0.1);
-    }
-
-    .btn-neon:hover {
-        background: linear-gradient(145deg, rgba(0,255,255,0.1), rgba(0,255,255,0.2));
-        box-shadow: 
-            0 0 30px rgba(0,255,255,0.6),
-            inset 0 0 30px rgba(0,255,255,0.2);
-        color: #ffffff;
-        text-shadow: 0 0 15px #00ffff;
-    }
-
-    /* QUIZ ELEMENTS */
-    .quiz-card {
-        background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,0.2);
-        border-radius: 20px;
-        padding: 30px;
-        margin: 20px 0;
-        box-shadow: 
-            0 15px 25px rgba(0,0,0,0.2),
-            inset 0 1px 0 rgba(255,255,255,0.2);
-        animation: cardFloat 4s ease-in-out infinite;
-    }
-
-    @keyframes cardFloat {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-5px); }
-    }
-
-    .timer-display {
-        background: linear-gradient(145deg, #ff6b6b, #ee5a52);
-        color: white;
-        padding: 15px 30px;
-        border-radius: 25px;
-        font-size: 1.8rem;
-        font-weight: 900;
-        text-align: center;
-        box-shadow: 
-            0 10px 20px rgba(255,107,107,0.4),
-            inset 0 1px 0 rgba(255,255,255,0.3);
-        animation: timerPulse 1s ease-in-out infinite;
-        margin: 20px auto;
-        display: inline-block;
-    }
-
-    @keyframes timerPulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-    }
-
-    .question-card {
-        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-        border: 2px solid rgba(255,255,255,0.2);
-        border-radius: 15px;
-        padding: 25px;
-        margin: 15px 0;
-        color: white;
-        font-size: 1.4rem;
-        line-height: 1.6;
-        transform-style: preserve-3d;
-        transition: all 0.3s ease;
-    }
-
-    .option-3d {
-        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-        border: 2px solid rgba(255,255,255,0.2);
-        border-radius: 15px;
-        padding: 20px;
-        margin: 12px 0;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        transform-style: preserve-3d;
-        color: white;
+    .epic-tagline {
         font-size: 1.1rem;
+        color: #ffff00;
+        text-shadow: 0 0 15px #ffff00;
+        font-weight: 600;
+        margin: 20px 0;
+        position: relative;
+        z-index: 2;
+        animation: taglineFlicker 4s infinite;
+    }
+
+    @keyframes taglineFlicker {
+        0%, 90%, 100% { opacity: 1; }
+        92%, 98% { opacity: 0.7; }
+    }
+
+    /* Live Stats */
+    .cyber-stats {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin: 30px 0;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 2;
+    }
+
+    .stat-orb {
+        background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.1));
+        border: 2px solid #00ffff;
+        border-radius: 20px;
+        padding: 20px;
+        text-align: center;
+        min-width: 140px;
+        box-shadow: 
+            0 0 30px rgba(0, 255, 255, 0.4),
+            inset 0 0 30px rgba(0, 255, 255, 0.1);
+        animation: orbPulse 3s ease-in-out infinite;
+        backdrop-filter: blur(10px);
+    }
+
+    @keyframes orbPulse {
+        0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.4), inset 0 0 30px rgba(0, 255, 255, 0.1); }
+        50% { box-shadow: 0 0 50px rgba(0, 255, 255, 0.8), inset 0 0 50px rgba(0, 255, 255, 0.2); }
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 900;
+        color: #00ffff;
+        text-shadow: 0 0 20px #00ffff;
+        display: block;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: #ffffff;
+        opacity: 0.8;
+        margin-top: 5px;
+    }
+
+    /* Gaming Sections */
+    .game-section {
+        background: linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.05) 0%, 
+            rgba(255, 255, 255, 0.02) 100%);
+        backdrop-filter: blur(20px);
+        border-radius: 25px;
+        border: 2px solid;
+        border-image: linear-gradient(45deg, #00ffff, #ff00ff) 1;
+        padding: 40px;
+        margin: 40px 0;
+        box-shadow: 
+            0 20px 60px rgba(0, 0, 0, 0.3),
+            0 0 50px rgba(0, 255, 255, 0.1);
         position: relative;
         overflow: hidden;
+        transition: all 0.5s ease;
     }
 
-    .option-3d::before {
+    .game-section::before {
         content: '';
         position: absolute;
         top: 0;
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+        animation: sectionShimmer 4s infinite;
+    }
+
+    @keyframes sectionShimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+
+    .game-section.hidden {
+        opacity: 0;
+        transform: scale(0.9) translateY(50px);
+        pointer-events: none;
+    }
+
+    .game-section.show {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        pointer-events: auto;
+    }
+
+    /* Section Titles */
+    .cyber-title {
+        font-family: 'Orbitron', monospace;
+        font-size: 2.8rem;
+        background: linear-gradient(45deg, #00ffff, #ffffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-align: center;
+        margin-bottom: 30px;
+        position: relative;
+        text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+    }
+
+    .cyber-subtitle {
+        font-size: 1.4rem;
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 30px;
+        opacity: 0.9;
+    }
+
+    /* Gaming Buttons */
+    .cyber-btn {
+        background: linear-gradient(135deg, #00ffff, #0088cc);
+        color: #000000;
+        border: none;
+        border-radius: 15px;
+        padding: 18px 40px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 
+            0 10px 30px rgba(0, 255, 255, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        margin: 10px;
+    }
+
+    .cyber-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
         transition: left 0.5s ease;
     }
 
-    .option-3d:hover {
-        transform: translateY(-3px) rotateX(5deg);
-        border-color: #00ffff;
+    .cyber-btn:hover {
+        transform: translateY(-5px) scale(1.05);
         box-shadow: 
-            0 10px 20px rgba(0,0,0,0.3),
-            0 0 20px rgba(0,255,255,0.4);
+            0 20px 40px rgba(0, 255, 255, 0.6),
+            inset 0 2px 0 rgba(255, 255, 255, 0.4);
+        background: linear-gradient(135deg, #ff00ff, #cc0099);
     }
 
-    .option-3d:hover::before {
+    .cyber-btn:hover::before {
         left: 100%;
     }
 
-    .option-3d.selected {
-        background: linear-gradient(145deg, #00ffff, #0088cc);
-        border-color: #00ffff;
-        transform: translateY(-5px) rotateX(8deg);
+    .cyber-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .btn-success {
+        background: linear-gradient(135deg, #00ff00, #00cc00);
+    }
+
+    .btn-warning {
+        background: linear-gradient(135deg, #ffff00, #cc9900);
+    }
+
+    .btn-danger {
+        background: linear-gradient(135deg, #ff0000, #cc0000);
+    }
+
+    /* Gaming Rules */
+    .rules-matrix {
+        background: rgba(0, 255, 0, 0.05);
+        border: 2px solid #00ff00;
+        border-radius: 20px;
+        padding: 30px;
+        margin: 30px 0;
         box-shadow: 
-            0 15px 25px rgba(0,0,0,0.4),
-            0 0 30px rgba(0,255,255,0.6);
+            0 0 40px rgba(0, 255, 0, 0.2),
+            inset 0 0 40px rgba(0, 255, 0, 0.05);
     }
 
-    .option-3d.correct {
-        background: linear-gradient(145deg, #00ff00, #00cc00);
-        border-color: #00ff00;
-        box-shadow: 0 0 30px rgba(0,255,0,0.6);
+    .rules-title {
+        font-family: 'Orbitron', monospace;
+        font-size: 1.8rem;
+        color: #00ff00;
+        text-shadow: 0 0 20px #00ff00;
+        text-align: center;
+        margin-bottom: 25px;
     }
 
-    .option-3d.incorrect {
-        background: linear-gradient(145deg, #ff0000, #cc0000);
-        border-color: #ff0000;
-        box-shadow: 0 0 30px rgba(255,0,0,0.6);
+    .rules-grid {
+        list-style: none;
+        padding: 0;
     }
 
-    .progress-3d {
+    .rules-grid li {
+        padding: 15px 0;
+        padding-left: 40px;
+        position: relative;
+        color: #ffffff;
+        font-size: 1.1rem;
+        border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .rules-grid li:hover {
+        color: #00ff00;
+        text-shadow: 0 0 10px #00ff00;
+        transform: translateX(10px);
+    }
+
+    .rules-grid li::before {
+        content: "⚡";
+        position: absolute;
+        left: 0;
+        color: #00ff00;
+        font-size: 1.3rem;
+        text-shadow: 0 0 15px #00ff00;
+        animation: rulesPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes rulesPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+    }
+
+    /* Timer Display */
+    .timer-zone {
+        text-align: center;
+        margin: 30px 0;
+    }
+
+    .cyber-timer {
+        background: linear-gradient(135deg, #ff0000, #ff6600);
+        color: #ffffff;
+        padding: 25px 50px;
+        border-radius: 20px;
+        font-size: 2.5rem;
+        font-weight: 900;
+        display: inline-block;
+        box-shadow: 
+            0 15px 40px rgba(255, 0, 0, 0.5),
+            inset 0 2px 0 rgba(255, 255, 255, 0.3);
+        animation: timerAlert 1.5s ease-in-out infinite;
+        border: 2px solid #ff0000;
+        font-family: 'Orbitron', monospace;
+    }
+
+    @keyframes timerAlert {
+        0%, 100% { 
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            border-color: #ff0000;
+        }
+        50% { 
+            box-shadow: 0 20px 50px rgba(255, 0, 0, 0.8), inset 0 2px 0 rgba(255, 255, 255, 0.4);
+            border-color: #ffff00;
+        }
+    }
+
+    /* Progress System */
+    .progress-zone {
+        margin: 30px 0;
+        position: relative;
+    }
+
+    .progress-track {
         width: 100%;
-        height: 12px;
-        background: rgba(255,255,255,0.2);
+        height: 15px;
+        background: rgba(255, 255, 255, 0.1);
         border-radius: 10px;
         overflow: hidden;
-        margin: 20px 0;
-        box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .progress-fill-3d {
+    .progress-energy {
         height: 100%;
-        background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00);
+        background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00, #00ffff);
+        background-size: 200% 200%;
         width: 0%;
-        transition: width 0.5s ease;
+        transition: width 0.8s ease;
         border-radius: 10px;
-        box-shadow: 0 0 20px rgba(0,255,255,0.6);
-        animation: progressGlow 2s ease-in-out infinite alternate;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+        animation: energyFlow 2s linear infinite;
     }
 
-    @keyframes progressGlow {
-        0% { box-shadow: 0 0 20px rgba(0,255,255,0.6); }
-        100% { box-shadow: 0 0 30px rgba(0,255,255,0.9); }
+    @keyframes energyFlow {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 200% 50%; }
     }
 
-    /* RESULTS SCREEN */
-    .results-3d {
+    /* Question Display */
+    .question-pod {
+        background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(255, 0, 255, 0.05));
+        border: 2px solid #ff00ff;
+        border-radius: 20px;
+        padding: 35px;
+        margin: 30px 0;
+        box-shadow: 
+            0 0 40px rgba(255, 0, 255, 0.3),
+            inset 0 0 40px rgba(255, 0, 255, 0.1);
+        position: relative;
+    }
+
+    .question-header {
+        color: #ff00ff;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-shadow: 0 0 15px #ff00ff;
+        font-family: 'Orbitron', monospace;
+    }
+
+    .question-content {
+        font-size: 1.6rem;
+        color: #ffffff;
+        line-height: 1.8;
+        font-weight: 500;
+    }
+
+    /* Option Cards */
+    .options-arena {
+        margin: 30px 0;
+    }
+
+    .option-cyber {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 15px 0;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        color: #ffffff;
+        font-size: 1.2rem;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+    }
+
+    .option-cyber::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .option-cyber:hover {
+        transform: translateY(-8px) scale(1.02);
+        border-color: #00ffff;
+        box-shadow: 
+            0 15px 40px rgba(0, 255, 255, 0.4),
+            inset 0 0 30px rgba(0, 255, 255, 0.1);
+        background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(0, 255, 255, 0.08));
+    }
+
+    .option-cyber:hover::before {
+        left: 100%;
+    }
+
+    .option-cyber.selected {
+        border-color: #ff00ff;
+        background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(255, 0, 255, 0.1));
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 
+            0 20px 50px rgba(255, 0, 255, 0.6),
+            inset 0 0 40px rgba(255, 0, 255, 0.2);
+        color: #ff00ff;
+        font-weight: 700;
+    }
+
+    .option-cyber.correct {
+        border-color: #00ff00;
+        background: linear-gradient(135deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 0, 0.1));
+        box-shadow: 0 0 50px rgba(0, 255, 0, 0.8);
+        color: #00ff00;
+    }
+
+    .option-cyber.incorrect {
+        border-color: #ff0000;
+        background: linear-gradient(135deg, rgba(255, 0, 0, 0.2), rgba(255, 0, 0, 0.1));
+        box-shadow: 0 0 50px rgba(255, 0, 0, 0.8);
+        color: #ff0000;
+    }
+
+    .option-id {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        background: linear-gradient(135deg, #00ffff, #0088cc);
+        color: #000000;
+        border-radius: 50%;
         text-align: center;
-        animation: resultsEntrance 1s ease-out;
+        line-height: 35px;
+        font-weight: 900;
+        font-size: 1.1rem;
+        margin-right: 20px;
+        text-shadow: none;
     }
 
-    @keyframes resultsEntrance {
-        0% { opacity: 0; transform: translateY(50px) rotateX(-20deg); }
-        100% { opacity: 1; transform: translateY(0) rotateX(0deg); }
+    /* Results Arena */
+    .victory-zone {
+        text-align: center;
+        animation: victoryEntrance 1.5s ease-out;
     }
 
-    .trophy-3d {
-        font-size: 5rem;
-        color: #ffd700;
-        text-shadow: 
-            0 0 20px #ffd700,
-            0 0 40px #ffd700;
-        animation: trophySpin 3s ease-in-out infinite;
-        margin: 20px 0;
+    @keyframes victoryEntrance {
+        0% { opacity: 0; transform: scale(0.5) rotateY(180deg); }
+        100% { opacity: 1; transform: scale(1) rotateY(0deg); }
     }
 
-    @keyframes trophySpin {
+    .trophy-mega {
+        font-size: 6rem;
+        background: linear-gradient(45deg, #ffd700, #ffed4a, #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: trophyRotate 4s ease-in-out infinite;
+        margin: 30px 0;
+        text-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+    }
+
+    @keyframes trophyRotate {
         0%, 100% { transform: rotateY(0deg) scale(1); }
         50% { transform: rotateY(180deg) scale(1.1); }
     }
 
-    .score-3d {
+    .victory-title {
+        font-family: 'Orbitron', monospace;
+        font-size: 3.5rem;
+        background: linear-gradient(45deg, #ff00ff, #ffffff, #00ffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 25px 0;
+        animation: victoryGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes victoryGlow {
+        0% { text-shadow: 0 0 20px rgba(255, 0, 255, 0.8); }
+        100% { text-shadow: 0 0 40px rgba(0, 255, 255, 0.8); }
+    }
+
+    .score-mega {
+        font-size: 3rem;
+        font-weight: 900;
+        color: #00ffff;
+        text-shadow: 0 0 30px #00ffff;
+        margin: 20px 0;
+        padding: 20px 40px;
+        background: rgba(0, 255, 255, 0.1);
+        border-radius: 20px;
+        display: inline-block;
+        border: 2px solid #00ffff;
+        animation: scoreFlash 3s ease-in-out infinite;
+    }
+
+    @keyframes scoreFlash {
+        0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.5); }
+        50% { box-shadow: 0 0 60px rgba(0, 255, 255, 1); }
+    }
+
+    /* Reward System */
+    .reward-vault {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.08));
+        border: 3px solid #ffd700;
+        border-radius: 25px;
+        padding: 40px;
+        margin: 40px 0;
+        box-shadow: 
+            0 0 60px rgba(255, 215, 0, 0.4),
+            inset 0 0 60px rgba(255, 215, 0, 0.1);
+        text-align: center;
+        animation: vaultPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes vaultPulse {
+        0%, 100% { 
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.4), inset 0 0 60px rgba(255, 215, 0, 0.1);
+            border-color: #ffd700;
+        }
+        50% { 
+            box-shadow: 0 0 100px rgba(255, 215, 0, 0.8), inset 0 0 100px rgba(255, 215, 0, 0.2);
+            border-color: #ffff00;
+        }
+    }
+
+    .reward-title {
+        font-family: 'Orbitron', monospace;
+        font-size: 2.2rem;
+        color: #ffd700;
+        text-shadow: 0 0 30px #ffd700;
+        margin-bottom: 20px;
+    }
+
+    .reward-desc {
+        font-size: 1.4rem;
+        color: #ffffff;
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+
+    .coupon-vault {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+        border: 3px dashed #00ffff;
+        border-radius: 20px;
+        padding: 30px;
         font-size: 2.5rem;
         font-weight: 900;
         color: #00ffff;
-        text-shadow: 
-            0 0 10px #00ffff,
-            0 0 20px #00ffff;
-        margin: 20px 0;
-        animation: scoreGlow 2s ease-in-out infinite alternate;
+        text-shadow: 0 0 30px #00ffff;
+        letter-spacing: 5px;
+        margin: 25px 0;
+        font-family: 'Orbitron', monospace;
+        animation: couponPulse 2s ease-in-out infinite alternate;
     }
 
-    @keyframes scoreGlow {
-        0% { transform: scale(1); }
-        100% { transform: scale(1.05); }
+    @keyframes couponPulse {
+        0% { 
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            border-color: #00ffff;
+        }
+        100% { 
+            box-shadow: 0 0 60px rgba(0, 255, 255, 1);
+            border-color: #ffff00;
+        }
     }
 
-    .reward-3d {
-        background: linear-gradient(145deg, rgba(255,215,0,0.2), rgba(255,165,0,0.1));
-        border: 2px solid #ffd700;
-        border-radius: 20px;
-        padding: 30px;
-        margin: 30px 0;
-        color: #ffd700;
-        text-shadow: 0 0 10px #ffd700;
-        box-shadow: 
-            0 20px 40px rgba(0,0,0,0.3),
-            0 0 40px rgba(255,215,0,0.3);
-        animation: rewardFloat 3s ease-in-out infinite;
-    }
-
-    @keyframes rewardFloat {
-        0%, 100% { transform: translateY(0px) rotateZ(0deg); }
-        50% { transform: translateY(-10px) rotateZ(1deg); }
-    }
-
-    .coupon-3d {
-        background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
-        border: 3px dashed #00ffff;
-        border-radius: 15px;
-        padding: 20px;
-        font-size: 2rem;
+    /* Countdown */
+    .countdown-portal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, 
+            rgba(0, 255, 255, 0.95), 
+            rgba(255, 0, 255, 0.95));
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        color: #ffffff;
+        font-size: 12rem;
         font-weight: 900;
-        color: #00ffff;
-        text-shadow: 0 0 15px #00ffff;
-        letter-spacing: 3px;
-        margin: 20px 0;
-        animation: couponGlow 1.5s ease-in-out infinite alternate;
+        font-family: 'Orbitron', monospace;
+        text-shadow: 0 0 100px rgba(255, 255, 255, 1);
+        animation: countdownBlast 1s ease-out;
     }
 
-    @keyframes couponGlow {
-        0% { box-shadow: 0 0 20px rgba(0,255,255,0.4); }
-        100% { box-shadow: 0 0 40px rgba(0,255,255,0.8); }
-    }
-
-    /* MOBILE RESPONSIVE */
-    @media (max-width: 768px) {
-        .quiz-container {
-            padding: 20px;
-            margin: 10px;
+    @keyframes countdownBlast {
+        0% { 
+            transform: scale(0.3) rotate(-180deg); 
+            opacity: 0; 
         }
-        
-        .neon-title {
-            font-size: 2.5rem;
-            letter-spacing: 2px;
+        50% { 
+            transform: scale(1.3) rotate(0deg); 
+            opacity: 1; 
         }
-        
-        .pulse-edition {
-            font-size: 1.2rem;
-        }
-        
-        .btn-3d {
-            width: 100%;
-            margin: 8px 0;
+        100% { 
+            transform: scale(1) rotate(0deg); 
+            opacity: 1; 
         }
     }
 
-    /* HIDDEN STATES */
-    .hidden { display: none !important; }
-    .show { display: block !important; }
+    /* Footer */
+    .cyber-footer {
+        background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        margin: 50px 0;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
 
-    /* FLOATING PARTICLES */
-    .particle {
-        position: absolute;
-        width: 3px;
-        height: 3px;
-        background: #00ffff;
-        border-radius: 50%;
-        box-shadow: 0 0 10px #00ffff;
-        animation: float 6s ease-in-out infinite;
+    .footer-quote {
+        font-size: 1.4rem;
+        color: #ff00ff;
+        font-style: italic;
+        margin-bottom: 15px;
+        text-shadow: 0 0 20px #ff00ff;
+    }
+
+    .footer-credit {
+        font-size: 1rem;
+        color: #ffffff;
         opacity: 0.7;
     }
 
-    @keyframes float {
-        0%, 100% { transform: translateY(0px) translateX(0px); }
-        33% { transform: translateY(-20px) translateX(10px); }
-        66% { transform: translateY(-10px) translateX(-10px); }
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .neon-container {
+            padding: 10px;
+        }
+        
+        .neon-title {
+            font-size: 3rem;
+        }
+        
+        .cyber-stats {
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .game-section {
+            padding: 25px;
+        }
+        
+        .cyber-btn {
+            width: 100%;
+            margin: 8px 0;
+        }
+        
+        .cyber-timer {
+            font-size: 2rem;
+            padding: 20px 40px;
+        }
+        
+        .countdown-portal {
+            font-size: 8rem;
+        }
     }
 
-    /* TRIES INDICATOR */
-    .tries-indicator {
-        background: linear-gradient(145deg, rgba(255,0,255,0.2), rgba(200,0,200,0.1));
-        border: 2px solid #ff00ff;
-        border-radius: 15px;
-        padding: 10px 20px;
-        color: #ff00ff;
-        text-shadow: 0 0 8px #ff00ff;
-        font-weight: 700;
-        margin: 15px 0;
-        display: inline-block;
-        animation: triesGlow 2s ease-in-out infinite alternate;
+    /* Animations */
+    .hidden { 
+        display: none !important; 
     }
-
-    @keyframes triesGlow {
-        0% { box-shadow: 0 0 15px rgba(255,0,255,0.3); }
-        100% { box-shadow: 0 0 25px rgba(255,0,255,0.6); }
+    
+    .show { 
+        display: block !important; 
     }
 </style>
 
-<div class="quiz-wrapper">
-    <!-- Floating Particles -->
-    <div class="particle" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
-    <div class="particle" style="top: 20%; right: 20%; animation-delay: 1s;"></div>
-    <div class="particle" style="bottom: 30%; left: 30%; animation-delay: 2s;"></div>
-    <div class="particle" style="bottom: 20%; right: 10%; animation-delay: 3s;"></div>
-    <div class="particle" style="top: 50%; left: 5%; animation-delay: 4s;"></div>
-    <div class="particle" style="top: 70%; right: 15%; animation-delay: 5s;"></div>
+<div class="cosmic-bg"></div>
 
-    <div class="quiz-container">
-        <!-- Epic Neon Header -->
-        <div class="neon-header">
-            <h1 class="neon-title">PB DAYS</h1>
-            <div class="pulse-edition">PULSE EDITION</div>
-            <div class="event-dates">12-14 August 2025</div>
-            <div class="tagline">🎯 SUPERDEALS • 🧠 QUIZZES • 💰 DAILY JACKPOTS</div>
-            <div class="live-counter" id="liveCounter">
-                <i class="fas fa-users"></i> <span id="playerCount">0</span> players online!
+<!-- Floating Particles -->
+<div class="particle" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
+<div class="particle" style="top: 30%; right: 10%; animation-delay: 2s;"></div>
+<div class="particle" style="bottom: 20%; left: 15%; animation-delay: 4s;"></div>
+<div class="particle" style="bottom: 40%; right: 20%; animation-delay: 6s;"></div>
+<div class="particle" style="top: 60%; left: 8%; animation-delay: 8s;"></div>
+<div class="particle" style="top: 80%; right: 12%; animation-delay: 10s;"></div>
+<div class="particle" style="bottom: 60%; left: 25%; animation-delay: 12s;"></div>
+<div class="particle" style="bottom: 10%; right: 8%; animation-delay: 14s;"></div>
+
+<div class="neon-container">
+    <!-- Epic Cyber Header -->
+    <div class="cyber-header">
+        <h1 class="neon-title">PB DAYS</h1>
+        <div class="pulse-subtitle">PULSE EDITION</div>
+        <div class="event-info">🚀 12-14 August 2025 🚀</div>
+        <div class="epic-tagline">⚡ SUPERDEALS • 🧠 MIND-BENDING QUIZZES • 💰 EPIC JACKPOTS ⚡</div>
+        
+        <div class="cyber-stats">
+            <div class="stat-orb">
+                <span class="stat-number" id="liveCount">0</span>
+                <span class="stat-label">GAMERS ONLINE</span>
             </div>
-            <div class="tries-indicator" id="triesIndicator">
-                <i class="fas fa-star"></i> <span id="triesLeft">2</span> tries remaining
+            <div class="stat-orb">
+                <span class="stat-number" id="triesLeft">2</span>
+                <span class="stat-label">ATTEMPTS LEFT</span>
+            </div>
+            <div class="stat-orb">
+                <span class="stat-number">10</span>
+                <span class="stat-label">CHALLENGE ROUNDS</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Start Zone -->
+    <div id="startZone" class="game-section show">
+        <h2 class="cyber-title">
+            <i class="fas fa-skull"></i> ULTIMATE DENTAL CHALLENGE
+        </h2>
+        <p class="cyber-subtitle">
+            🔥 Test your knowledge and unlock INSANE rewards! Are you ready to dominate? 🔥
+        </p>
+        
+        <div class="rules-matrix">
+            <h3 class="rules-title">
+                ⚡ GAME RULES ⚡
+            </h3>
+            <ul class="rules-grid">
+                <li>10 MIND-BLOWING questions await your conquest</li>
+                <li>5 INTENSE minutes to prove your supremacy</li>
+                <li>Higher scores = BIGGER rewards (obviously!)</li>
+                <li>2 attempts max - make them COUNT!</li>
+                <li>Based on real dental science (but way cooler)</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <button class="cyber-btn" onclick="launchGame()" style="font-size: 1.4rem; padding: 25px 50px;">
+                🚀 LAUNCH GAME 🚀
+            </button>
+        </div>
+    </div>
+
+    <!-- Game Arena -->
+    <div id="gameZone" class="game-section hidden">
+        <div class="timer-zone">
+            <div class="cyber-timer" id="gameTimer">
+                ⏰ 5:00
             </div>
         </div>
 
-        <!-- Start Screen -->
-        <div id="startScreen" class="show">
-            <div class="quiz-card">
-                <h2 style="color: #00ffff; font-size: 2rem; text-shadow: 0 0 15px #00ffff; text-align: center; margin-bottom: 25px;">
-                    <i class="fas fa-tooth"></i> DENTAL MASTERY CHALLENGE
-                </h2>
-                <div style="color: white; font-size: 1.2rem; text-align: center; margin-bottom: 30px;">
-                    Test your dental expertise and unlock exclusive PB DAYS rewards!
-                </div>
-                
-                <div class="quiz-card" style="background: linear-gradient(145deg, rgba(0,255,255,0.1), rgba(0,200,200,0.05));">
-                    <h3 style="color: #00ffff; margin-bottom: 20px;">
-                        <i class="fas fa-info-circle"></i> CHALLENGE RULES:
-                    </h3>
-                    <ul style="color: white; list-style: none; padding: 0;">
-                        <li style="margin: 10px 0; padding-left: 30px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #00ff00;">✓</span>
-                            10 randomly selected dental questions
-                        </li>
-                        <li style="margin: 10px 0; padding-left: 30px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #00ff00;">✓</span>
-                            5 minutes to complete the challenge
-                        </li>
-                        <li style="margin: 10px 0; padding-left: 30px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #00ff00;">✓</span>
-                            Higher scores unlock better rewards
-                        </li>
-                        <li style="margin: 10px 0; padding-left: 30px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #00ff00;">✓</span>
-                            2 attempts per player
-                        </li>
-                        <li style="margin: 10px 0; padding-left: 30px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #00ff00;">✓</span>
-                            Exclusive PB DAYS rewards await!
-                        </li>
-                    </ul>
-                </div>
-                
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="btn-3d btn-neon" onclick="startQuiz()" style="font-size: 1.4rem; padding: 22px 45px;">
-                        <i class="fas fa-rocket"></i> LAUNCH CHALLENGE
-                    </button>
-                </div>
+        <div class="progress-zone">
+            <div class="progress-track">
+                <div class="progress-energy" id="energyBar"></div>
             </div>
         </div>
 
-        <!-- Quiz Screen -->
-        <div id="quizScreen" class="hidden">
-            <div style="text-align: center; margin-bottom: 25px;">
-                <div class="timer-display" id="timer">
-                    <i class="fas fa-clock"></i> 5:00
-                </div>
+        <div class="question-pod">
+            <div class="question-header" id="questionMeta">
+                ⚡ ROUND 1 OF 10
             </div>
+            <div class="question-content" id="questionText"></div>
+        </div>
 
-            <div class="progress-3d">
-                <div class="progress-fill-3d" id="progressBar"></div>
+        <div class="options-arena" id="optionsZone">
+            <!-- Options generated dynamically -->
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <button class="cyber-btn" id="nextRound" onclick="advanceRound()" disabled>
+                ⚡ NEXT ROUND ⚡
+            </button>
+        </div>
+    </div>
+
+    <!-- Victory Zone -->
+    <div id="victoryZone" class="game-section hidden">
+        <div class="victory-zone">
+            <div class="trophy-mega">
+                <i class="fas fa-crown"></i>
             </div>
-
-            <div class="question-card">
-                <div style="color: #00ffff; font-weight: 700; margin-bottom: 15px;" id="questionNumber">
-                    Question 1 of 10
-                </div>
-                <div id="questionText" style="font-size: 1.5rem; line-height: 1.6;"></div>
+            <h2 class="victory-title" id="victoryMessage">GAME COMPLETE!</h2>
+            <div class="score-mega" id="finalScore"></div>
+            
+            <div class="reward-vault" id="rewardVault">
+                <h3 class="reward-title">
+                    🎁 EPIC REWARD UNLOCKED! 🎁
+                </h3>
+                <p class="reward-desc" id="rewardDetails"></p>
+                <div class="coupon-vault" id="couponDisplay"></div>
+                <button class="cyber-btn" onclick="copyReward()">
+                    📋 COPY REWARD CODE
+                </button>
             </div>
-
-            <div id="optionsContainer">
-                <!-- Options will be dynamically added here -->
-            </div>
-
-            <div style="text-align: center; margin-top: 30px;">
-                <button class="btn-3d" id="nextBtn" onclick="nextQuestion()" disabled>
-                    NEXT QUESTION <i class="fas fa-arrow-right"></i>
+            
+            <div style="margin-top: 50px;">
+                <a href="https://pinkblue.in/cart" class="cyber-btn btn-success" target="_blank">
+                    🛒 REDEEM NOW
+                </a>
+                <a href="https://pinkblue.in" class="cyber-btn btn-warning" target="_blank">
+                    🛍️ SHOP MORE
+                </a>
+                <button class="cyber-btn" onclick="shareVictory()">
+                    📢 SHARE VICTORY
+                </button>
+                <button class="cyber-btn btn-danger" onclick="playAgain()" id="replayBtn">
+                    🔥 PLAY AGAIN
                 </button>
             </div>
         </div>
+    </div>
 
-        <!-- Results Screen -->
-        <div id="resultsScreen" class="hidden">
-            <div class="results-3d">
-                <div class="trophy-3d">
-                    <i class="fas fa-trophy"></i>
-                </div>
-                <h2 style="color: #ffd700; font-size: 3rem; text-shadow: 0 0 20px #ffd700; margin: 20px 0;" id="resultsTitle">
-                    MISSION COMPLETE!
-                </h2>
-                <div class="score-3d" id="scoreDisplay"></div>
-                
-                <div class="reward-3d" id="rewardCard">
-                    <h3 style="margin-bottom: 20px; font-size: 1.8rem;">
-                        <i class="fas fa-gift"></i> YOUR PB DAYS REWARD!
-                    </h3>
-                    <p id="rewardText" style="font-size: 1.3rem; margin-bottom: 25px;"></p>
-                    <div class="coupon-3d" id="couponCode"></div>
-                    <button class="btn-3d" onclick="copyCoupon()" style="margin: 10px;">
-                        <i class="fas fa-copy"></i> COPY CODE
-                    </button>
-                </div>
-                
-                <div style="margin-top: 40px;">
-                    <a href="https://pinkblue.in/cart" class="btn-3d" target="_blank" style="background: linear-gradient(145deg, #28a745, #20c997); margin: 8px;">
-                        <i class="fas fa-shopping-cart"></i> CHECKOUT NOW
-                    </a>
-                    <a href="https://pinkblue.in" class="btn-3d" target="_blank" style="background: linear-gradient(145deg, #ffc107, #fd7e14); margin: 8px;">
-                        <i class="fas fa-store"></i> CONTINUE SHOPPING
-                    </a>
-                    <button class="btn-3d btn-neon" onclick="shareQuiz()" style="margin: 8px;">
-                        <i class="fas fa-share-alt"></i> SHARE VICTORY
-                    </button>
-                    <button class="btn-3d" onclick="restartQuiz()" style="margin: 8px;" id="restartBtn">
-                        <i class="fas fa-redo"></i> TRY AGAIN
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Creative Footer -->
-        <div style="margin-top: 40px; padding: 25px; background: linear-gradient(145deg, rgba(255,0,255,0.1), rgba(255,100,255,0.05)); border-radius: 20px; text-align: center; color: #ff00ff; border: 1px solid rgba(255,0,255,0.3);">
-            <p style="font-size: 1.1rem; font-style: italic; margin: 0;">
-                🦷 "Life's too short for dull teeth... and boring quizzes!" ⚡
-            </p>
-            <small style="opacity: 0.8; margin-top: 10px; display: block;">
-                Powered by PinkBlue.in - Where dental dreams get an upgrade! ✨
-            </small>
-        </div>
+    <!-- Cyber Footer -->
+    <div class="cyber-footer">
+        <p class="footer-quote">
+            🦷 "Life's too short for boring teeth... and basic quizzes!" 🎮
+        </p>
+        <small class="footer-credit">
+            Powered by PinkBlue.in - Where dental dreams become EPIC reality! ⚡✨
+        </small>
     </div>
 </div>
 
+<!-- Countdown Portal -->
+<div class="countdown-portal" id="countdownPortal">
+    <span id="countdownNum">3</span>
+</div>
+
 <script>
-    // Advanced Fingerprinting System
-    class AdvancedFingerprint {
+    // Advanced Fingerprinting
+    class GameFingerprint {
         constructor() {
             this.tm = new ThumbmarkJS.Thumbmark();
         }
         
-        async generateFingerprint() {
+        async generateId() {
             try {
                 const result = await this.tm.get();
                 return result.id;
             } catch (error) {
-                // Fallback fingerprinting
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
                 ctx.textBaseline = 'top';
                 ctx.font = '14px Arial';
-                ctx.fillText('PBDaysNeon2025', 2, 2);
+                ctx.fillText('PBDaysEpicGame2025', 2, 2);
                 
-                const fingerprint = canvas.toDataURL() + 
-                                   navigator.userAgent + 
-                                   screen.width + 
-                                   screen.height + 
-                                   navigator.language +
-                                   navigator.platform +
-                                   (navigator.hardwareConcurrency || '');
+                const data = canvas.toDataURL() + 
+                            navigator.userAgent + 
+                            screen.width + screen.height + 
+                            navigator.language + navigator.platform +
+                            (navigator.hardwareConcurrency || '');
                 
                 let hash = 0;
-                for (let i = 0; i < fingerprint.length; i++) {
-                    const char = fingerprint.charCodeAt(i);
-                    hash = ((hash << 5) - hash) + char;
+                for (let i = 0; i < data.length; i++) {
+                    hash = ((hash << 5) - hash) + data.charCodeAt(i);
                     hash = hash & hash;
                 }
                 return Math.abs(hash).toString();
@@ -734,304 +994,274 @@
         }
         
         async getAttempts() {
-            const fp = await this.generateFingerprint();
-            const attempts = JSON.parse(localStorage.getItem('pbDaysAttempts') || '{}');
-            return attempts[fp] || 0;
+            const id = await this.generateId();
+            const attempts = JSON.parse(localStorage.getItem('pbDaysGameAttempts') || '{}');
+            return attempts[id] || 0;
         }
         
-        async incrementAttempts() {
-            const fp = await this.generateFingerprint();
-            const attempts = JSON.parse(localStorage.getItem('pbDaysAttempts') || '{}');
-            attempts[fp] = (attempts[fp] || 0) + 1;
-            localStorage.setItem('pbDaysAttempts', JSON.stringify(attempts));
-            return attempts[fp];
+        async addAttempt() {
+            const id = await this.generateId();
+            const attempts = JSON.parse(localStorage.getItem('pbDaysGameAttempts') || '{}');
+            attempts[id] = (attempts[id] || 0) + 1;
+            localStorage.setItem('pbDaysGameAttempts', JSON.stringify(attempts));
+            return attempts[id];
         }
     }
 
-    // Quiz Variables
-    let currentQuestion = 0;
-    let score = 0;
-    let timeLeft = 300; // 5 minutes in seconds
-    let timer;
-    let selectedAnswer = null;
-    let questions = [];
-    let fingerprint = new AdvancedFingerprint();
+    // Game Variables
+    let currentRound = 0;
+    let playerScore = 0;
+    let timeLeft = 300; // 5 minutes
+    let gameTimer;
+    let selectedChoice = null;
+    let gameQuestions = [];
+    let fingerprint = new GameFingerprint();
     let attemptsUsed = 0;
 
-    // Intelligent Player Counter
-    class PlayerCounter {
+    // Epic Live Counter
+    class EpicCounter {
         constructor() {
-            this.baseCount = 847;
-            this.lastUpdate = Date.now();
-            this.trend = 1; // 1 for increasing, -1 for decreasing
+            this.count = 892;
+            this.lastTime = Date.now();
             this.init();
         }
         
         init() {
-            const stored = localStorage.getItem('pbDaysPlayerData');
+            const stored = localStorage.getItem('pbDaysGameCounter');
             if (stored) {
                 const data = JSON.parse(stored);
-                this.baseCount = data.count;
-                this.lastUpdate = data.timestamp;
+                this.count = data.count;
+                this.lastTime = data.time;
             }
-            this.updateCounter();
-            setInterval(() => this.updateCounter(), 3000 + Math.random() * 4000);
+            this.update();
+            setInterval(() => this.update(), 3500 + Math.random() * 3000);
         }
         
-        updateCounter() {
-            const now = Date.now();
-            const timeDiff = (now - this.lastUpdate) / 1000 / 60; // minutes
-            
-            // Realistic increment based on time of day (IST)
+        update() {
             const hour = new Date().getHours();
-            let baseIncrement = 0;
+            let increment = 0;
             
-            if (hour >= 9 && hour <= 12) baseIncrement = 3; // Morning peak
-            else if (hour >= 14 && hour <= 18) baseIncrement = 5; // Afternoon peak
-            else if (hour >= 19 && hour <= 22) baseIncrement = 4; // Evening peak
-            else baseIncrement = 1; // Off-peak
+            // Peak gaming hours
+            if (hour >= 18 && hour <= 23) increment = 5;
+            else if (hour >= 14 && hour <= 18) increment = 3;
+            else if (hour >= 9 && hour <= 12) increment = 2;
+            else increment = 1;
             
-            // Add some randomness
-            const increment = Math.floor(Math.random() * baseIncrement) + 1;
+            const change = Math.floor(Math.random() * increment) + 1;
             
-            // Occasionally decrease for realism
-            if (Math.random() < 0.15) {
-                this.baseCount = Math.max(150, this.baseCount - Math.floor(Math.random() * 3));
+            if (Math.random() < 0.1) {
+                this.count = Math.max(200, this.count - Math.floor(Math.random() * 2));
             } else {
-                this.baseCount += increment;
+                this.count += change;
             }
             
-            // Cap at 1000
-            if (this.baseCount > 1000) {
-                this.baseCount = 150 + Math.floor(Math.random() * 50);
+            if (this.count > 1200) {
+                this.count = 200 + Math.floor(Math.random() * 100);
             }
             
-            document.getElementById('playerCount').textContent = this.baseCount;
-            this.lastUpdate = now;
+            document.getElementById('liveCount').textContent = this.count;
             
-            // Save to localStorage
-            localStorage.setItem('pbDaysPlayerData', JSON.stringify({
-                count: this.baseCount,
-                timestamp: this.lastUpdate
+            localStorage.setItem('pbDaysGameCounter', JSON.stringify({
+                count: this.count,
+                time: Date.now()
             }));
         }
     }
 
-    const playerCounter = new PlayerCounter();
+    const epicCounter = new EpicCounter();
 
-    // Questions Pool
-    const allQuestions = [
+    // Epic Questions
+    const epicQuestions = [
         {
-            question: "What is the hardest substance in the human body?",
-            options: ["Bone", "Tooth enamel", "Dentin", "Cartilage"],
+            question: "What's the HARDEST substance your body can create (hint: it's in your mouth)?",
+            options: ["Bone (nice try!)", "Tooth Enamel (CORRECT!)", "Fingernails (nope!)", "Hair (seriously?)"],
             correct: 1
         },
         {
-            question: "How many permanent teeth does an adult typically have?",
-            options: ["28", "30", "32", "34"],
+            question: "How many teeth should an adult have if they're not missing any?",
+            options: ["28 (close but no)", "30 (getting warmer)", "32 (BINGO!)", "34 (too many!)"],
             correct: 2
         },
         {
-            question: "What is the most common dental disease?",
-            options: ["Gingivitis", "Tooth decay (caries)", "Periodontal disease", "Oral cancer"],
+            question: "What's the #1 enemy of teeth worldwide?",
+            options: ["Bad breath", "Tooth decay (YEP!)", "Gum disease", "Wisdom teeth"],
             correct: 1
         },
         {
-            question: "Which mineral is primarily responsible for strengthening tooth enamel?",
-            options: ["Calcium", "Phosphorus", "Fluoride", "Magnesium"],
+            question: "Which mineral makes your teeth SUPER strong?",
+            options: ["Calcium", "Iron", "Fluoride (WINNER!)", "Zinc"],
             correct: 2
         },
         {
-            question: "What is the technical term for teeth grinding?",
-            options: ["Bruxism", "Gingivitis", "Periodontitis", "Xerostomia"],
+            question: "What do we call it when people grind their teeth (usually at night)?",
+            options: ["Bruxism (SMART!)", "Gingivitis", "Halitosis", "Caries"],
             correct: 0
         },
         {
-            question: "At what age do children typically start losing their baby teeth?",
-            options: ["4-5 years", "6-7 years", "8-9 years", "10-11 years"],
+            question: "At what age do kids typically start losing their baby teeth?",
+            options: ["4-5 years", "6-7 years (CORRECT!)", "8-9 years", "10-11 years"],
             correct: 1
         },
         {
-            question: "What is the soft tissue inside the tooth called?",
-            options: ["Enamel", "Dentin", "Pulp", "Cementum"],
+            question: "What's the soft, living part inside your tooth called?",
+            options: ["Enamel", "Dentin", "Pulp (YES!)", "Crown"],
             correct: 2
         },
         {
-            question: "How often should you replace your toothbrush?",
-            options: ["Every month", "Every 3-4 months", "Every 6 months", "Every year"],
+            question: "How often should you get a new toothbrush?",
+            options: ["Monthly", "Every 3-4 months (RIGHT!)", "Twice a year", "Once a year"],
             correct: 1
         },
         {
-            question: "What is the ideal pH level for maintaining oral health?",
-            options: ["5.5", "6.0", "7.0", "7.5"],
+            question: "What's the perfect pH for a healthy mouth?",
+            options: ["5.5 (too acidic)", "6.0 (still acidic)", "7.0 (PERFECT!)", "8.0 (too basic)"],
             correct: 2
         },
         {
-            question: "Which type of bacteria is primarily responsible for tooth decay?",
-            options: ["Streptococcus mutans", "Lactobacillus", "Actinomyces", "Prevotella"],
+            question: "Which bacteria is the main villain causing cavities?",
+            options: ["Streptococcus mutans (VILLAIN!)", "E. coli", "Staphylococcus", "Lactobacillus"],
             correct: 0
         },
         {
-            question: "What is the recommended fluoride concentration in toothpaste for adults?",
-            options: ["500 ppm", "1000 ppm", "1450 ppm", "2000 ppm"],
+            question: "How much fluoride should be in adult toothpaste?",
+            options: ["500 ppm", "1000 ppm", "1450 ppm (IDEAL!)", "2000 ppm"],
             correct: 2
         },
         {
-            question: "Which tooth is known as the 'wisdom tooth'?",
-            options: ["First molar", "Second molar", "Third molar", "Premolar"],
+            question: "What do we call the teeth that come in last (if at all)?",
+            options: ["Molars", "Premolars", "Wisdom teeth (WISE!)", "Canines"],
             correct: 2
         },
         {
-            question: "What causes bad breath (halitosis) most commonly?",
-            options: ["Poor oral hygiene", "Stomach problems", "Lung disease", "Heart disease"],
+            question: "What's the most common cause of bad breath?",
+            options: ["Poor oral hygiene (BINGO!)", "Stomach issues", "Sinus problems", "Diet"],
             correct: 0
         },
         {
-            question: "How long should you brush your teeth?",
-            options: ["30 seconds", "1 minute", "2 minutes", "5 minutes"],
+            question: "How long should you brush your teeth for optimal cleaning?",
+            options: ["30 seconds (too short)", "1 minute (longer!)", "2 minutes (PERFECT!)", "5 minutes (overkill)"],
             correct: 2
         },
         {
-            question: "What is dental plaque primarily composed of?",
-            options: ["Food particles", "Bacteria", "Saliva", "Dead cells"],
+            question: "What is dental plaque mainly made of?",
+            options: ["Food bits", "Bacteria (NASTY!)", "Saliva", "Dead cells"],
             correct: 1
         },
         {
-            question: "Which vitamin deficiency can cause bleeding gums?",
-            options: ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin D"],
+            question: "Which vitamin deficiency causes bleeding gums?",
+            options: ["Vitamin A", "Vitamin B", "Vitamin C (SCURVY!)", "Vitamin D"],
             correct: 2
         },
         {
-            question: "What is the space between teeth called?",
-            options: ["Interdental space", "Diastema", "Embrasure", "Frenum"],
+            question: "What's the gap between teeth called?",
+            options: ["Diastema (FANCY!)", "Space", "Opening", "Cavity"],
             correct: 0
         },
         {
-            question: "Which professional treatment removes tartar?",
-            options: ["Scaling", "Polishing", "Whitening", "Bonding"],
+            question: "Which treatment removes hard tartar buildup?",
+            options: ["Scaling (WINNER!)", "Polishing", "Whitening", "Filling"],
             correct: 0
         },
         {
-            question: "What does 'RCT' stand for in dentistry?",
-            options: ["Root Canal Therapy", "Routine Check Treatment", "Rapid Care Treatment", "Root Cavity Treatment"],
+            question: "What does RCT stand for in dentistry?",
+            options: ["Root Canal Therapy (OUCH!)", "Regular Cleaning Treatment", "Routine Check Treatment", "Root Cavity Treatment"],
             correct: 0
         },
         {
-            question: "What is the main function of saliva?",
-            options: ["Digestion only", "Lubrication and protection", "Taste enhancement", "Temperature regulation"],
-            correct: 1
-        },
-        {
-            question: "How many baby teeth do children typically have?",
-            options: ["16", "20", "24", "28"],
-            correct: 1
-        },
-        {
-            question: "What is periodontal disease?",
-            options: ["Tooth decay", "Gum disease", "Oral cancer", "Tooth grinding"],
-            correct: 1
-        },
-        {
-            question: "Which tool is used to measure pocket depth around teeth?",
-            options: ["Scaler", "Probe", "Curette", "Explorer"],
-            correct: 1
-        },
-        {
-            question: "What is xerostomia?",
-            options: ["Excessive saliva", "Dry mouth", "Gum bleeding", "Tooth sensitivity"],
-            correct: 1
-        },
-        {
-            question: "At what age should children first visit a dentist?",
-            options: ["When first tooth appears", "At 1 year old", "At 2 years old", "At 3 years old"],
-            correct: 1
-        },
-        {
-            question: "What is the crown of a tooth?",
-            options: ["The root", "The visible part above the gum", "The nerve", "The bone socket"],
-            correct: 1
-        },
-        {
-            question: "Which material is commonly used for white fillings?",
-            options: ["Amalgam", "Gold", "Composite resin", "Silver"],
-            correct: 2
-        },
-        {
-            question: "What is the purpose of dental floss?",
-            options: ["Whiten teeth", "Remove plaque between teeth", "Strengthen enamel", "Freshen breath"],
-            correct: 1
-        },
-        {
-            question: "How often should you visit the dentist for routine checkups?",
-            options: ["Every 3 months", "Every 6 months", "Once a year", "Only when problems occur"],
-            correct: 1
-        },
-        {
-            question: "What is gingivitis?",
-            options: ["Tooth decay", "Gum inflammation", "Oral cancer", "Tooth loss"],
+            question: "What's saliva's main job?",
+            options: ["Taste only", "Protection & lubrication (HERO!)", "Digestion only", "Nothing much"],
             correct: 1
         }
     ];
 
-    // Quiz Functions
+    // Game Functions
     function getRandomQuestions(pool, count = 10) {
         const shuffled = [...pool].sort(() => 0.5 - Math.random());
         return shuffled.slice(0, count);
     }
 
-    async function startQuiz() {
-        // Check attempts
+    async function launchGame() {
         attemptsUsed = await fingerprint.getAttempts();
         
         if (attemptsUsed >= 2) {
-            showNoMoreAttempts();
+            showGameOver();
             return;
         }
         
-        // Generate random questions
-        questions = getRandomQuestions(allQuestions, 10);
-        
-        // Increment attempts
-        await fingerprint.incrementAttempts();
-        attemptsUsed++;
-        
-        // Update tries display
-        document.getElementById('triesLeft').textContent = 2 - attemptsUsed;
-        
-        // Start quiz
-        document.getElementById('startScreen').classList.add('hidden');
-        document.getElementById('quizScreen').classList.add('show');
-        startTimer();
-        loadQuestion();
+        showCountdown();
     }
 
-    function showNoMoreAttempts() {
-        document.getElementById('startScreen').innerHTML = `
-            <div class="quiz-card" style="text-align: center;">
-                <h2 style="color: #ff0000; text-shadow: 0 0 15px #ff0000; margin-bottom: 20px;">
-                    <i class="fas fa-exclamation-triangle"></i> ATTEMPTS EXHAUSTED
-                </h2>
-                <p style="color: white; font-size: 1.3rem; margin-bottom: 30px;">
-                    You've used both your attempts for this challenge!
+    function showCountdown() {
+        const portal = document.getElementById('countdownPortal');
+        const num = document.getElementById('countdownNum');
+        let countdown = 3;
+        
+        portal.style.display = 'flex';
+        
+        const interval = setInterval(() => {
+            num.textContent = countdown;
+            num.style.animation = 'countdownBlast 1s ease-out';
+            
+            if (countdown === 0) {
+                num.textContent = 'FIGHT!';
+                setTimeout(() => {
+                    portal.style.display = 'none';
+                    startEpicGame();
+                }, 1000);
+                clearInterval(interval);
+            }
+            countdown--;
+        }, 1000);
+    }
+
+    async function startEpicGame() {
+        gameQuestions = getRandomQuestions(epicQuestions, 10);
+        
+        await fingerprint.addAttempt();
+        attemptsUsed++;
+        
+        document.getElementById('triesLeft').textContent = 2 - attemptsUsed;
+        
+        document.getElementById('startZone').classList.remove('show');
+        document.getElementById('startZone').classList.add('hidden');
+        document.getElementById('gameZone').classList.remove('hidden');
+        document.getElementById('gameZone').classList.add('show');
+        
+        document.getElementById('gameZone').scrollIntoView({ behavior: 'smooth' });
+        
+        startGameTimer();
+        loadEpicRound();
+    }
+
+    function showGameOver() {
+        document.getElementById('startZone').innerHTML = `
+            <h2 class="cyber-title" style="color: #ff0000;">
+                💀 GAME OVER 💀
+            </h2>
+            <div class="rules-matrix" style="border-color: #ff0000; background: rgba(255, 0, 0, 0.1);">
+                <p style="color: #ffffff; font-size: 1.4rem; text-align: center; margin-bottom: 25px;">
+                    You've used both attempts, warrior!
                 </p>
-                <p style="color: #00ffff; font-size: 1.1rem; margin-bottom: 30px;">
-                    Thank you for participating in PB DAYS: Pulse Edition!
+                <p style="color: #ffff00; text-align: center; font-size: 1.1rem;">
+                    Thanks for playing PB DAYS: Pulse Edition! 🔥
                 </p>
-                <a href="https://pinkblue.in" class="btn-3d" target="_blank">
-                    <i class="fas fa-shopping-cart"></i> EXPLORE PRODUCTS
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="https://pinkblue.in" class="cyber-btn" target="_blank">
+                    🛍️ EXPLORE PRODUCTS
                 </a>
             </div>
         `;
     }
 
-    function startTimer() {
-        timer = setInterval(() => {
+    function startGameTimer() {
+        gameTimer = setInterval(() => {
             timeLeft--;
             updateTimerDisplay();
             
             if (timeLeft <= 0) {
-                clearInterval(timer);
-                endQuiz();
+                clearInterval(gameTimer);
+                endEpicGame();
             }
         }, 1000);
     }
@@ -1039,259 +1269,266 @@
     function updateTimerDisplay() {
         const minutes = Math.floor(timeLeft / 60);
         const seconds = timeLeft % 60;
-        document.getElementById('timer').innerHTML = 
-            `<i class="fas fa-clock"></i> ${minutes}:${seconds.toString().padStart(2, '0')}`;
+        document.getElementById('gameTimer').innerHTML = 
+            `⏰ ${minutes}:${seconds.toString().padStart(2, '0')}`;
     }
 
-    function loadQuestion() {
-        const question = questions[currentQuestion];
-        document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+    function loadEpicRound() {
+        const question = gameQuestions[currentRound];
+        document.getElementById('questionMeta').innerHTML = 
+            `⚡ ROUND ${currentRound + 1} OF ${gameQuestions.length}`;
         document.getElementById('questionText').textContent = question.question;
         
-        const optionsContainer = document.getElementById('optionsContainer');
-        optionsContainer.innerHTML = '';
+        const optionsZone = document.getElementById('optionsZone');
+        optionsZone.innerHTML = '';
         
         question.options.forEach((option, index) => {
             const optionDiv = document.createElement('div');
-            optionDiv.className = 'option-3d';
-            optionDiv.onclick = () => selectAnswer(index);
+            optionDiv.className = 'option-cyber';
+            optionDiv.onclick = () => selectChoice(index);
             optionDiv.innerHTML = `
-                <span style="color: #00ffff; font-weight: bold; margin-right: 15px;">${String.fromCharCode(65 + index)}</span>
+                <span class="option-id">${String.fromCharCode(65 + index)}</span>
                 ${option}
             `;
-            optionsContainer.appendChild(optionDiv);
+            optionsZone.appendChild(optionDiv);
         });
         
-        updateProgress();
-        selectedAnswer = null;
-        document.getElementById('nextBtn').disabled = true;
+        updateEnergyBar();
+        selectedChoice = null;
+        document.getElementById('nextRound').disabled = true;
     }
 
-    function selectAnswer(index) {
-        const options = document.querySelectorAll('.option-3d');
+    function selectChoice(index) {
+        const options = document.querySelectorAll('.option-cyber');
         options.forEach(option => option.classList.remove('selected'));
         options[index].classList.add('selected');
         
-        selectedAnswer = index;
-        document.getElementById('nextBtn').disabled = false;
+        selectedChoice = index;
+        document.getElementById('nextRound').disabled = false;
     }
 
-    function nextQuestion() {
-        if (selectedAnswer === null) return;
+    function advanceRound() {
+        if (selectedChoice === null) return;
         
-        const question = questions[currentQuestion];
-        const options = document.querySelectorAll('.option-3d');
+        const question = gameQuestions[currentRound];
+        const options = document.querySelectorAll('.option-cyber');
         
-        // Show correct/incorrect answers
+        // Show results
         options.forEach((option, index) => {
             if (index === question.correct) {
                 option.classList.add('correct');
-            } else if (index === selectedAnswer && index !== question.correct) {
+            } else if (index === selectedChoice && index !== question.correct) {
                 option.classList.add('incorrect');
             }
         });
         
-        if (selectedAnswer === question.correct) {
-            score++;
+        if (selectedChoice === question.correct) {
+            playerScore++;
         }
         
         setTimeout(() => {
-            currentQuestion++;
-            if (currentQuestion < questions.length) {
-                loadQuestion();
+            currentRound++;
+            if (currentRound < gameQuestions.length) {
+                loadEpicRound();
             } else {
-                endQuiz();
+                endEpicGame();
             }
-        }, 1500);
+        }, 2000);
     }
 
-    function updateProgress() {
-        const progress = ((currentQuestion + 1) / questions.length) * 100;
-        document.getElementById('progressBar').style.width = progress + '%';
+    function updateEnergyBar() {
+        const progress = ((currentRound + 1) / gameQuestions.length) * 100;
+        document.getElementById('energyBar').style.width = progress + '%';
     }
 
-    function endQuiz() {
-        clearInterval(timer);
+    function endEpicGame() {
+        clearInterval(gameTimer);
         
-        document.getElementById('quizScreen').classList.add('hidden');
-        document.getElementById('resultsScreen').classList.add('show');
+        document.getElementById('gameZone').classList.remove('show');
+        document.getElementById('gameZone').classList.add('hidden');
+        document.getElementById('victoryZone').classList.remove('hidden');
+        document.getElementById('victoryZone').classList.add('show');
         
-        displayResults();
+        document.getElementById('victoryZone').scrollIntoView({ behavior: 'smooth' });
+        
+        showEpicResults();
     }
 
-    function displayResults() {
-        const percentage = (score / questions.length) * 100;
-        document.getElementById('scoreDisplay').textContent = `${score}/${questions.length} (${percentage.toFixed(0)}%)`;
+    function showEpicResults() {
+        const percentage = (playerScore / gameQuestions.length) * 100;
+        document.getElementById('finalScore').textContent = 
+            `${playerScore}/${gameQuestions.length} (${percentage.toFixed(0)}%)`;
         
-        const resultsTitle = document.getElementById('resultsTitle');
-        const rewardText = document.getElementById('rewardText');
-        const couponCode = document.getElementById('couponCode');
-        const restartBtn = document.getElementById('restartBtn');
+        const victoryMsg = document.getElementById('victoryMessage');
+        const rewardDetails = document.getElementById('rewardDetails');
+        const couponDisplay = document.getElementById('couponDisplay');
+        const replayBtn = document.getElementById('replayBtn');
         
-        // Update restart button based on remaining attempts
         if (attemptsUsed >= 2) {
-            restartBtn.style.display = 'none';
+            replayBtn.style.display = 'none';
         }
         
-        // Reward system based on score
-        if (score >= 9) {
-            resultsTitle.textContent = 'LEGENDARY PERFORMANCE!';
-            rewardText.textContent = 'Outstanding! SpeedEndo Calcipro Rotary Files worth ₹1250 FREE with minimum purchase of ₹4999!';
-            couponCode.textContent = 'XML5KZ';
-        } else if (score >= 7) {
-            resultsTitle.textContent = 'EXCELLENT MASTERY!';
-            rewardText.textContent = 'Fantastic! You\'ve unlocked 10% PB Cashback on your purchase!';
-            couponCode.textContent = 'ZYXW10';
-        } else if (score === 6) {
-            resultsTitle.textContent = 'GREAT KNOWLEDGE!';
-            rewardText.textContent = 'Well done! You\'ve won a FREE Flitt Burs Pack of 10 worth ₹499!';
-            couponCode.textContent = 'FLXMGH';
-        } else if (score >= 4) {
-            resultsTitle.textContent = 'SOLID EFFORT!';
-            rewardText.textContent = 'Good work! You\'ve earned 10% PB Cashback on your next order!';
-            couponCode.textContent = 'XMFHUI';
+        // Epic Rewards
+        if (playerScore >= 9) {
+            victoryMsg.textContent = 'LEGENDARY DOMINATION!';
+            rewardDetails.textContent = 'INSANE! SpeedEndo Calcipro Rotary Files worth ₹1250 FREE with ₹4999+ purchase!';
+            couponDisplay.textContent = 'XML5KZ';
+        } else if (playerScore >= 7) {
+            victoryMsg.textContent = 'EPIC MASTERY!';
+            rewardDetails.textContent = 'INCREDIBLE! You\'ve unlocked 10% PB Cashback - use it wisely!';
+            couponDisplay.textContent = 'ZYXW10';
+        } else if (playerScore === 6) {
+            victoryMsg.textContent = 'SOLID VICTORY!';
+            rewardDetails.textContent = 'NICE! You\'ve earned a FREE Flitt Burs Pack of 10 worth ₹499!';
+            couponDisplay.textContent = 'FLXMGH';
+        } else if (playerScore >= 4) {
+            victoryMsg.textContent = 'GOOD FIGHT!';
+            rewardDetails.textContent = 'DECENT! You\'ve secured 10% PB Cashback for your next battle!';
+            couponDisplay.textContent = 'XMFHUI';
         } else {
-            resultsTitle.textContent = 'KEEP LEARNING!';
-            rewardText.textContent = 'Every expert was once a beginner! Here\'s a Flat 5% Off to get you started!';
-            couponCode.textContent = '5XMHY';
+            victoryMsg.textContent = 'KEEP FIGHTING!';
+            rewardDetails.textContent = 'Every champion started somewhere! Here\'s 5% OFF to fuel your journey!';
+            couponDisplay.textContent = '5XMHY';
         }
     }
 
-    function copyCoupon() {
-        const couponCode = document.getElementById('couponCode').textContent;
+    function copyReward() {
+        const code = document.getElementById('couponDisplay').textContent;
         
         if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(couponCode).then(() => {
+            navigator.clipboard.writeText(code).then(() => {
                 showCopySuccess();
             }).catch(() => {
-                fallbackCopy(couponCode);
+                fallbackCopy(code);
             });
         } else {
-            fallbackCopy(couponCode);
+            fallbackCopy(code);
         }
     }
 
     function fallbackCopy(text) {
-        const textArea = document.createElement("textarea");
-        textArea.value = text;
-        textArea.style.position = "fixed";
-        textArea.style.left = "-999999px";
-        textArea.style.top = "-999999px";
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.style.position = "fixed";
+        area.style.left = "-9999px";
+        area.style.top = "-9999px";
+        document.body.appendChild(area);
+        area.focus();
+        area.select();
         
         try {
             document.execCommand('copy');
             showCopySuccess();
         } catch (err) {
-            alert('Coupon code: ' + text + '\n\nPlease copy this code manually.');
+            alert('Reward code: ' + text + '\n\nCopy it manually!');
         }
-        document.body.removeChild(textArea);
+        document.body.removeChild(area);
     }
 
     function showCopySuccess() {
-        // Create floating success message
-        const success = document.createElement('div');
-        success.style.cssText = `
+        const notification = document.createElement('div');
+        notification.style.cssText = `
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(145deg, #00ff00, #00cc00);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
+            top: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            color: #000000;
+            padding: 20px 30px;
+            border-radius: 15px;
             z-index: 10000;
-            font-weight: bold;
-            text-shadow: 0 0 10px #00ff00;
-            box-shadow: 0 0 20px rgba(0,255,0,0.6);
-            animation: slideIn 0.5s ease-out;
+            font-weight: 900;
+            box-shadow: 0 15px 40px rgba(0, 255, 0, 0.6);
+            animation: slideInRight 0.5s ease-out;
+            font-size: 1.1rem;
         `;
-        success.innerHTML = '<i class="fas fa-check"></i> CODE COPIED TO CLIPBOARD!';
-        document.body.appendChild(success);
+        notification.innerHTML = '🎉 REWARD CODE COPIED! 🎉';
+        document.body.appendChild(notification);
         
         setTimeout(() => {
-            success.style.animation = 'slideOut 0.5s ease-in forwards';
-            setTimeout(() => document.body.removeChild(success), 500);
-        }, 2500);
+            notification.style.animation = 'slideOutRight 0.5s ease-in forwards';
+            setTimeout(() => document.body.removeChild(notification), 500);
+        }, 3000);
     }
 
-    function shareQuiz() {
-        const scoreText = document.getElementById('scoreDisplay').textContent;
-        const couponText = document.getElementById('couponCode').textContent;
+    function shareVictory() {
+        const score = document.getElementById('finalScore').textContent;
+        const reward = document.getElementById('couponDisplay').textContent;
         
-        // Create epic share text
-        const shareText = `🚀 I just DOMINATED the PB DAYS: Pulse Edition Dental Quiz!
-        
-⚡ SCORE: ${scoreText}
-🎁 REWARD: ${couponText}
+        const shareText = `🚀 I just CRUSHED the PB DAYS: Pulse Edition challenge!
 
-🦷 Think you can beat my score? Take the challenge!
-🔥 Epic rewards await dental masters!
+⚡ EPIC SCORE: ${score}
+🎁 REWARD UNLOCKED: ${reward}
 
-#PBDays #PulseEdition #DentalChallenge #PinkBlue`;
+🔥 Think you can beat me? Take the ultimate dental challenge!
+💎 Insane rewards waiting for true champions!
+
+#PBDays #PulseEdition #EpicChallenge #Gaming #Dental #PinkBlue`;
         
-        if (navigator.share) {
+        if (navigator.share && navigator.canShare) {
             navigator.share({
-                title: 'PB DAYS: Pulse Edition - Quiz Victory!',
+                title: 'PB DAYS Epic Victory!',
                 text: shareText,
                 url: window.location.href
-            }).catch(err => {
-                // Fallback if native sharing fails
-                copyToClipboard(shareText);
+            }).catch(() => {
+                fallbackShare(shareText);
             });
         } else {
-            copyToClipboard(shareText);
+            fallbackShare(shareText);
         }
     }
 
-    function copyToClipboard(text) {
+    function fallbackShare(content) {
         if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert('🎉 Victory message copied! Share it with your friends!');
+            navigator.clipboard.writeText(content).then(() => {
+                alert('🎯 EPIC victory message copied! Share it everywhere!');
+            }).catch(() => {
+                prompt('Share your EPIC victory:', content);
             });
         } else {
-            alert('Share this victory message:\n\n' + text);
+            prompt('Share your EPIC victory:', content);
         }
     }
 
-    async function restartQuiz() {
-        // Check if attempts remaining
-        const currentAttempts = await fingerprint.getAttempts();
-        if (currentAttempts >= 2) {
-            alert('No more attempts remaining!');
+    async function playAgain() {
+        const attempts = await fingerprint.getAttempts();
+        if (attempts >= 2) {
+            alert('🔥 No more attempts remaining, warrior!');
             return;
         }
         
-        // Reset quiz state
-        currentQuestion = 0;
-        score = 0;
+        // Reset everything
+        currentRound = 0;
+        playerScore = 0;
         timeLeft = 300;
-        selectedAnswer = null;
+        selectedChoice = null;
         
-        document.getElementById('resultsScreen').classList.add('hidden');
-        document.getElementById('startScreen').classList.add('show');
-        document.getElementById('quizScreen').classList.add('hidden');
-        clearInterval(timer);
+        // Reset sections
+        document.getElementById('victoryZone').classList.remove('show');
+        document.getElementById('victoryZone').classList.add('hidden');
+        document.getElementById('gameZone').classList.add('hidden');
+        document.getElementById('startZone').classList.remove('hidden');
+        document.getElementById('startZone').classList.add('show');
         
-        // Update tries display
-        document.getElementById('triesLeft').textContent = 2 - currentAttempts;
+        clearInterval(gameTimer);
+        
+        document.getElementById('startZone').scrollIntoView({ behavior: 'smooth' });
+        
+        document.getElementById('triesLeft').textContent = Math.max(0, 2 - attempts);
     }
 
-    // Initialize quiz on page load
+    // Initialize Epic Game
     window.addEventListener('load', async function() {
-        // Update tries display
         const attempts = await fingerprint.getAttempts();
         document.getElementById('triesLeft').textContent = Math.max(0, 2 - attempts);
         
-        // Add CSS animations
+        // Add epic animations
         const style = document.createElement('style');
         style.textContent = `
-            @keyframes slideIn {
+            @keyframes slideInRight {
                 0% { transform: translateX(100%); opacity: 0; }
                 100% { transform: translateX(0); opacity: 1; }
             }
-            @keyframes slideOut {
+            @keyframes slideOutRight {
                 0% { transform: translateX(0); opacity: 1; }
                 100% { transform: translateX(100%); opacity: 0; }
             }
@@ -1299,7 +1536,7 @@
         document.head.appendChild(style);
     });
 
-    // Prevent cheating
+    // Anti-cheat protection
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('keydown', function(e) {
         if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
