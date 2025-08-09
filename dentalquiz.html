@@ -17,60 +17,151 @@
             background: linear-gradient(135deg, #e0f2fe, #bae6fd, #a5b4fc);
             min-height: 100vh;
             color: #1e293b;
-            padding: 20px;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        /* Floating Dental Instruments */
+        .dental-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
             overflow: hidden;
         }
 
+        .dental-instrument {
+            position: absolute;
+            opacity: 0.06;
+            animation: floatInstrument 12s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .dental-instrument:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .dental-instrument:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; }
+        .dental-instrument:nth-child(3) { bottom: 30%; left: 15%; animation-delay: 4s; }
+        .dental-instrument:nth-child(4) { bottom: 20%; right: 20%; animation-delay: 6s; }
+        .dental-instrument:nth-child(5) { top: 60%; left: 8%; animation-delay: 8s; }
+        .dental-instrument:nth-child(6) { top: 80%; right: 12%; animation-delay: 10s; }
+
+        @keyframes floatInstrument {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            25% { transform: translateY(-20px) rotate(5deg) scale(1.1); }
+            50% { transform: translateY(-10px) rotate(-5deg) scale(1.05); }
+            75% { transform: translateY(-25px) rotate(3deg) scale(1.08); }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Compact Header with Horizontal Stats */
         .header {
             background: linear-gradient(135deg, #0b3d91, #10b981);
             color: white;
-            padding: 30px;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 20px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 2.8rem;
+            margin-bottom: 8px;
             font-weight: 800;
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
         .header p {
             opacity: 0.9;
             font-size: 1.1rem;
+            margin-bottom: 20px;
         }
 
-        .stats {
+        /* Horizontal Stats Row */
+        .stats-row {
             display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
-        .stat {
+        .stat-item {
+            flex: 1;
+            min-width: 120px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px;
+            border-radius: 10px;
             text-align: center;
-            padding: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .stat-number {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
-            color: #0b3d91;
+            display: block;
+            margin-bottom: 4px;
+            animation: statBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes statBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Fun Tags */
+        .fun-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .fun-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-size: 0.9rem;
-            color: #64748b;
+            font-weight: 600;
+            animation: tagFloat 3s ease-in-out infinite;
+        }
+
+        .fun-tag:nth-child(1) { animation-delay: 0s; }
+        .fun-tag:nth-child(2) { animation-delay: 0.5s; }
+        .fun-tag:nth-child(3) { animation-delay: 1s; }
+        .fun-tag:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes tagFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
         }
 
         .content {
+            background: white;
+            border-radius: 20px;
             padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
 
         .rules {
@@ -84,6 +175,7 @@
         .rules h3 {
             color: #10b981;
             margin-bottom: 15px;
+            font-size: 1.2rem;
         }
 
         .rules ul {
@@ -104,24 +196,67 @@
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
             display: block;
             width: 100%;
             margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
         }
 
         .btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+            transform: none;
         }
 
         .btn-success { background: linear-gradient(135deg, #16a34a, #15803d); }
         .btn-warning { background: linear-gradient(135deg, #f59e0b, #d97706); }
         .btn-whatsapp { background: linear-gradient(135deg, #25d366, #128c7e); }
+
+        /* Countdown Overlay */
+        .countdown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(11, 61, 145, 0.95), rgba(16, 185, 129, 0.95));
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            color: white;
+            font-size: 8rem;
+            font-weight: 900;
+            animation: countdownPop 1s ease-out;
+        }
+
+        @keyframes countdownPop {
+            0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+            50% { transform: scale(1.2) rotate(5deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
 
         .timer {
             background: linear-gradient(135deg, #5a67d8, #4f46e5);
@@ -132,12 +267,18 @@
             font-size: 1.3rem;
             font-weight: bold;
             margin-bottom: 20px;
+            animation: timerPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes timerPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
         }
 
         .progress {
             background: #e2e8f0;
-            height: 8px;
-            border-radius: 4px;
+            height: 10px;
+            border-radius: 5px;
             overflow: hidden;
             margin-bottom: 20px;
         }
@@ -147,6 +288,24 @@
             height: 100%;
             width: 0%;
             transition: width 0.5s ease;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: progressShimmer 2s ease infinite;
+        }
+
+        @keyframes progressShimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .question {
@@ -155,6 +314,12 @@
             border-radius: 12px;
             margin-bottom: 20px;
             border: 1px solid #e2e8f0;
+            animation: questionSlide 0.6s ease-out;
+        }
+
+        @keyframes questionSlide {
+            0% { opacity: 0; transform: translateX(-20px); }
+            100% { opacity: 1; transform: translateX(0); }
         }
 
         .question-meta {
@@ -164,7 +329,7 @@
         }
 
         .question-text {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 600;
             color: #1e293b;
         }
@@ -185,31 +350,57 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            animation: optionFadeIn 0.4s ease-out;
+        }
+
+        .option:nth-child(1) { animation-delay: 0.1s; }
+        .option:nth-child(2) { animation-delay: 0.2s; }
+        .option:nth-child(3) { animation-delay: 0.3s; }
+        .option:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes optionFadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .option:hover {
             border-color: #0b3d91;
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(11, 61, 145, 0.15);
         }
 
         .option.selected {
             border-color: #5a67d8;
             background: #f1f5f9;
+            transform: translateY(-3px);
         }
 
         .option.correct {
             border-color: #16a34a;
             background: #f0fdf4;
+            animation: correctBounce 0.6s ease-out;
+        }
+
+        @keyframes correctBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .option.incorrect {
             border-color: #ef4444;
             background: #fef2f2;
+            animation: incorrectShake 0.6s ease-out;
+        }
+
+        @keyframes incorrectShake {
+            0%, 100% { transform: translateX(0); }
+            25%, 75% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
         }
 
         .option-letter {
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
             background: #0b3d91;
             color: white;
             border-radius: 50%;
@@ -217,16 +408,41 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .option.selected .option-letter {
+            background: #5a67d8;
+            transform: scale(1.1);
+        }
+
+        .option.correct .option-letter {
+            background: #16a34a;
+        }
+
+        .option.incorrect .option-letter {
+            background: #ef4444;
         }
 
         .results {
             text-align: center;
-            padding: 30px;
+            animation: resultsSlide 0.8s ease-out;
+        }
+
+        @keyframes resultsSlide {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .trophy {
             font-size: 4rem;
             margin: 20px 0;
+            animation: trophyFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes trophyFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
         .score {
@@ -237,22 +453,24 @@
         }
 
         .reward-card {
-            background: #fefce8;
-            border: 2px dashed #f59e0b;
-            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 193, 7, 0.05));
+            border: 2px solid #f59e0b;
+            border-radius: 15px;
             padding: 25px;
             margin: 20px 0;
+            animation: rewardGlow 3s ease-in-out infinite;
         }
 
-        .coupon-code {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #0b3d91;
-            letter-spacing: 3px;
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
+        @keyframes rewardGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.4); }
+        }
+
+        .reward-title {
+            font-size: 1.5rem;
+            color: #f59e0b;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
 
         .hidden { display: none; }
@@ -269,60 +487,91 @@
         }
 
         @media (max-width: 768px) {
-            .header h1 { font-size: 2rem; }
-            .stats { flex-direction: column; gap: 10px; }
+            .header h1 { font-size: 2.2rem; }
+            .stats-row { flex-direction: column; gap: 10px; }
+            .fun-tags { justify-content: center; }
             .button-row { flex-direction: column; }
             .button-row .btn { width: 100%; }
+            .countdown-overlay { font-size: 5rem; }
         }
     </style>
 </head>
 <body>
+    <!-- Floating Dental Instruments Background -->
+    <div class="dental-bg">
+        <div class="dental-instrument">🦷</div>
+        <div class="dental-instrument">🪥</div>
+        <div class="dental-instrument">💊</div>
+        <div class="dental-instrument">🔬</div>
+        <div class="dental-instrument">⚕️</div>
+        <div class="dental-instrument">💉</div>
+    </div>
+
     <div class="container">
-        <!-- Header -->
+        <!-- Compact Header with Horizontal Stats -->
         <div class="header">
             <h1>PB DAYS: Pulse Edition</h1>
-            <p>Dental Knowledge Challenge</p>
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-number" id="visitCount">1,247</div>
-                    <div class="stat-label">People Visited</div>
+            <p>🦷 Dental Knowledge Challenge 🦷</p>
+            
+            <!-- Horizontal Stats Row -->
+            <div class="stats-row">
+                <div class="stat-item">
+                    <span class="stat-number" id="visitCount">1,247</span>
+                    <span class="stat-label">Participants</span>
                 </div>
-                <div class="stat">
-                    <div class="stat-number" id="attemptsLeft">2</div>
-                    <div class="stat-label">Attempts Left</div>
+                <div class="stat-item">
+                    <span class="stat-number" id="attemptsLeft">2</span>
+                    <span class="stat-label">Tries Left</span>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">10</div>
-                    <div class="stat-label">Questions</div>
+                <div class="stat-item">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">Questions</span>
                 </div>
+                <div class="stat-item">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Minutes</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="dailyJackpot">₹5,000</span>
+                    <span class="stat-label">Daily Jackpot</span>
+                </div>
+            </div>
+
+            <!-- Fun Tags -->
+            <div class="fun-tags">
+                <div class="fun-tag">🎯 Quizzes</div>
+                <div class="fun-tag">💰 Superdeals</div>
+                <div class="fun-tag">🎰 Daily Jackpot</div>
+                <div class="fun-tag">🏆 Instant Rewards</div>
             </div>
         </div>
 
         <!-- Start Screen -->
         <div class="content" id="startScreen">
-            <h2 style="color: #0b3d91; margin-bottom: 15px;">Test Your Dental Knowledge</h2>
-            <p style="color: #64748b; margin-bottom: 20px;">Challenge yourself with 10 carefully selected dental questions and win exclusive PB DAYS rewards!</p>
+            <h2 style="color: #0b3d91; margin-bottom: 15px; text-align: center;">🚀 Ready for the Challenge?</h2>
+            <p style="color: #64748b; margin-bottom: 20px; text-align: center;">Test your dental expertise and unlock exclusive PB DAYS superdeals!</p>
             
             <div class="rules">
-                <h3><i class="fas fa-tooth"></i> Quiz Rules:</h3>
+                <h3><i class="fas fa-tooth"></i> Challenge Rules:</h3>
                 <ul>
-                    <li>Answer 10 randomly selected dental questions</li>
-                    <li>You have 5 minutes to complete the quiz</li>
-                    <li>Higher scores unlock better rewards</li>
-                    <li>Maximum 2 attempts per participant</li>
-                    <li>Instant reward upon completion</li>
+                    <li>✅ Answer 10 expert-level dental questions</li>
+                    <li>⏰ You have 2 minutes to complete</li>
+                    <li>🎯 Score 8/10 or higher for maximum rewards</li>
+                    <li>🔥 Each question has only one correct answer</li>
+                    <li>💪 Maximum 2 attempts per participant</li>
+                    <li>🎁 Instant superdeal offers upon completion</li>
                 </ul>
             </div>
 
-            <button class="btn" onclick="startQuiz()">
-                <i class="fas fa-play-circle"></i> Start Quiz Challenge
+            <button class="btn" onclick="startCountdown()">
+                <i class="fas fa-rocket"></i> Launch Challenge Now!
             </button>
         </div>
 
         <!-- Quiz Screen -->
         <div class="content hidden" id="quizScreen">
             <div class="timer" id="timer">
-                <i class="fas fa-clock"></i> Time: 5:00
+                <i class="fas fa-clock"></i> Time: 2:00
             </div>
             
             <div class="progress">
@@ -345,29 +594,25 @@
         <div class="content hidden" id="resultsScreen">
             <div class="results">
                 <div class="trophy" id="trophyIcon">🏆</div>
-                <h2 id="resultsTitle">Quiz Complete!</h2>
+                <h2 id="resultsTitle">Challenge Complete!</h2>
                 <div class="score" id="finalScore"></div>
 
                 <div class="reward-card">
-                    <h3 style="color: #f59e0b; margin-bottom: 15px;">
-                        <i class="fas fa-gift"></i> Your Reward
+                    <h3 class="reward-title">
+                        <i class="fas fa-gift"></i> Your PB DAYS Superdeal!
                     </h3>
                     <p id="rewardDescription"></p>
-                    <div class="coupon-code" id="couponCode"></div>
-                    <button class="btn" onclick="copyCode()">
-                        <i class="fas fa-copy"></i> Copy Reward Code
-                    </button>
                 </div>
 
                 <div class="button-row">
                     <a href="https://pinkblue.in/cart" class="btn btn-success" target="_blank">
-                        <i class="fas fa-shopping-cart"></i> Redeem Now
+                        <i class="fas fa-shopping-cart"></i> Claim Superdeal
                     </a>
                     <a href="https://pinkblue.in" class="btn btn-warning" target="_blank">
-                        <i class="fas fa-store"></i> Browse Products
+                        <i class="fas fa-store"></i> Browse More
                     </a>
                     <button class="btn btn-whatsapp" onclick="shareWhatsApp()">
-                        <i class="fab fa-whatsapp"></i> Share Results
+                        <i class="fab fa-whatsapp"></i> Share Victory
                     </button>
                     <button class="btn" id="tryAgainBtn" onclick="tryAgain()">
                         <i class="fas fa-redo"></i> Try Again
@@ -377,6 +622,11 @@
         </div>
     </div>
 
+    <!-- Countdown Overlay -->
+    <div class="countdown-overlay" id="countdownOverlay">
+        <span id="countdownNumber">3</span>
+    </div>
+
     <script>
         // Simple fingerprinting
         function generateFingerprint() {
@@ -384,7 +634,7 @@
             const ctx = canvas.getContext('2d');
             ctx.textBaseline = 'top';
             ctx.font = '14px Arial';
-            ctx.fillText('PBDays2025', 2, 2);
+            ctx.fillText('PBDaysPulse2025', 2, 2);
             
             const fingerprint = canvas.toDataURL() + navigator.userAgent + screen.width + screen.height;
             let hash = 0;
@@ -518,7 +768,7 @@
         // Game state
         let currentQuestionIndex = 0;
         let score = 0;
-        let timeLeft = 300; // 5 minutes
+        let timeLeft = 120; // 2 minutes
         let timer;
         let selectedAnswer = null;
         let gameQuestions = [];
@@ -529,21 +779,45 @@
             return shuffled.slice(0, count);
         }
 
-        // Start quiz
-        function startQuiz() {
+        // 3-2-1 Countdown
+        function startCountdown() {
             const attempts = getAttempts();
             if (attempts >= 2) {
                 alert('You have used all your attempts!');
                 return;
             }
 
+            const overlay = document.getElementById('countdownOverlay');
+            const number = document.getElementById('countdownNumber');
+            let count = 3;
+            
+            overlay.style.display = 'flex';
+            
+            const interval = setInterval(() => {
+                number.textContent = count;
+                number.style.animation = 'countdownPop 1s ease-out';
+                
+                if (count === 0) {
+                    number.textContent = 'GO!';
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                        startQuiz();
+                    }, 1000);
+                    clearInterval(interval);
+                }
+                count--;
+            }, 1000);
+        }
+
+        // Start quiz
+        function startQuiz() {
             incrementAttempts();
             document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - getAttempts());
 
             gameQuestions = getRandomQuestions(10);
             currentQuestionIndex = 0;
             score = 0;
-            timeLeft = 300;
+            timeLeft = 120;
             selectedAnswer = null;
 
             document.getElementById('startScreen').classList.add('hidden');
@@ -662,7 +936,6 @@
 
             const title = document.getElementById('resultsTitle');
             const description = document.getElementById('rewardDescription');
-            const coupon = document.getElementById('couponCode');
             const trophy = document.getElementById('trophyIcon');
             const tryAgain = document.getElementById('tryAgainBtn');
 
@@ -670,73 +943,38 @@
                 tryAgain.style.display = 'none';
             }
 
-            // Rewards
-            if (score >= 9) {
-                title.textContent = 'Outstanding Performance!';
+            // Rewards (without codes)
+            if (score >= 8) {
+                title.textContent = '🎉 SUPERDEALS UNLOCKED!';
                 trophy.textContent = '👑';
-                description.textContent = 'Amazing! SpeedEndo Calcipro Rotary Files worth ₹1250 FREE with minimum purchase of ₹4999!';
-                coupon.textContent = 'XML5KZ';
-            } else if (score >= 7) {
-                title.textContent = 'Excellent Work!';
+                description.textContent = 'Outstanding! You\'ve unlocked exclusive PB DAYS superdeals and premium offers! Check your cart for instant discounts.';
+            } else if (score >= 6) {
+                title.textContent = '🏆 GREAT PERFORMANCE!';
                 trophy.textContent = '🏆';
-                description.textContent = 'Great job! You\'ve unlocked 10% PB Cashback on your purchase!';
-                coupon.textContent = 'ZYXW10';
-            } else if (score === 6) {
-                title.textContent = 'Well Done!';
-                trophy.textContent = '🥇';
-                description.textContent = 'Congratulations! You\'ve won a FREE Flitt Burs Pack of 10 worth ₹499!';
-                coupon.textContent = 'FLXMGH';
+                description.textContent = 'Excellent work! You\'ve qualified for special PB DAYS discounts and bonus offers!';
             } else if (score >= 4) {
-                title.textContent = 'Good Effort!';
+                title.textContent = '⭐ GOOD EFFORT!';
                 trophy.textContent = '🥈';
-                description.textContent = 'Nice work! You\'ve earned 10% PB Cashback on your next order!';
-                coupon.textContent = 'XMFHUI';
+                description.textContent = 'Nice try! You\'ve earned PB DAYS participation rewards and special member discounts!';
             } else {
-                title.textContent = 'Keep Learning!';
+                title.textContent = '💪 KEEP LEARNING!';
                 trophy.textContent = '🥉';
-                description.textContent = 'Every expert started somewhere! Here\'s 5% OFF to get you started!';
-                coupon.textContent = '5XMHY';
+                description.textContent = 'Every expert started somewhere! Enjoy exclusive learning resources and beginner-friendly offers!';
             }
-        }
-
-        // Copy code
-        function copyCode() {
-            const code = document.getElementById('couponCode').textContent;
-            
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(code).then(() => {
-                    alert('Reward code copied to clipboard!');
-                }).catch(() => {
-                    fallbackCopy(code);
-                });
-            } else {
-                fallbackCopy(code);
-            }
-        }
-
-        function fallbackCopy(text) {
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            alert('Reward code copied!');
         }
 
         // Share on WhatsApp
         function shareWhatsApp() {
             const scoreText = document.getElementById('finalScore').textContent;
-            const codeText = document.getElementById('couponCode').textContent;
             
-            const message = `🎉 I just completed the PB DAYS: Pulse Edition Dental Challenge!
+            const message = `🚀 I just completed the PB DAYS: Pulse Edition Dental Challenge!
 
 🏆 My Score: ${scoreText}
-🎁 Reward Code: ${codeText}
+🎁 Superdeals Unlocked!
 
 🦷 Test your dental knowledge: ${window.location.href}
 
-#PBDays #DentalChallenge #PinkBlue`;
+#PBDays #DentalChallenge #Superdeals #PinkBlue`;
             
             const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
@@ -762,6 +1000,14 @@
             const current = parseInt(document.getElementById('visitCount').textContent.replace(',', ''));
             document.getElementById('visitCount').textContent = (current + Math.floor(Math.random() * 3) + 1).toLocaleString();
         }, 30000);
+
+        // Update daily jackpot
+        setInterval(() => {
+            const jackpots = ['₹2,500', '₹5,000', '₹7,500', '₹10,000'];
+            const currentIndex = jackpots.indexOf(document.getElementById('dailyJackpot').textContent);
+            const nextIndex = (currentIndex + 1) % jackpots.length;
+            document.getElementById('dailyJackpot').textContent = jackpots[nextIndex];
+        }, 45000);
     </script>
 </body>
 </html>
