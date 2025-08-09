@@ -1,1 +1,767 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>PB DAYS: Pulse Edition — Dental Instruments Challenge</title> <link rel="preconnect" href="https://fonts.googleapis.com"/> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/> <style> :root{ --blue:#0b3d91; --teal:#10b981; --violet:#5a67d8; --ink:#0f172a; --slate:#475569; --bg1:#e0f2fe; --bg2:#c7d2fe; --bg3:#ecfeff; --ok:#16a34a; --err:#ef4444; --gold:#f59e0b; } *{box-sizing:border-box} body{ margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3)); background-size: 300% 300%; animation: bgFlow 18s ease-in-out infinite; color: var(--ink); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; } @keyframes bgFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}} .wrap{max-width:960px; margin:0 auto; padding:16px} .card{ background: rgba(255,255,255,.92); backdrop-filter: blur(16px); border:1px solid rgba(11,61,145,.12); border-radius:20px; box-shadow:0 10px 30px rgba(11,61,145,.12); padding:24px; margin:16px 0; position:relative; overflow:hidden; } .header{ text-align:center; padding:28px 16px 12px; } .brand{ font-weight:800; font-size:2.2rem; letter-spacing:-.02em; background: linear-gradient(90deg,var(--blue),var(--teal),var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:0 0 24px rgba(11,61,145,.2); } .sub{color:var(--slate); font-weight:600} .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:16px 0; } .stat{ border:1px solid rgba(11,61,145,.12); border-radius:14px; padding:12px; text-align:center; background:rgba(255,255,255,.9); transition:transform .25s ease, box-shadow .25s ease; } .stat:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(11,61,145,.12)} .n{font-weight:800; font-size:1.4rem; color:var(--blue)} .l{font-size:.85rem; color:var(--slate)} .rules{ border:1px dashed rgba(16,185,129,.35); border-radius:16px; padding:14px 14px 6px; background:rgba(16,185,129,.06); } .rules h3{margin:0 0 8px; font-size:1rem; color:var(--teal)} .rules ul{margin:0; padding:0 0 0 18px} .rules li{margin:6px 0; color:var(--slate)} .btn{ display:inline-flex; align-items:center; justify-content:center; gap:10px; border:none; border-radius:14px; font-weight:800; letter-spacing:.02em; color:#fff; background: linear-gradient(135deg,#2563eb,#1d4ed8); box-shadow:0 10px 24px rgba(37,99,235,.28); padding:14px 18px; cursor:pointer; transition:transform .2s ease, box-shadow .2s ease; } .btn:active{transform:translateY(1px)} .btn.secondary{background: linear-gradient(135deg,#10b981,#059669); box-shadow:0 10px 24px rgba(16,185,129,.28)} .btn.warn{background: linear-gradient(135deg,#f59e0b,#d97706); box-shadow:0 10px 24px rgba(245,158,11,.28)} .btn.wa{background: linear-gradient(135deg,#25d366,#128c7e); box-shadow:0 10px 24px rgba(37,211,102,.28)} .row{display:flex; flex-wrap:wrap; gap:10px; justify-content:center} .timer{ display:inline-flex; align-items:center; gap:10px; font-weight:800; color:#fff; background: linear-gradient(135deg,#5a67d8,#4f46e5); border-radius:14px; padding:12px 16px; box-shadow:0 10px 24px rgba(90,103,216,.28); font-variant-numeric:tabular-nums; } .prog{height:10px; border-radius:999px; background:rgba(11,61,145,.12); overflow:hidden} .prog > span{ display:block; height:100%; background: linear-gradient(90deg,var(--blue),var(--teal),var(--violet)); width:0%; transition: width .5s ease; } .qmeta{color:var(--violet); font-weight:800; margin-bottom:8px} .qtext{font-size:1.2rem; font-weight:600; color:var(--ink)} .opt{ border:2px solid rgba(11,61,145,.12); border-radius:14px; padding:14px; background:#fff; display:flex; align-items:center; gap:12px; cursor:pointer; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; } .opt:hover{transform:translateY(-2px); box-shadow:0 8px 18px rgba(11,61,145,.12); border-color:rgba(11,61,145,.25)} .opt .tag{ width:34px; height:34px; border-radius:50%; background: linear-gradient(135deg,var(--blue),var(--violet)); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-weight:800; } .opt.selected{border-color:var(--violet); box-shadow:0 10px 20px rgba(90,103,216,.18)} .opt.correct{border-color:var(--ok); animation: stampOK .5s ease both} .opt.incorrect{border-color:var(--err); animation: shake .5s ease both} @keyframes shake{ 10%,90%{transform:translateX(-2px)} 20%,80%{transform:translateX(3px)} 30%,50%,70%{transform:translateX(-5px)} 40%,60%{transform:translateX(5px)} } @keyframes stampOK{ 0%{transform:scale(.98); box-shadow:none} 100%{transform:scale(1); box-shadow:0 0 0 4px rgba(22,163,74,.1)} } .stamp{ margin-left:auto; font-weight:800; font-size:.95rem; letter-spacing:.06em; padding:6px 10px; border-radius:10px; display:none; } .opt.correct .stamp{display:inline-block; background:rgba(22,163,74,.12); color:var(--ok)} .opt.incorrect .stamp{display:inline-block; background:rgba(239,68,68,.12); color:var(--err)} .trophy{font-size:3rem; margin:10px 0} .score{font-weight:800; font-size:1.6rem; color:var(--blue)} /* Falling dental instruments (SVG version) */ .sky{pointer-events:none; position:fixed; inset:0; overflow:hidden; z-index:1} .tool{ position:absolute; top:-60px; opacity:.95; filter: drop-shadow(0 6px 8px rgba(0,0,0,.15)); animation: fall linear var(--dur), sway ease-in-out 3s infinite; will-change: transform; } .tool svg{display:block; width:24px; height:24px} @keyframes fall{to{transform:translateY(110vh) rotate(var(--rot))}} @keyframes sway{0%,100%{transform:translateX(0)}50%{transform:translateX(12px)}} @media (max-width:768px){ .tool svg{transform: scale(0.9)} } /* Countdown overlay */ .count{ position:fixed; inset:0; background:linear-gradient(135deg, rgba(11,61,145,.95), rgba(90,103,216,.95)); color:#fff; display:none; align-items:center; justify-content:center; z-index:10; font-weight:800; font-size:5rem; } @media (max-width:768px){ .brand{font-size:1.9rem} .stats{grid-template-columns:repeat(3,1fr)} .qtext{font-size:1.05rem} .opt{padding:12px} .btn{width:100%} .count{font-size:3.5rem} } </style> </head> <body> <!-- Floating instruments layer --> <div class="sky" id="sky"></div> <div class="wrap"> <!-- Header / Brand --> <div class="card header"> <div class="brand">PB DAYS — PULSE EDITION</div> <div class="sub">Dental Instruments Challenge</div> <div style="height:12px"></div> <div class="stats"> <div class="stat"> <div class="n" id="visitors">0</div> <div class="l">People Visited</div> </div> <div class="stat"> <div class="n" id="attemptsLeft">2</div> <div class="l">Attempts Left</div> </div> <div class="stat"> <div class="n">10</div> <div class="l">Questions</div> </div> </div> </div> <!-- Start --> <div class="card" id="startCard"> <h2 style="margin:0 0 8px; font-size:1.6rem; color:var(--blue);">Atraumatic Entry</h2> <p style="margin:0 0 12px; color:var(--slate)">Scrub in and step into the operatory—this quiz drops real dental instruments and inside jokes as you play.</p> <div class="rules"> <h3><i class="fa-solid fa-tooth"></i> Sterile Protocol</h3> <ul> <li>10 curated, industry-relevant MCQs</li> <li>5 minutes (chair time)</li> <li>2 attempts per participant (fingerprint protected)</li> <li>Better scores = better rewards</li> <li>Instant coupon reveal post-op</li> </ul> </div> <div class="row" style="margin-top:10px"> <button class="btn" onclick="begin()">Scrub — Count 3-2-1</button> </div> </div> <!-- Quiz --> <div class="card" id="quizCard" style="display:none"> <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:space-between"> <div class="timer" id="timer"><i class="fa-regular fa-clock"></i> <span>5:00</span></div> <div style="min-width:160px; flex:1; margin-left:auto"> <div class="prog"><span id="progFill"></span></div> </div> </div> <div style="height:10px"></div> <div class="qmeta" id="qMeta">Question 1 of 10</div> <div class="qtext" id="qText"></div> <div id="opts" style="display:grid; gap:10px; margin-top:12px"></div> <div class="row" style="margin-top:10px"> <button id="nextBtn" class="btn" onclick="nextQ()" disabled>Next — Occlusion Check</button> </div> </div> <!-- Results --> <div class="card" id="resCard" style="display:none; text-align:center"> <div class="trophy" id="trophy">🏆</div> <div class="score" id="scoreLine">Score: 0/10 (0%)</div> <div style="height:8px"></div> <div class="card" style="border-style:dashed"> <h3 style="margin:0 0 6px; color:var(--gold)">Your Reward</h3> <p id="rewardText" style="margin:0 0 8px; color:var(--slate)"></p> <div id="coupon" style="font-weight:800; font-size:1.6rem; letter-spacing:.12em; color:var(--blue)"></div> <div class="row" style="margin-top:10px"> <button class="btn secondary" onclick="copyCoupon()"><i class="fa-regular fa-copy"></i> Copy Code</button> <a class="btn secondary" href="https://pinkblue.in/cart" target="_blank"><i class="fa-solid fa-bag-shopping"></i> Redeem</a> <a class="btn warn" href="https://pinkblue.in" target="_blank"><i class="fa-solid fa-store"></i> Continue Shopping</a> <button class="btn wa" onclick="shareWA()"><i class="fa-brands fa-whatsapp"></i> Share on WhatsApp</button> <button class="btn" id="againBtn" onclick="again()">New Attempt</button> </div> </div> </div> </div> <!-- Countdown --> <div class="count" id="count"><span id="countNum">3</span></div> <script> // Lightweight fingerprint (client-side only) class ID { static get(){ try{ const c=document.createElement('canvas'); const ctx=c.getContext('2d'); ctx.textBaseline='top'; ctx.font='14px Inter'; ctx.fillText('PB-PULSE-TOOLS-2025',2,2); const raw = c.toDataURL()+navigator.userAgent+screen.width+screen.height+navigator.language+navigator.platform; let h=0; for(let i=0;i<raw.length;i++){h=((h<<5)-h)+raw.charCodeAt(i); h|=0} return String(Math.abs(h)); }catch(e){ return 'fallback_'+Math.floor(Math.random()*1e9) } } } // Attempt guard const KEY_ATT='pb_pulse_attempts'; function getAttempts(){ const id=ID.get(); const store=JSON.parse(localStorage.getItem(KEY_ATT)||'{}'); return store[id]||0; } function incAttempts(){ const id=ID.get(); const store=JSON.parse(localStorage.getItem(KEY_ATT)||'{}'); store[id]=(store[id]||0)+1; localStorage.setItem(KEY_ATT, JSON.stringify(store)); return store[id]; } // Visit counter (logical, gentle growth) (function visits(){ const k='pb_pulse_visits'; let obj=JSON.parse(localStorage.getItem(k)||'{"n":742}'); const hour=(new Date()).getHours(); const bump = (hour>=9 && hour<=20)? (1+Math.floor(Math.random()*3)) : 1; obj.n+=bump; if(obj.n>5000) obj.n=800+Math.floor(Math.random()*300); localStorage.setItem(k, JSON.stringify(obj)); document.getElementById('visitors').textContent = obj.n.toLocaleString(); })(); // Inline SVG instruments (currentColor for easy theming) const TOOL_SVGS = [ // Dental mirror `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-label="Dental mirror" xmlns="http://www.w3.org/2000/svg"> <circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="2"/> <path d="M9.8 9.8 L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/> </svg>`, // Explorer (sickle probe) `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-label="Explorer" xmlns="http://www.w3.org/2000/svg"> <path d="M6 20 L10 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/> <rect x="10" y="15" width="7" height="2.5" rx="1.25" fill="currentColor"/> <path d="M17 16.2 C19.2 16.2, 20.8 14.6, 20.8 12.8 C20.8 11.6, 20.2 10.5, 19.2 9.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/> </svg>`, // Forceps `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-label="Forceps" xmlns="http://www.w3.org/2000/svg"> <path d="M6 18 C7.5 16.5, 10 14, 12 12 C14 10, 16.5 7.5, 18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/> <circle cx="6" cy="18" r="2" stroke="currentColor" stroke-width="2"/> <circle cx="18" cy="6" r="2" stroke="currentColor" stroke-width="2"/> </svg>`, // Syringe `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-label="Syringe" xmlns="http://www.w3.org/2000/svg"> <path d="M3 7 L7 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/> <rect x="7" y="7" width="9" height="4" rx="1.2" stroke="currentColor" stroke-width="2"/> <path d="M16 9 L21 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/> <path d="M9 11 L12 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/> <path d="M11 9 L14 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/> </svg>`, // Contra-angle handpiece `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-label="Contra-angle handpiece" xmlns="http://www.w3.org/2000/svg"> <path d="M6 18 C10 16, 13 13, 15 10 L18 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/> <circle cx="18" cy="7" r="1.5" fill="currentColor"/> <rect x="5" y="17" width="3" height="3" rx="1" fill="currentColor"/> </svg>` ]; const TOOL_COLORS = ['#0b3d91', '#10b981', '#5a67d8', '#1e293b']; function dropToolsSVG(burst = 8){ const sky = document.getElementById('sky'); for (let i = 0; i < burst; i++){ const toolWrap = document.createElement('div'); toolWrap.className = 'tool'; const left = (Math.random() * 100).toFixed(2); const dur = (6 + Math.random() * 4).toFixed(2) + 's'; const rotDeg = ((Math.random() * 40) - 20).toFixed(1) + 'deg'; toolWrap.style.left = left + 'vw'; toolWrap.style.setProperty('--dur', dur); toolWrap.style.setProperty('--rot', rotDeg); toolWrap.style.color = TOOL_COLORS[Math.floor(Math.random() * TOOL_COLORS.length)]; const svgIdx = Math.floor(Math.random() * TOOL_SVGS.length); toolWrap.innerHTML = TOOL_SVGS[svgIdx]; sky.appendChild(toolWrap); toolWrap.addEventListener('animationend', () => toolWrap.remove()); } } // Countdown function countdown(cb){ const c=document.getElementById('count'), n=document.getElementById('countNum'); let v=3; c.style.display='flex'; n.textContent=v; const iv=setInterval(()=>{ v--; if(v<=0){ n.textContent='GO'; setTimeout(()=>{c.style.display='none'; clearInterval(iv); cb&&cb();},700); } else n.textContent=v; },900); } // Questions const BANK = [ {q:"Hardest substance in the human body?", a:["Bone","Tooth enamel","Dentin","Cementum"], c:1}, {q:"Adult complete dentition includes:", a:["28 teeth","30 teeth","32 teeth","34 teeth"], c:2}, {q:"Most prevalent oral disease:", a:["Gingivitis","Dental caries","Periodontitis","Oral cancer"], c:1}, {q:"Mineral most effective for enamel strengthening:", a:["Calcium","Phosphorus","Fluoride","Magnesium"], c:2}, {q:"Clinical term for involuntary teeth grinding:", a:["Bruxism","Halitosis","Xerostomia","Trismus"], c:0}, {q:"Typical age for primary tooth exfoliation start:", a:["4–5y","6–7y","8–9y","10–11y"], c:1}, {q:"Innermost vital tooth tissue:", a:["Enamel","Dentin","Pulp","Cementum"], c:2}, {q:"Toothbrush replacement frequency:", a:["Monthly","Every 3–4 months","Every 6 months","Annually"], c:1}, {q:"Optimal pH for oral health:", a:["5.5","6.0","7.0","7.5"], c:2}, {q:"Primary cariogenic pathogen:", a:["S. mutans","Lactobacillus","Actinomyces","Prevotella"], c:0}, {q:"Adult toothpaste fluoride (ppm):", a:["500","1000","1450","2000"], c:2}, {q:"Third molars are:", a:["First molars","Second molars","Wisdom teeth","Premolars"], c:2}, {q:"Commonest cause of halitosis:", a:["Poor oral hygiene","GERD","Sinusitis","Cardiac disease"], c:0}, {q:"Effective brushing duration:", a:["30s","1m","2m","5m"], c:2}, {q:"Plaque primarily is:", a:["Food debris","Bacterial biofilm","Saliva proteins","Epithelial cells"], c:1}, {q:"Vitamin deficiency causing gingival bleeding:", a:["A","B-complex","C","D"], c:2}, {q:"Space between adjacent teeth:", a:["Interdental space","Diastema","Embrasure","Frenum"], c:0}, {q:"Procedure removing calculus:", a:["Scaling","Polishing","Whitening","Bonding"], c:0}, {q:"RCT stands for:", a:["Root Canal Therapy","Routine Care Treatment","Restorative Crown Treatment","Radicular Cavity Treatment"], c:0}, {q:"Primary function of saliva:", a:["Taste modulation","Protective lubrication","Temperature regulation","Aesthetics"], c:1} ]; function pick(n=10){ const pool=[...BANK]; const out=[]; while(out.length<n && pool.length){ const i=Math.floor(Math.random()*pool.length); out.push(pool.splice(i,1)); } return out; } // State let qs=[], idx=0, score=0, time=300, tmr=null, selected=null; function begin(){ const used=getAttempts(); if(used>=2){ document.getElementById('startCard').innerHTML = ` <h2 style="margin:0 0 8px; color:var(--err)">Gloves Off — Attempts Used</h2> <p style="color:var(--slate)">You’ve completed both sterile attempts for this operatory window.</p> <div class="row"><a class="btn warn" target="_blank" href="https://pinkblue.in">Browse Products</a></div> `; return; } countdown(start); } function start(){ incAttempts(); document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - getAttempts()); qs = pick(10); idx=0; score=0; time=300; selected=null; document.getElementById('startCard').style.display='none'; document.getElementById('quizCard').style.display='block'; renderQ(); runTimer(); dropToolsSVG(10); // opening flourish } function runTimer(){ const el=document.getElementById('timer').querySelector('span'); clearInterval(tmr); tmr=setInterval(()=>{ time--; if(time<0){clearInterval(tmr); finish(); return;} const m=Math.floor(time/60), s=String(time%60).padStart(2,'0'); el.textContent = `${m}:${s}`; },1000); } function renderQ(){ const q=qs[idx]; document.getElementById('qMeta').textContent = `Question ${idx+1} of ${qs.length}`; document.getElementById('qText').textContent = q.q; const box=document.getElementById('opts'); box.innerHTML=''; q.a.forEach((txt,i)=>{ const d=document.createElement('div'); d.className='opt'; d.innerHTML=`<span class="tag">${String.fromCharCode(65+i)}</span><span>${txt}</span><span class="stamp"></span>`; d.onclick=()=>choose(i,d); box.appendChild(d); }); document.getElementById('progFill').style.width = ((idx)/qs.length*100)+'%'; selected=null; document.getElementById('nextBtn').disabled=true; } function choose(i, node){ document.querySelectorAll('.opt').forEach(el=>el.classList.remove('selected')); node.classList.add('selected'); selected=i; document.getElementById('nextBtn').disabled=false; } function nextQ(){ if(selected===null) return; const q=qs[idx]; const opts=[...document.querySelectorAll('.opt')]; opts.forEach((el,i)=>{ const stamp=el.querySelector('.stamp'); if(i===q.c){ el.classList.add('correct'); stamp.textContent='STERILE ✓'; } else if(i===selected){ el.classList.add('incorrect'); stamp.textContent='BIOHAZARD ✗'; } }); if(selected===q.c){ score++; hapticOK(); } else { hapticErr(); } dropToolsSVG(6); // per-question micro burst setTimeout(()=>{ idx++; if(idx<qs.length){ renderQ(); } else { finish(); } },900); } function finish(){ clearInterval(tmr); document.getElementById('quizCard').style.display='none'; const pct = Math.round(score/qs.length*100); document.getElementById('scoreLine').textContent = `Score: ${score}/${qs.length} (${pct}%)`; const t=document.getElementById('trophy'); const rT=document.getElementById('rewardText'); const c=document.getElementById('coupon'); if(score>=9){ t.textContent='👑'; rT.textContent='SpeedEndo Calcipro Rotary Files worth ₹1250 FREE on ₹4999+'; c.textContent='XML5KZ'; }else if(score>=7){ t.textContent='🏆'; rT.textContent='PB Cashback 10% unlocked'; c.textContent='ZYXW10'; }else if(score===6){ t.textContent='🥇'; rT.textContent='Flitt Burs Pack of 10 worth ₹499 — FREE'; c.textContent='FLXMGH'; }else if(score>=4){ t.textContent='🥈'; rT.textContent='PB Cashback 10% for your next order'; c.textContent='XMFHUI'; }else{ t.textContent='🥉'; rT.textContent='Flat 5% Off to get you started'; c.textContent='5XMHY'; } document.getElementById('resCard').style.display='block'; document.getElementById('progFill').style.width='100%'; dropToolsSVG(14); // finale burst if(getAttempts()>=2) document.getElementById('againBtn').style.display='none'; } function copyCoupon(){ const code=document.getElementById('coupon').textContent.trim(); if(!code) return; if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(code).then(notify).catch(()=>fallback(code)); }else{ fallback(code); } } function notify(){ const n=document.createElement('div'); n.textContent='Code Copied'; n.style.cssText='position:fixed;top:16px;right:16px;background:#16a34a;color:#fff;padding:10px 14px;border-radius:10px;z-index:20;font-weight:800;box-shadow:0 8px 18px rgba(22,163,74,.35)'; document.body.appendChild(n); setTimeout(()=>n.remove(),1500); } function fallback(t){ const ta=document.createElement('textarea'); ta.value=t; ta.style.position='fixed'; ta.style.left='-9999px'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); notify(); } function shareWA(){ const scoreLine=document.getElementById('scoreLine').textContent; const code=document.getElementById('coupon').textContent.trim(); const msg = `I just completed the PB DAYS: Pulse Edition Dental Instruments Challenge!\n\n${scoreLine}\nReward: ${code}\n\nTry it now: ${location.href}\n#PBDays #Dental #PulseEdition #PinkBlue`; const url=`https://wa.me/?text=${encodeURIComponent(msg)}`; window.open(url,'_blank'); } function again(){ const left = Math.max(0, 2 - getAttempts()); if(left<=0){ alert('Attempt limit reached.'); return; } document.getElementById('resCard').style.display='none'; document.getElementById('startCard').style.display='block'; window.scrollTo({top:0, behavior:'smooth'}); } // Subtle haptics function hapticOK(){ try{ if(window.navigator.vibrate) navigator.vibrate(15);}catch(e){} } function hapticErr(){ try{ if(window.navigator.vibrate) navigator.vibrate([10,40,h(e){} } // Init attempts left document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - getAttempts()); </script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PB DAYS: Pulse Edition - Dental Challenge</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd, #a5b4fc);
+            min-height: 100vh;
+            color: #1e293b;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0b3d91, #10b981);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0b3d91;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .rules {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #10b981;
+        }
+
+        .rules h3 {
+            color: #10b981;
+            margin-bottom: 15px;
+        }
+
+        .rules ul {
+            padding-left: 20px;
+        }
+
+        .rules li {
+            margin: 8px 0;
+            color: #475569;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: block;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-success { background: linear-gradient(135deg, #16a34a, #15803d); }
+        .btn-warning { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .btn-whatsapp { background: linear-gradient(135deg, #25d366, #128c7e); }
+
+        .timer {
+            background: linear-gradient(135deg, #5a67d8, #4f46e5);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .progress {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #0b3d91, #10b981);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .question {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .question-meta {
+            color: #5a67d8;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .options {
+            display: grid;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .option:hover {
+            border-color: #0b3d91;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            border-color: #5a67d8;
+            background: #f1f5f9;
+        }
+
+        .option.correct {
+            border-color: #16a34a;
+            background: #f0fdf4;
+        }
+
+        .option.incorrect {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .option-letter {
+            width: 30px;
+            height: 30px;
+            background: #0b3d91;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .results {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .trophy {
+            font-size: 4rem;
+            margin: 20px 0;
+        }
+
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0b3d91;
+            margin: 20px 0;
+        }
+
+        .reward-card {
+            background: #fefce8;
+            border: 2px dashed #f59e0b;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .coupon-code {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0b3d91;
+            letter-spacing: 3px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .hidden { display: none; }
+
+        .button-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .button-row .btn {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .stats { flex-direction: column; gap: 10px; }
+            .button-row { flex-direction: column; }
+            .button-row .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>PB DAYS: Pulse Edition</h1>
+            <p>Dental Knowledge Challenge</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number" id="visitCount">1,247</div>
+                    <div class="stat-label">People Visited</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="attemptsLeft">2</div>
+                    <div class="stat-label">Attempts Left</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Questions</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Screen -->
+        <div class="content" id="startScreen">
+            <h2 style="color: #0b3d91; margin-bottom: 15px;">Test Your Dental Knowledge</h2>
+            <p style="color: #64748b; margin-bottom: 20px;">Challenge yourself with 10 carefully selected dental questions and win exclusive PB DAYS rewards!</p>
+            
+            <div class="rules">
+                <h3><i class="fas fa-tooth"></i> Quiz Rules:</h3>
+                <ul>
+                    <li>Answer 10 randomly selected dental questions</li>
+                    <li>You have 5 minutes to complete the quiz</li>
+                    <li>Higher scores unlock better rewards</li>
+                    <li>Maximum 2 attempts per participant</li>
+                    <li>Instant reward upon completion</li>
+                </ul>
+            </div>
+
+            <button class="btn" onclick="startQuiz()">
+                <i class="fas fa-play-circle"></i> Start Quiz Challenge
+            </button>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div class="content hidden" id="quizScreen">
+            <div class="timer" id="timer">
+                <i class="fas fa-clock"></i> Time: 5:00
+            </div>
+            
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <div class="question">
+                <div class="question-meta" id="questionMeta">Question 1 of 10</div>
+                <div class="question-text" id="questionText"></div>
+            </div>
+
+            <div class="options" id="optionsContainer"></div>
+
+            <button class="btn" id="nextBtn" onclick="nextQuestion()" disabled>
+                Next Question <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Results Screen -->
+        <div class="content hidden" id="resultsScreen">
+            <div class="results">
+                <div class="trophy" id="trophyIcon">🏆</div>
+                <h2 id="resultsTitle">Quiz Complete!</h2>
+                <div class="score" id="finalScore"></div>
+
+                <div class="reward-card">
+                    <h3 style="color: #f59e0b; margin-bottom: 15px;">
+                        <i class="fas fa-gift"></i> Your Reward
+                    </h3>
+                    <p id="rewardDescription"></p>
+                    <div class="coupon-code" id="couponCode"></div>
+                    <button class="btn" onclick="copyCode()">
+                        <i class="fas fa-copy"></i> Copy Reward Code
+                    </button>
+                </div>
+
+                <div class="button-row">
+                    <a href="https://pinkblue.in/cart" class="btn btn-success" target="_blank">
+                        <i class="fas fa-shopping-cart"></i> Redeem Now
+                    </a>
+                    <a href="https://pinkblue.in" class="btn btn-warning" target="_blank">
+                        <i class="fas fa-store"></i> Browse Products
+                    </a>
+                    <button class="btn btn-whatsapp" onclick="shareWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Share Results
+                    </button>
+                    <button class="btn" id="tryAgainBtn" onclick="tryAgain()">
+                        <i class="fas fa-redo"></i> Try Again
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple fingerprinting
+        function generateFingerprint() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.textBaseline = 'top';
+            ctx.font = '14px Arial';
+            ctx.fillText('PBDays2025', 2, 2);
+            
+            const fingerprint = canvas.toDataURL() + navigator.userAgent + screen.width + screen.height;
+            let hash = 0;
+            for (let i = 0; i < fingerprint.length; i++) {
+                const char = fingerprint.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash).toString();
+        }
+
+        // Attempt tracking
+        function getAttempts() {
+            const fp = generateFingerprint();
+            const attempts = JSON.parse(localStorage.getItem('pbDaysAttempts') || '{}');
+            return attempts[fp] || 0;
+        }
+
+        function incrementAttempts() {
+            const fp = generateFingerprint();
+            const attempts = JSON.parse(localStorage.getItem('pbDaysAttempts') || '{}');
+            attempts[fp] = (attempts[fp] || 0) + 1;
+            localStorage.setItem('pbDaysAttempts', JSON.stringify(attempts));
+            return attempts[fp];
+        }
+
+        // Questions
+        const questions = [
+            {
+                question: "What is the hardest substance in the human body?",
+                options: ["Bone", "Tooth enamel", "Dentin", "Cartilage"],
+                correct: 1
+            },
+            {
+                question: "How many permanent teeth does an adult typically have?",
+                options: ["28", "30", "32", "34"],
+                correct: 2
+            },
+            {
+                question: "What is the most common dental disease?",
+                options: ["Gingivitis", "Dental caries", "Periodontitis", "Oral cancer"],
+                correct: 1
+            },
+            {
+                question: "Which mineral is most effective for strengthening tooth enamel?",
+                options: ["Calcium", "Phosphorus", "Fluoride", "Magnesium"],
+                correct: 2
+            },
+            {
+                question: "What is the clinical term for teeth grinding?",
+                options: ["Bruxism", "Gingivitis", "Periodontitis", "Xerostomia"],
+                correct: 0
+            },
+            {
+                question: "At what age do children typically start losing baby teeth?",
+                options: ["4-5 years", "6-7 years", "8-9 years", "10-11 years"],
+                correct: 1
+            },
+            {
+                question: "What is the soft tissue inside a tooth called?",
+                options: ["Enamel", "Dentin", "Pulp", "Cementum"],
+                correct: 2
+            },
+            {
+                question: "How often should you replace your toothbrush?",
+                options: ["Monthly", "Every 3-4 months", "Every 6 months", "Annually"],
+                correct: 1
+            },
+            {
+                question: "What is the optimal pH level for oral health?",
+                options: ["5.5", "6.0", "7.0", "7.5"],
+                correct: 2
+            },
+            {
+                question: "Which bacteria is primarily responsible for tooth decay?",
+                options: ["Streptococcus mutans", "Lactobacillus", "Actinomyces", "Prevotella"],
+                correct: 0
+            },
+            {
+                question: "What is the recommended fluoride concentration in adult toothpaste?",
+                options: ["500 ppm", "1000 ppm", "1450 ppm", "2000 ppm"],
+                correct: 2
+            },
+            {
+                question: "Which teeth are commonly called 'wisdom teeth'?",
+                options: ["First molars", "Second molars", "Third molars", "Premolars"],
+                correct: 2
+            },
+            {
+                question: "What is the primary cause of bad breath?",
+                options: ["Poor oral hygiene", "Stomach problems", "Sinus issues", "Heart disease"],
+                correct: 0
+            },
+            {
+                question: "How long should you brush your teeth?",
+                options: ["30 seconds", "1 minute", "2 minutes", "5 minutes"],
+                correct: 2
+            },
+            {
+                question: "What is dental plaque primarily composed of?",
+                options: ["Food particles", "Bacteria", "Saliva", "Dead cells"],
+                correct: 1
+            },
+            {
+                question: "Deficiency of which vitamin causes bleeding gums?",
+                options: ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin D"],
+                correct: 2
+            },
+            {
+                question: "What is the space between teeth called?",
+                options: ["Interdental space", "Diastema", "Embrasure", "Frenum"],
+                correct: 0
+            },
+            {
+                question: "Which procedure removes tartar buildup?",
+                options: ["Scaling", "Polishing", "Whitening", "Bonding"],
+                correct: 0
+            },
+            {
+                question: "What does RCT stand for in dentistry?",
+                options: ["Root Canal Therapy", "Routine Care Treatment", "Restorative Crown Treatment", "Root Cavity Treatment"],
+                correct: 0
+            },
+            {
+                question: "What is the primary function of saliva?",
+                options: ["Taste enhancement", "Protection and lubrication", "Temperature control", "Digestion only"],
+                correct: 1
+            }
+        ];
+
+        // Game state
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let timeLeft = 300; // 5 minutes
+        let timer;
+        let selectedAnswer = null;
+        let gameQuestions = [];
+
+        // Get random questions
+        function getRandomQuestions(count = 10) {
+            const shuffled = [...questions].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        // Start quiz
+        function startQuiz() {
+            const attempts = getAttempts();
+            if (attempts >= 2) {
+                alert('You have used all your attempts!');
+                return;
+            }
+
+            incrementAttempts();
+            document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - getAttempts());
+
+            gameQuestions = getRandomQuestions(10);
+            currentQuestionIndex = 0;
+            score = 0;
+            timeLeft = 300;
+            selectedAnswer = null;
+
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.remove('hidden');
+
+            loadQuestion();
+            startTimer();
+        }
+
+        // Start timer
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    endQuiz();
+                }
+            }, 1000);
+        }
+
+        // Update timer display
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').innerHTML = 
+                `<i class="fas fa-clock"></i> Time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Load question
+        function loadQuestion() {
+            const question = gameQuestions[currentQuestionIndex];
+            document.getElementById('questionMeta').textContent = `Question ${currentQuestionIndex + 1} of 10`;
+            document.getElementById('questionText').textContent = question.question;
+
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.onclick = () => selectAnswer(index);
+                optionDiv.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <span>${option}</span>
+                `;
+                container.appendChild(optionDiv);
+            });
+
+            updateProgress();
+            selectedAnswer = null;
+            document.getElementById('nextBtn').disabled = true;
+        }
+
+        // Select answer
+        function selectAnswer(index) {
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            selectedAnswer = index;
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        // Next question
+        function nextQuestion() {
+            if (selectedAnswer === null) return;
+
+            const question = gameQuestions[currentQuestionIndex];
+            const options = document.querySelectorAll('.option');
+
+            // Show correct/incorrect
+            options.forEach((option, index) => {
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedAnswer && index !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
+
+            if (selectedAnswer === question.correct) {
+                score++;
+            }
+
+            setTimeout(() => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < gameQuestions.length) {
+                    loadQuestion();
+                } else {
+                    endQuiz();
+                }
+            }, 1500);
+        }
+
+        // Update progress
+        function updateProgress() {
+            const progress = ((currentQuestionIndex + 1) / gameQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // End quiz
+        function endQuiz() {
+            clearInterval(timer);
+            
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+            
+            showResults();
+        }
+
+        // Show results
+        function showResults() {
+            const percentage = (score / gameQuestions.length) * 100;
+            document.getElementById('finalScore').textContent = `${score}/${gameQuestions.length} (${percentage.toFixed(0)}%)`;
+
+            const title = document.getElementById('resultsTitle');
+            const description = document.getElementById('rewardDescription');
+            const coupon = document.getElementById('couponCode');
+            const trophy = document.getElementById('trophyIcon');
+            const tryAgain = document.getElementById('tryAgainBtn');
+
+            if (getAttempts() >= 2) {
+                tryAgain.style.display = 'none';
+            }
+
+            // Rewards
+            if (score >= 9) {
+                title.textContent = 'Outstanding Performance!';
+                trophy.textContent = '👑';
+                description.textContent = 'Amazing! SpeedEndo Calcipro Rotary Files worth ₹1250 FREE with minimum purchase of ₹4999!';
+                coupon.textContent = 'XML5KZ';
+            } else if (score >= 7) {
+                title.textContent = 'Excellent Work!';
+                trophy.textContent = '🏆';
+                description.textContent = 'Great job! You\'ve unlocked 10% PB Cashback on your purchase!';
+                coupon.textContent = 'ZYXW10';
+            } else if (score === 6) {
+                title.textContent = 'Well Done!';
+                trophy.textContent = '🥇';
+                description.textContent = 'Congratulations! You\'ve won a FREE Flitt Burs Pack of 10 worth ₹499!';
+                coupon.textContent = 'FLXMGH';
+            } else if (score >= 4) {
+                title.textContent = 'Good Effort!';
+                trophy.textContent = '🥈';
+                description.textContent = 'Nice work! You\'ve earned 10% PB Cashback on your next order!';
+                coupon.textContent = 'XMFHUI';
+            } else {
+                title.textContent = 'Keep Learning!';
+                trophy.textContent = '🥉';
+                description.textContent = 'Every expert started somewhere! Here\'s 5% OFF to get you started!';
+                coupon.textContent = '5XMHY';
+            }
+        }
+
+        // Copy code
+        function copyCode() {
+            const code = document.getElementById('couponCode').textContent;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(code).then(() => {
+                    alert('Reward code copied to clipboard!');
+                }).catch(() => {
+                    fallbackCopy(code);
+                });
+            } else {
+                fallbackCopy(code);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('Reward code copied!');
+        }
+
+        // Share on WhatsApp
+        function shareWhatsApp() {
+            const scoreText = document.getElementById('finalScore').textContent;
+            const codeText = document.getElementById('couponCode').textContent;
+            
+            const message = `🎉 I just completed the PB DAYS: Pulse Edition Dental Challenge!
+
+🏆 My Score: ${scoreText}
+🎁 Reward Code: ${codeText}
+
+🦷 Test your dental knowledge: ${window.location.href}
+
+#PBDays #DentalChallenge #PinkBlue`;
+            
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Try again
+        function tryAgain() {
+            const attempts = getAttempts();
+            if (attempts >= 2) {
+                alert('No more attempts remaining!');
+                return;
+            }
+            
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
+        }
+
+        // Initialize
+        document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - getAttempts());
+
+        // Update visit counter
+        setInterval(() => {
+            const current = parseInt(document.getElementById('visitCount').textContent.replace(',', ''));
+            document.getElementById('visitCount').textContent = (current + Math.floor(Math.random() * 3) + 1).toLocaleString();
+        }, 30000);
+    </script>
+</body>
+</html>
