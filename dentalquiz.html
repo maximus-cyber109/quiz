@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PB DAYS: Pulse Edition - Retro Study Challenge</title>
+    <title>PB DAYS: Pulse Edition - Dental Knowledge Challenge</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -153,7 +153,7 @@
             margin-bottom: 20px;
         }
 
-        /* Retro Stats Row */
+        /* Horizontal Stats Row */
         .pixel-stats {
             display: flex;
             justify-content: space-between;
@@ -272,7 +272,7 @@
         }
 
         .pixel-rules::before {
-            content: '📚';
+            content: '🎯';
             position: absolute;
             top: -8px;
             left: 10px;
@@ -653,13 +653,13 @@
         <!-- Retro Pixelated Header -->
         <div class="retro-header">
             <h1 class="pixel-title">PB DAYS: PULSE EDITION</h1>
-            <p class="pixel-subtitle">🎓 RETRO DENTAL STUDY CHALLENGE 🎓</p>
+            <p class="pixel-subtitle">🦷 DENTAL KNOWLEDGE CHALLENGE 🦷</p>
             
             <!-- Horizontal Stats -->
             <div class="pixel-stats">
                 <div class="pixel-stat">
-                    <span class="stat-number" id="visitCount">1,247</span>
-                    <span class="stat-label">STUDENTS</span>
+                    <span class="stat-number" id="peopleCount">200</span>
+                    <span class="stat-label">PEOPLE PLAYED</span>
                 </div>
                 <div class="pixel-stat">
                     <span class="stat-number" id="attemptsLeft">2</span>
@@ -677,39 +677,39 @@
 
             <!-- Pixel Tags -->
             <div class="pixel-tags">
-                <div class="pixel-tag">📚 STUDY HALL</div>
-                <div class="pixel-tag">💰 REWARDS</div>
-                <div class="pixel-tag">🏆 LEADERBOARD</div>
-                <div class="pixel-tag">⚡ POWER-UPS</div>
+                <div class="pixel-tag">🎯 QUIZZES</div>
+                <div class="pixel-tag">💰 SUPERDEALS</div>
+                <div class="pixel-tag">🎰 DAILY JACKPOT</div>
+                <div class="pixel-tag">⚡ BEST PRICES</div>
             </div>
         </div>
 
         <!-- Start Screen -->
         <div class="retro-content" id="startScreen">
-            <h2 style="color: #F4C430; margin-bottom: 15px; text-align: center; font-size: 1.2rem; text-shadow: 2px 2px 0 #2B1810;">📖 WELCOME TO THE STUDY HALL</h2>
-            <p style="color: #2B1810; margin-bottom: 20px; text-align: center; font-size: 0.7rem;">Step into our retro dental library and test your knowledge!</p>
+            <h2 style="color: #F4C430; margin-bottom: 15px; text-align: center; font-size: 1.2rem; text-shadow: 2px 2px 0 #2B1810;">🎯 PB DAYS PULSE CHALLENGE</h2>
+            <p style="color: #2B1810; margin-bottom: 20px; text-align: center; font-size: 0.7rem;">Test your dental knowledge and unlock exclusive PB DAYS rewards!</p>
             
             <div class="pixel-rules">
-                <h3>📚 STUDY HALL RULES</h3>
+                <h3>🎯 CHALLENGE RULES</h3>
                 <ul>
                     <li>✅ Answer 10 dental knowledge questions</li>
-                    <li>⏰ You have 2 minutes of study time</li>
-                    <li>🎯 Higher scores unlock better textbooks</li>
-                    <li>🔥 Each question is worth study points</li>
-                    <li>💪 Maximum 2 study sessions allowed</li>
-                    <li>🎁 Earn exclusive study materials</li>
+                    <li>⏰ You have 2 minutes to complete</li>
+                    <li>🎯 Higher scores unlock better rewards</li>
+                    <li>🔥 Each question has one correct answer</li>
+                    <li>💪 Maximum 2 attempts allowed</li>
+                    <li>🎁 Earn exclusive reward codes</li>
                 </ul>
             </div>
 
             <button class="pixel-btn" onclick="startCountdown()">
-                🚀 ENTER STUDY HALL
+                🚀 START CHALLENGE
             </button>
         </div>
 
         <!-- Quiz Screen -->
         <div class="retro-content hidden" id="quizScreen">
             <div class="pixel-timer" id="timer">
-                ⏰ STUDY TIME: 2:00
+                ⏰ TIME: 2:00
             </div>
             
             <div class="pixel-progress">
@@ -724,7 +724,7 @@
             <div class="pixel-options" id="optionsContainer"></div>
 
             <button class="pixel-btn" id="nextBtn" onclick="nextQuestion()" disabled>
-                ➡️ NEXT PAGE
+                ➡️ NEXT QUESTION
             </button>
         </div>
 
@@ -732,32 +732,32 @@
         <div class="retro-content hidden" id="resultsScreen">
             <div class="pixel-results">
                 <div class="pixel-trophy" id="trophyIcon">🏆</div>
-                <h2 id="resultsTitle">STUDY SESSION COMPLETE!</h2>
+                <h2 id="resultsTitle">CHALLENGE COMPLETE!</h2>
                 <div class="pixel-score" id="finalScore"></div>
 
                 <div class="pixel-reward">
                     <h3 class="reward-title">
-                        📚 YOUR STUDY REWARD!
+                        🎁 YOUR PB DAYS REWARD!
                     </h3>
                     <p id="rewardDescription"></p>
                     <div class="pixel-coupon" id="couponCode"></div>
                     <button class="pixel-btn" onclick="copyCode()">
-                        📋 COPY STUDY CODE
+                        📋 COPY REWARD CODE
                     </button>
                 </div>
 
                 <div class="button-row">
                     <a href="https://pinkblue.in/cart" class="pixel-btn btn-success" target="_blank">
-                        🛒 USE TEXTBOOK
+                        🛒 REDEEM NOW
                     </a>
                     <a href="https://pinkblue.in" class="pixel-btn btn-warning" target="_blank">
-                        📖 BROWSE LIBRARY
+                        📖 BROWSE PRODUCTS
                     </a>
                     <button class="pixel-btn btn-whatsapp" onclick="shareWhatsApp()">
-                        📱 SHARE GRADE
+                        📱 SHARE RESULTS
                     </button>
                     <button class="pixel-btn" id="tryAgainBtn" onclick="tryAgain()">
-                        🔄 RESTUDY
+                        🔄 TRY AGAIN
                     </button>
                 </div>
             </div>
@@ -770,13 +770,13 @@
     </div>
 
     <script>
-        // Simple fingerprinting for study sessions
-        function generateStudentID() {
+        // Simple fingerprinting for attempts
+        function generateUserID() {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             ctx.textBaseline = 'top';
             ctx.font = '14px Press Start 2P';
-            ctx.fillText('PBStudyHall2025', 2, 2);
+            ctx.fillText('PBDaysPulse2025', 2, 2);
             
             const fingerprint = canvas.toDataURL() + navigator.userAgent + screen.width + screen.height;
             let hash = 0;
@@ -788,23 +788,39 @@
             return Math.abs(hash).toString();
         }
 
-        // Study session tracking
-        function getStudySessions() {
-            const studentId = generateStudentID();
-            const sessions = JSON.parse(localStorage.getItem('pbStudySessions') || '{}');
-            return sessions[studentId] || 0;
+        // Attempt tracking
+        function getAttempts() {
+            const userId = generateUserID();
+            const attempts = JSON.parse(localStorage.getItem('pbDaysAttempts') || '{}');
+            return attempts[userId] || 0;
         }
 
-        function incrementStudySessions() {
-            const studentId = generateStudentID();
-            const sessions = JSON.parse(localStorage.getItem('pbStudySessions') || '{}');
-            sessions[studentId] = (sessions[studentId] || 0) + 1;
-            localStorage.setItem('pbStudySessions', JSON.stringify(sessions));
-            return sessions[studentId];
+        function incrementAttempts() {
+            const userId = generateUserID();
+            const attempts = JSON.parse(localStorage.getItem('pbDaysAttempts') || '{}');
+            attempts[userId] = (attempts[userId] || 0) + 1;
+            localStorage.setItem('pbDaysAttempts', JSON.stringify(attempts));
+            return attempts[userId];
+        }
+
+        // People played counter - starts at 200, increases by 50 daily
+        function updatePeopleCount() {
+            const startDate = new Date('2025-08-10'); // Start date
+            const currentDate = new Date();
+            const daysDiff = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
+            const baseCount = 200;
+            const dailyIncrease = 50;
+            const currentCount = baseCount + (daysDiff * dailyIncrease);
+            
+            // Add small random increment to make it look live
+            const randomIncrement = Math.floor(Math.random() * 5);
+            const finalCount = currentCount + randomIncrement;
+            
+            document.getElementById('peopleCount').textContent = finalCount.toLocaleString();
         }
 
         // Dental Knowledge Questions
-        const studyQuestions = [
+        const quizQuestions = [
             {
                 question: "What is the hardest substance in the human body?",
                 options: ["Bone", "Tooth enamel", "Dentin", "Cartilage"],
@@ -917,15 +933,15 @@
 
         // Get random questions
         function getRandomQuestions(count = 10) {
-            const shuffled = [...studyQuestions].sort(() => 0.5 - Math.random());
+            const shuffled = [...quizQuestions].sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
         }
 
-        // Retro 3-2-1 Countdown
+        // 3-2-1 Countdown
         function startCountdown() {
-            const sessions = getStudySessions();
-            if (sessions >= 2) {
-                alert('📚 All study sessions completed!');
+            const attempts = getAttempts();
+            if (attempts >= 2) {
+                alert('🎯 All attempts completed!');
                 return;
             }
 
@@ -940,10 +956,10 @@
                 number.style.animation = 'pixelFlicker 1s ease-out';
                 
                 if (count === 0) {
-                    number.textContent = 'STUDY!';
+                    number.textContent = 'GO!';
                     setTimeout(() => {
                         overlay.style.display = 'none';
-                        startStudySession();
+                        startQuiz();
                     }, 1000);
                     clearInterval(interval);
                 }
@@ -951,10 +967,10 @@
             }, 1000);
         }
 
-        // Start study session
-        function startStudySession() {
-            incrementStudySessions();
-            document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - getStudySessions());
+        // Start quiz
+        function startQuiz() {
+            incrementAttempts();
+            document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - getAttempts());
 
             gameQuestions = getRandomQuestions(10);
             currentQuestion = 0;
@@ -977,7 +993,7 @@
                 
                 if (timeLeft <= 0) {
                     clearInterval(timer);
-                    endStudySession();
+                    endQuiz();
                 }
             }, 1000);
         }
@@ -987,7 +1003,7 @@
             const minutes = Math.floor(timeLeft / 60);
             const seconds = timeLeft % 60;
             document.getElementById('timer').innerHTML = 
-                `⏰ STUDY TIME: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                `⏰ TIME: ${minutes}:${seconds.toString().padStart(2, '0')}`;
         }
 
         // Load question
@@ -1050,7 +1066,7 @@
                 if (currentQuestion < gameQuestions.length) {
                     loadQuestion();
                 } else {
-                    endStudySession();
+                    endQuiz();
                 }
             }, 1500);
         }
@@ -1061,8 +1077,8 @@
             document.getElementById('progressBar').style.width = progress + '%';
         }
 
-        // End study session
-        function endStudySession() {
+        // End quiz
+        function endQuiz() {
             clearInterval(timer);
             
             document.getElementById('quizScreen').classList.add('hidden');
@@ -1071,7 +1087,7 @@
             showResults();
         }
 
-        // Show results with study-themed rewards
+        // Show results with rewards
         function showResults() {
             const percentage = (score / gameQuestions.length) * 100;
             document.getElementById('finalScore').textContent = `${score}/${gameQuestions.length} (${percentage.toFixed(0)}%)`;
@@ -1082,35 +1098,35 @@
             const trophy = document.getElementById('trophyIcon');
             const tryAgain = document.getElementById('tryAgainBtn');
 
-            if (getStudySessions() >= 2) {
+            if (getAttempts() >= 2) {
                 tryAgain.style.display = 'none';
             }
 
-            // Study-themed rewards
+            // Rewards
             if (score >= 9) {
-                title.textContent = '🎓 SUMMA CUM LAUDE!';
+                title.textContent = '🎉 EXCELLENT PERFORMANCE!';
                 trophy.textContent = '👑';
                 description.textContent = 'Outstanding! SpeedEndo Calcipro Rotary Files worth ₹1250 FREE with minimum purchase of ₹4999!';
                 coupon.textContent = 'XML5KZ';
             } else if (score >= 7) {
-                title.textContent = '📚 MAGNA CUM LAUDE!';
+                title.textContent = '🏆 GREAT WORK!';
                 trophy.textContent = '🏆';
-                description.textContent = 'Excellent work! You\'ve unlocked 10% PB Cashback on your entire purchase!';
+                description.textContent = 'Excellent! You\'ve unlocked 10% PB Cashback on your entire purchase!';
                 coupon.textContent = 'ZYXW10';
             } else if (score === 6) {
-                title.textContent = '⭐ CUM LAUDE!';
+                title.textContent = '⭐ WELL DONE!';
                 trophy.textContent = '🥇';
-                description.textContent = 'Great studying! You\'ve won a FREE Flitt Burs Pack of 10 worth ₹499!';
+                description.textContent = 'Great job! You\'ve won a FREE Flitt Burs Pack of 10 worth ₹499!';
                 coupon.textContent = 'FLXMGH';
             } else if (score >= 4) {
-                title.textContent = '📖 HONOR ROLL!';
+                title.textContent = '🎯 GOOD EFFORT!';
                 trophy.textContent = '🥈';
-                description.textContent = 'Good effort! You\'ve secured 10% PB Cashback for your next order!';
+                description.textContent = 'Nice work! You\'ve secured 10% PB Cashback for your next order!';
                 coupon.textContent = 'XMFHUI';
             } else {
-                title.textContent = '📝 STUDY MORE!';
+                title.textContent = '💪 KEEP LEARNING!';
                 trophy.textContent = '🥉';
-                description.textContent = 'Every scholar starts somewhere! Here\'s 5% OFF to continue your studies!';
+                description.textContent = 'Every expert started somewhere! Here\'s 5% OFF to get you started!';
                 coupon.textContent = '5XMHY';
             }
         }
@@ -1121,7 +1137,7 @@
             
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(code).then(() => {
-                    alert('📚 Study code copied to clipboard!');
+                    alert('🎯 Reward code copied to clipboard!');
                 }).catch(() => {
                     fallbackCopy(code);
                 });
@@ -1137,22 +1153,22 @@
             textArea.select();
             document.execCommand('copy');
             document.body.removeChild(textArea);
-            alert('📚 Study code copied!');
+            alert('🎯 Reward code copied!');
         }
 
-        // Share on WhatsApp
+        // Share on WhatsApp with correct link
         function shareWhatsApp() {
             const scoreText = document.getElementById('finalScore').textContent;
             const codeText = document.getElementById('couponCode').textContent;
             
-            const message = `🎓 I just completed the PB DAYS: Pulse Edition Retro Study Challenge!
+            const message = `🎯 I just completed the PB DAYS: Pulse Edition Dental Challenge!
 
-📚 My Study Grade: ${scoreText}
+🏆 My Score: ${scoreText}
 🎁 Reward Code: ${codeText}
 
-📖 Test your dental knowledge: ${window.location.href}
+🦷 Test your dental knowledge: https://pinkblue.in/pbd-aug25-quiz
 
-#PBDays #StudyHall #RetroChallenge #PinkBlue`;
+#PBDays #PulseEdition #DentalChallenge #PinkBlue`;
             
             const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
@@ -1160,9 +1176,9 @@
 
         // Try again
         function tryAgain() {
-            const sessions = getStudySessions();
-            if (sessions >= 2) {
-                alert('📚 No more study sessions remaining!');
+            const attempts = getAttempts();
+            if (attempts >= 2) {
+                alert('🎯 No more attempts remaining!');
                 return;
             }
             
@@ -1171,12 +1187,16 @@
         }
 
         // Initialize
-        document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - getStudySessions());
-
-        // Update student counter
+        document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - getAttempts());
+        
+        // Update people count on load
+        updatePeopleCount();
+        
+        // Update people count every 30 seconds with small random increments
         setInterval(() => {
-            const current = parseInt(document.getElementById('visitCount').textContent.replace(',', ''));
-            document.getElementById('visitCount').textContent = (current + Math.floor(Math.random() * 3) + 1).toLocaleString();
+            const current = parseInt(document.getElementById('peopleCount').textContent.replace(',', ''));
+            const increment = Math.floor(Math.random() * 3) + 1;
+            document.getElementById('peopleCount').textContent = (current + increment).toLocaleString();
         }, 30000);
     </script>
 </body>
