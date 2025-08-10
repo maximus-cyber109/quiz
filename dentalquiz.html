@@ -786,7 +786,7 @@
         function incrementAttempts() {
             const userId = generateUserID();
             const attempts = JSON.parse(localStorage.getItem('pbDaysAttempts') || '{}');
-            attempts[userId] = (attempts[userId] || 0) + 1;
+            attempts[userId] = (attempts[userId] || 0) + 2;
             localStorage.setItem('pbDaysAttempts', JSON.stringify(attempts));
             return attempts[userId];
         }
