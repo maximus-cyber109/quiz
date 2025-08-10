@@ -650,7 +650,7 @@
                     <span class="stat-label">PEOPLE PLAYED</span>
                 </div>
                 <div class="pixel-stat">
-                    <span class="stat-number" id="attemptsLeft">2</span>
+                    <span class="stat-number" id="attemptsLeft">5</span>
                     <span class="stat-label">ATTEMPTS</span>
                 </div>
                 <div class="pixel-stat">
@@ -668,7 +668,7 @@
                 <div class="pixel-tag">🎯 QUIZZES</div>
                 <div class="pixel-tag">💰 SUPERDEALS</div>
                 <div class="pixel-tag">🎰 DAILY JACKPOT</div>
-                <div class="pixel-tag">⚡ BEST PRICES</div>
+                <div class="pixel-tag">⚡ POWER-UPS</div>
             </div>
         </div>
 
@@ -684,7 +684,7 @@
                     <li>⏰ You have 2 minutes to complete</li>
                     <li>🎯 Higher scores unlock better rewards</li>
                     <li>🔥 Each question has one correct answer</li>
-                    <li>💪 Maximum 2 attempts allowed</li>
+                    <li>💪 Maximum 5 attempts allowed</li>
                     <li>🎁 Earn exclusive reward codes</li>
                 </ul>
             </div>
@@ -738,7 +738,7 @@
                     <a href="https://pinkblue.in/cart" class="pixel-btn btn-success" target="_top">
                         🛒 REDEEM NOW
                     </a>
-                    <a href="https://pinkblue.in" class="pixel-btn btn-warning" target="_top">
+                    <a href="https://pinkblue.in" class="pixel-btn btn-warning" target="_blank">
                         📖 BROWSE PRODUCTS
                     </a>
                     <button class="pixel-btn btn-whatsapp" onclick="shareWhatsApp()">
@@ -776,7 +776,7 @@
             return Math.abs(hash).toString();
         }
 
-        // Attempt tracking
+        // Attempt tracking - NOW 5 ATTEMPTS
         function getAttempts() {
             const userId = generateUserID();
             const attempts = JSON.parse(localStorage.getItem('pbDaysAttempts') || '{}');
@@ -786,7 +786,7 @@
         function incrementAttempts() {
             const userId = generateUserID();
             const attempts = JSON.parse(localStorage.getItem('pbDaysAttempts') || '{}');
-            attempts[userId] = (attempts[userId] || 0) + 2;
+            attempts[userId] = (attempts[userId] || 0) + 1;
             localStorage.setItem('pbDaysAttempts', JSON.stringify(attempts));
             return attempts[userId];
         }
@@ -1390,7 +1390,7 @@
         // 3-2-1 Countdown
         function startCountdown() {
             const attempts = getAttempts();
-            if (attempts >= 2) {
+            if (attempts >= 5) {  // CHANGED TO 5 ATTEMPTS
                 alert('🎯 All attempts completed!');
                 return;
             }
@@ -1420,7 +1420,7 @@
         // Start quiz
         function startQuiz() {
             incrementAttempts();
-            document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - getAttempts());
+            document.getElementById('attemptsLeft').textContent = Math.max(0, 5 - getAttempts()); // CHANGED TO 5 ATTEMPTS
 
             gameQuestions = getRandomQuestions(10);
             currentQuestion = 0;
@@ -1548,7 +1548,7 @@
             const trophy = document.getElementById('trophyIcon');
             const tryAgain = document.getElementById('tryAgainBtn');
 
-            if (getAttempts() >= 2) {
+            if (getAttempts() >= 5) {  // CHANGED TO 5 ATTEMPTS
                 tryAgain.style.display = 'none';
             }
 
@@ -1622,7 +1622,7 @@
         // Try again
         function tryAgain() {
             const attempts = getAttempts();
-            if (attempts >= 5) {
+            if (attempts >= 5) {  // CHANGED TO 5 ATTEMPTS
                 alert('🎯 No more attempts remaining!');
                 return;
             }
@@ -1632,7 +1632,7 @@
         }
 
         // Initialize
-        document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - getAttempts());
+        document.getElementById('attemptsLeft').textContent = Math.max(0, 5 - getAttempts()); // CHANGED TO 5 ATTEMPTS
         
         // Update people count on load
         updatePeopleCount();
