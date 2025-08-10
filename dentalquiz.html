@@ -38,23 +38,18 @@
             width: 100%;
             height: 100%;
             background: 
-                /* Books on shelves */
                 linear-gradient(90deg, transparent 10px, #8B4513 10px, #8B4513 15px, transparent 15px),
                 linear-gradient(90deg, transparent 25px, #CD853F 25px, #CD853F 30px, transparent 30px),
                 linear-gradient(90deg, transparent 40px, #A0522D 40px, #A0522D 45px, transparent 45px),
                 linear-gradient(90deg, transparent 55px, #D2691E 55px, #D2691E 60px, transparent 60px),
-                /* Bookshelf structure */
                 linear-gradient(0deg, #8B4513 0%, #8B4513 20px, transparent 20px, transparent 40px, #8B4513 40px, #8B4513 60px, transparent 60px),
-                /* Study desk */
                 linear-gradient(0deg, transparent 70%, #654321 70%, #654321 80%, transparent 80%),
-                /* Background wall */
                 #F5F5F5;
             background-size: 80px 100px, 80px 100px, 80px 100px, 80px 100px, 100% 100px, 100% 100px, 100% 100%;
             opacity: 0.15;
             z-index: 1;
         }
 
-        /* Pixelated Elements Container */
         .pixel-elements {
             position: fixed;
             top: 0;
@@ -95,7 +90,6 @@
             z-index: 10;
         }
 
-        /* Retro Pixelated Header */
         .retro-header {
             background: #FFFFFF;
             border: 4px solid #F4C430;
@@ -153,7 +147,6 @@
             margin-bottom: 20px;
         }
 
-        /* Horizontal Stats Row */
         .pixel-stats {
             display: flex;
             justify-content: space-between;
@@ -203,7 +196,6 @@
             color: #2B1810;
         }
 
-        /* Retro Tags */
         .pixel-tags {
             display: flex;
             justify-content: center;
@@ -299,7 +291,6 @@
             line-height: 1.4;
         }
 
-        /* Retro Buttons */
         .pixel-btn {
             background: #F4C430;
             color: #2B1810;
@@ -351,7 +342,6 @@
         .btn-whatsapp { background: #90EE90; color: #25D366; }
         .btn-whatsapp:hover { background: #98FB98; }
 
-        /* Countdown Screen */
         .pixel-countdown {
             position: fixed;
             top: 0;
@@ -376,7 +366,6 @@
             10%, 30%, 50%, 70%, 90% { opacity: 0.8; }
         }
 
-        /* Quiz Elements */
         .pixel-timer {
             background: #2B1810;
             color: #F4C430;
@@ -549,7 +538,6 @@
             color: #FFFFFF;
         }
 
-        /* Results */
         .pixel-results {
             text-align: center;
             animation: resultsAppear 1s ease-out;
@@ -805,120 +793,582 @@
 
         // People played counter - starts at 200, increases by 50 daily
         function updatePeopleCount() {
-            const startDate = new Date('2025-08-10'); // Start date
+            const startDate = new Date('2025-08-10');
             const currentDate = new Date();
             const daysDiff = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
             const baseCount = 200;
             const dailyIncrease = 50;
             const currentCount = baseCount + (daysDiff * dailyIncrease);
             
-            // Add small random increment to make it look live
             const randomIncrement = Math.floor(Math.random() * 5);
             const finalCount = currentCount + randomIncrement;
             
             document.getElementById('peopleCount').textContent = finalCount.toLocaleString();
         }
 
-        // Dental Knowledge Questions
-        const quizQuestions = [
+        // ALL DENTAL QUESTIONS FROM YOUR ATTACHMENT
+        const allQuestions = [
+            // Easy Level Questions
             {
-                question: "What is the hardest substance in the human body?",
-                options: ["Bone", "Tooth enamel", "Dentin", "Cartilage"],
+                question: "What is the primary mineral component of enamel?",
+                options: ["Collagen", "Hydroxyapatite", "Calcium carbonate", "Fluoride"],
                 correct: 1
             },
             {
-                question: "How many permanent teeth does an adult typically have?",
-                options: ["28", "30", "32", "34"],
+                question: "Which tooth is most commonly extracted due to impaction?",
+                options: ["Maxillary central incisor", "Mandibular canine", "Maxillary first molar", "Mandibular third molar"],
+                correct: 3
+            },
+            {
+                question: "Which nerve supplies sensation to the lower teeth?",
+                options: ["Facial nerve", "Maxillary nerve", "Mandibular nerve", "Glossopharyngeal nerve"],
                 correct: 2
             },
             {
-                question: "What is the most common dental disease?",
-                options: ["Gingivitis", "Dental caries", "Periodontitis", "Oral cancer"],
+                question: "What is the recommended angle for placing a dental elevator?",
+                options: ["10°", "45°", "90°", "180°"],
                 correct: 1
             },
             {
-                question: "Which mineral is most effective for strengthening tooth enamel?",
-                options: ["Calcium", "Phosphorus", "Fluoride", "Magnesium"],
-                correct: 2
-            },
-            {
-                question: "What is the clinical term for teeth grinding?",
-                options: ["Bruxism", "Gingivitis", "Periodontitis", "Xerostomia"],
-                correct: 0
-            },
-            {
-                question: "At what age do children typically start losing baby teeth?",
-                options: ["4-5 years", "6-7 years", "8-9 years", "10-11 years"],
+                question: "What is the ideal time to etch enamel for composite restoration?",
+                options: ["5–10 seconds", "15–20 seconds", "25–30 seconds", "1 minute"],
                 correct: 1
             },
             {
-                question: "What is the soft tissue inside a tooth called?",
-                options: ["Enamel", "Dentin", "Pulp", "Cementum"],
-                correct: 2
-            },
-            {
-                question: "How often should you replace your toothbrush?",
-                options: ["Monthly", "Every 3-4 months", "Every 6 months", "Annually"],
+                question: "Which material is commonly used for root canal obturation?",
+                options: ["Zinc phosphate", "Gutta-percha", "Composite resin", "Calcium hydroxide"],
                 correct: 1
             },
             {
-                question: "What is the optimal pH level for oral health?",
-                options: ["5.5", "6.0", "7.0", "7.5"],
-                correct: 2
-            },
-            {
-                question: "Which bacteria is primarily responsible for tooth decay?",
-                options: ["Streptococcus mutans", "Lactobacillus", "Actinomyces", "Prevotella"],
-                correct: 0
-            },
-            {
-                question: "What is the recommended fluoride concentration in adult toothpaste?",
-                options: ["500 ppm", "1000 ppm", "1450 ppm", "2000 ppm"],
-                correct: 2
-            },
-            {
-                question: "Which teeth are commonly called 'wisdom teeth'?",
-                options: ["First molars", "Second molars", "Third molars", "Premolars"],
-                correct: 2
-            },
-            {
-                question: "What is the primary cause of bad breath?",
-                options: ["Poor oral hygiene", "Stomach problems", "Sinus issues", "Heart disease"],
-                correct: 0
-            },
-            {
-                question: "How long should you brush your teeth?",
-                options: ["30 seconds", "1 minute", "2 minutes", "5 minutes"],
-                correct: 2
-            },
-            {
-                question: "What is dental plaque primarily composed of?",
-                options: ["Food particles", "Bacteria", "Saliva", "Dead cells"],
+                question: "What is the function of a periosteal elevator?",
+                options: ["Elevate teeth", "Reflect soft tissue", "Cut bone", "Drill into enamel"],
                 correct: 1
             },
             {
-                question: "Deficiency of which vitamin causes bleeding gums?",
-                options: ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin D"],
+                question: "What is the universal numbering system number for the maxillary right first molar?",
+                options: ["2", "3", "4", "1"],
+                correct: 1
+            },
+            {
+                question: "What is the ideal concentration of sodium hypochlorite used in endodontics?",
+                options: ["0.5%", "1%", "2.5%", "10%"],
                 correct: 2
             },
             {
-                question: "What is the space between teeth called?",
-                options: ["Interdental space", "Diastema", "Embrasure", "Frenum"],
+                question: "Which impression material is known for excellent elastic recovery?",
+                options: ["Alginate", "ZOE paste", "Addition silicone", "Impression compound"],
+                correct: 2
+            },
+            {
+                question: "What is the working length in endodontics typically measured from?",
+                options: ["Apex of the root", "Cemento-enamel junction", "Incisal edge", "Reference point to apical constriction"],
+                correct: 3
+            },
+            {
+                question: "Which instrument is used to detect caries in occlusal pits?",
+                options: ["Spoon excavator", "Periodontal probe", "Dental explorer", "Condenser"],
+                correct: 2
+            },
+            {
+                question: "What is the most radiopaque dental material?",
+                options: ["Composite resin", "Zinc oxide eugenol", "Gutta-percha", "Amalgam"],
+                correct: 3
+            },
+            {
+                question: "What is the most common site for plaque accumulation?",
+                options: ["Palatal surface of maxillary teeth", "Buccal surface of molars", "Interproximal surfaces", "Occlusal surfaces of incisors"],
+                correct: 2
+            },
+            {
+                question: "Which vitamin deficiency causes bleeding gums?",
+                options: ["Vitamin A", "Vitamin B12", "Vitamin C", "Vitamin D"],
+                correct: 2
+            },
+            {
+                question: "What is the ideal crown-root ratio for a healthy tooth?",
+                options: ["1:1", "2:1", "3:1", "4:1"],
                 correct: 0
             },
             {
-                question: "Which procedure removes tartar buildup?",
-                options: ["Scaling", "Polishing", "Whitening", "Bonding"],
+                question: "The normal probing depth of a healthy gingival sulcus is:",
+                options: ["0–1 mm", "1–3 mm", "4–5 mm", "5–7 mm"],
+                correct: 1
+            },
+            {
+                question: "Which bacteria is primarily associated with dental caries?",
+                options: ["Lactobacillus casei", "Streptococcus mutans", "Actinomyces viscosus", "Porphyromonas gingivalis"],
+                correct: 1
+            },
+            {
+                question: "The primary purpose of fluoride in dentistry is to:",
+                options: ["Whiten teeth", "Kill all oral bacteria", "Strengthen enamel and prevent caries", "Cure gingivitis"],
+                correct: 2
+            },
+            {
+                question: "Which radiograph is ideal for viewing impacted third molars?",
+                options: ["Bitewing", "Occlusal", "Periapical", "OPG (Orthopantomogram)"],
+                correct: 3
+            },
+            {
+                question: "Which tooth has the longest root in the human dentition?",
+                options: ["Maxillary canine", "Mandibular molar", "Maxillary incisor", "Mandibular premolar"],
                 correct: 0
             },
             {
-                question: "What does RCT stand for in dentistry?",
-                options: ["Root Canal Therapy", "Routine Care Treatment", "Restorative Crown Treatment", "Root Cavity Treatment"],
+                question: "What is the ideal curing time for a light-cured composite?",
+                options: ["2 seconds", "10 seconds", "20 seconds", "1 minute"],
+                correct: 2
+            },
+            {
+                question: "What is the main purpose of rubber dam isolation?",
+                options: ["Improve aesthetics", "Maintain moisture", "Prevent contamination", "Reduce post-op pain"],
+                correct: 2
+            },
+            {
+                question: "Which material is most commonly used for pit and fissure sealants?",
+                options: ["Zinc phosphate", "Flowable composite", "Glass ionomer", "Resin-based sealant"],
+                correct: 3
+            },
+            {
+                question: "Which of the following is a resorbable suture material?",
+                options: ["Silk", "Vicryl", "Nylon", "Polyester"],
+                correct: 1
+            },
+            {
+                question: "What is the primary cause of halitosis in most dental patients?",
+                options: ["Gastric reflux", "Tongue coating", "Sinusitis", "Excessive fluoride"],
+                correct: 1
+            },
+            {
+                question: "In which condition is the 'floating teeth' radiographic sign seen?",
+                options: ["Ameloblastoma", "Langerhans cell histiocytosis", "Odontoma", "Osteomyelitis"],
+                correct: 1
+            },
+            {
+                question: "What does GIC stand for in dental materials?",
+                options: ["General Implant Cement", "Glass Ionomer Cement", "Gingival Isolation Compound", "Gelatin Intercalating Compound"],
+                correct: 1
+            },
+            {
+                question: "The articulating paper is used for:",
+                options: ["Cleaning teeth", "Checking occlusion", "Caries detection", "Bite registration"],
+                correct: 1
+            },
+            {
+                question: "The buccal object rule in radiography helps determine:",
+                options: ["Size of the lesion", "Depth of caries", "Position of objects in 3D", "Film speed"],
+                correct: 2
+            },
+            {
+                question: "Which vitamin plays a key role in bone and tooth mineralization?",
+                options: ["Vitamin A", "Vitamin B1", "Vitamin C", "Vitamin D"],
+                correct: 3
+            },
+            {
+                question: "What is the average eruption age of permanent mandibular central incisors?",
+                options: ["4–5 years", "6–7 years", "8–9 years", "10–11 years"],
+                correct: 1
+            },
+            {
+                question: "Which condition is characterized by 'dry socket'?",
+                options: ["Acute gingivitis", "Pericoronitis", "Alveolar osteitis", "Periodontitis"],
+                correct: 2
+            },
+            {
+                question: "What type of cement is commonly used for luting crowns?",
+                options: ["Eugenol", "GIC", "ZOE", "Calcium hydroxide"],
+                correct: 1
+            },
+            {
+                question: "Which part of the dental handpiece holds the bur?",
+                options: ["Coupling", "Motor", "Chuck", "Headpiece"],
+                correct: 2
+            },
+            {
+                question: "What is the primary cause of gingivitis?",
+                options: ["Genetic factors", "Bacterial plaque", "Vitamin deficiency", "Hormonal changes"],
+                correct: 1
+            },
+            {
+                question: "Which instrument is used to check the mobility of teeth?",
+                options: ["Excavator", "Mirror", "Tweezer", "Probe"],
+                correct: 3
+            },
+            {
+                question: "What is the average pH of saliva in a healthy individual?",
+                options: ["3–4", "5.0", "6.7–7.4", "8–9"],
+                correct: 2
+            },
+            {
+                question: "The primary function of a matrix band in restorative dentistry is:",
+                options: ["Light cure support", "Moisture control", "Retraction", "To form the missing wall of a tooth"],
+                correct: 3
+            },
+            {
+                question: "Which tooth is typically most prone to early childhood caries?",
+                options: ["Mandibular molars", "Maxillary incisors", "Maxillary premolars", "Mandibular canines"],
+                correct: 1
+            },
+            {
+                question: "What does PPE stand for in a dental clinic setup?",
+                options: ["Personal Patient Equipment", "Primary Protective Eyewear", "Personal Protective Equipment", "Public Protection Essentials"],
+                correct: 2
+            },
+            {
+                question: "Which instrument is used to adapt and condense amalgam into a cavity?",
+                options: ["Explorer", "Burnisher", "Condenser", "Excavator"],
+                correct: 2
+            },
+            {
+                question: "Which radiograph is best for evaluating the periodontium?",
+                options: ["Bitewing", "OPG", "Occlusal", "Lateral cephalogram"],
                 correct: 0
             },
             {
-                question: "What is the primary function of saliva?",
-                options: ["Taste enhancement", "Protection and lubrication", "Temperature control", "Digestion only"],
+                question: "Which fluoride application is most commonly used in dental practice?",
+                options: ["Sodium fluoride", "Calcium fluoride", "Zinc fluoride", "Magnesium fluoride"],
+                correct: 0
+            },
+            {
+                question: "Which muscle is primarily involved in mastication?",
+                options: ["Masseter", "Buccinator", "Orbicularis oris", "Platysma"],
+                correct: 0
+            },
+            {
+                question: "What is the primary cause of attrition in teeth?",
+                options: ["Acid erosion", "Tooth-to-tooth contact", "Caries", "Brushing technique"],
+                correct: 1
+            },
+            {
+                question: "The purpose of a wedge in Class II restorations is to:",
+                options: ["Increase bonding", "Polish the surface", "Separate teeth and adapt the matrix", "Reduce occlusal load"],
+                correct: 2
+            },
+            {
+                question: "The first permanent molars erupt around what age?",
+                options: ["4 years", "6 years", "8 years", "10 years"],
+                correct: 1
+            },
+            {
+                question: "Which of the following is not a function of saliva?",
+                options: ["Lubrication", "Taste perception", "Tooth whitening", "Buffering acids"],
+                correct: 2
+            },
+            {
+                question: "What is the chief function of a scaler in dental hygiene?",
+                options: ["Caries removal", "Plaque and calculus removal", "Whitening enamel", "Smoothen restorations"],
+                correct: 1
+            },
+            {
+                question: "What is the ideal position of the bevel when giving an inferior alveolar nerve block?",
+                options: ["Toward the lingual side", "Toward the syringe", "Toward the bone", "Away from the bone"],
+                correct: 2
+            },
+            {
+                question: "The primary use of alginate is:",
+                options: ["Bite registration", "Permanent crown fabrication", "Diagnostic impressions", "Root canal obturation"],
+                correct: 2
+            },
+            {
+                question: "Which of these is an example of a non-resorbable suture?",
+                options: ["Catgut", "Vicryl", "Silk", "PGA"],
+                correct: 2
+            },
+            {
+                question: "What is the main ingredient in most whitening toothpastes?",
+                options: ["Fluoride", "Hydrogen Peroxide", "Chlorhexidine", "Zinc oxide"],
+                correct: 1
+            },
+            // Medium Level Questions
+            {
+                question: "What is the most reliable radiographic indicator of periodontal bone loss?",
+                options: ["Thickened lamina dura", "Fuzzy interdental crest", "Increased pulp chamber", "Loss of enamel density"],
+                correct: 1
+            },
+            {
+                question: "Which type of collagen is most abundant in the periodontal ligament?",
+                options: ["Type I", "Type II", "Type III", "Type IV"],
+                correct: 0
+            },
+            {
+                question: "Which file system utilizes a reciprocating motion in endodontics?",
+                options: ["Protaper Gold", "HyFlex", "WaveOne", "Hero Shaper"],
+                correct: 2
+            },
+            {
+                question: "What is the minimum ferrule height recommended for post-endodontic crown restorations?",
+                options: ["0.5 mm", "1.0 mm", "1.5 mm", "2.0 mm"],
+                correct: 3
+            },
+            {
+                question: "Which condition presents radiographically with 'hair-on-end' appearance in skull films?",
+                options: ["Thalassemia", "Paget's disease", "Osteopetrosis", "Sickle cell anemia"],
+                correct: 0
+            },
+            {
+                question: "Which cement offers chemical bonding to both enamel and dentin?",
+                options: ["Zinc phosphate", "GIC", "Resin-modified ZOE", "Polycarboxylate"],
+                correct: 1
+            },
+            {
+                question: "The 'picket fence' appearance of alveolar bone loss is characteristic of:",
+                options: ["Chronic periodontitis", "Juvenile periodontitis", "Aggressive caries", "Gingival fibromatosis"],
+                correct: 1
+            },
+            {
+                question: "Which of the following local anesthetics is safest for use in a cardiac-compromised patient?",
+                options: ["Lidocaine with adrenaline", "Mepivacaine without vasoconstrictor", "Articaine", "Bupivacaine with epinephrine"],
+                correct: 1
+            },
+            {
+                question: "The major cause of endodontic failure is:",
+                options: ["Inadequate obturation", "Lack of temporary filling", "Excessive irrigation", "Tooth fracture"],
+                correct: 0
+            },
+            {
+                question: "Which restorative material has the best marginal seal over time?",
+                options: ["Amalgam", "Flowable composite", "Resin-modified GIC", "Conventional GIC"],
+                correct: 2
+            },
+            {
+                question: "Which impression material exhibits the best dimensional stability over time?",
+                options: ["Alginate", "Polyether", "ZOE impression paste", "Reversible hydrocolloid"],
+                correct: 1
+            },
+            {
+                question: "What is the key advantage of using NiTi rotary files over stainless steel hand files?",
+                options: ["Increased radiopacity", "Better tactile control", "Higher rigidity", "Superior flexibility and canal centering"],
+                correct: 3
+            },
+            {
+                question: "Which maxillary tooth is most likely to have a palatal radicular groove?",
+                options: ["First molar", "Central incisor", "Lateral incisor", "Canine"],
+                correct: 2
+            },
+            {
+                question: "The 'butterfly effect' in endodontics refers to:",
+                options: ["Dual canal curvature", "Variation in dentinal tubule pattern", "Split root anatomy", "Recurrent flare-ups"],
+                correct: 1
+            },
+            {
+                question: "Which property of a dental material is most relevant for resisting permanent deformation under stress?",
+                options: ["Elastic modulus", "Flexural strength", "Compressive strength", "Yield strength"],
+                correct: 3
+            },
+            {
+                question: "Which flap design is most commonly used in periapical surgery?",
+                options: ["Envelope flap", "Semilunar flap", "Triangular flap", "Pedicle flap"],
+                correct: 2
+            },
+            {
+                question: "The ADA classification of dental caries includes Class V lesions located at the:",
+                options: ["Incisal edge", "Interproximal surface", "Cervical third of the facial/lingual surfaces", "Occlusal surface"],
+                correct: 2
+            },
+            {
+                question: "The most significant disadvantage of zinc phosphate cement is:",
+                options: ["Low compressive strength", "Solubility in water", "Initial acidity and pulpal irritation", "Poor esthetics"],
+                correct: 2
+            },
+            {
+                question: "In digital radiography, increasing kVp will:",
+                options: ["Increase image noise", "Increase image contrast", "Decrease exposure time", "Reduce sensor sensitivity"],
+                correct: 2
+            },
+            {
+                question: "Which is the most biocompatible root-end filling material used in apicoectomy?",
+                options: ["Amalgam", "Cavit", "MTA (Mineral Trioxide Aggregate)", "Zinc oxide eugenol"],
+                correct: 2
+            },
+            {
+                question: "Which of the following is most commonly associated with cracked tooth syndrome?",
+                options: ["Mandibular second molar", "Maxillary canine", "Mandibular first molar", "Maxillary second premolar"],
+                correct: 2
+            },
+            {
+                question: "In perio charting, a Grade II furcation involvement is defined as:",
+                options: ["Incipient involvement", "Partial bone loss with probe not passing through completely", "Through-and-through furcation", "No bone loss"],
+                correct: 1
+            },
+            {
+                question: "Which condition shows a 'cotton wool' appearance radiographically?",
+                options: ["Fibrous dysplasia", "Paget's disease", "Osteomyelitis", "Osteosarcoma"],
+                correct: 1
+            },
+            {
+                question: "Which muscle primarily assists in opening the mouth?",
+                options: ["Temporalis", "Medial pterygoid", "Lateral pterygoid", "Masseter"],
+                correct: 2
+            },
+            {
+                question: "Which GIC type is specifically indicated for orthodontic band cementation?",
+                options: ["Type I", "Type II", "Type III", "Type IV"],
+                correct: 0
+            },
+            {
+                question: "Which instrument is used to smoothen the axial wall of a Class II cavity?",
+                options: ["Spoon excavator", "Gingival margin trimmer", "Hatchet", "Bin-angle chisel"],
+                correct: 3
+            },
+            {
+                question: "What is the function of EDTA in endodontics?",
+                options: ["Dissolves organic debris", "Removes smear layer by chelating calcium", "Antimicrobial agent", "Lubricates the canal"],
+                correct: 1
+            },
+            {
+                question: "Which periodontal defect has the best prognosis for regenerative therapy?",
+                options: ["One-wall defect", "Two-wall defect", "Three-wall defect", "Horizontal bone loss"],
+                correct: 2
+            },
+            {
+                question: "What is the purpose of the ferrule effect in post-endodontic crowns?",
+                options: ["Improves occlusion", "Enhances marginal fit", "Reduces microleakage", "Increases fracture resistance"],
+                correct: 3
+            },
+            {
+                question: "Which salivary gland produces a mixed serous and mucous secretion?",
+                options: ["Parotid gland", "Sublingual gland", "Submandibular gland", "Minor labial glands"],
+                correct: 2
+            },
+            {
+                question: "Which of the following is the most common cause of vertical root fracture in endodontically treated teeth?",
+                options: ["Excessive irrigant pressure", "Use of calcium hydroxide", "Inappropriate post placement", "Secondary caries"],
+                correct: 2
+            },
+            {
+                question: "What is the most radiolucent dental restorative material?",
+                options: ["Zinc phosphate", "Composite resin", "Amalgam", "GIC"],
+                correct: 1
+            },
+            {
+                question: "Which antibiotic is most commonly used in localized aggressive periodontitis?",
+                options: ["Penicillin", "Azithromycin", "Metronidazole", "Tetracycline"],
+                correct: 3
+            },
+            {
+                question: "The 'orange peel' effect in composite finishing indicates:",
+                options: ["Overheating during polishing", "Incomplete polymerization", "Surface contamination", "Under-etching"],
+                correct: 1
+            },
+            {
+                question: "What is the purpose of a 'stop' in NiTi rotary endodontic files?",
+                options: ["Prevent file breakage", "Ensure standard taper", "Control working length", "Increase torque resistance"],
+                correct: 2
+            },
+            {
+                question: "Which of the following is a major disadvantage of CAD/CAM ceramic crowns?",
+                options: ["Poor marginal adaptation", "Limited esthetics", "Brittleness and chipping", "Long fabrication time"],
+                correct: 2
+            },
+            {
+                question: "What is the ideal pH range of calcium hydroxide for its antimicrobial effect?",
+                options: ["5–6", "7–8", "9–10", "12–12.5"],
+                correct: 3
+            },
+            {
+                question: "What does the 'ZOE' in dental materials stand for?",
+                options: ["Zinc oxide eugenol", "Zinc oxide ethanol", "Zinc oxide electrolyte", "Zinc oxide emulsion"],
+                correct: 0
+            },
+            // Difficult Level Questions
+            {
+                question: "Which of the following presents as a 'sunburst' radiographic appearance in the jaw?",
+                options: ["Ewing's sarcoma", "Osteosarcoma", "Langerhans cell histiocytosis", "Ameloblastoma"],
+                correct: 1
+            },
+            {
+                question: "Which growth factor plays the most significant role in bone remodeling around dental implants?",
+                options: ["Epidermal growth factor", "Vascular endothelial growth factor", "Platelet-derived growth factor", "Bone morphogenetic protein-2"],
+                correct: 3
+            },
+            {
+                question: "In case of a mandibular fracture involving the condylar process, deviation of the jaw occurs toward:",
+                options: ["Opposite side", "Fracture side", "Midline", "No deviation"],
+                correct: 1
+            },
+            {
+                question: "In prosthodontics, the term 'neutrocentric occlusion' primarily applies to:",
+                options: ["Lingualized occlusion", "Balanced occlusion", "Non-anatomic teeth in complete dentures", "Group function occlusion"],
+                correct: 2
+            },
+            {
+                question: "Which cement has the highest bond strength to enamel and dentin?",
+                options: ["Resin cement", "Zinc polycarboxylate", "Resin-modified GIC", "Zinc phosphate"],
+                correct: 0
+            },
+            {
+                question: "In apexification, which material promotes apical barrier formation most predictably?",
+                options: ["Calcium hydroxide", "MTA", "Biodentine", "ZOE"],
+                correct: 1
+            },
+            {
+                question: "What is the primary cause of strip perforation during endodontic therapy?",
+                options: ["Using chelating agents", "Overuse of rotary files", "Excessive instrumentation on inner canal curve", "Failing to obturate to working length"],
+                correct: 2
+            },
+            {
+                question: "Which laser wavelength is most selectively absorbed by water and hydroxyapatite in hard tissue cutting?",
+                options: ["Diode laser (810–980 nm)", "CO₂ laser (10,600 nm)", "Er:YAG laser (2940 nm)", "Nd:YAG laser (1064 nm)"],
+                correct: 2
+            },
+            {
+                question: "In orthodontics, 'moment-to-force ratio' is critical for:",
+                options: ["Root resorption", "Anchorage planning", "Controlled tooth movement", "Timing of extraction"],
+                correct: 2
+            },
+            {
+                question: "Which test best differentiates periapical cyst from granuloma non-invasively?",
+                options: ["Percussion", "Cold test", "CBCT imaging", "Electric pulp test"],
+                correct: 2
+            },
+            {
+                question: "Which of the following conditions exhibits 'cotton wool' radiopacities on radiographs?",
+                options: ["Osteomyelitis", "Paget's disease", "Cemento-ossifying fibroma", "Fibrous dysplasia"],
+                correct: 1
+            },
+            {
+                question: "What is the primary mechanism of action of sodium hypochlorite in endodontics?",
+                options: ["Chelation of smear layer", "Protein denaturation and dissolution", "Calcium ion chelation", "Oxidation of dentin matrix"],
+                correct: 1
+            },
+            {
+                question: "Which of the following cysts has the highest recurrence rate post-enucleation?",
+                options: ["Radicular cyst", "Dentigerous cyst", "Odontogenic keratocyst", "Nasopalatine duct cyst"],
+                correct: 2
+            },
+            {
+                question: "In ridge augmentation, which graft material is considered both osteoconductive and osteoinductive?",
+                options: ["Alloplast", "Xenograft", "Demineralized freeze-dried bone allograft (DFDBA)", "Hydroxyapatite cement"],
+                correct: 2
+            },
+            {
+                question: "In class II division 2 malocclusion, the most common characteristic is:",
+                options: ["Proclined upper incisors", "Retroclined upper central incisors", "Increased overjet", "Posterior crossbite"],
+                correct: 1
+            },
+            {
+                question: "The best method for evaluating vertical root fractures in endodontically treated teeth is:",
+                options: ["Periapical radiograph", "CBCT scan", "Transillumination", "Periodontal probing"],
+                correct: 1
+            },
+            {
+                question: "Which of the following causes 'ghost teeth' radiographically?",
+                options: ["Dentinogenesis imperfecta", "Regional odontodysplasia", "Amelogenesis imperfecta", "Dens invaginatus"],
+                correct: 1
+            },
+            {
+                question: "What is the minimum ferrule height required to ensure biomechanical stability in a post-core crown?",
+                options: ["0.5 mm", "1.0 mm", "1.5 mm", "2.0 mm"],
+                correct: 3
+            },
+            {
+                question: "Which of the following best describes the use of erbium lasers in dentistry?",
+                options: ["Soft tissue coagulation", "Crown lengthening", "Hard tissue ablation", "Vital pulp therapy"],
+                correct: 2
+            },
+            {
+                question: "What is the critical pH below which enamel demineralization begins?",
+                options: ["5.8", "5.5", "6.0", "4.8"],
                 correct: 1
             }
         ];
@@ -933,7 +1383,7 @@
 
         // Get random questions
         function getRandomQuestions(count = 10) {
-            const shuffled = [...quizQuestions].sort(() => 0.5 - Math.random());
+            const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
         }
 
@@ -1131,19 +1581,16 @@
             }
         }
 
-        // Copy code
+        // Copy code - NO POPUP
         function copyCode() {
             const code = document.getElementById('couponCode').textContent;
             
             if (navigator.clipboard) {
-                navigator.clipboard.writeText(code).then(() => {
-                    alert('🎯 Reward code copied to clipboard!');
-                }).catch(() => {
-                    fallbackCopy(code);
-                });
+                navigator.clipboard.writeText(code);
             } else {
                 fallbackCopy(code);
             }
+            // NO ALERT OR POPUP - SILENT COPY
         }
 
         function fallbackCopy(text) {
@@ -1153,18 +1600,16 @@
             textArea.select();
             document.execCommand('copy');
             document.body.removeChild(textArea);
-            alert('🎯 Reward code copied!');
+            // NO ALERT OR POPUP - SILENT COPY
         }
 
-        // Share on WhatsApp with correct link
+        // Share on WhatsApp - WITHOUT REWARD CODE
         function shareWhatsApp() {
             const scoreText = document.getElementById('finalScore').textContent;
-            const codeText = document.getElementById('couponCode').textContent;
             
             const message = `🎯 I just completed the PB DAYS: Pulse Edition Dental Challenge!
 
 🏆 My Score: ${scoreText}
-🎁 Reward Code: ${codeText}
 
 🦷 Test your dental knowledge: https://pinkblue.in/pbd-aug25-quiz
 
