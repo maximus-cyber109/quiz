@@ -595,6 +595,10 @@
             letter-spacing: 4px;
             margin: 15px 0;
             animation: couponBlink 2s ease-in-out infinite;
+            user-select: all;
+            -webkit-user-select: all;
+            -moz-user-select: all;
+            -ms-user-select: all;
         }
 
         @keyframes couponBlink {
@@ -613,6 +617,27 @@
         .button-row .pixel-btn {
             flex: 1;
             min-width: 200px;
+        }
+
+        /* Copy Success Indicator */
+        .copy-success {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #2B1810;
+            color: #F4C430;
+            padding: 20px;
+            border: 3px solid #F4C430;
+            font-size: 0.8rem;
+            z-index: 2000;
+            display: none;
+            animation: copyPulse 0.5s ease-out;
+        }
+
+        @keyframes copyPulse {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
 
         @media (max-width: 768px) {
@@ -650,7 +675,7 @@
                     <span class="stat-label">PEOPLE PLAYED</span>
                 </div>
                 <div class="pixel-stat">
-                    <span class="stat-number" id="attemptsLeft">5</span>
+                    <span class="stat-number" id="attemptsLeft">10</span>
                     <span class="stat-label">ATTEMPTS</span>
                 </div>
                 <div class="pixel-stat">
@@ -684,7 +709,7 @@
                     <li>⏰ You have 2 minutes to complete</li>
                     <li>🎯 Higher scores unlock better rewards</li>
                     <li>🔥 Each question has one correct answer</li>
-                    <li>💪 Maximum 5 attempts allowed</li>
+                    <li>💪 Maximum 10 attempts allowed</li>
                     <li>🎁 Earn exclusive reward codes</li>
                 </ul>
             </div>
@@ -728,7 +753,7 @@
                         🎁 YOUR PB DAYS REWARD!
                     </h3>
                     <p id="rewardDescription"></p>
-                    <div class="pixel-coupon" id="couponCode"></div>
+                    <div class="pixel-coupon" id="couponCode" onclick="copyCodeDirect()"></div>
                     <button class="pixel-btn" onclick="copyCode()">
                         📋 COPY REWARD CODE
                     </button>
@@ -738,7 +763,7 @@
                     <a href="https://pinkblue.in/cart" class="pixel-btn btn-success" target="_top">
                         🛒 REDEEM NOW
                     </a>
-                    <a href="https://pinkblue.in" class="pixel-btn btn-warning" target="_blank">
+                    <a href="https://pinkblue.in" class="pixel-btn btn-warning" target="_top">
                         📖 BROWSE PRODUCTS
                     </a>
                     <button class="pixel-btn btn-whatsapp" onclick="shareWhatsApp()">
@@ -755,6 +780,11 @@
     <!-- Pixelated Countdown -->
     <div class="pixel-countdown" id="countdownOverlay">
         <span id="countdownNumber">3</span>
+    </div>
+
+    <!-- Copy Success Indicator -->
+    <div class="copy-success" id="copySuccess">
+        📋 CODE COPIED!
     </div>
 
     <script>
@@ -776,7 +806,7 @@
             return Math.abs(hash).toString();
         }
 
-        // Attempt tracking - NOW 5 ATTEMPTS
+        // Attempt tracking - NOW 10 ATTEMPTS
         function getAttempts() {
             const userId = generateUserID();
             const attempts = JSON.parse(localStorage.getItem('pbDaysAttempts') || '{}');
@@ -1390,7 +1420,7 @@
         // 3-2-1 Countdown
         function startCountdown() {
             const attempts = getAttempts();
-            if (attempts >= 5) {  // CHANGED TO 5 ATTEMPTS
+            if (attempts >= 10) {  // CHANGED TO 10 ATTEMPTS
                 alert('🎯 All attempts completed!');
                 return;
             }
@@ -1420,7 +1450,7 @@
         // Start quiz
         function startQuiz() {
             incrementAttempts();
-            document.getElementById('attemptsLeft').textContent = Math.max(0, 5 - getAttempts()); // CHANGED TO 5 ATTEMPTS
+            document.getElementById('attemptsLeft').textContent = Math.max(0, 10 - getAttempts()); // CHANGED TO 10 ATTEMPTS
 
             gameQuestions = getRandomQuestions(10);
             currentQuestion = 0;
@@ -1548,7 +1578,7 @@
             const trophy = document.getElementById('trophyIcon');
             const tryAgain = document.getElementById('tryAgainBtn');
 
-            if (getAttempts() >= 5) {  // CHANGED TO 5 ATTEMPTS
+            if (getAttempts() >= 10) {  // CHANGED TO 10 ATTEMPTS
                 tryAgain.style.display = 'none';
             }
 
@@ -1581,29 +1611,68 @@
             }
         }
 
-        // Copy code - NO POPUP
+        // IMPROVED COPY FUNCTIONS FOR NATIVE APPS
         function copyCode() {
             const code = document.getElementById('couponCode').textContent;
-            
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(code);
+            copyToClipboard(code);
+        }
+
+        function copyCodeDirect() {
+            const code = document.getElementById('couponCode').textContent;
+            copyToClipboard(code);
+        }
+
+        function copyToClipboard(text) {
+            // Method 1: Modern Clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showCopySuccess();
+                }).catch(() => {
+                    // Fallback to legacy method
+                    legacyCopyToClipboard(text);
+                });
             } else {
-                fallbackCopy(code);
+                // Method 2: Legacy fallback for native apps
+                legacyCopyToClipboard(text);
             }
-            // NO ALERT OR POPUP - SILENT COPY
         }
 
-        function fallbackCopy(text) {
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            // NO ALERT OR POPUP - SILENT COPY
+        function legacyCopyToClipboard(text) {
+            // Create a temporary input element
+            const tempInput = document.createElement('input');
+            tempInput.value = text;
+            tempInput.style.position = 'fixed';
+            tempInput.style.left = '-999999px';
+            tempInput.style.top = '-999999px';
+            document.body.appendChild(tempInput);
+            
+            // Select and copy
+            tempInput.focus();
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); // For mobile devices
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showCopySuccess();
+                }
+            } catch (err) {
+                // If all methods fail, at least show the code is highlighted
+                showCopySuccess();
+            }
+            
+            document.body.removeChild(tempInput);
         }
 
-        // Share on WhatsApp - WITHOUT REWARD CODE
+        function showCopySuccess() {
+            const copySuccessElement = document.getElementById('copySuccess');
+            copySuccessElement.style.display = 'block';
+            setTimeout(() => {
+                copySuccessElement.style.display = 'none';
+            }, 2000);
+        }
+
+        // FIXED WHATSAPP SHARE FOR NATIVE APPS
         function shareWhatsApp() {
             const scoreText = document.getElementById('finalScore').textContent;
             
@@ -1615,14 +1684,34 @@
 
 #PBDays #PulseEdition #DentalChallenge #PinkBlue`;
             
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+            // Try multiple methods for native app compatibility
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Method 1: Standard WhatsApp web
+            const whatsappWebUrl = `https://wa.me/?text=${encodedMessage}`;
+            
+            // Method 2: WhatsApp app deep link
+            const whatsappAppUrl = `whatsapp://send?text=${encodedMessage}`;
+            
+            // Try app first, then web as fallback
+            try {
+                // For native apps, try opening WhatsApp app directly
+                window.location.href = whatsappAppUrl;
+                
+                // Fallback to web version after short delay
+                setTimeout(() => {
+                    window.open(whatsappWebUrl, '_blank');
+                }, 1000);
+            } catch (error) {
+                // Final fallback
+                window.open(whatsappWebUrl, '_blank');
+            }
         }
 
         // Try again
         function tryAgain() {
             const attempts = getAttempts();
-            if (attempts >= 5) {  // CHANGED TO 5 ATTEMPTS
+            if (attempts >= 10) {  // CHANGED TO 10 ATTEMPTS
                 alert('🎯 No more attempts remaining!');
                 return;
             }
@@ -1632,7 +1721,7 @@
         }
 
         // Initialize
-        document.getElementById('attemptsLeft').textContent = Math.max(0, 5 - getAttempts()); // CHANGED TO 5 ATTEMPTS
+        document.getElementById('attemptsLeft').textContent = Math.max(0, 10 - getAttempts()); // CHANGED TO 10 ATTEMPTS
         
         // Update people count on load
         updatePeopleCount();
