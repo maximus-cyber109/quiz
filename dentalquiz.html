@@ -538,6 +538,63 @@
             color: #FFFFFF;
         }
 
+        /* ATTEMPTS HISTORY TABLE */
+        .attempts-history {
+            background: #FFFFFF;
+            border: 4px solid #2B1810;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 
+                inset 0 0 0 2px #F4C430,
+                6px 6px 0 #E6B800;
+        }
+
+        .attempts-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #FFFFFF;
+            margin: 20px 0;
+        }
+
+        .attempts-table th {
+            background: #F4C430;
+            color: #2B1810;
+            padding: 12px 8px;
+            border: 2px solid #2B1810;
+            font-size: 0.6rem;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .attempts-table td {
+            background: #FFFFFF;
+            color: #2B1810;
+            padding: 10px 8px;
+            border: 2px solid #2B1810;
+            font-size: 0.6rem;
+            text-align: center;
+        }
+
+        .attempts-table tr:nth-child(even) td {
+            background: #F9F9F9;
+        }
+
+        .attempts-table tr:hover td {
+            background: #F4C430;
+            color: #2B1810;
+        }
+
+        .no-attempts-message {
+            text-align: center;
+            color: #2B1810;
+            font-size: 1rem;
+            margin: 20px 0;
+            padding: 20px;
+            background: #FFB6C1;
+            border: 3px solid #DC143C;
+            border-radius: 10px;
+        }
+
         .pixel-results {
             text-align: center;
             animation: resultsAppear 1s ease-out;
@@ -604,63 +661,6 @@
         @keyframes couponBlink {
             0%, 90%, 100% { opacity: 1; }
             95% { opacity: 0.8; }
-        }
-
-        /* ATTEMPTS HISTORY TABLE */
-        .attempts-history {
-            background: #FFFFFF;
-            border: 4px solid #2B1810;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 
-                inset 0 0 0 2px #F4C430,
-                6px 6px 0 #E6B800;
-        }
-
-        .attempts-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #FFFFFF;
-            margin: 20px 0;
-        }
-
-        .attempts-table th {
-            background: #F4C430;
-            color: #2B1810;
-            padding: 12px 8px;
-            border: 2px solid #2B1810;
-            font-size: 0.6rem;
-            text-align: center;
-            font-weight: 800;
-        }
-
-        .attempts-table td {
-            background: #FFFFFF;
-            color: #2B1810;
-            padding: 10px 8px;
-            border: 2px solid #2B1810;
-            font-size: 0.6rem;
-            text-align: center;
-        }
-
-        .attempts-table tr:nth-child(even) td {
-            background: #F9F9F9;
-        }
-
-        .attempts-table tr:hover td {
-            background: #F4C430;
-            color: #2B1810;
-        }
-
-        .no-attempts-message {
-            text-align: center;
-            color: #2B1810;
-            font-size: 1rem;
-            margin: 20px 0;
-            padding: 20px;
-            background: #FFB6C1;
-            border: 3px solid #DC143C;
-            border-radius: 10px;
         }
 
         .copy-success {
@@ -735,7 +735,7 @@
                     <span class="stat-label">PEOPLE PLAYED</span>
                 </div>
                 <div class="pixel-stat">
-                    <span class="stat-number" id="attemptsLeft">11</span>
+                    <span class="stat-number" id="attemptsLeft">2</span>
                     <span class="stat-label">ATTEMPTS</span>
                 </div>
                 <div class="pixel-stat">
@@ -753,7 +753,7 @@
                 <div class="pixel-tag">🎯 QUIZZES</div>
                 <div class="pixel-tag">💰 SUPERDEALS</div>
                 <div class="pixel-tag">🎰 DAILY JACKPOT</div>
-                <div class="pixel-tag">⚡ POWER-UPS</div>
+                <div class="pixel-tag">⚡BEST PRICES</div>
             </div>
         </div>
 
@@ -769,7 +769,7 @@
                     <li>⏰ You have 2 minutes to complete</li>
                     <li>🎯 Higher scores unlock better rewards</li>
                     <li>🔥 Each question has one correct answer</li>
-                    <li>💪 Maximum 11 attempts allowed</li>
+                    <li>💪 Maximum 2 attempts allowed</li>
                     <li>🎁 Earn exclusive reward codes</li>
                 </ul>
             </div>
@@ -785,7 +785,7 @@
             
             <div class="no-attempts-message">
                 <strong>🚫 All Attempts Completed!</strong><br>
-                You have used all your 11 attempts for PB DAYS: Pulse Edition
+                You have used all your 2 attempts for PB DAYS: Pulse Edition
             </div>
 
             <div id="attemptsTableContainer">
@@ -905,7 +905,7 @@
             return Math.abs(hash).toString();
         }
 
-        // Attempt tracking - NOW 11 ATTEMPTS
+        // Attempt tracking - NOW 2 ATTEMPTS
         function getAttempts() {
             const userId = generateUserID();
             const attempts = JSON.parse(localStorage.getItem('pbDaysAttempts') || '{}');
@@ -968,7 +968,7 @@
             });
         }
 
-        // People played counter - starts at 200, increases by 50 daily
+        // People played counter
         function updatePeopleCount() {
             const startDate = new Date('2025-08-10');
             const currentDate = new Date();
@@ -1035,7 +1035,6 @@
                 options: ["Alginate", "ZOE paste", "Addition silicone", "Impression compound"],
                 correct: 2
             },
-            // Add more questions as needed - truncating for space
             {
                 question: "What is the working length in endodontics typically measured from?",
                 options: ["Apex of the root", "Cemento-enamel junction", "Incisal edge", "Reference point to apical constriction"],
@@ -1060,6 +1059,31 @@
                 question: "Which vitamin deficiency causes bleeding gums?",
                 options: ["Vitamin A", "Vitamin B12", "Vitamin C", "Vitamin D"],
                 correct: 2
+            },
+            {
+                question: "What is the ideal crown-root ratio for a healthy tooth?",
+                options: ["1:1", "2:1", "3:1", "4:1"],
+                correct: 0
+            },
+            {
+                question: "The normal probing depth of a healthy gingival sulcus is:",
+                options: ["0–1 mm", "1–3 mm", "4–5 mm", "5–7 mm"],
+                correct: 1
+            },
+            {
+                question: "Which bacteria is primarily associated with dental caries?",
+                options: ["Lactobacillus casei", "Streptococcus mutans", "Actinomyces viscosus", "Porphyromonas gingivalis"],
+                correct: 1
+            },
+            {
+                question: "The primary purpose of fluoride in dentistry is to:",
+                options: ["Whiten teeth", "Kill all oral bacteria", "Strengthen enamel and prevent caries", "Cure gingivitis"],
+                correct: 2
+            },
+            {
+                question: "Which radiograph is ideal for viewing impacted third molars?",
+                options: ["Bitewing", "Occlusal", "Periapical", "OPG (Orthopantomogram)"],
+                correct: 3
             }
         ];
 
@@ -1081,7 +1105,7 @@
         // Check if user should see attempts history
         function checkUserStatus() {
             const attempts = getAttempts();
-            if (attempts >= 11) {  // 11 ATTEMPTS
+            if (attempts >= 2) {  // 2 ATTEMPTS
                 // Show attempts history instead of start screen
                 document.getElementById('startScreen').classList.add('hidden');
                 document.getElementById('attemptsHistoryScreen').classList.remove('hidden');
@@ -1122,7 +1146,7 @@
         // Start quiz
         function startQuiz() {
             const currentAttempt = incrementAttempts();
-            document.getElementById('attemptsLeft').textContent = Math.max(0, 11 - getAttempts()); // 11 ATTEMPTS
+            document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - getAttempts()); // 2 ATTEMPTS
 
             gameQuestions = getRandomQuestions(10);
             currentQuestion = 0;
@@ -1262,7 +1286,7 @@
             const trophy = document.getElementById('trophyIcon');
             const tryAgain = document.getElementById('tryAgainBtn');
 
-            if (getAttempts() >= 11) {  // 11 ATTEMPTS
+            if (getAttempts() >= 2) {  // 2 ATTEMPTS
                 tryAgain.style.display = 'none';
             }
 
@@ -1370,7 +1394,7 @@
             const message = `🎯 I just completed the PB DAYS: Pulse Edition Dental Challenge!
 
 🏆 My Best Score: ${bestScore}/10
-📊 Total Attempts: ${history.length}/11
+📊 Total Attempts: ${history.length}/2
 
 🦷 Test your dental knowledge: https://pinkblue.in/pbd-aug25-quiz
 
@@ -1393,7 +1417,7 @@
         // Try again
         function tryAgain() {
             const attempts = getAttempts();
-            if (attempts >= 11) {  // 11 ATTEMPTS
+            if (attempts >= 2) {  // 2 ATTEMPTS
                 // Show attempts history
                 document.getElementById('resultsScreen').classList.add('hidden');
                 document.getElementById('attemptsHistoryScreen').classList.remove('hidden');
@@ -1413,7 +1437,7 @@
                 displayAttemptsHistory();
             }
             
-            document.getElementById('attemptsLeft').textContent = Math.max(0, 11 - getAttempts()); // 11 ATTEMPTS
+            document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - getAttempts()); // 2 ATTEMPTS
             updatePeopleCount();
             
             // Update people count every 30 seconds
