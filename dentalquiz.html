@@ -199,7 +199,8 @@
         .pixel-tags {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            align-items: center;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
@@ -214,12 +215,101 @@
 
         .pixel-tag:nth-child(1) { animation-delay: 0s; }
         .pixel-tag:nth-child(2) { animation-delay: 1s; }
-        .pixel-tag:nth-child(3) { animation-delay: 2s; }
-        .pixel-tag:nth-child(4) { animation-delay: 3s; }
 
         @keyframes tagBlink {
             0%, 90%, 100% { opacity: 1; }
             95% { opacity: 0.7; }
+        }
+
+        /* Header Buttons */
+        .header-btn {
+            border: 3px solid;
+            padding: 12px 20px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Header Start Challenge Button */
+        .header-start-btn {
+            background: #90EE90;
+            color: #006400;
+            border-color: #006400;
+            box-shadow: 
+                inset 2px 2px 0 #98FB98,
+                inset -2px -2px 0 #00FF00,
+                3px 3px 0 #004000;
+            animation: challengeBlink 2s ease-in-out infinite;
+        }
+
+        .header-start-btn:hover {
+            background: #98FB98;
+            transform: translate(2px, 2px);
+            box-shadow: 
+                inset 2px 2px 0 #ADFF2F,
+                inset -2px -2px 0 #90EE90,
+                1px 1px 0 #004000;
+        }
+
+        .header-start-btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: 
+                inset 2px 2px 0 #00FF00,
+                inset -2px -2px 0 #004000;
+        }
+
+        @keyframes challengeBlink {
+            0%, 90%, 100% { 
+                background: #90EE90; 
+                color: #006400;
+            }
+            95% { 
+                background: #FFD700; 
+                color: #2B1810;
+            }
+        }
+
+        /* Header Explore PB Days Button */
+        .header-explore-btn {
+            background: #FF8C00;
+            color: #8B4513;
+            border-color: #8B4513;
+            box-shadow: 
+                inset 2px 2px 0 #FFA500,
+                inset -2px -2px 0 #FF7F00,
+                3px 3px 0 #5D2E00;
+            animation: exploreBlink 2.5s ease-in-out infinite;
+        }
+
+        .header-explore-btn:hover {
+            background: #FFA500;
+            transform: translate(2px, 2px);
+            box-shadow: 
+                inset 2px 2px 0 #FFB84D,
+                inset -2px -2px 0 #FF8C00,
+                1px 1px 0 #5D2E00;
+        }
+
+        .header-explore-btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: 
+                inset 2px 2px 0 #FF7F00,
+                inset -2px -2px 0 #5D2E00;
+        }
+
+        @keyframes exploreBlink {
+            0%, 90%, 100% { 
+                background: #FF8C00; 
+                color: #8B4513;
+            }
+            95% { 
+                background: #F4C430; 
+                color: #2B1810;
+            }
         }
 
         .retro-content {
@@ -707,6 +797,15 @@
                 font-size: 0.5rem; 
                 padding: 8px 4px; 
             }
+            .header-btn {
+                font-size: 0.6rem;
+                padding: 10px 16px;
+                margin: 5px 0;
+            }
+            .pixel-tags {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
     </style>
 </head>
@@ -748,12 +847,16 @@
                 </div>
             </div>
 
-            <!-- Pixel Tags -->
+            <!-- Updated Pixel Tags with Both Buttons -->
             <div class="pixel-tags">
                 <div class="pixel-tag">🎯 QUIZZES</div>
-                <div class="pixel-tag">💰 SUPERDEALS</div>
-                <div class="pixel-tag">🎰 DAILY JACKPOT</div>
-                <div class="pixel-tag">⚡BEST PRICES</div>
+                <div class="pixel-tag">⚡ POWER-UPS</div>
+                <button class="header-btn header-start-btn" onclick="startCountdown()">
+                    🚀 START CHALLENGE
+                </button>
+                <a href="https://pinkblue.in" class="header-btn header-explore-btn" target="_top">
+                    🌟 EXPLORE PB DAYS
+                </a>
             </div>
         </div>
 
@@ -905,7 +1008,7 @@
             return Math.abs(hash).toString();
         }
 
-        // Attempt tracking - NOW 2 ATTEMPTS
+        // Attempt tracking - 2 ATTEMPTS
         function getAttempts() {
             const userId = generateUserID();
             const attempts = JSON.parse(localStorage.getItem('pbDaysAttempts') || '{}');
@@ -1021,7 +1124,7 @@
                 correct: 1
             },
             {
-                question: "What is the universal numbering system number for the maxillary right first molar?",
+                question: "What is the universal numbering system number for the maxillary right molar?",
                 options: ["2", "3", "4", "1"],
                 correct: 1
             },
