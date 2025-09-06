@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PB DAYS: TREASURE HUNT JACKPOT</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Animated background particles */
+        .bg-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, #ffd700 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .container {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header {
+            margin-bottom: 30px;
+            background: linear-gradient(145deg, rgba(0,0,0,0.3), rgba(255,255,255,0.1));
+            padding: 25px;
+            border-radius: 25px;
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: 'Pirata One', cursive;
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 20px #ffd700; }
+            to { text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 30px #ffd700, 0 0 40px #ffd700; }
+        }
+
+        .title {
+            font-size: 22px;
+            color: #fff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #2d1b69, #1a0b45);
+            padding: 20px 15px;
+            border-radius: 20px;
+            border: 2px solid #ffd700;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,215,0,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .treasure-machine {
+            background: linear-gradient(145deg, #8b4513, #a0522d, #cd853f);
+            border-radius: 30px;
+            padding: 40px 25px;
+            margin-bottom: 30px;
+            box-shadow: 
+                inset 0 0 50px rgba(0,0,0,0.3),
+                0 15px 40px rgba(0,0,0,0.4),
+                0 0 60px rgba(255, 215, 0, 0.2);
+            border: 4px solid #ffd700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .treasure-machine:before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 25px;
+            pointer-events: none;
+        }
+
+        .machine-title {
+            font-family: 'Pirata One', cursive;
+            font-size: 26px;
+            color: #ffd700;
+            margin-bottom: 25px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .attempts-display {
+            background: linear-gradient(145deg, rgba(255,215,0,0.9), rgba(255,215,0,0.7));
+            color: #8b4513;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 16px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .treasure-reels {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 35px;
+            perspective: 1000px;
+        }
+
+        .treasure-reel {
+            width: 85px;
+            height: 130px;
+            background: linear-gradient(145deg, #2c1810, #1a0f0a);
+            border: 4px solid #ffd700;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 
+                inset 0 0 20px rgba(0,0,0,0.5),
+                0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .treasure-reel:before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            pointer-events: none;
+        }
+
+        .reel-strip {
+            position: absolute;
+            width: 100%;
+            transition: transform 0.1s ease;
+        }
+
+        .reel-symbol {
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            background: linear-gradient(145deg, #3a2317, #2c1810);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            position: relative;
+        }
+
+        .reel-symbol:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,215,0,0.1) 0%, transparent 70%);
+        }
+
+        .spin-button {
+            background: linear-gradient(145deg, #ffd700, #ffed4a, #ffd700);
+            color: #8b4513;
+            border: none;
+            padding: 20px 45px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+            box-shadow: 
+                0 8px 25px rgba(255, 215, 0, 0.4),
+                inset 0 1px 0 rgba(255,255,255,0.2),
+                inset 0 -1px 0 rgba(0,0,0,0.2);
+            font-family: 'Cinzel', serif;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spin-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .spin-button:hover:not(:disabled):before {
+            left: 100%;
+        }
+
+        .spin-button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 35px rgba(255, 215, 0, 0.6),
+                inset 0 1px 0 rgba(255,255,255,0.3),
+                inset 0 -1px 0 rgba(0,0,0,0.2);
+        }
+
+        .spin-button:active {
+            transform: translateY(-1px);
+        }
+
+        .spin-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .treasure-result {
+            display: none;
+            background: linear-gradient(145deg, #8b4513, #a0522d);
+            border: 4px solid #ffd700;
+            border-radius: 25px;
+            padding: 30px;
+            margin-top: 25px;
+            box-shadow: 
+                0 15px 40px rgba(0,0,0,0.4),
+                0 0 60px rgba(255, 215, 0, 0.3),
+                inset 0 0 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .treasure-result:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            animation: treasure-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes treasure-glow {
+            0%, 100% { transform: scale(0.8) rotate(0deg); opacity: 0.5; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+        }
+
+        .treasure-result.show {
+            display: block;
+            animation: treasure-reveal 0.8s ease-out;
+        }
+
+        @keyframes treasure-reveal {
+            0% { opacity: 0; transform: scale(0.5) rotateY(90deg); }
+            50% { transform: scale(1.1) rotateY(45deg); }
+            100% { opacity: 1; transform: scale(1) rotateY(0deg); }
+        }
+
+        .result-title {
+            font-family: 'Pirata One', cursive;
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #ffd700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            animation: result-bounce 0.6s ease-out 0.3s both;
+        }
+
+        @keyframes result-bounce {
+            0% { transform: translateY(-30px); opacity: 0; }
+            50% { transform: translateY(5px); }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .result-reward {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            animation: result-bounce 0.6s ease-out 0.5s both;
+        }
+
+        .treasure-code {
+            background: linear-gradient(145deg, #2c1810, #1a0f0a);
+            border: 2px solid #ffd700;
+            padding: 15px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            animation: result-bounce 0.6s ease-out 0.7s both;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: result-bounce 0.6s ease-out 0.9s both;
+        }
+
+        .action-btn {
+            background: linear-gradient(145deg, #4a4a4a, #2c2c2c);
+            color: #ffd700;
+            border: 2px solid #ffd700;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Cinzel', serif;
+        }
+
+        .action-btn:hover {
+            background: linear-gradient(145deg, #ffd700, #ffed4a);
+            color: #2c2c2c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .achievements {
+            background: linear-gradient(145deg, rgba(0,0,0,0.4), rgba(255,255,255,0.1));
+            padding: 25px;
+            border-radius: 20px;
+            border: 2px solid #ffd700;
+            backdrop-filter: blur(10px);
+            margin-bottom: 25px;
+        }
+
+        .achievements h3 {
+            font-family: 'Pirata One', cursive;
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 22px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+        }
+
+        .achievement {
+            background: linear-gradient(145deg, #2d1b69, #1a0b45);
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .achievement.unlocked {
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .achievement-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .achievement-name {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            background: rgba(0,0,0,0.3);
+            height: 8px;
+            border-radius: 4px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #ffd700, #ffed4a);
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .rules {
+            background: linear-gradient(145deg, rgba(0,0,0,0.4), rgba(255,255,255,0.1));
+            padding: 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            text-align: left;
+            font-size: 14px;
+            line-height: 1.8;
+            border: 2px solid #ffd700;
+        }
+
+        .rules h3 {
+            font-family: 'Pirata One', cursive;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 22px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .rules p {
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .spinning .reel-strip {
+            animation: treasure-spin 0.1s linear infinite;
+        }
+
+        @keyframes treasure-spin {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-130px); }
+        }
+
+        .mega-jackpot {
+            animation: mega-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes mega-glow {
+            from {
+                box-shadow: 
+                    0 15px 40px rgba(0,0,0,0.4),
+                    0 0 60px rgba(255, 215, 0, 0.3),
+                    inset 0 0 30px rgba(0,0,0,0.2);
+            }
+            to {
+                box-shadow: 
+                    0 20px 60px rgba(0,0,0,0.6),
+                    0 0 100px rgba(255, 215, 0, 0.8),
+                    inset 0 0 50px rgba(255, 215, 0, 0.1);
+            }
+        }
+
+        /* Coin rain effect */
+        .coin {
+            position: absolute;
+            font-size: 24px;
+            color: #ffd700;
+            animation: coin-fall 3s linear infinite;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes coin-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .treasure-reel {
+                width: 75px;
+                height: 115px;
+            }
+            
+            .reel-symbol {
+                height: 115px;
+                font-size: 28px;
+            }
+            
+            .treasure-machine {
+                padding: 30px 20px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+            
+            .title {
+                font-size: 18px;
+            }
+        }
+
+        /* Sound control */
+        .sound-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #ffd700;
+            border-radius: 50px;
+            padding: 10px 15px;
+            cursor: pointer;
+            color: #ffd700;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .sound-control:hover {
+            background: rgba(255, 215, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-particles" id="particles"></div>
+    
+    <div class="sound-control" onclick="toggleSound()" id="soundControl">
+        🔊
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">🏴‍☠️ PB DAYS: TREASURE VAULT 🏴‍☠️</div>
+            <div class="title">
+                ⚔️ PIRATE'S JACKPOT ADVENTURE ⚔️
+            </div>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number" id="totalSpins">0</div>
+                <div class="stat-label">TREASURE HUNTS</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="jackpotWins">0</div>
+                <div class="stat-label">MEGA JACKPOTS</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalGold">0</div>
+                <div class="stat-label">GOLD EARNED</div>
+            </div>
+        </div>
+
+        <div class="treasure-machine" id="treasureMachine">
+            <div class="machine-title">🏆 LEGENDARY TREASURE MACHINE 🏆</div>
+            
+            <div class="attempts-display" id="attemptsDisplay">
+                ⚡ Treasure Hunts Remaining: <span id="attemptsLeft">5</span>/5 ⚡
+            </div>
+
+            <div class="treasure-reels">
+                <div class="treasure-reel" id="reel1">
+                    <div class="reel-strip" id="strip1"></div>
+                </div>
+                <div class="treasure-reel" id="reel2">
+                    <div class="reel-strip" id="strip2"></div>
+                </div>
+                <div class="treasure-reel" id="reel3">
+                    <div class="reel-strip" id="strip3"></div>
+                </div>
+            </div>
+
+            <button class="spin-button" id="spinButton">
+                ⚔️ HUNT FOR TREASURE ⚔️
+            </button>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+
+            <div class="treasure-result" id="treasureResult">
+                <div class="result-title" id="resultTitle"></div>
+                <div class="result-reward" id="resultReward"></div>
+                <div class="treasure-code" id="treasureCode"></div>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="copyCode()">📋 COPY CODE</button>
+                    <button class="action-btn" onclick="redeemTreasure()">🏪 REDEEM NOW</button>
+                    <button class="action-btn" onclick="shareVictory()">📱 SHARE VICTORY</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="achievements">
+            <h3>🏅 PIRATE ACHIEVEMENTS 🏅</h3>
+            <div class="achievement-grid" id="achievementGrid">
+                <!-- Achievements will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="rules">
+            <h3>⚔️ TREASURE HUNT RULES ⚔️</h3>
+            <p><strong>🏴‍☠️ The Legend:</strong> Ancient pirates buried their greatest treasures in magical slot machines across the seven seas!</p>
+            <p><strong>💎 LEGENDARY TREASURES:</strong></p>
+            <p>• 💰💰💰 = PIRATE KING'S HOARD (50% OFF + 500 Gold)</p>
+            <p>• 💎💎💎 = DIAMOND CROWN (30% OFF + 300 Gold)</p>
+            <p>• 🏆🏆🏆 = GOLDEN CHALICE (25% OFF + 250 Gold)</p>
+            <p>• ⚔️⚔️⚔️ = LEGENDARY SWORD (20% OFF + 200 Gold)</p>
+            <p>• 🗝️🗝️🗝️ = MASTER'S KEY (15% OFF + 150 Gold)</p>
+            <p>• Any 2 Match = TREASURE MAP (10% OFF + 50 Gold)</p>
+            <p>• Different Symbols = COMPASS (5% OFF + 10 Gold)</p>
+            <p><strong>🎯 Daily Quests:</strong> 5 free treasure hunts reset every 24 hours</p>
+            <p><strong>🏅 Achievements:</strong> Unlock special titles and bonus rewards</p>
+            <p><strong>⚡ Power-ups:</strong> Earn mystical abilities for bigger wins</p>
+        </div>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="bgMusic" loop>
+        <source src="data:audio/mpeg;base64,/+MYxAAEaAIEeUAQAgBgNgP/////KQQ/////Lw==" type="audio/mpeg">
+    </audio>
+    <audio id="spinSound">
+        <source src="data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAD/+0DEAAAAAAAAAAAAAAAAAAAAAADwAAA=" type="audio/mpeg">
+    </audio>
+    <audio id="winSound">
+        <source src="data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAD/+0DEAAAAAAAAAAAAAAAAAAAAAADwAAA=" type="audio/mpeg">
+    </audio>
+    <audio id="jackpotSound">
+        <source src="data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAD/+0DEAAAAAAAAAAAAAAAAAAAAAADwAAA=" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Game configuration
+        const treasureSymbols = ['💰', '💎', '🏆', '⚔️', '🗝️', '🏴‍☠️', '⭐', '🎯'];
+        let attemptsRemaining = 5;
+        let isSpinning = false;
+        let soundEnabled = true;
+        let gameStats = {
+            totalSpins: 0,
+            jackpotWins: 0,
+            totalGold: 0,
+            level: 1,
+            experience: 0
+        };
+
+        // Achievement system
+        const achievements = [
+            { id: 'first_spin', name: 'First Hunt', icon: '🏴‍☠️', condition: (stats) => stats.totalSpins >= 1, unlocked: false },
+            { id: 'treasure_hunter', name: 'Treasure Hunter', icon: '🗝️', condition: (stats) => stats.totalSpins >= 10, unlocked: false },
+            { id: 'gold_collector', name: 'Gold Collector', icon: '💰', condition: (stats) => stats.totalGold >= 100, unlocked: false },
+            { id: 'jackpot_master', name: 'Jackpot Master', icon: '💎', condition: (stats) => stats.jackpotWins >= 3, unlocked: false },
+            { id: 'pirate_king', name: 'Pirate King', icon: '👑', condition: (stats) => stats.totalGold >= 1000, unlocked: false },
+            { id: 'legend', name: 'Legendary Pirate', icon: '🏆', condition: (stats) => stats.totalSpins >= 100, unlocked: false }
+        ];
+
+        // Reward system with gold values
+        const treasureRewards = {
+            '💰💰💰': { title: 'PIRATE KING\'S HOARD!', discount: '50% OFF', code: 'KING50', gold: 500, rarity: 'LEGENDARY' },
+            '💎💎💎': { title: 'DIAMOND CROWN!', discount: '30% OFF', code: 'DIAMOND30', gold: 300, rarity: 'EPIC' },
+            '🏆🏆🏆': { title: 'GOLDEN CHALICE!', discount: '25% OFF', code: 'CHALICE25', gold: 250, rarity: 'EPIC' },
+            '⚔️⚔️⚔️': { title: 'LEGENDARY SWORD!', discount: '20% OFF', code: 'SWORD20', gold: 200, rarity: 'RARE' },
+            '🗝️🗝️🗝️': { title: 'MASTER\'S KEY!', discount: '15% OFF', code: 'KEY15', gold: 150, rarity: 'RARE' },
+        };
+
+        // Initialize the game
+        function initTreasureHunt() {
+            loadGameStats();
+            createParticles();
+            createTreasureReels();
+            updateUI();
+            updateAttemptsDisplay();
+            initializeAchievements();
+            startBackgroundMusic();
+            
+            // Update experience progress
+            updateExperienceBar();
+        }
+
+        // Create animated background particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Create treasure reels
+        function createTreasureReels() {
+            for (let i = 1; i <= 3; i++) {
+                const strip = document.getElementById(`strip${i}`);
+                strip.innerHTML = '';
+                
+                // Create multiple sets of symbols for smooth animation
+                for (let j = 0; j < 25; j++) {
+                    treasureSymbols.forEach(symbol => {
+                        const item = document.createElement('div');
+                        item.className = 'reel-symbol';
+                        item.textContent = symbol;
+                        strip.appendChild(item);
+                    });
+                }
+            }
+        }
+
+        // Main spin function
+        async function spinTreasure() {
+            if (isSpinning || attemptsRemaining <= 0) return;
+
+            isSpinning = true;
+            attemptsRemaining--;
+            gameStats.totalSpins++;
+            gameStats.experience += 10;
+
+            // Play spin sound
+            playSound('spinSound');
+
+            // Update UI
+            document.getElementById('spinButton').disabled = true;
+            document.getElementById('spinButton').textContent = '⚔️ HUNTING TREASURE... ⚔️';
+            document.getElementById('treasureResult').classList.remove('show');
+
+            // Add spinning animation with particle effects
+            const reels = document.querySelectorAll('.treasure-reel');
+            reels.forEach(reel => reel.classList.add('spinning'));
+            
+            // Create spinning particle effect
+            createSpinParticles();
+
+            // Generate treasure results
+            const results = [
+                treasureSymbols[Math.floor(Math.random() * treasureSymbols.length)],
+                treasureSymbols[Math.floor(Math.random() * treasureSymbols.length)],
+                treasureSymbols[Math.floor(Math.random() * treasureSymbols.length)]
+            ];
+
+            // Stop reels with dramatic timing
+            const delays = [1200, 1800, 2400];
+            
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    stopTreasureReel(i + 1, results[i]);
+                    if (i === 2) {
+                        setTimeout(() => revealTreasure(results), 600);
+                    }
+                }, delays[i]);
+            }
+
+            updateGameStats();
+            updateAttemptsDisplay();
+            checkAchievements();
+        }
+
+        // Stop individual reel with dramatic effect
+        function stopTreasureReel(reelNumber, symbol) {
+            const reel = document.getElementById(`reel${reelNumber}`);
+            const strip = document.getElementById(`strip${reelNumber}`);
+            
+            reel.classList.remove('spinning');
+            
+            // Find symbol position and align it
+            const items = strip.querySelectorAll('.reel-symbol');
+            const symbolIndex = Array.from(items).findIndex(item => item.textContent === symbol);
+            const offset = -(symbolIndex * 130);
+            
+            strip.style.transform = `translateY(${offset}px)`;
+            
+            // Add dramatic stop effect
+            reel.style.animation = 'treasure-stop 0.3s ease-out';
+            setTimeout(() => {
+                reel.style.animation = '';
+            }, 300);
+        }
+
+        // Reveal treasure with epic effects
+        function revealTreasure(results) {
+            const resultKey = results.join('');
+            let reward, goldEarned = 0;
+
+            // Check for legendary treasures
+            if (treasureRewards[resultKey]) {
+                reward = treasureRewards[resultKey];
+                goldEarned = reward.gold;
+                gameStats.jackpotWins++;
+                
+                // Epic jackpot effects
+                document.getElementById('treasureMachine').classList.add('mega-jackpot');
+                playSound('jackpotSound');
+                createCoinRain();
+                createFireworks();
+            }
+            // Check for two matching symbols
+            else if (results[0] === results[1] || results[1] === results[2] || results[0] === results[2]) {
+                reward = {
+                    title: 'TREASURE MAP FOUND!',
+                    discount: '10% OFF',
+                    code: 'MAP10',
+                    gold: 50,
+                    rarity: 'COMMON'
+                };
+                goldEarned = 50;
+                playSound('winSound');
+            }
+            // Participation reward
+            else {
+                reward = {
+                    title: 'COMPASS DISCOVERED!',
+                    discount: '5% OFF',
+                    code: 'COMPASS5',
+                    gold: 10,
+                    rarity: 'COMMON'
+                };
+                goldEarned = 10;
+                playSound('winSound');
+            }
+
+            // Update gold
+            gameStats.totalGold += goldEarned;
+            gameStats.experience += goldEarned;
+
+            // Generate unique treasure code
+            const timestamp = Date.now().toString().slice(-4);
+            const uniqueCode = reward.code + timestamp;
+
+            // Display treasure result with epic animation
+            document.getElementById('resultTitle').textContent = 
+                `🏴‍☠️ ${reward.title} 🏴‍☠️`;
+            document.getElementById('resultReward').textContent = 
+                `Ye found ${reward.discount} treasure + ${goldEarned} gold doubloons!`;
+            document.getElementById('treasureCode').textContent = uniqueCode;
+            document.getElementById('treasureResult').classList.add('show');
+
+            // Reset spin button with delay for drama
+            setTimeout(() => {
+                isSpinning = false;
+                document.getElementById('spinButton').disabled = attemptsRemaining <= 0;
+                document.getElementById('spinButton').textContent = 
+                    attemptsRemaining > 0 ? '⚔️ HUNT FOR TREASURE ⚔️' : '🚫 COME BACK TOMORROW! 🚫';
+                
+                // Remove mega jackpot effect
+                setTimeout(() => {
+                    document.getElementById('treasureMachine').classList.remove('mega-jackpot');
+                }, 3000);
+            }, 1500);
+
+            saveGameStats();
+            updateExperienceBar();
+        }
+
+        // Create coin rain effect for big wins
+        function createCoinRain() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const coin = document.createElement('div');
+                    coin.className = 'coin';
+                    coin.textContent = '🪙';
+                    coin.style.left = Math.random() * 100 + '%';
+                    coin.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(coin);
+                    
+                    setTimeout(() => coin.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        // Create fireworks effect
+        function createFireworks() {
+            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4'];
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.style.position = 'fixed';
+                    firework.style.left = Math.random() * 100 + '%';
+                    firework.style.top = Math.random() * 50 + '%';
+                    firework.style.width = '4px';
+                    firework.style.height = '4px';
+                    firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    firework.style.borderRadius = '50%';
+                    firework.style.animation = 'firework 1s ease-out forwards';
+                    firework.style.zIndex = '1000';
+                    document.body.appendChild(firework);
+                    
+                    setTimeout(() => firework.remove(), 1000);
+                }, i * 150);
+            }
+        }
+
+        // Create spin particles
+        function createSpinParticles() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.textContent = ['✨', '⭐', '💫'][Math.floor(Math.random() * 3)];
+                    particle.style.position = 'absolute';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.fontSize = '20px';
+                    particle.style.pointerEvents = 'none';
+                    particle.style.animation = 'particle-burst 1s ease-out forwards';
+                    document.getElementById('treasureMachine').appendChild(particle);
+                    
+                    setTimeout(() => particle.remove(), 1000);
+                }, i * 50);
+            }
+        }
+
+        // Initialize achievements
+        function initializeAchievements() {
+            const grid = document.getElementById('achievementGrid');
+            achievements.forEach(achievement => {
+                const div = document.createElement('div');
+                div.className = `achievement ${achievement.unlocked ? 'unlocked' : ''}`;
+                div.innerHTML = `
+                    <div class="achievement-icon">${achievement.icon}</div>
+                    <div class="achievement-name">${achievement.name}</div>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        // Check and unlock achievements
+        function checkAchievements() {
+            let newUnlocks = 0;
+            achievements.forEach((achievement, index) => {
+                if (!achievement.unlocked && achievement.condition(gameStats)) {
+                    achievement.unlocked = true;
+                    newUnlocks++;
+                    
+                    // Update UI
+                    const achievementElement = document.querySelectorAll('.achievement')[index];
+                    achievementElement.classList.add('unlocked');
+                    
+                    // Show achievement notification
+                    setTimeout(() => {
+                        showAchievementNotification(achievement);
+                    }, 1000);
+                }
+            });
+            
+            if (newUnlocks > 0) {
+                playSound('winSound');
+            }
+        }
+
+        // Show achievement notification
+        function showAchievementNotification(achievement) {
+            const notification = document.createElement('div');
+            notification.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: linear-gradient(145deg, #8b4513, #a0522d);
+                    border: 3px solid #ffd700;
+                    border-radius: 20px;
+                    padding: 20px;
+                    text-align: center;
+                    z-index: 10000;
+                    box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+                    animation: achievement-popup 3s ease-out forwards;
+                ">
+                    <div style="font-size: 32px; margin-bottom: 10px;">${achievement.icon}</div>
+                    <div style="font-family: 'Pirata One', cursive; color: #ffd700; font-size: 18px; margin-bottom: 5px;">ACHIEVEMENT UNLOCKED!</div>
+                    <div style="color: white; font-weight: bold;">${achievement.name}</div>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        // Update experience bar
+        function updateExperienceBar() {
+            const levelThreshold = gameStats.level * 100;
+            const progress = (gameStats.experience % 100) / 100 * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            
+            // Level up check
+            if (gameStats.experience >= levelThreshold) {
+                gameStats.level++;
+                showLevelUpNotification();
+            }
+        }
+
+        // Show level up notification
+        function showLevelUpNotification() {
+            const notification = document.createElement('div');
+            notification.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 20%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(145deg, #4a4a4a, #2c2c2c);
+                    border: 3px solid #ffd700;
+                    border-radius: 15px;
+                    padding: 20px;
+                    text-align: center;
+                    z-index: 10000;
+                    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+                    animation: level-up 3s ease-out forwards;
+                ">
+                    <div style="font-size: 28px; margin-bottom: 10px;">🎉</div>
+                    <div style="color: #ffd700; font-size: 16px; font-weight: bold;">LEVEL UP!</div>
+                    <div style="color: white;">Level ${gameStats.level}</div>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        // Update attempts display
+        function updateAttemptsDisplay() {
+            const attemptsElement = document.getElementById('attemptsLeft');
+            attemptsElement.textContent = attemptsRemaining;
+            
+            if (attemptsRemaining <= 0) {
+                document.getElementById('attemptsDisplay').innerHTML = 
+                    '🚫 <strong>All treasure hunts complete!</strong> Return tomorrow, matey! 🚫';
+                document.getElementById('attemptsDisplay').style.background = 
+                    'linear-gradient(145deg, rgba(255, 82, 82, 0.9), rgba(255, 82, 82, 0.7))';
+            }
+        }
+
+        // Update game statistics
+        function updateGameStats() {
+            document.getElementById('totalSpins').textContent = gameStats.totalSpins;
+            document.getElementById('jackpotWins').textContent = gameStats.jackpotWins;
+            document.getElementById('totalGold').textContent = gameStats.totalGold;
+        }
+
+        // Load game stats from localStorage
+        function loadGameStats() {
+            const savedStats = localStorage.getItem('pbTreasureStats');
+            const savedAttempts = localStorage.getItem('pbTreasureAttempts');
+            const lastPlayDate = localStorage.getItem('pbTreasureDate');
+            const savedAchievements = localStorage.getItem('pbTreasureAchievements');
+            const today = new Date().toDateString();
+
+            if (savedStats) {
+                gameStats = JSON.parse(savedStats);
+            }
+
+            if (savedAchievements) {
+                const savedAchievementStates = JSON.parse(savedAchievements);
+                achievements.forEach((achievement, index) => {
+                    if (savedAchievementStates[index]) {
+                        achievement.unlocked = savedAchievementStates[index].unlocked;
+                    }
+                });
+            }
+
+            // Reset attempts daily
+            if (lastPlayDate !== today) {
+                attemptsRemaining = 5;
+                localStorage.setItem('pbTreasureDate', today);
+            } else if (savedAttempts) {
+                attemptsRemaining = parseInt(savedAttempts);
+            }
+        }
+
+        // Save game stats to localStorage
+        function saveGameStats() {
+            localStorage.setItem('pbTreasureStats', JSON.stringify(gameStats));
+            localStorage.setItem('pbTreasureAttempts', attemptsRemaining.toString());
+            localStorage.setItem('pbTreasureAchievements', JSON.stringify(achievements));
+        }
+
+        // Audio functions
+        function playSound(soundId) {
+            if (soundEnabled) {
+                const audio = document.getElementById(soundId);
+                if (audio) {
+                    audio.currentTime = 0;
+                    audio.play().catch(() => {});
+                }
+            }
+        }
+
+        function startBackgroundMusic() {
+            if (soundEnabled) {
+                const bgMusic = document.getElementById('bgMusic');
+                bgMusic.volume = 0.3;
+                bgMusic.play().catch(() => {});
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const control = document.getElementById('soundControl');
+            const bgMusic = document.getElementById('bgMusic');
+            
+            if (soundEnabled) {
+                control.textContent = '🔊';
+                bgMusic.play().catch(() => {});
+            } else {
+                control.textContent = '🔇';
+                bgMusic.pause();
+            }
+        }
+
+        // Action functions
+        function copyCode() {
+            const code = document.getElementById('treasureCode').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ COPIED!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        function redeemTreasure() {
+            window.open('https://pinkblue.in', '_blank');
+        }
+
+        function shareVictory() {
+            const code = document.getElementById('treasureCode').textContent;
+            const text = `🏴‍☠️ Ahoy! I just struck treasure in PB DAYS! Use me code ${code} for dental supplies booty! ⚔️💰`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'PB DAYS Treasure Hunt Victory!',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(text);
+                alert('Victory message copied to clipboard, matey!');
+            }
+        }
+
+        // Event listeners
+        document.getElementById('spinButton').addEventListener('click', spinTreasure);
+
+        // Add custom CSS animations
+        const customStyles = document.createElement('style');
+        customStyles.textContent = `
+            @keyframes treasure-stop {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+            
+            @keyframes particle-burst {
+                0% { opacity: 1; transform: scale(0) rotate(0deg); }
+                50% { opacity: 1; transform: scale(1) rotate(180deg); }
+                100% { opacity: 0; transform: scale(0) rotate(360deg); }
+            }
+            
+            @keyframes firework {
+                0% { opacity: 1; transform: scale(0); }
+                50% { opacity: 1; transform: scale(1); }
+                100% { opacity: 0; transform: scale(2); }
+            }
+            
+            @keyframes achievement-popup {
+                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+                20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+                30% { transform: translate(-50%, -50%) scale(1); }
+                100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            }
+            
+            @keyframes level-up {
+                0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+                20% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            }
+        `;
+        document.head.appendChild(customStyles);
+
+        // Initialize the treasure hunt
+        window.addEventListener('load', initTreasureHunt);
+
+        // Add click particle effects
+        document.addEventListener('click', function(e) {
+            const sparkles = ['✨', '⭐', '💫', '🌟'];
+            const sparkle = sparkles[Math.floor(Math.random() * sparkles.length)];
+            const span = document.createElement('span');
+            span.textContent = sparkle;
+            span.style.position = 'absolute';
+            span.style.left = e.pageX + 'px';
+            span.style.top = e.pageY + 'px';
+            span.style.fontSize = '16px';
+            span.style.pointerEvents = 'none';
+            span.style.animation = 'sparkle-burst 0.8s ease-out forwards';
+            span.style.zIndex = '1000';
+            document.body.appendChild(span);
+            
+            setTimeout(() => span.remove(), 800);
+        });
+
+        // Final sparkle animation
+        const sparkleStyle = document.createElement('style');
+        sparkleStyle.textContent = `
+            @keyframes sparkle-burst {
+                0% { opacity: 1; transform: scale(0) rotate(0deg); }
+                50% { opacity: 1; transform: scale(1.5) rotate(180deg); }
+                100% { opacity: 0; transform: scale(0) rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(sparkleStyle);
+    </script>
+</body>
+</html>
