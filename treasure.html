@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PB DAYS: TREASURE HUNT JACKPOT</title>
+    <title>PB DAYS: TREASURE ISLAND ADVENTURE</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Fredoka:wght@300;400;600;700&display=swap');
         
         * {
             margin: 0;
@@ -14,36 +14,137 @@
         }
 
         body {
-            font-family: 'Cinzel', serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 100%);
-            color: #fff;
+            font-family: 'Fredoka', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 30%, #87ceeb 70%, #ffd89b 100%);
+            color: #2c3e50;
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
         }
 
-        /* Animated background particles */
-        .bg-particles {
-            position: absolute;
+        /* Animated treasure island background */
+        .island-background {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            pointer-events: none;
+            height: 100vh;
+            background: 
+                /* Moon */
+                radial-gradient(circle at 85% 15%, #fff8dc 80px, transparent 80px),
+                /* Stars */
+                radial-gradient(circle at 20% 20%, #fff 2px, transparent 2px),
+                radial-gradient(circle at 80% 30%, #fff 1px, transparent 1px),
+                radial-gradient(circle at 60% 10%, #fff 1.5px, transparent 1.5px),
+                radial-gradient(circle at 30% 25%, #fff 1px, transparent 1px),
+                radial-gradient(circle at 90% 40%, #fff 2px, transparent 2px),
+                /* Water waves */
+                linear-gradient(180deg, transparent 60%, #4a90e2 60%, #357abd 70%, #2e8b57 80%, #228b22 100%);
+            z-index: -2;
+            animation: twinkle 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        /* Floating boats */
+        .boat {
+            position: absolute;
+            font-size: 40px;
+            animation: float-boat 8s ease-in-out infinite;
             z-index: -1;
         }
 
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, #ffd700 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-            opacity: 0.7;
+        .boat:nth-child(1) {
+            top: 70%;
+            left: -10%;
+            animation-delay: 0s;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+        .boat:nth-child(2) {
+            top: 75%;
+            right: -15%;
+            animation-delay: 4s;
+            animation-direction: reverse;
+        }
+
+        @keyframes float-boat {
+            0%, 100% {
+                transform: translateX(0) translateY(0) rotate(-2deg);
+            }
+            25% {
+                transform: translateX(20vw) translateY(-10px) rotate(1deg);
+            }
+            50% {
+                transform: translateX(40vw) translateY(-5px) rotate(-1deg);
+            }
+            75% {
+                transform: translateX(60vw) translateY(-8px) rotate(2deg);
+            }
+        }
+
+        /* Water ripples */
+        .water-ripples {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(74, 144, 226, 0.1) 20px,
+                    rgba(74, 144, 226, 0.3) 40px,
+                    rgba(74, 144, 226, 0.1) 60px,
+                    transparent 80px
+                );
+            animation: wave-motion 6s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes wave-motion {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-20px); }
+        }
+
+        /* Palm trees */
+        .palm-tree {
+            position: absolute;
+            font-size: 60px;
+            z-index: -1;
+        }
+
+        .palm-tree:nth-child(1) {
+            top: 50%;
+            left: 5%;
+            animation: sway 4s ease-in-out infinite;
+        }
+
+        .palm-tree:nth-child(2) {
+            top: 45%;
+            right: 8%;
+            animation: sway 4s ease-in-out infinite reverse;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        /* Treasure particles */
+        .treasure-particle {
+            position: absolute;
+            animation: float-treasure 4s ease-in-out infinite;
+            font-size: 20px;
+            z-index: 1;
+        }
+
+        @keyframes float-treasure {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(-15px) rotate(180deg); opacity: 1; }
         }
 
         .container {
@@ -57,11 +158,11 @@
 
         .header {
             margin-bottom: 30px;
-            background: linear-gradient(145deg, rgba(0,0,0,0.3), rgba(255,255,255,0.1));
+            background: rgba(255, 255, 255, 0.95);
             padding: 25px;
             border-radius: 25px;
-            border: 2px solid #ffd700;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            border: 3px solid #ff6b35;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
             backdrop-filter: blur(10px);
         }
 
@@ -69,20 +170,20 @@
             font-family: 'Pirata One', cursive;
             font-size: 28px;
             font-weight: bold;
-            color: #ffd700;
+            color: #ff6b35;
             margin-bottom: 10px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
-            animation: glow 2s ease-in-out infinite alternate;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: logo-glow 2s ease-in-out infinite alternate;
         }
 
-        @keyframes glow {
-            from { text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 20px #ffd700; }
-            to { text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 30px #ffd700, 0 0 40px #ffd700; }
+        @keyframes logo-glow {
+            from { color: #ff6b35; }
+            to { color: #ff8c42; }
         }
 
         .title {
-            font-size: 22px;
-            color: #fff;
+            font-size: 20px;
+            color: #2c3e50;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -99,101 +200,87 @@
         }
 
         .stat-card {
-            background: linear-gradient(145deg, #2d1b69, #1a0b45);
+            background: linear-gradient(145deg, #fff 0%, #f8f9fa 100%);
             padding: 20px 15px;
             border-radius: 20px;
-            border: 2px solid #ffd700;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border: 2px solid #28a745;
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.2);
             transition: transform 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .stat-card:before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,215,0,0.1), transparent);
-            transform: rotate(45deg);
-            animation: shine 3s ease-in-out infinite;
-        }
-
-        @keyframes shine {
-            0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
         .stat-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(40, 167, 69, 0.3);
         }
 
         .stat-number {
             font-size: 24px;
             font-weight: 700;
-            color: #ffd700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: #28a745;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .stat-label {
             font-size: 12px;
-            opacity: 0.9;
+            color: #6c757d;
             margin-top: 5px;
             font-weight: 600;
         }
 
         .treasure-machine {
-            background: linear-gradient(145deg, #8b4513, #a0522d, #cd853f);
+            background: linear-gradient(145deg, #fff8dc, #f5deb3, #daa520);
             border-radius: 30px;
             padding: 40px 25px;
             margin-bottom: 30px;
             box-shadow: 
-                inset 0 0 50px rgba(0,0,0,0.3),
-                0 15px 40px rgba(0,0,0,0.4),
-                0 0 60px rgba(255, 215, 0, 0.2);
-            border: 4px solid #ffd700;
+                0 15px 40px rgba(218, 165, 32, 0.3),
+                inset 0 2px 10px rgba(255, 255, 255, 0.3);
+            border: 4px solid #ff6b35;
             position: relative;
             overflow: hidden;
         }
 
-        .treasure-machine:before {
-            content: '';
+        .treasure-machine::before {
+            content: '🏝️';
             position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            border: 2px solid rgba(255, 215, 0, 0.5);
-            border-radius: 25px;
-            pointer-events: none;
+            top: -20px;
+            right: -20px;
+            font-size: 100px;
+            opacity: 0.1;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .machine-title {
             font-family: 'Pirata One', cursive;
             font-size: 26px;
-            color: #ffd700;
+            color: #d2691e;
             margin-bottom: 25px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
-            animation: pulse 2s ease-in-out infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: bounce 2s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
         .attempts-display {
-            background: linear-gradient(145deg, rgba(255,215,0,0.9), rgba(255,215,0,0.7));
-            color: #8b4513;
+            background: linear-gradient(145deg, #28a745, #20c997);
+            color: white;
             padding: 15px;
             border-radius: 15px;
             margin-bottom: 25px;
             font-weight: 700;
             font-size: 16px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
         }
 
         .treasure-reels {
@@ -207,26 +294,14 @@
         .treasure-reel {
             width: 85px;
             height: 130px;
-            background: linear-gradient(145deg, #2c1810, #1a0f0a);
-            border: 4px solid #ffd700;
+            background: linear-gradient(145deg, #fff, #f8f9fa);
+            border: 4px solid #007bff;
             border-radius: 15px;
             overflow: hidden;
             position: relative;
             box-shadow: 
-                inset 0 0 20px rgba(0,0,0,0.5),
-                0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .treasure-reel:before {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            right: 2px;
-            bottom: 2px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 10px;
-            pointer-events: none;
+                0 8px 20px rgba(0, 123, 255, 0.3),
+                inset 0 2px 5px rgba(255, 255, 255, 0.5);
         }
 
         .reel-strip {
@@ -241,24 +316,13 @@
             align-items: center;
             justify-content: center;
             font-size: 32px;
-            background: linear-gradient(145deg, #3a2317, #2c1810);
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-            position: relative;
-        }
-
-        .reel-symbol:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, rgba(255,215,0,0.1) 0%, transparent 70%);
+            background: linear-gradient(145deg, #fff, #f8f9fa);
+            border-bottom: 1px solid rgba(0, 123, 255, 0.2);
         }
 
         .spin-button {
-            background: linear-gradient(145deg, #ffd700, #ffed4a, #ffd700);
-            color: #8b4513;
+            background: linear-gradient(145deg, #ff6b35, #ff8c42);
+            color: white;
             border: none;
             padding: 20px 45px;
             font-size: 20px;
@@ -268,77 +332,32 @@
             transition: all 0.3s ease;
             margin-bottom: 25px;
             box-shadow: 
-                0 8px 25px rgba(255, 215, 0, 0.4),
-                inset 0 1px 0 rgba(255,255,255,0.2),
-                inset 0 -1px 0 rgba(0,0,0,0.2);
-            font-family: 'Cinzel', serif;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .spin-button:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .spin-button:hover:not(:disabled):before {
-            left: 100%;
+                0 8px 25px rgba(255, 107, 53, 0.4),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+            font-family: 'Fredoka', sans-serif;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .spin-button:hover:not(:disabled) {
             transform: translateY(-3px);
-            box-shadow: 
-                0 12px 35px rgba(255, 215, 0, 0.6),
-                inset 0 1px 0 rgba(255,255,255,0.3),
-                inset 0 -1px 0 rgba(0,0,0,0.2);
-        }
-
-        .spin-button:active {
-            transform: translateY(-1px);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.6);
+            background: linear-gradient(145deg, #ff8c42, #ffa726);
         }
 
         .spin-button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
-            transform: none;
         }
 
         .treasure-result {
             display: none;
-            background: linear-gradient(145deg, #8b4513, #a0522d);
-            border: 4px solid #ffd700;
+            background: linear-gradient(145deg, #fff, #f8f9fa);
+            border: 4px solid #28a745;
             border-radius: 25px;
             padding: 30px;
             margin-top: 25px;
-            box-shadow: 
-                0 15px 40px rgba(0,0,0,0.4),
-                0 0 60px rgba(255, 215, 0, 0.3),
-                inset 0 0 30px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .treasure-result:before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
-            animation: treasure-glow 3s ease-in-out infinite;
-        }
-
-        @keyframes treasure-glow {
-            0%, 100% { transform: scale(0.8) rotate(0deg); opacity: 0.5; }
-            50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+            box-shadow: 0 15px 40px rgba(40, 167, 69, 0.3);
+            color: #2c3e50;
         }
 
         .treasure-result.show {
@@ -347,47 +366,36 @@
         }
 
         @keyframes treasure-reveal {
-            0% { opacity: 0; transform: scale(0.5) rotateY(90deg); }
-            50% { transform: scale(1.1) rotateY(45deg); }
+            0% { opacity: 0; transform: scale(0.8) rotateY(90deg); }
             100% { opacity: 1; transform: scale(1) rotateY(0deg); }
         }
 
         .result-title {
             font-family: 'Pirata One', cursive;
-            font-size: 26px;
-            font-weight: bold;
+            font-size: 24px;
+            color: #28a745;
             margin-bottom: 15px;
-            color: #ffd700;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
-            animation: result-bounce 0.6s ease-out 0.3s both;
-        }
-
-        @keyframes result-bounce {
-            0% { transform: translateY(-30px); opacity: 0; }
-            50% { transform: translateY(5px); }
-            100% { transform: translateY(0); opacity: 1; }
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
 
         .result-reward {
-            font-size: 18px;
+            font-size: 16px;
             margin-bottom: 20px;
+            color: #495057;
             font-weight: 600;
-            animation: result-bounce 0.6s ease-out 0.5s both;
         }
 
         .treasure-code {
-            background: linear-gradient(145deg, #2c1810, #1a0f0a);
-            border: 2px solid #ffd700;
+            background: linear-gradient(145deg, #007bff, #0056b3);
+            color: white;
             padding: 15px;
             border-radius: 12px;
             font-family: 'Courier New', monospace;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
-            color: #ffd700;
             margin-bottom: 20px;
-            letter-spacing: 3px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
-            animation: result-bounce 0.6s ease-out 0.7s both;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .action-buttons {
@@ -395,44 +403,41 @@
             gap: 12px;
             justify-content: center;
             flex-wrap: wrap;
-            animation: result-bounce 0.6s ease-out 0.9s both;
         }
 
         .action-btn {
-            background: linear-gradient(145deg, #4a4a4a, #2c2c2c);
-            color: #ffd700;
-            border: 2px solid #ffd700;
+            background: linear-gradient(145deg, #6c5ce7, #a29bfe);
+            color: white;
+            border: none;
             padding: 12px 20px;
             border-radius: 25px;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
             transition: all 0.3s ease;
-            font-family: 'Cinzel', serif;
+            font-family: 'Fredoka', sans-serif;
         }
 
         .action-btn:hover {
-            background: linear-gradient(145deg, #ffd700, #ffed4a);
-            color: #2c2c2c;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
         }
 
         .achievements {
-            background: linear-gradient(145deg, rgba(0,0,0,0.4), rgba(255,255,255,0.1));
+            background: rgba(255, 255, 255, 0.95);
             padding: 25px;
             border-radius: 20px;
-            border: 2px solid #ffd700;
+            border: 3px solid #ffc107;
             backdrop-filter: blur(10px);
             margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.3);
         }
 
         .achievements h3 {
             font-family: 'Pirata One', cursive;
-            color: #ffd700;
+            color: #e67e22;
             margin-bottom: 20px;
             font-size: 22px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .achievement-grid {
@@ -442,17 +447,18 @@
         }
 
         .achievement {
-            background: linear-gradient(145deg, #2d1b69, #1a0b45);
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
             padding: 15px;
             border-radius: 15px;
-            border: 2px solid transparent;
+            border: 2px solid #dee2e6;
             transition: all 0.3s ease;
             text-align: center;
         }
 
         .achievement.unlocked {
-            border-color: #ffd700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            border-color: #28a745;
+            background: linear-gradient(145deg, #d4edda, #c3e6cb);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.2);
         }
 
         .achievement-icon {
@@ -463,47 +469,44 @@
         .achievement-name {
             font-size: 12px;
             font-weight: 600;
+            color: #495057;
         }
 
         .progress-bar {
-            background: rgba(0,0,0,0.3);
-            height: 8px;
-            border-radius: 4px;
+            background: rgba(0,0,0,0.1);
+            height: 10px;
+            border-radius: 5px;
             margin: 10px 0;
             overflow: hidden;
         }
 
         .progress-fill {
-            background: linear-gradient(90deg, #ffd700, #ffed4a);
+            background: linear-gradient(90deg, #28a745, #20c997);
             height: 100%;
-            border-radius: 4px;
+            border-radius: 5px;
             transition: width 0.5s ease;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
         }
 
         .rules {
-            background: linear-gradient(145deg, rgba(0,0,0,0.4), rgba(255,255,255,0.1));
+            background: rgba(255, 255, 255, 0.95);
             padding: 25px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
             text-align: left;
             font-size: 14px;
-            line-height: 1.8;
-            border: 2px solid #ffd700;
+            line-height: 1.6;
+            border: 3px solid #17a2b8;
+            box-shadow: 0 10px 30px rgba(23, 162, 184, 0.3);
+            color: #2c3e50;
         }
 
         .rules h3 {
             font-family: 'Pirata One', cursive;
-            color: #ffd700;
+            color: #17a2b8;
             margin-bottom: 20px;
             text-align: center;
             font-size: 22px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .rules p {
-            margin-bottom: 10px;
-            font-weight: 500;
         }
 
         .spinning .reel-strip {
@@ -516,131 +519,116 @@
         }
 
         .mega-jackpot {
-            animation: mega-glow 2s ease-in-out infinite alternate;
+            animation: mega-celebration 2s ease-in-out infinite alternate;
         }
 
-        @keyframes mega-glow {
+        @keyframes mega-celebration {
             from {
-                box-shadow: 
-                    0 15px 40px rgba(0,0,0,0.4),
-                    0 0 60px rgba(255, 215, 0, 0.3),
-                    inset 0 0 30px rgba(0,0,0,0.2);
+                box-shadow: 0 15px 40px rgba(218, 165, 32, 0.3);
+                transform: scale(1);
             }
             to {
-                box-shadow: 
-                    0 20px 60px rgba(0,0,0,0.6),
-                    0 0 100px rgba(255, 215, 0, 0.8),
-                    inset 0 0 50px rgba(255, 215, 0, 0.1);
+                box-shadow: 0 20px 60px rgba(255, 215, 0, 0.8);
+                transform: scale(1.02);
             }
         }
 
-        /* Coin rain effect */
-        .coin {
-            position: absolute;
-            font-size: 24px;
-            color: #ffd700;
-            animation: coin-fall 3s linear infinite;
+        /* Confetti effect */
+        .confetti {
+            position: fixed;
+            font-size: 20px;
+            animation: confetti-fall 3s linear infinite;
             pointer-events: none;
             z-index: 1000;
         }
 
-        @keyframes coin-fall {
+        @keyframes confetti-fall {
             0% {
-                transform: translateY(-100px) rotate(0deg);
+                transform: translateY(-100vh) rotate(0deg);
                 opacity: 1;
             }
             100% {
-                transform: translateY(100vh) rotate(360deg);
+                transform: translateY(100vh) rotate(720deg);
                 opacity: 0;
             }
         }
 
-        /* Responsive design */
-        @media (max-width: 480px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .treasure-reel {
-                width: 75px;
-                height: 115px;
-            }
-            
-            .reel-symbol {
-                height: 115px;
-                font-size: 28px;
-            }
-            
-            .treasure-machine {
-                padding: 30px 20px;
-            }
-            
-            .logo {
-                font-size: 24px;
-            }
-            
-            .title {
-                font-size: 18px;
-            }
-        }
-
-        /* Sound control */
         .sound-control {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(0,0,0,0.7);
-            border: 2px solid #ffd700;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ff6b35;
             border-radius: 50px;
             padding: 10px 15px;
             cursor: pointer;
-            color: #ffd700;
+            color: #ff6b35;
             font-size: 18px;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
             z-index: 1000;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
         }
 
         .sound-control:hover {
-            background: rgba(255, 215, 0, 0.2);
+            background: rgba(255, 107, 53, 0.1);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 15px; }
+            .treasure-reel { width: 75px; height: 115px; }
+            .reel-symbol { height: 115px; font-size: 28px; }
+            .treasure-machine { padding: 30px 20px; }
+            .logo { font-size: 24px; }
+            .title { font-size: 18px; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-particles" id="particles"></div>
+    <!-- Animated background -->
+    <div class="island-background"></div>
+    <div class="water-ripples"></div>
     
-    <div class="sound-control" onclick="toggleSound()" id="soundControl">
-        🔊
-    </div>
+    <!-- Boats -->
+    <div class="boat">⛵</div>
+    <div class="boat">🚢</div>
+    
+    <!-- Palm trees -->
+    <div class="palm-tree">🌴</div>
+    <div class="palm-tree">🌴</div>
+    
+    <!-- Sound control -->
+    <div class="sound-control" onclick="toggleSound()" id="soundControl">🔊</div>
 
     <div class="container">
         <div class="header">
-            <div class="logo">🏴‍☠️ PB DAYS: TREASURE VAULT 🏴‍☠️</div>
+            <div class="logo">🏴‍☠️ PB DAYS: TREASURE ISLAND 🏝️</div>
             <div class="title">
-                ⚔️ PIRATE'S JACKPOT ADVENTURE ⚔️
+                ⚔️ CAPTAIN'S JACKPOT ADVENTURE ⚔️
             </div>
         </div>
 
         <div class="stats-container">
             <div class="stat-card">
                 <div class="stat-number" id="totalSpins">0</div>
-                <div class="stat-label">TREASURE HUNTS</div>
+                <div class="stat-label">ADVENTURES</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="jackpotWins">0</div>
-                <div class="stat-label">MEGA JACKPOTS</div>
+                <div class="stat-label">BIG WINS</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="totalGold">0</div>
-                <div class="stat-label">GOLD EARNED</div>
+                <div class="stat-label">TREASURE COINS</div>
             </div>
         </div>
 
         <div class="treasure-machine" id="treasureMachine">
-            <div class="machine-title">🏆 LEGENDARY TREASURE MACHINE 🏆</div>
+            <div class="machine-title">🏆 MAGICAL TREASURE CHEST 🏆</div>
             
             <div class="attempts-display" id="attemptsDisplay">
-                ⚡ Treasure Hunts Remaining: <span id="attemptsLeft">5</span>/5 ⚡
+                🎯 Adventures Remaining: <span id="attemptsLeft">5</span>/5 🎯
             </div>
 
             <div class="treasure-reels">
@@ -656,7 +644,7 @@
             </div>
 
             <button class="spin-button" id="spinButton">
-                ⚔️ HUNT FOR TREASURE ⚔️
+                🎮 START ADVENTURE 🎮
             </button>
 
             <div class="progress-bar">
@@ -669,48 +657,47 @@
                 <div class="treasure-code" id="treasureCode"></div>
                 <div class="action-buttons">
                     <button class="action-btn" onclick="copyCode()">📋 COPY CODE</button>
-                    <button class="action-btn" onclick="redeemTreasure()">🏪 REDEEM NOW</button>
-                    <button class="action-btn" onclick="shareVictory()">📱 SHARE VICTORY</button>
+                    <button class="action-btn" onclick="redeemTreasure()">🛒 SHOP NOW</button>
+                    <button class="action-btn" onclick="shareVictory()">📱 SHARE WIN</button>
                 </div>
             </div>
         </div>
 
         <div class="achievements">
-            <h3>🏅 PIRATE ACHIEVEMENTS 🏅</h3>
-            <div class="achievement-grid" id="achievementGrid">
-                <!-- Achievements will be populated by JavaScript -->
-            </div>
+            <h3>🏅 TREASURE HUNTER BADGES 🏅</h3>
+            <div class="achievement-grid" id="achievementGrid"></div>
         </div>
 
         <div class="rules">
-            <h3>⚔️ TREASURE HUNT RULES ⚔️</h3>
-            <p><strong>🏴‍☠️ The Legend:</strong> Ancient pirates buried their greatest treasures in magical slot machines across the seven seas!</p>
+            <h3>🗺️ TREASURE ISLAND GUIDE 🗺️</h3>
+            <p><strong>🏝️ Welcome to Treasure Island!</strong> Find ancient treasures and win amazing rewards!</p>
             <p><strong>💎 LEGENDARY TREASURES:</strong></p>
-            <p>• 💰💰💰 = PIRATE KING'S HOARD (50% OFF + 500 Gold)</p>
-            <p>• 💎💎💎 = DIAMOND CROWN (30% OFF + 300 Gold)</p>
-            <p>• 🏆🏆🏆 = GOLDEN CHALICE (25% OFF + 250 Gold)</p>
-            <p>• ⚔️⚔️⚔️ = LEGENDARY SWORD (20% OFF + 200 Gold)</p>
-            <p>• 🗝️🗝️🗝️ = MASTER'S KEY (15% OFF + 150 Gold)</p>
-            <p>• Any 2 Match = TREASURE MAP (10% OFF + 50 Gold)</p>
-            <p>• Different Symbols = COMPASS (5% OFF + 10 Gold)</p>
-            <p><strong>🎯 Daily Quests:</strong> 5 free treasure hunts reset every 24 hours</p>
-            <p><strong>🏅 Achievements:</strong> Unlock special titles and bonus rewards</p>
-            <p><strong>⚡ Power-ups:</strong> Earn mystical abilities for bigger wins</p>
+            <p>• 💰💰💰 = CAPTAIN'S VAULT (50% OFF + 500 Coins)</p>
+            <p>• 💎💎💎 = DIAMOND TREASURE (30% OFF + 300 Coins)</p>
+            <p>• 🏆🏆🏆 = GOLDEN TROPHY (25% OFF + 250 Coins)</p>
+            <p>• ⚔️⚔️⚔️ = PIRATE'S SWORD (20% OFF + 200 Coins)</p>
+            <p>• 🗝️🗝️🗝️ = MAGIC KEY (15% OFF + 150 Coins)</p>
+            <p>• Any 2 Match = TREASURE MAP (10% OFF + 50 Coins)</p>
+            <p>• Different = COMPASS (5% OFF + 10 Coins)</p>
+            <p><strong>🎯 Daily Adventures:</strong> 5 free spins every day</p>
+            <p><strong>🏅 Collect Badges:</strong> Unlock special achievements</p>
+            <p><strong>⚡ Level Up:</strong> Gain experience and unlock bonuses</p>
         </div>
     </div>
 
-    <!-- Audio elements -->
-    <audio id="bgMusic" loop>
-        <source src="data:audio/mpeg;base64,/+MYxAAEaAIEeUAQAgBgNgP/////KQQ/////Lw==" type="audio/mpeg">
+    <!-- Working audio with real sound effects -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
+        <source src="https://freesound.org/data/previews/316/316847_4939433-lq.mp3" type="audio/mpeg">
     </audio>
-    <audio id="spinSound">
-        <source src="data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAD/+0DEAAAAAAAAAAAAAAAAAAAAAADwAAA=" type="audio/mpeg">
+    <audio id="spinSound" preload="auto">
+        <source src="https://freesound.org/data/previews/341/341695_5123451-lq.mp3" type="audio/mpeg">
     </audio>
-    <audio id="winSound">
-        <source src="data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAD/+0DEAAAAAAAAAAAAAAAAAAAAAADwAAA=" type="audio/mpeg">
+    <audio id="winSound" preload="auto">
+        <source src="https://freesound.org/data/previews/171/171671_2437358-lq.mp3" type="audio/mpeg">
     </audio>
-    <audio id="jackpotSound">
-        <source src="data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAD/+0DEAAAAAAAAAAAAAAAAAAAAAADwAAA=" type="audio/mpeg">
+    <audio id="jackpotSound" preload="auto">
+        <source src="https://freesound.org/data/previews/274/274180_5123451-lq.mp3" type="audio/mpeg">
     </audio>
 
     <script>
@@ -729,50 +716,46 @@
 
         // Achievement system
         const achievements = [
-            { id: 'first_spin', name: 'First Hunt', icon: '🏴‍☠️', condition: (stats) => stats.totalSpins >= 1, unlocked: false },
+            { id: 'first_spin', name: 'First Adventure', icon: '🏴‍☠️', condition: (stats) => stats.totalSpins >= 1, unlocked: false },
             { id: 'treasure_hunter', name: 'Treasure Hunter', icon: '🗝️', condition: (stats) => stats.totalSpins >= 10, unlocked: false },
             { id: 'gold_collector', name: 'Gold Collector', icon: '💰', condition: (stats) => stats.totalGold >= 100, unlocked: false },
             { id: 'jackpot_master', name: 'Jackpot Master', icon: '💎', condition: (stats) => stats.jackpotWins >= 3, unlocked: false },
-            { id: 'pirate_king', name: 'Pirate King', icon: '👑', condition: (stats) => stats.totalGold >= 1000, unlocked: false },
-            { id: 'legend', name: 'Legendary Pirate', icon: '🏆', condition: (stats) => stats.totalSpins >= 100, unlocked: false }
+            { id: 'pirate_captain', name: 'Pirate Captain', icon: '👑', condition: (stats) => stats.totalGold >= 1000, unlocked: false },
+            { id: 'legend', name: 'Island Legend', icon: '🏆', condition: (stats) => stats.totalSpins >= 100, unlocked: false }
         ];
 
-        // Reward system with gold values
+        // Reward system
         const treasureRewards = {
-            '💰💰💰': { title: 'PIRATE KING\'S HOARD!', discount: '50% OFF', code: 'KING50', gold: 500, rarity: 'LEGENDARY' },
-            '💎💎💎': { title: 'DIAMOND CROWN!', discount: '30% OFF', code: 'DIAMOND30', gold: 300, rarity: 'EPIC' },
-            '🏆🏆🏆': { title: 'GOLDEN CHALICE!', discount: '25% OFF', code: 'CHALICE25', gold: 250, rarity: 'EPIC' },
-            '⚔️⚔️⚔️': { title: 'LEGENDARY SWORD!', discount: '20% OFF', code: 'SWORD20', gold: 200, rarity: 'RARE' },
-            '🗝️🗝️🗝️': { title: 'MASTER\'S KEY!', discount: '15% OFF', code: 'KEY15', gold: 150, rarity: 'RARE' },
+            '💰💰💰': { title: 'CAPTAIN\'S VAULT UNLOCKED!', discount: '50% OFF', code: 'CAPTAIN50', gold: 500, rarity: 'LEGENDARY' },
+            '💎💎💎': { title: 'DIAMOND TREASURE FOUND!', discount: '30% OFF', code: 'DIAMOND30', gold: 300, rarity: 'EPIC' },
+            '🏆🏆🏆': { title: 'GOLDEN TROPHY WON!', discount: '25% OFF', code: 'TROPHY25', gold: 250, rarity: 'EPIC' },
+            '⚔️⚔️⚔️': { title: 'PIRATE\'S SWORD DISCOVERED!', discount: '20% OFF', code: 'SWORD20', gold: 200, rarity: 'RARE' },
+            '🗝️🗝️🗝️': { title: 'MAGIC KEY OBTAINED!', discount: '15% OFF', code: 'KEY15', gold: 150, rarity: 'RARE' },
         };
 
         // Initialize the game
         function initTreasureHunt() {
             loadGameStats();
-            createParticles();
+            createTreasureParticles();
             createTreasureReels();
             updateUI();
             updateAttemptsDisplay();
             initializeAchievements();
-            startBackgroundMusic();
-            
-            // Update experience progress
             updateExperienceBar();
         }
 
-        // Create animated background particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            for (let i = 0; i < 20; i++) {
+        // Create floating treasure particles
+        function createTreasureParticles() {
+            const particles = ['✨', '💫', '⭐', '🌟', '💰', '💎'];
+            for (let i = 0; i < 15; i++) {
                 const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.width = Math.random() * 4 + 2 + 'px';
-                particle.style.height = particle.style.width;
+                particle.className = 'treasure-particle';
+                particle.textContent = particles[Math.floor(Math.random() * particles.length)];
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                particlesContainer.appendChild(particle);
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                particle.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                document.body.appendChild(particle);
             }
         }
 
@@ -782,7 +765,6 @@
                 const strip = document.getElementById(`strip${i}`);
                 strip.innerHTML = '';
                 
-                // Create multiple sets of symbols for smooth animation
                 for (let j = 0; j < 25; j++) {
                     treasureSymbols.forEach(symbol => {
                         const item = document.createElement('div');
@@ -803,29 +785,29 @@
             gameStats.totalSpins++;
             gameStats.experience += 10;
 
-            // Play spin sound
+            // Play spin sound with fallback
             playSound('spinSound');
 
             // Update UI
             document.getElementById('spinButton').disabled = true;
-            document.getElementById('spinButton').textContent = '⚔️ HUNTING TREASURE... ⚔️';
+            document.getElementById('spinButton').textContent = '🎮 SPINNING... 🎮';
             document.getElementById('treasureResult').classList.remove('show');
 
-            // Add spinning animation with particle effects
+            // Add spinning animation
             const reels = document.querySelectorAll('.treasure-reel');
             reels.forEach(reel => reel.classList.add('spinning'));
             
-            // Create spinning particle effect
-            createSpinParticles();
+            // Create celebration particles
+            createCelebrationParticles();
 
-            // Generate treasure results
+            // Generate results
             const results = [
                 treasureSymbols[Math.floor(Math.random() * treasureSymbols.length)],
                 treasureSymbols[Math.floor(Math.random() * treasureSymbols.length)],
                 treasureSymbols[Math.floor(Math.random() * treasureSymbols.length)]
             ];
 
-            // Stop reels with dramatic timing
+            // Stop reels with timing
             const delays = [1200, 1800, 2400];
             
             for (let i = 0; i < 3; i++) {
@@ -842,45 +824,34 @@
             checkAchievements();
         }
 
-        // Stop individual reel with dramatic effect
+        // Stop reel with effect
         function stopTreasureReel(reelNumber, symbol) {
             const reel = document.getElementById(`reel${reelNumber}`);
             const strip = document.getElementById(`strip${reelNumber}`);
             
             reel.classList.remove('spinning');
             
-            // Find symbol position and align it
             const items = strip.querySelectorAll('.reel-symbol');
             const symbolIndex = Array.from(items).findIndex(item => item.textContent === symbol);
             const offset = -(symbolIndex * 130);
             
             strip.style.transform = `translateY(${offset}px)`;
-            
-            // Add dramatic stop effect
-            reel.style.animation = 'treasure-stop 0.3s ease-out';
-            setTimeout(() => {
-                reel.style.animation = '';
-            }, 300);
         }
 
-        // Reveal treasure with epic effects
+        // Reveal treasure with effects
         function revealTreasure(results) {
             const resultKey = results.join('');
             let reward, goldEarned = 0;
 
-            // Check for legendary treasures
             if (treasureRewards[resultKey]) {
                 reward = treasureRewards[resultKey];
                 goldEarned = reward.gold;
                 gameStats.jackpotWins++;
                 
-                // Epic jackpot effects
                 document.getElementById('treasureMachine').classList.add('mega-jackpot');
                 playSound('jackpotSound');
-                createCoinRain();
-                createFireworks();
+                createConfetti();
             }
-            // Check for two matching symbols
             else if (results[0] === results[1] || results[1] === results[2] || results[0] === results[2]) {
                 reward = {
                     title: 'TREASURE MAP FOUND!',
@@ -892,7 +863,6 @@
                 goldEarned = 50;
                 playSound('winSound');
             }
-            // Participation reward
             else {
                 reward = {
                     title: 'COMPASS DISCOVERED!',
@@ -905,30 +875,24 @@
                 playSound('winSound');
             }
 
-            // Update gold
             gameStats.totalGold += goldEarned;
             gameStats.experience += goldEarned;
 
-            // Generate unique treasure code
             const timestamp = Date.now().toString().slice(-4);
             const uniqueCode = reward.code + timestamp;
 
-            // Display treasure result with epic animation
-            document.getElementById('resultTitle').textContent = 
-                `🏴‍☠️ ${reward.title} 🏴‍☠️`;
+            document.getElementById('resultTitle').textContent = `🎉 ${reward.title}`;
             document.getElementById('resultReward').textContent = 
-                `Ye found ${reward.discount} treasure + ${goldEarned} gold doubloons!`;
+                `Amazing! You won ${reward.discount} + ${goldEarned} treasure coins!`;
             document.getElementById('treasureCode').textContent = uniqueCode;
             document.getElementById('treasureResult').classList.add('show');
 
-            // Reset spin button with delay for drama
             setTimeout(() => {
                 isSpinning = false;
                 document.getElementById('spinButton').disabled = attemptsRemaining <= 0;
                 document.getElementById('spinButton').textContent = 
-                    attemptsRemaining > 0 ? '⚔️ HUNT FOR TREASURE ⚔️' : '🚫 COME BACK TOMORROW! 🚫';
+                    attemptsRemaining > 0 ? '🎮 START ADVENTURE 🎮' : '🚫 RETURN TOMORROW! 🚫';
                 
-                // Remove mega jackpot effect
                 setTimeout(() => {
                     document.getElementById('treasureMachine').classList.remove('mega-jackpot');
                 }, 3000);
@@ -938,47 +902,27 @@
             updateExperienceBar();
         }
 
-        // Create coin rain effect for big wins
-        function createCoinRain() {
-            for (let i = 0; i < 20; i++) {
+        // Create confetti effect
+        function createConfetti() {
+            const confettiEmojis = ['🎉', '🎊', '✨', '⭐', '💫', '🌟'];
+            for (let i = 0; i < 30; i++) {
                 setTimeout(() => {
-                    const coin = document.createElement('div');
-                    coin.className = 'coin';
-                    coin.textContent = '🪙';
-                    coin.style.left = Math.random() * 100 + '%';
-                    coin.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                    document.body.appendChild(coin);
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.textContent = confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.body.appendChild(confetti);
                     
-                    setTimeout(() => coin.remove(), 3000);
+                    setTimeout(() => confetti.remove(), 4000);
                 }, i * 100);
             }
         }
 
-        // Create fireworks effect
-        function createFireworks() {
-            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4'];
+        // Create celebration particles
+        function createCelebrationParticles() {
             for (let i = 0; i < 10; i++) {
-                setTimeout(() => {
-                    const firework = document.createElement('div');
-                    firework.style.position = 'fixed';
-                    firework.style.left = Math.random() * 100 + '%';
-                    firework.style.top = Math.random() * 50 + '%';
-                    firework.style.width = '4px';
-                    firework.style.height = '4px';
-                    firework.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    firework.style.borderRadius = '50%';
-                    firework.style.animation = 'firework 1s ease-out forwards';
-                    firework.style.zIndex = '1000';
-                    document.body.appendChild(firework);
-                    
-                    setTimeout(() => firework.remove(), 1000);
-                }, i * 150);
-            }
-        }
-
-        // Create spin particles
-        function createSpinParticles() {
-            for (let i = 0; i < 15; i++) {
                 setTimeout(() => {
                     const particle = document.createElement('div');
                     particle.textContent = ['✨', '⭐', '💫'][Math.floor(Math.random() * 3)];
@@ -987,11 +931,12 @@
                     particle.style.top = Math.random() * 100 + '%';
                     particle.style.fontSize = '20px';
                     particle.style.pointerEvents = 'none';
-                    particle.style.animation = 'particle-burst 1s ease-out forwards';
+                    particle.style.animation = 'celebration-burst 1s ease-out forwards';
+                    particle.style.zIndex = '1000';
                     document.getElementById('treasureMachine').appendChild(particle);
                     
                     setTimeout(() => particle.remove(), 1000);
-                }, i * 50);
+                }, i * 100);
             }
         }
 
@@ -1009,28 +954,16 @@
             });
         }
 
-        // Check and unlock achievements
+        // Check achievements
         function checkAchievements() {
-            let newUnlocks = 0;
             achievements.forEach((achievement, index) => {
                 if (!achievement.unlocked && achievement.condition(gameStats)) {
                     achievement.unlocked = true;
-                    newUnlocks++;
-                    
-                    // Update UI
                     const achievementElement = document.querySelectorAll('.achievement')[index];
                     achievementElement.classList.add('unlocked');
-                    
-                    // Show achievement notification
-                    setTimeout(() => {
-                        showAchievementNotification(achievement);
-                    }, 1000);
+                    showAchievementNotification(achievement);
                 }
             });
-            
-            if (newUnlocks > 0) {
-                playSound('winSound');
-            }
         }
 
         // Show achievement notification
@@ -1042,22 +975,22 @@
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-                    background: linear-gradient(145deg, #8b4513, #a0522d);
-                    border: 3px solid #ffd700;
+                    background: linear-gradient(145deg, #28a745, #20c997);
+                    border: 3px solid #fff;
                     border-radius: 20px;
-                    padding: 20px;
+                    padding: 25px;
                     text-align: center;
                     z-index: 10000;
-                    box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+                    box-shadow: 0 0 50px rgba(40, 167, 69, 0.5);
+                    color: white;
                     animation: achievement-popup 3s ease-out forwards;
                 ">
-                    <div style="font-size: 32px; margin-bottom: 10px;">${achievement.icon}</div>
-                    <div style="font-family: 'Pirata One', cursive; color: #ffd700; font-size: 18px; margin-bottom: 5px;">ACHIEVEMENT UNLOCKED!</div>
-                    <div style="color: white; font-weight: bold;">${achievement.name}</div>
+                    <div style="font-size: 40px; margin-bottom: 15px;">${achievement.icon}</div>
+                    <div style="font-family: 'Pirata One', cursive; font-size: 20px; margin-bottom: 10px;">BADGE EARNED!</div>
+                    <div style="font-weight: bold; font-size: 16px;">${achievement.name}</div>
                 </div>
             `;
             document.body.appendChild(notification);
-            
             setTimeout(() => notification.remove(), 3000);
         }
 
@@ -1067,7 +1000,6 @@
             const progress = (gameStats.experience % 100) / 100 * 100;
             document.getElementById('progressFill').style.width = progress + '%';
             
-            // Level up check
             if (gameStats.experience >= levelThreshold) {
                 gameStats.level++;
                 showLevelUpNotification();
@@ -1080,25 +1012,25 @@
             notification.innerHTML = `
                 <div style="
                     position: fixed;
-                    top: 20%;
+                    top: 30%;
                     left: 50%;
                     transform: translateX(-50%);
-                    background: linear-gradient(145deg, #4a4a4a, #2c2c2c);
-                    border: 3px solid #ffd700;
+                    background: linear-gradient(145deg, #ff6b35, #ff8c42);
+                    border: 3px solid #fff;
                     border-radius: 15px;
-                    padding: 20px;
+                    padding: 25px;
                     text-align: center;
                     z-index: 10000;
-                    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-                    animation: level-up 3s ease-out forwards;
+                    box-shadow: 0 0 40px rgba(255, 107, 53, 0.6);
+                    color: white;
+                    animation: level-celebration 3s ease-out forwards;
                 ">
-                    <div style="font-size: 28px; margin-bottom: 10px;">🎉</div>
-                    <div style="color: #ffd700; font-size: 16px; font-weight: bold;">LEVEL UP!</div>
-                    <div style="color: white;">Level ${gameStats.level}</div>
+                    <div style="font-size: 30px; margin-bottom: 10px;">🎉</div>
+                    <div style="font-family: 'Pirata One', cursive; font-size: 18px; margin-bottom: 5px;">LEVEL UP!</div>
+                    <div style="font-weight: bold;">Captain Level ${gameStats.level}</div>
                 </div>
             `;
             document.body.appendChild(notification);
-            
             setTimeout(() => notification.remove(), 3000);
         }
 
@@ -1109,9 +1041,9 @@
             
             if (attemptsRemaining <= 0) {
                 document.getElementById('attemptsDisplay').innerHTML = 
-                    '🚫 <strong>All treasure hunts complete!</strong> Return tomorrow, matey! 🚫';
+                    '🌅 <strong>All adventures complete!</strong> Return tomorrow, Captain! 🌅';
                 document.getElementById('attemptsDisplay').style.background = 
-                    'linear-gradient(145deg, rgba(255, 82, 82, 0.9), rgba(255, 82, 82, 0.7))';
+                    'linear-gradient(145deg, #ffc107, #ffcd39)';
             }
         }
 
@@ -1122,7 +1054,7 @@
             document.getElementById('totalGold').textContent = gameStats.totalGold;
         }
 
-        // Load game stats from localStorage
+        // Load game stats
         function loadGameStats() {
             const savedStats = localStorage.getItem('pbTreasureStats');
             const savedAttempts = localStorage.getItem('pbTreasureAttempts');
@@ -1143,7 +1075,6 @@
                 });
             }
 
-            // Reset attempts daily
             if (lastPlayDate !== today) {
                 attemptsRemaining = 5;
                 localStorage.setItem('pbTreasureDate', today);
@@ -1152,44 +1083,53 @@
             }
         }
 
-        // Save game stats to localStorage
+        // Save game stats
         function saveGameStats() {
             localStorage.setItem('pbTreasureStats', JSON.stringify(gameStats));
             localStorage.setItem('pbTreasureAttempts', attemptsRemaining.toString());
             localStorage.setItem('pbTreasureAchievements', JSON.stringify(achievements));
         }
 
-        // Audio functions
+        // Audio functions with fallbacks
         function playSound(soundId) {
             if (soundEnabled) {
                 const audio = document.getElementById(soundId);
                 if (audio) {
                     audio.currentTime = 0;
-                    audio.play().catch(() => {});
+                    audio.volume = 0.3;
+                    audio.play().catch(() => {
+                        // Fallback: create audio context beep
+                        createBeep(soundId === 'spinSound' ? 440 : soundId === 'winSound' ? 880 : 1320);
+                    });
                 }
             }
         }
 
-        function startBackgroundMusic() {
-            if (soundEnabled) {
-                const bgMusic = document.getElementById('bgMusic');
-                bgMusic.volume = 0.3;
-                bgMusic.play().catch(() => {});
+        // Create beep sound as fallback
+        function createBeep(frequency) {
+            if (typeof AudioContext !== 'undefined' || typeof webkitAudioContext !== 'undefined') {
+                const audioContext = new (AudioContext || webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
             }
         }
 
         function toggleSound() {
             soundEnabled = !soundEnabled;
             const control = document.getElementById('soundControl');
-            const bgMusic = document.getElementById('bgMusic');
-            
-            if (soundEnabled) {
-                control.textContent = '🔊';
-                bgMusic.play().catch(() => {});
-            } else {
-                control.textContent = '🔇';
-                bgMusic.pause();
-            }
+            control.textContent = soundEnabled ? '🔊' : '🔇';
         }
 
         // Action functions
@@ -1211,91 +1151,79 @@
 
         function shareVictory() {
             const code = document.getElementById('treasureCode').textContent;
-            const text = `🏴‍☠️ Ahoy! I just struck treasure in PB DAYS! Use me code ${code} for dental supplies booty! ⚔️💰`;
+            const text = `🏝️ Ahoy! I found treasure at PB DAYS Island! Use code ${code} for amazing dental supplies! ⚔️💰`;
             
             if (navigator.share) {
                 navigator.share({
-                    title: 'PB DAYS Treasure Hunt Victory!',
+                    title: 'PB DAYS Treasure Island Victory!',
                     text: text,
                     url: window.location.href
                 });
             } else {
                 navigator.clipboard.writeText(text);
-                alert('Victory message copied to clipboard, matey!');
+                alert('Treasure message copied to share with friends! 🏴‍☠️');
             }
         }
 
         // Event listeners
         document.getElementById('spinButton').addEventListener('click', spinTreasure);
 
-        // Add custom CSS animations
-        const customStyles = document.createElement('style');
-        customStyles.textContent = `
-            @keyframes treasure-stop {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.05); }
-                100% { transform: scale(1); }
-            }
-            
-            @keyframes particle-burst {
-                0% { opacity: 1; transform: scale(0) rotate(0deg); }
-                50% { opacity: 1; transform: scale(1) rotate(180deg); }
-                100% { opacity: 0; transform: scale(0) rotate(360deg); }
-            }
-            
-            @keyframes firework {
-                0% { opacity: 1; transform: scale(0); }
-                50% { opacity: 1; transform: scale(1); }
-                100% { opacity: 0; transform: scale(2); }
-            }
-            
-            @keyframes achievement-popup {
-                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-                20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-                30% { transform: translate(-50%, -50%) scale(1); }
-                100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            }
-            
-            @keyframes level-up {
-                0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-                20% { opacity: 1; transform: translateX(-50%) translateY(0); }
-                80% { opacity: 1; transform: translateX(-50%) translateY(0); }
-                100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-            }
-        `;
-        document.head.appendChild(customStyles);
-
-        // Initialize the treasure hunt
-        window.addEventListener('load', initTreasureHunt);
-
-        // Add click particle effects
-        document.addEventListener('click', function(e) {
-            const sparkles = ['✨', '⭐', '💫', '🌟'];
-            const sparkle = sparkles[Math.floor(Math.random() * sparkles.length)];
-            const span = document.createElement('span');
-            span.textContent = sparkle;
-            span.style.position = 'absolute';
-            span.style.left = e.pageX + 'px';
-            span.style.top = e.pageY + 'px';
-            span.style.fontSize = '16px';
-            span.style.pointerEvents = 'none';
-            span.style.animation = 'sparkle-burst 0.8s ease-out forwards';
-            span.style.zIndex = '1000';
-            document.body.appendChild(span);
-            
-            setTimeout(() => span.remove(), 800);
-        });
-
-        // Final sparkle animation
-        const sparkleStyle = document.createElement('style');
-        sparkleStyle.textContent = `
-            @keyframes sparkle-burst {
+        // Add animations
+        const animationStyles = document.createElement('style');
+        animationStyles.textContent = `
+            @keyframes celebration-burst {
                 0% { opacity: 1; transform: scale(0) rotate(0deg); }
                 50% { opacity: 1; transform: scale(1.5) rotate(180deg); }
                 100% { opacity: 0; transform: scale(0) rotate(360deg); }
             }
+            
+            @keyframes achievement-popup {
+                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5) rotate(-10deg); }
+                50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1) rotate(5deg); }
+                100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+            }
+            
+            @keyframes level-celebration {
+                0% { opacity: 0; transform: translateX(-50%) translateY(-30px) scale(0.8); }
+                50% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1.1); }
+                100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+            }
         `;
-        document.head.appendChild(sparkleStyle);
+        document.head.appendChild(animationStyles);
+
+        // Initialize game
+        window.addEventListener('load', initTreasureHunt);
+
+        // Add click sparkle effects
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.treasure-machine') || e.target.closest('.stat-card')) {
+                const sparkles = ['✨', '⭐', '💫', '🌟'];
+                const sparkle = sparkles[Math.floor(Math.random() * sparkles.length)];
+                const span = document.createElement('span');
+                span.textContent = sparkle;
+                span.style.position = 'absolute';
+                span.style.left = e.pageX + 'px';
+                span.style.top = e.pageY + 'px';
+                span.style.fontSize = '18px';
+                span.style.pointerEvents = 'none';
+                span.style.animation = 'sparkle-magic 1s ease-out forwards';
+                span.style.zIndex = '1000';
+                document.body.appendChild(span);
+                
+                setTimeout(() => span.remove(), 1000);
+            }
+        });
+
+        // Final sparkle animation
+        const sparkleStyles = document.createElement('style');
+        sparkleStyles.textContent = `
+            @keyframes sparkle-magic {
+                0% { opacity: 1; transform: scale(0) rotate(0deg); }
+                50% { opacity: 1; transform: scale(2) rotate(180deg); }
+                100% { opacity: 0; transform: scale(0) rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(sparkleStyles);
     </script>
 </body>
 </html>
