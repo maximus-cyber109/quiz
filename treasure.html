@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PB DAYS: TREASURE ISLAND ADVENTURE</title>
+    <title>PB QUIZ: DENTAL CHALLENGE</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Fredoka:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap');
         
         * {
             margin: 0;
@@ -14,137 +14,96 @@
         }
 
         body {
-            font-family: 'Fredoka', sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 30%, #87ceeb 70%, #ffd89b 100%);
-            color: #2c3e50;
+            font-family: 'Exo 2', sans-serif;
+            background: linear-gradient(135deg, #0f3460 0%, #1e3c72 25%, #2a5298 50%, #4285f4 100%);
+            color: #fff;
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
         }
 
-        /* Animated treasure island background */
-        .island-background {
+        /* Retro animated background */
+        .retro-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
             background: 
-                /* Moon */
-                radial-gradient(circle at 85% 15%, #fff8dc 80px, transparent 80px),
-                /* Stars */
-                radial-gradient(circle at 20% 20%, #fff 2px, transparent 2px),
-                radial-gradient(circle at 80% 30%, #fff 1px, transparent 1px),
-                radial-gradient(circle at 60% 10%, #fff 1.5px, transparent 1.5px),
-                radial-gradient(circle at 30% 25%, #fff 1px, transparent 1px),
-                radial-gradient(circle at 90% 40%, #fff 2px, transparent 2px),
-                /* Water waves */
-                linear-gradient(180deg, transparent 60%, #4a90e2 60%, #357abd 70%, #2e8b57 80%, #228b22 100%);
-            z-index: -2;
-            animation: twinkle 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.8; }
-            100% { opacity: 1; }
-        }
-
-        /* Floating boats */
-        .boat {
-            position: absolute;
-            font-size: 40px;
-            animation: float-boat 8s ease-in-out infinite;
-            z-index: -1;
-        }
-
-        .boat:nth-child(1) {
-            top: 70%;
-            left: -10%;
-            animation-delay: 0s;
-        }
-
-        .boat:nth-child(2) {
-            top: 75%;
-            right: -15%;
-            animation-delay: 4s;
-            animation-direction: reverse;
-        }
-
-        @keyframes float-boat {
-            0%, 100% {
-                transform: translateX(0) translateY(0) rotate(-2deg);
-            }
-            25% {
-                transform: translateX(20vw) translateY(-10px) rotate(1deg);
-            }
-            50% {
-                transform: translateX(40vw) translateY(-5px) rotate(-1deg);
-            }
-            75% {
-                transform: translateX(60vw) translateY(-8px) rotate(2deg);
-            }
-        }
-
-        /* Water ripples */
-        .water-ripples {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40%;
-            background: 
                 repeating-linear-gradient(
                     90deg,
                     transparent,
-                    rgba(74, 144, 226, 0.1) 20px,
-                    rgba(74, 144, 226, 0.3) 40px,
-                    rgba(74, 144, 226, 0.1) 60px,
-                    transparent 80px
+                    rgba(66, 133, 244, 0.05) 2px,
+                    transparent 4px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    rgba(66, 133, 244, 0.05) 2px,
+                    transparent 4px
                 );
-            animation: wave-motion 6s ease-in-out infinite;
-            z-index: -1;
+            animation: retro-move 20s linear infinite;
+            z-index: -2;
         }
 
-        @keyframes wave-motion {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(-20px); }
+        @keyframes retro-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
-        /* Palm trees */
-        .palm-tree {
+        /* Floating geometric shapes */
+        .geo-shape {
             position: absolute;
-            font-size: 60px;
-            z-index: -1;
+            animation: float-geo 8s ease-in-out infinite;
+            opacity: 0.1;
         }
 
-        .palm-tree:nth-child(1) {
-            top: 50%;
-            left: 5%;
-            animation: sway 4s ease-in-out infinite;
+        .geo-shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #4285f4, #1976d2);
+            transform: rotate(45deg);
+            animation-delay: 0s;
         }
 
-        .palm-tree:nth-child(2) {
-            top: 45%;
-            right: 8%;
-            animation: sway 4s ease-in-out infinite reverse;
+        .geo-shape:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #2196f3, #0d47a1);
+            border-radius: 50%;
+            animation-delay: 2s;
         }
 
-        @keyframes sway {
-            0%, 100% { transform: rotate(-2deg); }
-            50% { transform: rotate(2deg); }
+        .geo-shape:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #03a9f4, #0277bd);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation-delay: 4s;
         }
 
-        /* Treasure particles */
-        .treasure-particle {
+        @keyframes float-geo {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        /* Pulsing orbs */
+        .pulse-orb {
             position: absolute;
-            animation: float-treasure 4s ease-in-out infinite;
-            font-size: 20px;
-            z-index: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, #4285f4, transparent);
+            animation: pulse-glow 3s ease-in-out infinite;
         }
 
-        @keyframes float-treasure {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
-            50% { transform: translateY(-15px) rotate(180deg); opacity: 1; }
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 0.7; }
         }
 
         .container {
@@ -158,121 +117,179 @@
 
         .header {
             margin-bottom: 30px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.1);
             padding: 25px;
             border-radius: 25px;
-            border: 3px solid #ff6b35;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
-            backdrop-filter: blur(10px);
+            border: 2px solid #4285f4;
+            box-shadow: 
+                0 0 30px rgba(66, 133, 244, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(66, 133, 244, 0.1), transparent);
+            animation: header-shine 4s ease-in-out infinite;
+        }
+
+        @keyframes header-shine {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
         }
 
         .logo {
-            font-family: 'Pirata One', cursive;
-            font-size: 28px;
-            font-weight: bold;
-            color: #ff6b35;
+            font-family: 'Orbitron', monospace;
+            font-size: 32px;
+            font-weight: 900;
+            color: #4285f4;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: logo-glow 2s ease-in-out infinite alternate;
+            text-shadow: 
+                0 0 10px #4285f4,
+                0 0 20px #4285f4,
+                0 0 30px #4285f4;
+            animation: neon-glow 2s ease-in-out infinite alternate;
+            position: relative;
+            z-index: 2;
         }
 
-        @keyframes logo-glow {
-            from { color: #ff6b35; }
-            to { color: #ff8c42; }
+        @keyframes neon-glow {
+            from { 
+                text-shadow: 
+                    0 0 10px #4285f4,
+                    0 0 20px #4285f4,
+                    0 0 30px #4285f4;
+            }
+            to { 
+                text-shadow: 
+                    0 0 20px #4285f4,
+                    0 0 30px #4285f4,
+                    0 0 40px #4285f4,
+                    0 0 50px #4285f4;
+            }
         }
 
         .title {
             font-size: 20px;
-            color: #2c3e50;
+            color: #fff;
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
             font-weight: 600;
+            position: relative;
+            z-index: 2;
         }
 
         .stats-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             margin-bottom: 30px;
         }
 
         .stat-card {
-            background: linear-gradient(145deg, #fff 0%, #f8f9fa 100%);
+            background: linear-gradient(145deg, rgba(66, 133, 244, 0.2), rgba(30, 60, 114, 0.3));
             padding: 20px 15px;
             border-radius: 20px;
-            border: 2px solid #28a745;
-            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.2);
-            transition: transform 0.3s ease;
+            border: 2px solid #4285f4;
+            box-shadow: 
+                0 8px 25px rgba(66, 133, 244, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
         }
 
         .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(40, 167, 69, 0.3);
+            box-shadow: 
+                0 12px 35px rgba(66, 133, 244, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .stat-number {
-            font-size: 24px;
+            font-family: 'Orbitron', monospace;
+            font-size: 28px;
             font-weight: 700;
-            color: #28a745;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            color: #4285f4;
+            text-shadow: 0 0 10px #4285f4;
         }
 
         .stat-label {
             font-size: 12px;
-            color: #6c757d;
-            margin-top: 5px;
+            opacity: 0.9;
+            margin-top: 8px;
             font-weight: 600;
+            text-transform: uppercase;
         }
 
-        .treasure-machine {
-            background: linear-gradient(145deg, #fff8dc, #f5deb3, #daa520);
+        .quiz-machine {
+            background: linear-gradient(145deg, rgba(66, 133, 244, 0.15), rgba(30, 60, 114, 0.25));
             border-radius: 30px;
             padding: 40px 25px;
             margin-bottom: 30px;
             box-shadow: 
-                0 15px 40px rgba(218, 165, 32, 0.3),
-                inset 0 2px 10px rgba(255, 255, 255, 0.3);
-            border: 4px solid #ff6b35;
+                0 15px 40px rgba(66, 133, 244, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 3px solid #4285f4;
             position: relative;
             overflow: hidden;
         }
 
-        .treasure-machine::before {
-            content: '🏝️';
+        .quiz-machine::before {
+            content: '';
             position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 100px;
-            opacity: 0.1;
-            animation: rotate 20s linear infinite;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(66, 133, 244, 0.1) 0%, transparent 70%);
+            animation: machine-pulse 6s ease-in-out infinite;
         }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes machine-pulse {
+            0%, 100% { transform: scale(0.8) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 0.6; }
         }
 
         .machine-title {
-            font-family: 'Pirata One', cursive;
-            font-size: 26px;
-            color: #d2691e;
+            font-family: 'Orbitron', monospace;
+            font-size: 24px;
+            color: #4285f4;
             margin-bottom: 25px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: bounce 2s ease-in-out infinite;
+            text-shadow: 0 0 15px #4285f4;
+            animation: title-pulse 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        @keyframes title-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .attempts-display {
-            background: linear-gradient(145deg, #28a745, #20c997);
+            background: linear-gradient(145deg, #4285f4, #1976d2);
             color: white;
             padding: 15px;
             border-radius: 15px;
@@ -280,817 +297,751 @@
             font-weight: 700;
             font-size: 16px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
-        }
-
-        .treasure-reels {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 35px;
-            perspective: 1000px;
-        }
-
-        .treasure-reel {
-            width: 85px;
-            height: 130px;
-            background: linear-gradient(145deg, #fff, #f8f9fa);
-            border: 4px solid #007bff;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
             box-shadow: 
-                0 8px 20px rgba(0, 123, 255, 0.3),
-                inset 0 2px 5px rgba(255, 255, 255, 0.5);
+                0 5px 15px rgba(66, 133, 244, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
         }
 
-        .reel-strip {
-            position: absolute;
-            width: 100%;
-            transition: transform 0.1s ease;
+        .question-container {
+            background: rgba(255, 255, 255, 0.95);
+            color: #2c3e50;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+            display: none;
         }
 
-        .reel-symbol {
-            height: 130px;
+        .question-container.active {
+            display: block;
+            animation: question-appear 0.5s ease-out;
+        }
+
+        @keyframes question-appear {
+            0% { opacity: 0; transform: translateY(20px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .question-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            background: linear-gradient(145deg, #fff, #f8f9fa);
-            border-bottom: 1px solid rgba(0, 123, 255, 0.2);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #4285f4;
         }
 
-        .spin-button {
-            background: linear-gradient(145deg, #ff6b35, #ff8c42);
+        .question-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            color: #4285f4;
+        }
+
+        .timer {
+            font-family: 'Orbitron', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            color: #e74c3c;
+            text-shadow: 0 0 10px #e74c3c;
+        }
+
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 15px;
+        }
+
+        .option {
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            border: 3px solid #dee2e6;
+            padding: 15px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(66, 133, 244, 0.1), transparent);
+            transition: left 0.3s;
+        }
+
+        .option:hover::before {
+            left: 100%;
+        }
+
+        .option:hover {
+            border-color: #4285f4;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
+        }
+
+        .option.selected {
+            background: linear-gradient(145deg, #4285f4, #1976d2);
+            color: white;
+            border-color: #1976d2;
+        }
+
+        .option.correct {
+            background: linear-gradient(145deg, #28a745, #1e7e34);
+            color: white;
+            border-color: #1e7e34;
+        }
+
+        .option.incorrect {
+            background: linear-gradient(145deg, #dc3545, #b02a37);
+            color: white;
+            border-color: #b02a37;
+        }
+
+        .start-button, .next-button {
+            background: linear-gradient(145deg, #4285f4, #1976d2);
             color: white;
             border: none;
             padding: 20px 45px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-bottom: 25px;
+            margin: 20px 10px;
             box-shadow: 
-                0 8px 25px rgba(255, 107, 53, 0.4),
-                inset 0 1px 0 rgba(255,255,255,0.3);
-            font-family: 'Fredoka', sans-serif;
+                0 8px 25px rgba(66, 133, 244, 0.4),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+            font-family: 'Exo 2', sans-serif;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
         }
 
-        .spin-button:hover:not(:disabled) {
+        .start-button::before, .next-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .start-button:hover::before, .next-button:hover::before {
+            left: 100%;
+        }
+
+        .start-button:hover, .next-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.6);
-            background: linear-gradient(145deg, #ff8c42, #ffa726);
+            box-shadow: 
+                0 12px 35px rgba(66, 133, 244, 0.6),
+                inset 0 1px 0 rgba(255,255,255,0.3);
         }
 
-        .spin-button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .treasure-result {
+        .result-container {
             display: none;
-            background: linear-gradient(145deg, #fff, #f8f9fa);
-            border: 4px solid #28a745;
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid #4285f4;
             border-radius: 25px;
-            padding: 30px;
+            padding: 40px 30px;
             margin-top: 25px;
-            box-shadow: 0 15px 40px rgba(40, 167, 69, 0.3);
+            box-shadow: 
+                0 15px 40px rgba(66, 133, 244, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
             color: #2c3e50;
+            position: relative;
+            z-index: 2;
         }
 
-        .treasure-result.show {
+        .result-container.show {
             display: block;
-            animation: treasure-reveal 0.8s ease-out;
+            animation: result-celebration 1s ease-out;
         }
 
-        @keyframes treasure-reveal {
-            0% { opacity: 0; transform: scale(0.8) rotateY(90deg); }
+        @keyframes result-celebration {
+            0% { opacity: 0; transform: scale(0.5) rotateY(90deg); }
+            50% { transform: scale(1.1) rotateY(45deg); }
             100% { opacity: 1; transform: scale(1) rotateY(0deg); }
         }
 
         .result-title {
-            font-family: 'Pirata One', cursive;
-            font-size: 24px;
-            color: #28a745;
-            margin-bottom: 15px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-        }
-
-        .result-reward {
-            font-size: 16px;
+            font-family: 'Orbitron', monospace;
+            font-size: 28px;
+            font-weight: 900;
             margin-bottom: 20px;
-            color: #495057;
-            font-weight: 600;
+            color: #4285f4;
+            text-shadow: 0 0 15px #4285f4;
+            animation: result-glow 2s ease-in-out infinite alternate;
         }
 
-        .treasure-code {
-            background: linear-gradient(145deg, #007bff, #0056b3);
-            color: white;
-            padding: 15px;
-            border-radius: 12px;
-            font-family: 'Courier New', monospace;
+        @keyframes result-glow {
+            from { text-shadow: 0 0 15px #4285f4; }
+            to { text-shadow: 0 0 25px #4285f4, 0 0 35px #4285f4; }
+        }
+
+        .score-display {
+            font-size: 48px;
+            font-weight: 900;
+            color: #4285f4;
+            margin: 20px 0;
+            font-family: 'Orbitron', monospace;
+            text-shadow: 0 0 20px #4285f4;
+        }
+
+        .reward-message {
             font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            margin-bottom: 25px;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        .coupon-code {
+            background: linear-gradient(145deg, #4285f4, #1976d2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            font-family: 'Orbitron', monospace;
+            font-size: 24px;
+            font-weight: 900;
+            margin: 25px 0;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            box-shadow: 
+                0 10px 30px rgba(66, 133, 244, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .action-buttons {
             display: flex;
-            gap: 12px;
+            gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: 25px;
         }
 
         .action-btn {
-            background: linear-gradient(145deg, #6c5ce7, #a29bfe);
+            background: linear-gradient(145deg, #6c5ce7, #5a4fcf);
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 12px 25px;
             border-radius: 25px;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
             transition: all 0.3s ease;
-            font-family: 'Fredoka', sans-serif;
+            font-family: 'Exo 2', sans-serif;
         }
 
         .action-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
-        }
-
-        .achievements {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 25px;
-            border-radius: 20px;
-            border: 3px solid #ffc107;
-            backdrop-filter: blur(10px);
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.3);
-        }
-
-        .achievements h3 {
-            font-family: 'Pirata One', cursive;
-            color: #e67e22;
-            margin-bottom: 20px;
-            font-size: 22px;
-        }
-
-        .achievement-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 15px;
-        }
-
-        .achievement {
-            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
-            padding: 15px;
-            border-radius: 15px;
-            border: 2px solid #dee2e6;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .achievement.unlocked {
-            border-color: #28a745;
-            background: linear-gradient(145deg, #d4edda, #c3e6cb);
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.2);
-        }
-
-        .achievement-icon {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-
-        .achievement-name {
-            font-size: 12px;
-            font-weight: 600;
-            color: #495057;
-        }
-
-        .progress-bar {
-            background: rgba(0,0,0,0.1);
-            height: 10px;
-            border-radius: 5px;
-            margin: 10px 0;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background: linear-gradient(90deg, #28a745, #20c997);
-            height: 100%;
-            border-radius: 5px;
-            transition: width 0.5s ease;
-            box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
         }
 
         .rules {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.1);
             padding: 25px;
             border-radius: 20px;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             text-align: left;
             font-size: 14px;
-            line-height: 1.6;
-            border: 3px solid #17a2b8;
-            box-shadow: 0 10px 30px rgba(23, 162, 184, 0.3);
-            color: #2c3e50;
+            line-height: 1.8;
+            border: 2px solid #4285f4;
+            box-shadow: 0 10px 30px rgba(66, 133, 244, 0.2);
         }
 
         .rules h3 {
-            font-family: 'Pirata One', cursive;
-            color: #17a2b8;
+            font-family: 'Orbitron', monospace;
+            color: #4285f4;
             margin-bottom: 20px;
             text-align: center;
-            font-size: 22px;
-        }
-
-        .spinning .reel-strip {
-            animation: treasure-spin 0.1s linear infinite;
-        }
-
-        @keyframes treasure-spin {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-130px); }
-        }
-
-        .mega-jackpot {
-            animation: mega-celebration 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes mega-celebration {
-            from {
-                box-shadow: 0 15px 40px rgba(218, 165, 32, 0.3);
-                transform: scale(1);
-            }
-            to {
-                box-shadow: 0 20px 60px rgba(255, 215, 0, 0.8);
-                transform: scale(1.02);
-            }
-        }
-
-        /* Confetti effect */
-        .confetti {
-            position: fixed;
             font-size: 20px;
-            animation: confetti-fall 3s linear infinite;
-            pointer-events: none;
-            z-index: 1000;
-        }
-
-        @keyframes confetti-fall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
+            text-shadow: 0 0 10px #4285f4;
         }
 
         .sound-control {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid #ff6b35;
+            background: rgba(66, 133, 244, 0.2);
+            border: 2px solid #4285f4;
             border-radius: 50px;
-            padding: 10px 15px;
+            padding: 12px 18px;
             cursor: pointer;
-            color: #ff6b35;
-            font-size: 18px;
+            color: #4285f4;
+            font-size: 20px;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             z-index: 1000;
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
         }
 
         .sound-control:hover {
-            background: rgba(255, 107, 53, 0.1);
+            background: rgba(66, 133, 244, 0.3);
             transform: scale(1.1);
+        }
+
+        /* Retro particles */
+        .retro-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #4285f4;
+            border-radius: 50%;
+            animation: retro-float 6s ease-in-out infinite;
+            box-shadow: 0 0 10px #4285f4;
+        }
+
+        @keyframes retro-float {
+            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.5; }
+            50% { transform: translateY(-30px) translateX(20px); opacity: 1; }
+        }
+
+        /* Celebration effects */
+        .celebration-particle {
+            position: fixed;
+            font-size: 24px;
+            animation: celebrate-float 3s ease-out infinite;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes celebrate-float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
         }
 
         @media (max-width: 480px) {
             .container { padding: 15px; }
-            .treasure-reel { width: 75px; height: 115px; }
-            .reel-symbol { height: 115px; font-size: 28px; }
-            .treasure-machine { padding: 30px 20px; }
-            .logo { font-size: 24px; }
+            .logo { font-size: 28px; }
             .title { font-size: 18px; }
+            .quiz-machine { padding: 30px 20px; }
+            .question-text { font-size: 16px; }
+            .timer { font-size: 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- Animated background -->
-    <div class="island-background"></div>
-    <div class="water-ripples"></div>
+    <!-- Retro animated background -->
+    <div class="retro-bg"></div>
     
-    <!-- Boats -->
-    <div class="boat">⛵</div>
-    <div class="boat">🚢</div>
+    <!-- Geometric shapes -->
+    <div class="geo-shape"></div>
+    <div class="geo-shape"></div>
+    <div class="geo-shape"></div>
     
-    <!-- Palm trees -->
-    <div class="palm-tree">🌴</div>
-    <div class="palm-tree">🌴</div>
+    <!-- Pulsing orbs -->
+    <div class="pulse-orb" style="top: 30%; left: 5%; width: 60px; height: 60px; animation-delay: 0s;"></div>
+    <div class="pulse-orb" style="bottom: 40%; right: 10%; width: 40px; height: 40px; animation-delay: 2s;"></div>
+    <div class="pulse-orb" style="top: 60%; left: 80%; width: 50px; height: 50px; animation-delay: 4s;"></div>
     
     <!-- Sound control -->
     <div class="sound-control" onclick="toggleSound()" id="soundControl">🔊</div>
 
     <div class="container">
         <div class="header">
-            <div class="logo">🏴‍☠️ PB DAYS: TREASURE ISLAND 🏝️</div>
-            <div class="title">
-                ⚔️ CAPTAIN'S JACKPOT ADVENTURE ⚔️
-            </div>
+            <div class="logo">🦷 PB QUIZ 🦷</div>
+            <div class="title">DENTAL KNOWLEDGE CHALLENGE</div>
         </div>
 
         <div class="stats-container">
             <div class="stat-card">
-                <div class="stat-number" id="totalSpins">0</div>
-                <div class="stat-label">ADVENTURES</div>
+                <div class="stat-number" id="totalAttempts">2</div>
+                <div class="stat-label">ATTEMPTS</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="jackpotWins">0</div>
-                <div class="stat-label">BIG WINS</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="totalGold">0</div>
-                <div class="stat-label">TREASURE COINS</div>
+                <div class="stat-number">10</div>
+                <div class="stat-label">QUESTIONS</div>
             </div>
         </div>
 
-        <div class="treasure-machine" id="treasureMachine">
-            <div class="machine-title">🏆 MAGICAL TREASURE CHEST 🏆</div>
+        <div class="quiz-machine" id="quizMachine">
+            <div class="machine-title">🎯 DENTAL CHALLENGE ZONE 🎯</div>
             
             <div class="attempts-display" id="attemptsDisplay">
-                🎯 Adventures Remaining: <span id="attemptsLeft">5</span>/5 🎯
+                ⚡ Attempts Remaining: <span id="attemptsLeft">2</span>/2 ⚡
             </div>
 
-            <div class="treasure-reels">
-                <div class="treasure-reel" id="reel1">
-                    <div class="reel-strip" id="strip1"></div>
-                </div>
-                <div class="treasure-reel" id="reel2">
-                    <div class="reel-strip" id="strip2"></div>
-                </div>
-                <div class="treasure-reel" id="reel3">
-                    <div class="reel-strip" id="strip3"></div>
-                </div>
-            </div>
-
-            <button class="spin-button" id="spinButton">
-                🎮 START ADVENTURE 🎮
+            <button class="start-button" id="startButton" onclick="startQuiz()">
+                🚀 START CHALLENGE 🚀
             </button>
 
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            <div class="question-container" id="questionContainer">
+                <div class="question-header">
+                    <div class="question-number" id="questionNumber">Question 1 of 10</div>
+                    <div class="timer" id="timer">2:00</div>
+                </div>
+                <div class="question-text" id="questionText"></div>
+                <div class="options-container" id="optionsContainer"></div>
+                <button class="next-button" id="nextButton" onclick="nextQuestion()" style="display: none;">
+                    ➡️ NEXT QUESTION
+                </button>
             </div>
 
-            <div class="treasure-result" id="treasureResult">
-                <div class="result-title" id="resultTitle"></div>
-                <div class="result-reward" id="resultReward"></div>
-                <div class="treasure-code" id="treasureCode"></div>
+            <div class="result-container" id="resultContainer">
+                <div class="result-title">🎉 CHALLENGE COMPLETE! 🎉</div>
+                <div class="score-display" id="scoreDisplay">0/10</div>
+                <div class="reward-message" id="rewardMessage"></div>
+                <div class="coupon-code" id="couponCode" style="display: none;"></div>
                 <div class="action-buttons">
-                    <button class="action-btn" onclick="copyCode()">📋 COPY CODE</button>
-                    <button class="action-btn" onclick="redeemTreasure()">🛒 SHOP NOW</button>
-                    <button class="action-btn" onclick="shareVictory()">📱 SHARE WIN</button>
+                    <button class="action-btn" onclick="copyCode()" id="copyBtn" style="display: none;">📋 COPY CODE</button>
+                    <button class="action-btn" onclick="redeemNow()">🛒 SHOP NOW</button>
+                    <button class="action-btn" onclick="shareResult()">📱 SHARE</button>
+                    <button class="action-btn" onclick="tryAgain()">🔄 TRY AGAIN</button>
                 </div>
             </div>
-        </div>
-
-        <div class="achievements">
-            <h3>🏅 TREASURE HUNTER BADGES 🏅</h3>
-            <div class="achievement-grid" id="achievementGrid"></div>
         </div>
 
         <div class="rules">
-            <h3>🗺️ TREASURE ISLAND GUIDE 🗺️</h3>
-            <p><strong>🏝️ Welcome to Treasure Island!</strong> Find ancient treasures and win amazing rewards!</p>
-            <p><strong>💎 LEGENDARY TREASURES:</strong></p>
-            <p>• 💰💰💰 = CAPTAIN'S VAULT (50% OFF + 500 Coins)</p>
-            <p>• 💎💎💎 = DIAMOND TREASURE (30% OFF + 300 Coins)</p>
-            <p>• 🏆🏆🏆 = GOLDEN TROPHY (25% OFF + 250 Coins)</p>
-            <p>• ⚔️⚔️⚔️ = PIRATE'S SWORD (20% OFF + 200 Coins)</p>
-            <p>• 🗝️🗝️🗝️ = MAGIC KEY (15% OFF + 150 Coins)</p>
-            <p>• Any 2 Match = TREASURE MAP (10% OFF + 50 Coins)</p>
-            <p>• Different = COMPASS (5% OFF + 10 Coins)</p>
-            <p><strong>🎯 Daily Adventures:</strong> 5 free spins every day</p>
-            <p><strong>🏅 Collect Badges:</strong> Unlock special achievements</p>
-            <p><strong>⚡ Level Up:</strong> Gain experience and unlock bonuses</p>
+            <h3>🎯 CHALLENGE RULES 🎯</h3>
+            <p><strong>🦷 How to Play:</strong> Answer 10 dental knowledge questions within 2 minutes!</p>
+            <p><strong>🎁 REWARDS SYSTEM:</strong></p>
+            <p>• <strong>1-2 Correct:</strong> Better luck next time! Keep learning! 📚</p>
+            <p>• <strong>3-4 Correct:</strong> Flat 5% Off Coupon on your order 🎊</p>
+            <p>• <strong>5-6 Correct:</strong> Flitt Diamond Burs Pack of 10 worth ₹499 FREE on orders above ₹2000 💎</p>
+            <p>• <strong>7-8 Correct:</strong> 10% PB CASHBACK on Order 💰</p>
+            <p>• <strong>9-10 Correct:</strong> FREE Speedendo Calcipro Rotary File worth ₹1250 on orders above ₹5k 🏆</p>
+            <p><strong>⏰ Time Limit:</strong> 2 minutes total</p>
+            <p><strong>🎯 Attempts:</strong> Maximum 2 attempts allowed</p>
+            <p><strong>🔥 Tips:</strong> Each question has one correct answer. Think fast!</p>
         </div>
     </div>
 
-    <!-- Working audio with real sound effects -->
+    <!-- Retro Music -->
     <audio id="bgMusic" loop preload="auto">
-        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
-        <source src="https://freesound.org/data/previews/316/316847_4939433-lq.mp3" type="audio/mpeg">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+T1vWgeBy+F0PLUfSwFL33L9N2QQAoUXrPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAkUXbPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAoUXrTp66hUFAlFnt/0vWgfCCuBzPLYijgIGGq+8OCPOgUUXrHo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwU=" type="audio/wav">
     </audio>
-    <audio id="spinSound" preload="auto">
-        <source src="https://freesound.org/data/previews/341/341695_5123451-lq.mp3" type="audio/mpeg">
+    <audio id="clickSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+T1vWgeBy+F0PLUfSwFL33L9N2QQAoUXrPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAkUXbPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAoUXrTp66hUFAlFnt/0vWgfCCuBzPLYijgIGGq+8OCPOgUUXrHo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwU=" type="audio/wav">
     </audio>
-    <audio id="winSound" preload="auto">
-        <source src="https://freesound.org/data/previews/171/171671_2437358-lq.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="jackpotSound" preload="auto">
-        <source src="https://freesound.org/data/previews/274/274180_5123451-lq.mp3" type="audio/mpeg">
+    <audio id="correctSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+T1vWgeBy+F0PLUfSwFL33L9N2QQAoUXrPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAkUXbPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAoUXrTp66hUFAlFnt/0vWgfCCuBzPLYijgIGGq+8OCPOgUUXrHo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwU=" type="audio/wav">
     </audio>
 
     <script>
-        // Game configuration
-        const treasureSymbols = ['💰', '💎', '🏆', '⚔️', '🗝️', '🏴‍☠️', '⭐', '🎯'];
-        let attemptsRemaining = 5;
-        let isSpinning = false;
-        let soundEnabled = true;
-        let gameStats = {
-            totalSpins: 0,
-            jackpotWins: 0,
-            totalGold: 0,
-            level: 1,
-            experience: 0
-        };
-
-        // Achievement system
-        const achievements = [
-            { id: 'first_spin', name: 'First Adventure', icon: '🏴‍☠️', condition: (stats) => stats.totalSpins >= 1, unlocked: false },
-            { id: 'treasure_hunter', name: 'Treasure Hunter', icon: '🗝️', condition: (stats) => stats.totalSpins >= 10, unlocked: false },
-            { id: 'gold_collector', name: 'Gold Collector', icon: '💰', condition: (stats) => stats.totalGold >= 100, unlocked: false },
-            { id: 'jackpot_master', name: 'Jackpot Master', icon: '💎', condition: (stats) => stats.jackpotWins >= 3, unlocked: false },
-            { id: 'pirate_captain', name: 'Pirate Captain', icon: '👑', condition: (stats) => stats.totalGold >= 1000, unlocked: false },
-            { id: 'legend', name: 'Island Legend', icon: '🏆', condition: (stats) => stats.totalSpins >= 100, unlocked: false }
+        // Quiz questions (dental knowledge)
+        const quizQuestions = [
+            {
+                question: "What is the hardest substance in the human body?",
+                options: ["Bone", "Tooth Enamel", "Cartilage", "Nail"],
+                correct: 1
+            },
+            {
+                question: "How many teeth does a typical adult have?",
+                options: ["28", "30", "32", "34"],
+                correct: 2
+            },
+            {
+                question: "What causes tooth decay?",
+                options: ["Sugar directly", "Bacteria producing acid", "Cold drinks", "Hard foods"],
+                correct: 1
+            },
+            {
+                question: "What is the soft tissue inside the tooth called?",
+                options: ["Enamel", "Dentin", "Pulp", "Crown"],
+                correct: 2
+            },
+            {
+                question: "How often should you replace your toothbrush?",
+                options: ["Every month", "Every 3-4 months", "Every 6 months", "Every year"],
+                correct: 1
+            },
+            {
+                question: "What is the best time to brush your teeth?",
+                options: ["Before meals", "After meals", "Before bed only", "Any time"],
+                correct: 1
+            },
+            {
+                question: "What is gingivitis?",
+                options: ["Tooth decay", "Gum inflammation", "Bad breath", "Tooth sensitivity"],
+                correct: 1
+            },
+            {
+                question: "Which vitamin is essential for healthy teeth and gums?",
+                options: ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin E"],
+                correct: 2
+            },
+            {
+                question: "What is the main component of tooth enamel?",
+                options: ["Calcium phosphate", "Hydroxyapatite", "Fluoride", "Keratin"],
+                correct: 1
+            },
+            {
+                question: "At what age do permanent molars typically appear?",
+                options: ["4-5 years", "6-7 years", "8-9 years", "10-11 years"],
+                correct: 1
+            }
         ];
 
-        // Reward system
-        const treasureRewards = {
-            '💰💰💰': { title: 'CAPTAIN\'S VAULT UNLOCKED!', discount: '50% OFF', code: 'CAPTAIN50', gold: 500, rarity: 'LEGENDARY' },
-            '💎💎💎': { title: 'DIAMOND TREASURE FOUND!', discount: '30% OFF', code: 'DIAMOND30', gold: 300, rarity: 'EPIC' },
-            '🏆🏆🏆': { title: 'GOLDEN TROPHY WON!', discount: '25% OFF', code: 'TROPHY25', gold: 250, rarity: 'EPIC' },
-            '⚔️⚔️⚔️': { title: 'PIRATE\'S SWORD DISCOVERED!', discount: '20% OFF', code: 'SWORD20', gold: 200, rarity: 'RARE' },
-            '🗝️🗝️🗝️': { title: 'MAGIC KEY OBTAINED!', discount: '15% OFF', code: 'KEY15', gold: 150, rarity: 'RARE' },
-        };
+        // Game state
+        let currentQuestion = 0;
+        let score = 0;
+        let timeLeft = 120; // 2 minutes
+        let timerInterval;
+        let attemptsLeft = 2;
+        let isQuizActive = false;
+        let soundEnabled = true;
 
-        // Initialize the game
-        function initTreasureHunt() {
+        // Initialize game
+        function initQuiz() {
             loadGameStats();
-            createTreasureParticles();
-            createTreasureReels();
-            updateUI();
+            createRetroParticles();
             updateAttemptsDisplay();
-            initializeAchievements();
-            updateExperienceBar();
         }
 
-        // Create floating treasure particles
-        function createTreasureParticles() {
-            const particles = ['✨', '💫', '⭐', '🌟', '💰', '💎'];
-            for (let i = 0; i < 15; i++) {
+        // Create retro floating particles
+        function createRetroParticles() {
+            for (let i = 0; i < 20; i++) {
                 const particle = document.createElement('div');
-                particle.className = 'treasure-particle';
-                particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+                particle.className = 'retro-particle';
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 4 + 's';
-                particle.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
                 document.body.appendChild(particle);
             }
         }
 
-        // Create treasure reels
-        function createTreasureReels() {
-            for (let i = 1; i <= 3; i++) {
-                const strip = document.getElementById(`strip${i}`);
-                strip.innerHTML = '';
-                
-                for (let j = 0; j < 25; j++) {
-                    treasureSymbols.forEach(symbol => {
-                        const item = document.createElement('div');
-                        item.className = 'reel-symbol';
-                        item.textContent = symbol;
-                        strip.appendChild(item);
-                    });
+        // Start quiz
+        function startQuiz() {
+            if (attemptsLeft <= 0) return;
+
+            playSound('clickSound');
+            isQuizActive = true;
+            currentQuestion = 0;
+            score = 0;
+            timeLeft = 120;
+
+            document.getElementById('startButton').style.display = 'none';
+            document.getElementById('questionContainer').classList.add('active');
+            
+            startTimer();
+            loadQuestion();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            if (currentQuestion >= quizQuestions.length) {
+                endQuiz();
+                return;
+            }
+
+            const question = quizQuestions[currentQuestion];
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of 10`;
+            document.getElementById('questionText').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = option;
+                optionElement.onclick = () => selectOption(index);
+                optionsContainer.appendChild(optionElement);
+            });
+
+            document.getElementById('nextButton').style.display = 'none';
+        }
+
+        // Select an option
+        function selectOption(selectedIndex) {
+            if (!isQuizActive) return;
+
+            playSound('clickSound');
+            
+            const options = document.querySelectorAll('.option');
+            const question = quizQuestions[currentQuestion];
+            
+            options.forEach((option, index) => {
+                option.onclick = null; // Disable further clicks
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedIndex) {
+                    option.classList.add('incorrect');
+                } else {
+                    option.style.opacity = '0.5';
                 }
+            });
+
+            if (selectedIndex === question.correct) {
+                score++;
+                playSound('correctSound');
+                createCelebrationEffect();
+            }
+
+            document.getElementById('nextButton').style.display = 'block';
+        }
+
+        // Next question
+        function nextQuestion() {
+            playSound('clickSound');
+            currentQuestion++;
+            
+            if (currentQuestion >= quizQuestions.length) {
+                endQuiz();
+            } else {
+                loadQuestion();
             }
         }
 
-        // Main spin function
-        async function spinTreasure() {
-            if (isSpinning || attemptsRemaining <= 0) return;
-
-            isSpinning = true;
-            attemptsRemaining--;
-            gameStats.totalSpins++;
-            gameStats.experience += 10;
-
-            // Play spin sound with fallback
-            playSound('spinSound');
-
-            // Update UI
-            document.getElementById('spinButton').disabled = true;
-            document.getElementById('spinButton').textContent = '🎮 SPINNING... 🎮';
-            document.getElementById('treasureResult').classList.remove('show');
-
-            // Add spinning animation
-            const reels = document.querySelectorAll('.treasure-reel');
-            reels.forEach(reel => reel.classList.add('spinning'));
-            
-            // Create celebration particles
-            createCelebrationParticles();
-
-            // Generate results
-            const results = [
-                treasureSymbols[Math.floor(Math.random() * treasureSymbols.length)],
-                treasureSymbols[Math.floor(Math.random() * treasureSymbols.length)],
-                treasureSymbols[Math.floor(Math.random() * treasureSymbols.length)]
-            ];
-
-            // Stop reels with timing
-            const delays = [1200, 1800, 2400];
-            
-            for (let i = 0; i < 3; i++) {
-                setTimeout(() => {
-                    stopTreasureReel(i + 1, results[i]);
-                    if (i === 2) {
-                        setTimeout(() => revealTreasure(results), 600);
-                    }
-                }, delays[i]);
-            }
-
-            updateGameStats();
-            updateAttemptsDisplay();
-            checkAchievements();
-        }
-
-        // Stop reel with effect
-        function stopTreasureReel(reelNumber, symbol) {
-            const reel = document.getElementById(`reel${reelNumber}`);
-            const strip = document.getElementById(`strip${reelNumber}`);
-            
-            reel.classList.remove('spinning');
-            
-            const items = strip.querySelectorAll('.reel-symbol');
-            const symbolIndex = Array.from(items).findIndex(item => item.textContent === symbol);
-            const offset = -(symbolIndex * 130);
-            
-            strip.style.transform = `translateY(${offset}px)`;
-        }
-
-        // Reveal treasure with effects
-        function revealTreasure(results) {
-            const resultKey = results.join('');
-            let reward, goldEarned = 0;
-
-            if (treasureRewards[resultKey]) {
-                reward = treasureRewards[resultKey];
-                goldEarned = reward.gold;
-                gameStats.jackpotWins++;
+        // Start timer
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('timer').textContent = 
+                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
                 
-                document.getElementById('treasureMachine').classList.add('mega-jackpot');
-                playSound('jackpotSound');
-                createConfetti();
-            }
-            else if (results[0] === results[1] || results[1] === results[2] || results[0] === results[2]) {
-                reward = {
-                    title: 'TREASURE MAP FOUND!',
-                    discount: '10% OFF',
-                    code: 'MAP10',
-                    gold: 50,
-                    rarity: 'COMMON'
-                };
-                goldEarned = 50;
-                playSound('winSound');
-            }
-            else {
-                reward = {
-                    title: 'COMPASS DISCOVERED!',
-                    discount: '5% OFF',
-                    code: 'COMPASS5',
-                    gold: 10,
-                    rarity: 'COMMON'
-                };
-                goldEarned = 10;
-                playSound('winSound');
-            }
+                if (timeLeft <= 0) {
+                    endQuiz();
+                }
+            }, 1000);
+        }
 
-            gameStats.totalGold += goldEarned;
-            gameStats.experience += goldEarned;
-
-            const timestamp = Date.now().toString().slice(-4);
-            const uniqueCode = reward.code + timestamp;
-
-            document.getElementById('resultTitle').textContent = `🎉 ${reward.title}`;
-            document.getElementById('resultReward').textContent = 
-                `Amazing! You won ${reward.discount} + ${goldEarned} treasure coins!`;
-            document.getElementById('treasureCode').textContent = uniqueCode;
-            document.getElementById('treasureResult').classList.add('show');
-
-            setTimeout(() => {
-                isSpinning = false;
-                document.getElementById('spinButton').disabled = attemptsRemaining <= 0;
-                document.getElementById('spinButton').textContent = 
-                    attemptsRemaining > 0 ? '🎮 START ADVENTURE 🎮' : '🚫 RETURN TOMORROW! 🚫';
-                
-                setTimeout(() => {
-                    document.getElementById('treasureMachine').classList.remove('mega-jackpot');
-                }, 3000);
-            }, 1500);
-
+        // End quiz
+        function endQuiz() {
+            isQuizActive = false;
+            clearInterval(timerInterval);
+            attemptsLeft--;
+            
+            document.getElementById('questionContainer').classList.remove('active');
+            showResults();
             saveGameStats();
-            updateExperienceBar();
         }
 
-        // Create confetti effect
-        function createConfetti() {
-            const confettiEmojis = ['🎉', '🎊', '✨', '⭐', '💫', '🌟'];
-            for (let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'confetti';
-                    confetti.textContent = confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
-                    confetti.style.left = Math.random() * 100 + '%';
-                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
-                    document.body.appendChild(confetti);
-                    
-                    setTimeout(() => confetti.remove(), 4000);
-                }, i * 100);
+        // Show results with rewards
+        function showResults() {
+            const resultContainer = document.getElementById('resultContainer');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const rewardMessage = document.getElementById('rewardMessage');
+            const couponCode = document.getElementById('couponCode');
+            const copyBtn = document.getElementById('copyBtn');
+            
+            scoreDisplay.textContent = `${score}/10`;
+            
+            let reward = getReward(score);
+            rewardMessage.innerHTML = reward.message;
+            
+            if (reward.code) {
+                couponCode.textContent = reward.code;
+                couponCode.style.display = 'block';
+                copyBtn.style.display = 'inline-block';
+            } else {
+                couponCode.style.display = 'none';
+                copyBtn.style.display = 'none';
+            }
+            
+            resultContainer.classList.add('show');
+            createMegaCelebration();
+            updateAttemptsDisplay();
+        }
+
+        // Get reward based on score
+        function getReward(score) {
+            if (score >= 9) {
+                return {
+                    message: "🏆 AMAZING! You're a dental expert!<br>You won a <strong>FREE Speedendo Calcipro Rotary File worth ₹1250</strong> on orders above ₹5k!",
+                    code: "CALCIPRO5K"
+                };
+            } else if (score >= 7) {
+                return {
+                    message: "💰 EXCELLENT! Great dental knowledge!<br>You earned <strong>10% PB CASHBACK</strong> on your order!",
+                    code: "PBCASH124"
+                };
+            } else if (score >= 5) {
+                return {
+                    message: "💎 AWESOME! Well done!<br>You won a <strong>FREE Flitt Diamond Burs Pack of 10 worth ₹499</strong> on orders above ₹2000!",
+                    code: "FLITTBUR10"
+                };
+            } else if (score >= 3) {
+                return {
+                    message: "🎊 GOOD JOB! Nice work!<br>You earned a <strong>Flat 5% Off Coupon</strong> on your order!",
+                    code: "CYUIP05"
+                };
+            } else {
+                return {
+                    message: "📚 Better luck next time! Keep learning about dental health and try again!<br><strong>Every attempt makes you smarter!</strong>",
+                    code: null
+                };
             }
         }
 
-        // Create celebration particles
-        function createCelebrationParticles() {
-            for (let i = 0; i < 10; i++) {
+        // Create celebration effects
+        function createCelebrationEffect() {
+            const emojis = ['✨', '⭐', '💫', '🎉'];
+            for (let i = 0; i < 5; i++) {
                 setTimeout(() => {
                     const particle = document.createElement('div');
-                    particle.textContent = ['✨', '⭐', '💫'][Math.floor(Math.random() * 3)];
-                    particle.style.position = 'absolute';
+                    particle.className = 'celebration-particle';
+                    particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
                     particle.style.left = Math.random() * 100 + '%';
-                    particle.style.top = Math.random() * 100 + '%';
-                    particle.style.fontSize = '20px';
-                    particle.style.pointerEvents = 'none';
-                    particle.style.animation = 'celebration-burst 1s ease-out forwards';
-                    particle.style.zIndex = '1000';
-                    document.getElementById('treasureMachine').appendChild(particle);
+                    particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(particle);
                     
-                    setTimeout(() => particle.remove(), 1000);
+                    setTimeout(() => particle.remove(), 3000);
                 }, i * 100);
             }
         }
 
-        // Initialize achievements
-        function initializeAchievements() {
-            const grid = document.getElementById('achievementGrid');
-            achievements.forEach(achievement => {
-                const div = document.createElement('div');
-                div.className = `achievement ${achievement.unlocked ? 'unlocked' : ''}`;
-                div.innerHTML = `
-                    <div class="achievement-icon">${achievement.icon}</div>
-                    <div class="achievement-name">${achievement.name}</div>
-                `;
-                grid.appendChild(div);
-            });
-        }
-
-        // Check achievements
-        function checkAchievements() {
-            achievements.forEach((achievement, index) => {
-                if (!achievement.unlocked && achievement.condition(gameStats)) {
-                    achievement.unlocked = true;
-                    const achievementElement = document.querySelectorAll('.achievement')[index];
-                    achievementElement.classList.add('unlocked');
-                    showAchievementNotification(achievement);
-                }
-            });
-        }
-
-        // Show achievement notification
-        function showAchievementNotification(achievement) {
-            const notification = document.createElement('div');
-            notification.innerHTML = `
-                <div style="
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    background: linear-gradient(145deg, #28a745, #20c997);
-                    border: 3px solid #fff;
-                    border-radius: 20px;
-                    padding: 25px;
-                    text-align: center;
-                    z-index: 10000;
-                    box-shadow: 0 0 50px rgba(40, 167, 69, 0.5);
-                    color: white;
-                    animation: achievement-popup 3s ease-out forwards;
-                ">
-                    <div style="font-size: 40px; margin-bottom: 15px;">${achievement.icon}</div>
-                    <div style="font-family: 'Pirata One', cursive; font-size: 20px; margin-bottom: 10px;">BADGE EARNED!</div>
-                    <div style="font-weight: bold; font-size: 16px;">${achievement.name}</div>
-                </div>
-            `;
-            document.body.appendChild(notification);
-            setTimeout(() => notification.remove(), 3000);
-        }
-
-        // Update experience bar
-        function updateExperienceBar() {
-            const levelThreshold = gameStats.level * 100;
-            const progress = (gameStats.experience % 100) / 100 * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-            
-            if (gameStats.experience >= levelThreshold) {
-                gameStats.level++;
-                showLevelUpNotification();
+        // Create mega celebration for quiz end
+        function createMegaCelebration() {
+            const celebrationEmojis = ['🎉', '🎊', '✨', '⭐', '💫', '🌟', '🏆', '💎'];
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'celebration-particle';
+                    particle.textContent = celebrationEmojis[Math.floor(Math.random() * celebrationEmojis.length)];
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                    particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                    particle.style.animationDelay = Math.random() * 1 + 's';
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => particle.remove(), 5000);
+                }, i * 100);
             }
-        }
-
-        // Show level up notification
-        function showLevelUpNotification() {
-            const notification = document.createElement('div');
-            notification.innerHTML = `
-                <div style="
-                    position: fixed;
-                    top: 30%;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    background: linear-gradient(145deg, #ff6b35, #ff8c42);
-                    border: 3px solid #fff;
-                    border-radius: 15px;
-                    padding: 25px;
-                    text-align: center;
-                    z-index: 10000;
-                    box-shadow: 0 0 40px rgba(255, 107, 53, 0.6);
-                    color: white;
-                    animation: level-celebration 3s ease-out forwards;
-                ">
-                    <div style="font-size: 30px; margin-bottom: 10px;">🎉</div>
-                    <div style="font-family: 'Pirata One', cursive; font-size: 18px; margin-bottom: 5px;">LEVEL UP!</div>
-                    <div style="font-weight: bold;">Captain Level ${gameStats.level}</div>
-                </div>
-            `;
-            document.body.appendChild(notification);
-            setTimeout(() => notification.remove(), 3000);
         }
 
         // Update attempts display
         function updateAttemptsDisplay() {
-            const attemptsElement = document.getElementById('attemptsLeft');
-            attemptsElement.textContent = attemptsRemaining;
+            document.getElementById('attemptsLeft').textContent = attemptsLeft;
+            document.getElementById('totalAttempts').textContent = attemptsLeft;
             
-            if (attemptsRemaining <= 0) {
+            if (attemptsLeft <= 0) {
                 document.getElementById('attemptsDisplay').innerHTML = 
-                    '🌅 <strong>All adventures complete!</strong> Return tomorrow, Captain! 🌅';
+                    '🚫 <strong>All attempts completed!</strong> Come back tomorrow!';
                 document.getElementById('attemptsDisplay').style.background = 
-                    'linear-gradient(145deg, #ffc107, #ffcd39)';
+                    'linear-gradient(145deg, #e74c3c, #c0392b)';
+                document.getElementById('startButton').style.display = 'none';
             }
         }
 
-        // Update game statistics
-        function updateGameStats() {
-            document.getElementById('totalSpins').textContent = gameStats.totalSpins;
-            document.getElementById('jackpotWins').textContent = gameStats.jackpotWins;
-            document.getElementById('totalGold').textContent = gameStats.totalGold;
-        }
-
-        // Load game stats
-        function loadGameStats() {
-            const savedStats = localStorage.getItem('pbTreasureStats');
-            const savedAttempts = localStorage.getItem('pbTreasureAttempts');
-            const lastPlayDate = localStorage.getItem('pbTreasureDate');
-            const savedAchievements = localStorage.getItem('pbTreasureAchievements');
-            const today = new Date().toDateString();
-
-            if (savedStats) {
-                gameStats = JSON.parse(savedStats);
-            }
-
-            if (savedAchievements) {
-                const savedAchievementStates = JSON.parse(savedAchievements);
-                achievements.forEach((achievement, index) => {
-                    if (savedAchievementStates[index]) {
-                        achievement.unlocked = savedAchievementStates[index].unlocked;
-                    }
-                });
-            }
-
-            if (lastPlayDate !== today) {
-                attemptsRemaining = 5;
-                localStorage.setItem('pbTreasureDate', today);
-            } else if (savedAttempts) {
-                attemptsRemaining = parseInt(savedAttempts);
-            }
-        }
-
-        // Save game stats
-        function saveGameStats() {
-            localStorage.setItem('pbTreasureStats', JSON.stringify(gameStats));
-            localStorage.setItem('pbTreasureAttempts', attemptsRemaining.toString());
-            localStorage.setItem('pbTreasureAchievements', JSON.stringify(achievements));
-        }
-
-        // Audio functions with fallbacks
+        // Audio functions
         function playSound(soundId) {
             if (soundEnabled) {
                 const audio = document.getElementById(soundId);
@@ -1098,15 +1049,15 @@
                     audio.currentTime = 0;
                     audio.volume = 0.3;
                     audio.play().catch(() => {
-                        // Fallback: create audio context beep
-                        createBeep(soundId === 'spinSound' ? 440 : soundId === 'winSound' ? 880 : 1320);
+                        // Fallback: Web Audio API beep
+                        createRetroBeep(soundId);
                     });
                 }
             }
         }
 
-        // Create beep sound as fallback
-        function createBeep(frequency) {
+        // Create retro beep sounds
+        function createRetroBeep(soundType) {
             if (typeof AudioContext !== 'undefined' || typeof webkitAudioContext !== 'undefined') {
                 const audioContext = new (AudioContext || webkitAudioContext)();
                 const oscillator = audioContext.createOscillator();
@@ -1115,28 +1066,43 @@
                 oscillator.connect(gainNode);
                 gainNode.connect(audioContext.destination);
                 
-                oscillator.frequency.value = frequency;
-                oscillator.type = 'sine';
+                // Different frequencies for different sounds
+                const frequencies = {
+                    clickSound: 800,
+                    correctSound: 1200,
+                    bgMusic: 440
+                };
+                
+                oscillator.frequency.value = frequencies[soundType] || 600;
+                oscillator.type = 'square'; // Retro square wave
                 
                 gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
                 
                 oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.3);
+                oscillator.stop(audioContext.currentTime + 0.2);
             }
         }
 
         function toggleSound() {
             soundEnabled = !soundEnabled;
             const control = document.getElementById('soundControl');
-            control.textContent = soundEnabled ? '🔊' : '🔇';
+            const bgMusic = document.getElementById('bgMusic');
+            
+            if (soundEnabled) {
+                control.textContent = '🔊';
+                bgMusic.play().catch(() => {});
+            } else {
+                control.textContent = '🔇';
+                bgMusic.pause();
+            }
         }
 
         // Action functions
         function copyCode() {
-            const code = document.getElementById('treasureCode').textContent;
+            const code = document.getElementById('couponCode').textContent;
             navigator.clipboard.writeText(code).then(() => {
-                const btn = event.target;
+                const btn = document.getElementById('copyBtn');
                 const originalText = btn.textContent;
                 btn.textContent = '✅ COPIED!';
                 setTimeout(() => {
@@ -1145,85 +1111,95 @@
             });
         }
 
-        function redeemTreasure() {
+        function redeemNow() {
             window.open('https://pinkblue.in', '_blank');
         }
 
-        function shareVictory() {
-            const code = document.getElementById('treasureCode').textContent;
-            const text = `🏝️ Ahoy! I found treasure at PB DAYS Island! Use code ${code} for amazing dental supplies! ⚔️💰`;
+        function shareResult() {
+            const scoreText = document.getElementById('scoreDisplay').textContent;
+            const text = `🦷 I just completed the PB QUIZ and scored ${scoreText}! Test your dental knowledge too! 🎯⚡`;
             
             if (navigator.share) {
                 navigator.share({
-                    title: 'PB DAYS Treasure Island Victory!',
+                    title: 'PB QUIZ Challenge Complete!',
                     text: text,
                     url: window.location.href
                 });
             } else {
                 navigator.clipboard.writeText(text);
-                alert('Treasure message copied to share with friends! 🏴‍☠️');
+                alert('Result copied to share! 🎉');
             }
         }
 
-        // Event listeners
-        document.getElementById('spinButton').addEventListener('click', spinTreasure);
-
-        // Add animations
-        const animationStyles = document.createElement('style');
-        animationStyles.textContent = `
-            @keyframes celebration-burst {
-                0% { opacity: 1; transform: scale(0) rotate(0deg); }
-                50% { opacity: 1; transform: scale(1.5) rotate(180deg); }
-                100% { opacity: 0; transform: scale(0) rotate(360deg); }
+        function tryAgain() {
+            if (attemptsLeft > 0) {
+                document.getElementById('resultContainer').classList.remove('show');
+                document.getElementById('startButton').style.display = 'block';
+                currentQuestion = 0;
+                score = 0;
+                timeLeft = 120;
             }
+        }
+
+        // Load and save game stats
+        function loadGameStats() {
+            const savedAttempts = localStorage.getItem('pbQuizAttempts');
+            const lastPlayDate = localStorage.getItem('pbQuizDate');
+            const today = new Date().toDateString();
+
+            // Reset attempts daily
+            if (lastPlayDate !== today) {
+                attemptsLeft = 2;
+                localStorage.setItem('pbQuizDate', today);
+            } else if (savedAttempts) {
+                attemptsLeft = parseInt(savedAttempts);
+            }
+        }
+
+        function saveGameStats() {
+            localStorage.setItem('pbQuizAttempts', attemptsLeft.toString());
+        }
+
+        // Initialize when page loads
+        window.addEventListener('load', () => {
+            initQuiz();
             
-            @keyframes achievement-popup {
-                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5) rotate(-10deg); }
-                50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1) rotate(5deg); }
-                100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-            }
-            
-            @keyframes level-celebration {
-                0% { opacity: 0; transform: translateX(-50%) translateY(-30px) scale(0.8); }
-                50% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1.1); }
-                100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
-            }
-        `;
-        document.head.appendChild(animationStyles);
+            // Start background music
+            const bgMusic = document.getElementById('bgMusic');
+            bgMusic.volume = 0.2;
+            bgMusic.play().catch(() => {});
+        });
 
-        // Initialize game
-        window.addEventListener('load', initTreasureHunt);
-
-        // Add click sparkle effects
+        // Add retro click effects
         document.addEventListener('click', function(e) {
-            if (e.target.closest('.treasure-machine') || e.target.closest('.stat-card')) {
-                const sparkles = ['✨', '⭐', '💫', '🌟'];
-                const sparkle = sparkles[Math.floor(Math.random() * sparkles.length)];
-                const span = document.createElement('span');
-                span.textContent = sparkle;
-                span.style.position = 'absolute';
-                span.style.left = e.pageX + 'px';
-                span.style.top = e.pageY + 'px';
-                span.style.fontSize = '18px';
-                span.style.pointerEvents = 'none';
-                span.style.animation = 'sparkle-magic 1s ease-out forwards';
-                span.style.zIndex = '1000';
-                document.body.appendChild(span);
+            if (e.target.closest('.quiz-machine') || e.target.closest('.option')) {
+                const effect = document.createElement('div');
+                effect.style.position = 'absolute';
+                effect.style.left = e.pageX + 'px';
+                effect.style.top = e.pageY + 'px';
+                effect.style.width = '20px';
+                effect.style.height = '20px';
+                effect.style.background = '#4285f4';
+                effect.style.borderRadius = '50%';
+                effect.style.pointerEvents = 'none';
+                effect.style.animation = 'retro-click 0.6s ease-out forwards';
+                effect.style.zIndex = '1000';
+                document.body.appendChild(effect);
                 
-                setTimeout(() => span.remove(), 1000);
+                setTimeout(() => effect.remove(), 600);
             }
         });
 
-        // Final sparkle animation
-        const sparkleStyles = document.createElement('style');
-        sparkleStyles.textContent = `
-            @keyframes sparkle-magic {
-                0% { opacity: 1; transform: scale(0) rotate(0deg); }
-                50% { opacity: 1; transform: scale(2) rotate(180deg); }
-                100% { opacity: 0; transform: scale(0) rotate(360deg); }
+        // Add retro click animation
+        const retroStyles = document.createElement('style');
+        retroStyles.textContent = `
+            @keyframes retro-click {
+                0% { transform: scale(0); opacity: 1; box-shadow: 0 0 0 0 #4285f4; }
+                50% { transform: scale(1); opacity: 0.7; box-shadow: 0 0 0 10px rgba(66, 133, 244, 0.3); }
+                100% { transform: scale(1.5); opacity: 0; box-shadow: 0 0 0 20px rgba(66, 133, 244, 0); }
             }
         `;
-        document.head.appendChild(sparkleStyles);
+        document.head.appendChild(retroStyles);
     </script>
 </body>
 </html>
