@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PB QUIZ: DENTAL CHALLENGE</title>
+    <title>PB QUIZ - Dental Knowledge Challenge</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         
         * {
             margin: 0;
@@ -14,486 +15,1163 @@
         }
 
         body {
-            font-family: 'Exo 2', sans-serif;
-            background: linear-gradient(135deg, #0f3460 0%, #1e3c72 25%, #2a5298 50%, #4285f4 100%);
-            color: #fff;
-            overflow-x: hidden;
+            font-family: 'Press Start 2P', monospace;
+            background: linear-gradient(45deg, #4285f4 0%, #FFFFFF 25%, #4285f4 50%, #FFFFFF 75%, #4285f4 100%);
+            background-size: 400% 400%;
+            animation: retroGlow 8s ease infinite;
             min-height: 100vh;
+            color: #1a237e;
+            overflow-x: hidden;
             position: relative;
         }
 
+        @keyframes retroGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Retro Study Room Background */
+        .study-room-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 10px, #1565c0 10px, #1565c0 15px, transparent 15px),
+                linear-gradient(90deg, transparent 25px, #1976d2 25px, #1976d2 30px, transparent 30px),
+                linear-gradient(90deg, transparent 40px, #1e88e5 40px, #1e88e5 45px, transparent 45px),
+                linear-gradient(90deg, transparent 55px, #2196f3 55px, #2196f3 60px, transparent 60px),
+                linear-gradient(0deg, #1565c0 0%, #1565c0 20px, transparent 20px, transparent 40px, #1565c0 40px, #1565c0 60px, transparent 60px),
+                linear-gradient(0deg, transparent 70%, #0d47a1 70%, #0d47a1 80%, transparent 80%),
+                #F5F5F5;
+            background-size: 80px 100px, 80px 100px, 80px 100px, 80px 100px, 100% 100px, 100% 100px, 100% 100%;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .pixel-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .pixel-book {
+            position: absolute;
+            width: 8px;
+            height: 12px;
+            background: #4285f4;
+            animation: floatBook 6s ease-in-out infinite;
+            box-shadow: 
+                2px 0 0 #1976d2,
+                4px 0 0 #4285f4,
+                6px 0 0 #1976d2;
+        }
+
+        .pixel-book:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .pixel-book:nth-child(2) { top: 20%; right: 10%; animation-delay: 1s; }
+        .pixel-book:nth-child(3) { bottom: 30%; left: 15%; animation-delay: 2s; }
+        .pixel-book:nth-child(4) { bottom: 20%; right: 20%; animation-delay: 3s; }
+
+        @keyframes floatBook {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
         .container {
-            max-width: 420px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
-            text-align: center;
             position: relative;
             z-index: 10;
         }
 
-        .header {
-            margin-bottom: 30px;
-            background: rgba(255, 255, 255, 0.1);
+        .retro-header {
+            background: #FFFFFF;
+            border: 4px solid #4285f4;
+            border-radius: 0;
             padding: 25px;
-            border-radius: 25px;
-            border: 2px solid #4285f4;
-            box-shadow: 0 0 30px rgba(66, 133, 244, 0.3);
-            backdrop-filter: blur(15px);
+            margin-bottom: 25px;
+            text-align: center;
             position: relative;
-            overflow: hidden;
+            box-shadow: 
+                inset 0 0 0 2px #1a237e,
+                4px 4px 0 #1976d2,
+                8px 8px 0 #1565c0;
         }
 
-        .logo {
-            font-family: 'Orbitron', monospace;
-            font-size: 32px;
-            font-weight: 900;
+        .retro-header::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            height: 4px;
+            background: 
+                linear-gradient(90deg, 
+                #4285f4 0px, #4285f4 8px, 
+                #FFFFFF 8px, #FFFFFF 16px,
+                #4285f4 16px, #4285f4 24px,
+                #FFFFFF 24px, #FFFFFF 32px);
+            background-size: 32px 4px;
+            animation: pixelBorder 2s linear infinite;
+        }
+
+        @keyframes pixelBorder {
+            0% { background-position: 0px 0px; }
+            100% { background-position: 32px 0px; }
+        }
+
+        .pixel-title {
+            font-size: 2.5rem;
             color: #4285f4;
+            text-shadow: 
+                2px 2px 0 #1a237e,
+                4px 4px 0 #1976d2;
             margin-bottom: 10px;
-            text-shadow: 0 0 20px #4285f4;
-            animation: neon-glow 2s ease-in-out infinite alternate;
+            animation: pixelGlow 3s ease-in-out infinite;
         }
 
-        @keyframes neon-glow {
-            from { text-shadow: 0 0 20px #4285f4; }
-            to { text-shadow: 0 0 30px #4285f4, 0 0 40px #4285f4; }
+        @keyframes pixelGlow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
-        .title {
-            font-size: 20px;
-            color: #fff;
-            margin-bottom: 15px;
-            font-weight: 600;
+        .pixel-subtitle {
+            font-size: 0.8rem;
+            color: #1a237e;
+            margin-bottom: 20px;
         }
 
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+        .pixel-stats {
+            display: flex;
+            justify-content: space-between;
             gap: 15px;
-            margin-bottom: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
         }
 
-        .stat-card {
-            background: linear-gradient(145deg, rgba(66, 133, 244, 0.2), rgba(30, 60, 114, 0.3));
-            padding: 20px 15px;
-            border-radius: 20px;
-            border: 2px solid #4285f4;
-            box-shadow: 0 8px 25px rgba(66, 133, 244, 0.2);
-            transition: all 0.3s ease;
+        .pixel-stat {
+            flex: 1;
+            min-width: 120px;
+            background: #4285f4;
+            border: 3px solid #1a237e;
+            padding: 12px;
+            text-align: center;
             position: relative;
-            overflow: hidden;
+            box-shadow: 
+                inset 2px 2px 0 #64b5f6,
+                inset -2px -2px 0 #1976d2;
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(66, 133, 244, 0.3);
+        .pixel-stat::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
+            border: 1px solid #FFFFFF;
         }
 
         .stat-number {
-            font-family: 'Orbitron', monospace;
-            font-size: 28px;
-            font-weight: 700;
-            color: #4285f4;
-            text-shadow: 0 0 10px #4285f4;
+            font-size: 1.2rem;
+            color: #1a237e;
+            display: block;
+            margin-bottom: 4px;
+            animation: pixelPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pixelPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .stat-label {
-            font-size: 12px;
-            opacity: 0.9;
-            margin-top: 8px;
-            font-weight: 600;
-            text-transform: uppercase;
+            font-size: 0.6rem;
+            color: #1a237e;
         }
 
-        .quiz-machine {
-            background: linear-gradient(145deg, rgba(66, 133, 244, 0.15), rgba(30, 60, 114, 0.25));
-            border-radius: 30px;
-            padding: 40px 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 15px 40px rgba(66, 133, 244, 0.2);
-            border: 3px solid #4285f4;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .machine-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 24px;
-            color: #4285f4;
-            margin-bottom: 25px;
-            text-shadow: 0 0 15px #4285f4;
-            animation: title-pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes title-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .attempts-display {
-            background: linear-gradient(145deg, #4285f4, #1976d2);
-            color: white;
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            font-weight: 700;
-            font-size: 16px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.4);
-        }
-
-        .question-container {
-            background: rgba(255, 255, 255, 0.95);
-            color: #2c3e50;
-            padding: 30px;
-            border-radius: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            display: none;
-        }
-
-        .question-container.active {
-            display: block;
-            animation: question-appear 0.5s ease-out;
-        }
-
-        @keyframes question-appear {
-            0% { opacity: 0; transform: translateY(20px) scale(0.9); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .question-header {
+        .pixel-tags {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #4285f4;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
-        .question-number {
-            font-family: 'Orbitron', monospace;
-            font-size: 18px;
-            font-weight: 700;
+        .pixel-tag {
+            background: #1a237e;
             color: #4285f4;
+            padding: 8px 16px;
+            border: 2px solid #4285f4;
+            font-size: 0.6rem;
+            animation: tagBlink 4s ease-in-out infinite;
         }
 
-        .timer {
-            font-family: 'Orbitron', monospace;
-            font-size: 24px;
-            font-weight: 700;
-            color: #e74c3c;
-            text-shadow: 0 0 10px #e74c3c;
+        .pixel-tag:nth-child(1) { animation-delay: 0s; }
+        .pixel-tag:nth-child(2) { animation-delay: 1s; }
+
+        @keyframes tagBlink {
+            0%, 90%, 100% { opacity: 1; }
+            95% { opacity: 0.7; }
+        }
+
+        /* Header Buttons */
+        .header-btn {
+            border: 3px solid;
+            padding: 12px 20px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Header Start Challenge Button */
+        .header-start-btn {
+            background: #90EE90;
+            color: #006400;
+            border-color: #006400;
+            box-shadow: 
+                inset 2px 2px 0 #98FB98,
+                inset -2px -2px 0 #00FF00,
+                3px 3px 0 #004000;
+            animation: challengeBlink 2s ease-in-out infinite;
+        }
+
+        .header-start-btn:hover {
+            background: #98FB98;
+            transform: translate(2px, 2px);
+            box-shadow: 
+                inset 2px 2px 0 #ADFF2F,
+                inset -2px -2px 0 #90EE90,
+                1px 1px 0 #004000;
+        }
+
+        .header-start-btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: 
+                inset 2px 2px 0 #00FF00,
+                inset -2px -2px 0 #004000;
+        }
+
+        @keyframes challengeBlink {
+            0%, 90%, 100% { 
+                background: #90EE90; 
+                color: #006400;
+            }
+            95% { 
+                background: #4285f4; 
+                color: #1a237e;
+            }
+        }
+
+        /* Header Explore PB Days Button */
+        .header-explore-btn {
+            background: #FF8C00;
+            color: #8B4513;
+            border-color: #8B4513;
+            box-shadow: 
+                inset 2px 2px 0 #FFA500,
+                inset -2px -2px 0 #FF7F00,
+                3px 3px 0 #5D2E00;
+            animation: exploreBlink 2.5s ease-in-out infinite;
+        }
+
+        .header-explore-btn:hover {
+            background: #FFA500;
+            transform: translate(2px, 2px);
+            box-shadow: 
+                inset 2px 2px 0 #FFB84D,
+                inset -2px -2px 0 #FF8C00,
+                1px 1px 0 #5D2E00;
+        }
+
+        .header-explore-btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: 
+                inset 2px 2px 0 #FF7F00,
+                inset -2px -2px 0 #5D2E00;
+        }
+
+        @keyframes exploreBlink {
+            0%, 90%, 100% { 
+                background: #FF8C00; 
+                color: #8B4513;
+            }
+            95% { 
+                background: #4285f4; 
+                color: #1a237e;
+            }
+        }
+
+        .retro-content {
+            background: #FFFFFF;
+            border: 4px solid #1a237e;
+            padding: 30px;
+            margin-bottom: 25px;
+            position: relative;
+            box-shadow: 
+                inset 0 0 0 2px #4285f4,
+                6px 6px 0 #1976d2;
+        }
+
+        .retro-content::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            width: 12px;
+            height: 12px;
+            background: #4285f4;
+            border: 2px solid #1a237e;
+        }
+
+        .retro-content::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 12px;
+            height: 12px;
+            background: #4285f4;
+            border: 2px solid #1a237e;
+        }
+
+        .pixel-rules {
+            background: #4285f4;
+            border: 3px solid #1a237e;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .pixel-rules::before {
+            content: '🎯';
+            position: absolute;
+            top: -8px;
+            left: 10px;
+            background: #FFFFFF;
+            padding: 4px 8px;
+            border: 2px solid #1a237e;
+            font-size: 0.8rem;
+        }
+
+        .pixel-rules h3 {
+            color: #1a237e;
+            margin-bottom: 15px;
+            font-size: 0.8rem;
+        }
+
+        .pixel-rules ul {
+            padding-left: 20px;
+        }
+
+        .pixel-rules li {
+            margin: 8px 0;
+            color: #1a237e;
+            font-size: 0.6rem;
+            line-height: 1.4;
+        }
+
+        .pixel-btn {
+            background: #4285f4;
+            color: #1a237e;
+            border: 3px solid #1a237e;
+            padding: 15px 25px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: block;
+            width: 100%;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 
+                inset 2px 2px 0 #64b5f6,
+                inset -2px -2px 0 #1976d2,
+                4px 4px 0 #1565c0;
+        }
+
+        .pixel-btn:hover {
+            background: #64b5f6;
+            transform: translate(2px, 2px);
+            box-shadow: 
+                inset 2px 2px 0 #90caf9,
+                inset -2px -2px 0 #4285f4,
+                2px 2px 0 #1565c0;
+        }
+
+        .pixel-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 
+                inset 2px 2px 0 #1976d2,
+                inset -2px -2px 0 #1565c0;
+        }
+
+        .pixel-btn:disabled {
+            background: #CCCCCC;
+            color: #888888;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-success { background: #90EE90; color: #006400; }
+        .btn-success:hover { background: #98FB98; }
+
+        .btn-warning { background: #FFB347; color: #8B4513; }
+        .btn-warning:hover { background: #FFC470; }
+
+        .btn-whatsapp { background: #90EE90; color: #25D366; }
+        .btn-whatsapp:hover { background: #98FB98; }
+
+        .pixel-countdown {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a237e;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            color: #4285f4;
+            font-size: 6rem;
+            text-shadow: 
+                4px 4px 0 #1976d2,
+                8px 8px 0 #1565c0;
+            animation: pixelFlicker 1s ease-out;
+        }
+
+        @keyframes pixelFlicker {
+            0%, 20%, 40%, 60%, 80%, 100% { opacity: 1; }
+            10%, 30%, 50%, 70%, 90% { opacity: 0.8; }
+        }
+
+        .pixel-timer {
+            background: #1a237e;
+            color: #4285f4;
+            padding: 15px;
+            border: 3px solid #4285f4;
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            position: relative;
+            animation: timerBlink 2s ease-in-out infinite;
+        }
+
+        @keyframes timerBlink {
+            0%, 90%, 100% { border-color: #4285f4; }
+            95% { border-color: #64b5f6; }
+        }
+
+        .pixel-progress {
+            background: #1a237e;
+            height: 16px;
+            border: 2px solid #4285f4;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .pixel-progress-bar {
+            background: #4285f4;
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .pixel-progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, 
+                transparent 0px, transparent 4px,
+                #64b5f6 4px, #64b5f6 8px,
+                transparent 8px, transparent 12px,
+                #64b5f6 12px, #64b5f6 16px);
+            background-size: 16px 100%;
+            animation: progressPattern 1s linear infinite;
+        }
+
+        @keyframes progressPattern {
+            0% { background-position: 0px 0px; }
+            100% { background-position: 16px 0px; }
+        }
+
+        .pixel-question {
+            background: #4285f4;
+            border: 3px solid #1a237e;
+            padding: 25px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .pixel-question::before {
+            content: '?';
+            position: absolute;
+            top: -12px;
+            left: 15px;
+            background: #1a237e;
+            color: #4285f4;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            border: 2px solid #4285f4;
+        }
+
+        .question-meta {
+            color: #1a237e;
+            font-size: 0.7rem;
+            margin-bottom: 15px;
         }
 
         .question-text {
-            font-size: 18px;
-            margin-bottom: 25px;
-            line-height: 1.6;
-            font-weight: 600;
+            color: #1a237e;
+            font-size: 0.8rem;
+            line-height: 1.5;
         }
 
-        .options-container {
+        .pixel-options {
             display: grid;
             gap: 15px;
-        }
-
-        .option {
-            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
-            border: 3px solid #dee2e6;
-            padding: 15px 20px;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .option:hover {
-            border-color: #4285f4;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
-        }
-
-        .option.selected {
-            background: linear-gradient(145deg, #4285f4, #1976d2);
-            color: white;
-            border-color: #1976d2;
-        }
-
-        .option.correct {
-            background: linear-gradient(145deg, #28a745, #1e7e34);
-            color: white;
-            border-color: #1e7e34;
-        }
-
-        .option.incorrect {
-            background: linear-gradient(145deg, #dc3545, #b02a37);
-            color: white;
-            border-color: #b02a37;
-        }
-
-        .start-button, .next-button {
-            background: linear-gradient(145deg, #4285f4, #1976d2);
-            color: white;
-            border: none;
-            padding: 20px 45px;
-            font-size: 18px;
-            font-weight: 700;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 20px 10px;
-            box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
-            font-family: 'Exo 2', sans-serif;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .start-button:hover, .next-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(66, 133, 244, 0.6);
-        }
-
-        .result-container {
-            display: none;
-            background: rgba(255, 255, 255, 0.95);
-            border: 3px solid #4285f4;
-            border-radius: 25px;
-            padding: 40px 30px;
-            margin-top: 25px;
-            box-shadow: 0 15px 40px rgba(66, 133, 244, 0.3);
-            color: #2c3e50;
-        }
-
-        .result-container.show {
-            display: block;
-            animation: result-celebration 1s ease-out;
-        }
-
-        @keyframes result-celebration {
-            0% { opacity: 0; transform: scale(0.5) rotateY(90deg); }
-            50% { transform: scale(1.1) rotateY(45deg); }
-            100% { opacity: 1; transform: scale(1) rotateY(0deg); }
-        }
-
-        .result-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 28px;
-            font-weight: 900;
-            margin-bottom: 20px;
-            color: #4285f4;
-            text-shadow: 0 0 15px #4285f4;
-            animation: result-glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes result-glow {
-            from { text-shadow: 0 0 15px #4285f4; }
-            to { text-shadow: 0 0 25px #4285f4, 0 0 35px #4285f4; }
-        }
-
-        .score-display {
-            font-size: 48px;
-            font-weight: 900;
-            color: #4285f4;
             margin: 20px 0;
-            font-family: 'Orbitron', monospace;
-            text-shadow: 0 0 20px #4285f4;
         }
 
-        .reward-message {
-            font-size: 18px;
-            margin-bottom: 25px;
-            font-weight: 600;
-            line-height: 1.6;
-        }
-
-        .coupon-code {
-            background: linear-gradient(145deg, #4285f4, #1976d2);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            font-family: 'Orbitron', monospace;
-            font-size: 24px;
-            font-weight: 900;
-            margin: 25px 0;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            box-shadow: 0 10px 30px rgba(66, 133, 244, 0.4);
-        }
-
-        .action-buttons {
+        .pixel-option {
+            background: #FFFFFF;
+            border: 3px solid #1a237e;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
+            align-items: center;
             gap: 15px;
+            position: relative;
+        }
+
+        .pixel-option:hover {
+            background: #4285f4;
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #1976d2;
+        }
+
+        .pixel-option.selected {
+            background: #4285f4;
+            border-color: #64b5f6;
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #1976d2;
+        }
+
+        .pixel-option.correct {
+            background: #90EE90;
+            border-color: #006400;
+            animation: correctFlash 0.8s ease-out;
+        }
+
+        @keyframes correctFlash {
+            0%, 100% { background: #90EE90; }
+            50% { background: #98FB98; }
+        }
+
+        .pixel-option.incorrect {
+            background: #FFB6C1;
+            border-color: #DC143C;
+            animation: incorrectShake 0.6s ease-out;
+        }
+
+        @keyframes incorrectShake {
+            0%, 100% { transform: translateX(0); }
+            25%, 75% { transform: translateX(-4px); }
+            50% { transform: translateX(4px); }
+        }
+
+        .option-letter {
+            width: 24px;
+            height: 24px;
+            background: #1a237e;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 25px;
-        }
-
-        .action-btn {
-            background: linear-gradient(145deg, #6c5ce7, #5a4fcf);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-family: 'Exo 2', sans-serif;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
-        }
-
-        .rules {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            text-align: left;
-            font-size: 14px;
-            line-height: 1.8;
+            font-size: 0.7rem;
             border: 2px solid #4285f4;
-            box-shadow: 0 10px 30px rgba(66, 133, 244, 0.2);
         }
 
-        .rules h3 {
-            font-family: 'Orbitron', monospace;
-            color: #4285f4;
-            margin-bottom: 20px;
+        .pixel-option.selected .option-letter {
+            background: #64b5f6;
+            color: #1a237e;
+        }
+
+        .pixel-option.correct .option-letter {
+            background: #006400;
+            color: #FFFFFF;
+        }
+
+        .pixel-option.incorrect .option-letter {
+            background: #DC143C;
+            color: #FFFFFF;
+        }
+
+        /* ATTEMPTS HISTORY TABLE */
+        .attempts-history {
+            background: #FFFFFF;
+            border: 4px solid #1a237e;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 
+                inset 0 0 0 2px #4285f4,
+                6px 6px 0 #1976d2;
+        }
+
+        .attempts-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #FFFFFF;
+            margin: 20px 0;
+        }
+
+        .attempts-table th {
+            background: #4285f4;
+            color: #1a237e;
+            padding: 12px 8px;
+            border: 2px solid #1a237e;
+            font-size: 0.6rem;
             text-align: center;
-            font-size: 20px;
-            text-shadow: 0 0 10px #4285f4;
+            font-weight: 800;
         }
 
-        .sound-control {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(66, 133, 244, 0.2);
-            border: 2px solid #4285f4;
-            border-radius: 50px;
-            padding: 12px 18px;
-            cursor: pointer;
+        .attempts-table td {
+            background: #FFFFFF;
+            color: #1a237e;
+            padding: 10px 8px;
+            border: 2px solid #1a237e;
+            font-size: 0.6rem;
+            text-align: center;
+        }
+
+        .attempts-table tr:nth-child(even) td {
+            background: #F9F9F9;
+        }
+
+        .attempts-table tr:hover td {
+            background: #4285f4;
+            color: #1a237e;
+        }
+
+        .no-attempts-message {
+            text-align: center;
+            color: #1a237e;
+            font-size: 1rem;
+            margin: 20px 0;
+            padding: 20px;
+            background: #FFB6C1;
+            border: 3px solid #DC143C;
+            border-radius: 10px;
+        }
+
+        .pixel-results {
+            text-align: center;
+            animation: resultsAppear 1s ease-out;
+        }
+
+        @keyframes resultsAppear {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .pixel-trophy {
+            font-size: 4rem;
+            margin: 20px 0;
+            animation: trophyBob 3s ease-in-out infinite;
+        }
+
+        @keyframes trophyBob {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .pixel-score {
+            font-size: 1.5rem;
             color: #4285f4;
-            font-size: 20px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(15px);
-            z-index: 1000;
-            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
+            text-shadow: 2px 2px 0 #1a237e;
+            margin: 20px 0;
         }
 
-        .sound-control:hover {
-            background: rgba(66, 133, 244, 0.3);
-            transform: scale(1.1);
+        .pixel-reward {
+            background: #64b5f6;
+            border: 4px solid #1a237e;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            animation: rewardGlow 3s ease-in-out infinite;
         }
 
-        @media (max-width: 480px) {
-            .container { padding: 15px; }
-            .logo { font-size: 28px; }
-            .title { font-size: 18px; }
-            .quiz-machine { padding: 30px 20px; }
-            .question-text { font-size: 16px; }
-            .timer { font-size: 20px; }
+        @keyframes rewardGlow {
+            0%, 100% { box-shadow: 0 0 0 rgba(30, 136, 229, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(30, 136, 229, 0.8); }
+        }
+
+        .reward-title {
+            font-size: 0.9rem;
+            color: #1a237e;
+            margin-bottom: 15px;
+        }
+
+        .pixel-coupon {
+            background: #1a237e;
+            color: #4285f4;
+            border: 3px dashed #4285f4;
+            padding: 15px;
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            margin: 15px 0;
+            animation: couponBlink 2s ease-in-out infinite;
+            user-select: all;
+            -webkit-user-select: all;
+            -moz-user-select: all;
+            -ms-user-select: all;
+        }
+
+        @keyframes couponBlink {
+            0%, 90%, 100% { opacity: 1; }
+            95% { opacity: 0.8; }
+        }
+
+        .copy-success {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a237e;
+            color: #4285f4;
+            padding: 20px;
+            border: 3px solid #4285f4;
+            font-size: 0.8rem;
+            z-index: 2000;
+            display: none;
+            animation: copyPulse 0.5s ease-out;
+        }
+
+        @keyframes copyPulse {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        .hidden { display: none; }
+
+        .button-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .button-row .pixel-btn {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        @media (max-width: 768px) {
+            .pixel-title { font-size: 1.8rem; }
+            .pixel-stats { flex-direction: column; gap: 10px; }
+            .button-row { flex-direction: column; }
+            .button-row .pixel-btn { width: 100%; }
+            .pixel-countdown { font-size: 4rem; }
+            .pixel-coupon { font-size: 1.2rem; letter-spacing: 2px; }
+            .attempts-table th, .attempts-table td { 
+                font-size: 0.5rem; 
+                padding: 8px 4px; 
+            }
+            .header-btn {
+                font-size: 0.6rem;
+                padding: 10px 16px;
+                margin: 5px 0;
+            }
+            .pixel-tags {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Sound control -->
-    <div class="sound-control" onclick="toggleSound()" id="soundControl">🔊</div>
+    <!-- Study Room Background -->
+    <div class="study-room-bg"></div>
+
+    <!-- Floating Pixelated Books -->
+    <div class="pixel-elements">
+        <div class="pixel-book"></div>
+        <div class="pixel-book"></div>
+        <div class="pixel-book"></div>
+        <div class="pixel-book"></div>
+    </div>
 
     <div class="container">
-        <div class="header">
-            <div class="logo">🦷 PB QUIZ 🦷</div>
-            <div class="title">DENTAL KNOWLEDGE CHALLENGE</div>
-        </div>
-
-        <div class="stats-container">
-            <div class="stat-card">
-                <div class="stat-number" id="totalAttempts">5</div>
-                <div class="stat-label">ATTEMPTS</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">10</div>
-                <div class="stat-label">QUESTIONS</div>
-            </div>
-        </div>
-
-        <div class="quiz-machine" id="quizMachine">
-            <div class="machine-title">🎯 PB QUIZ CHALLENGE</div>
+        <!-- Retro Pixelated Header -->
+        <div class="retro-header">
+            <h1 class="pixel-title">🦷 PB QUIZ 🦷</h1>
+            <p class="pixel-subtitle">🧠 DENTAL KNOWLEDGE CHALLENGE 🧠</p>
             
-            <div class="attempts-display" id="attemptsDisplay">
-                ⚡ Attempts Remaining: <span id="attemptsLeft">5</span>/5 ⚡
+            <!-- Horizontal Stats -->
+            <div class="pixel-stats">
+                <div class="pixel-stat">
+                    <span class="stat-number" id="attemptsLeft">5</span>
+                    <span class="stat-label">ATTEMPTS</span>
+                </div>
+                <div class="pixel-stat">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">QUESTIONS</span>
+                </div>
+                <div class="pixel-stat">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">MINUTES</span>
+                </div>
             </div>
 
-            <button class="start-button" id="startButton" onclick="startQuiz()">
+            <!-- Updated Pixel Tags with Both Buttons -->
+            <div class="pixel-tags">
+                <div class="pixel-tag">🎯 QUIZZES</div>
+                <div class="pixel-tag">⚡ POWER-UPS</div>
+                <button class="header-btn header-start-btn" onclick="startCountdown()">
+                    🚀 START CHALLENGE
+                </button>
+                <a href="https://pinkblue.in" class="header-btn header-explore-btn" target="_top">
+                    🌟 EXPLORE MORE
+                </a>
+            </div>
+        </div>
+
+        <!-- Start Screen -->
+        <div class="retro-content" id="startScreen">
+            <h2 style="color: #4285f4; margin-bottom: 15px; text-align: center; font-size: 1.2rem; text-shadow: 2px 2px 0 #1a237e;">🎯 PB QUIZ CHALLENGE</h2>
+            <p style="color: #1a237e; margin-bottom: 20px; text-align: center; font-size: 0.7rem;">Test your dental knowledge and unlock exclusive PB rewards!</p>
+            
+            <div class="pixel-rules">
+                <h3>🎯 CHALLENGE RULES</h3>
+                <ul>
+                    <li>✅ Answer 10 advanced dental questions</li>
+                    <li>⏰ You have 2 minutes to complete</li>
+                    <li>🎯 Higher scores unlock better rewards</li>
+                    <li>🔥 Each question has one correct answer</li>
+                    <li>💪 Maximum 5 attempts allowed</li>
+                    <li>🎁 Earn exclusive reward codes</li>
+                </ul>
+            </div>
+
+            <button class="pixel-btn" onclick="startCountdown()">
                 🚀 START CHALLENGE
             </button>
+        </div>
 
-            <div class="question-container" id="questionContainer">
-                <div class="question-header">
-                    <div class="question-number" id="questionNumber">Question 1 of 10</div>
-                    <div class="timer" id="timer">⏰ TIME: 2:00</div>
-                </div>
-                <div class="question-text" id="questionText"></div>
-                <div class="options-container" id="optionsContainer"></div>
-                <button class="next-button" id="nextButton" onclick="nextQuestion()" style="display: none;">
-                    ➡️ NEXT QUESTION
-                </button>
+        <!-- Attempts History Screen -->
+        <div class="attempts-history hidden" id="attemptsHistoryScreen">
+            <h2 style="color: #4285f4; margin-bottom: 15px; text-align: center; font-size: 1.2rem; text-shadow: 2px 2px 0 #1a237e;">📊 YOUR CHALLENGE HISTORY</h2>
+            
+            <div class="no-attempts-message">
+                <strong>🚫 All Attempts Completed!</strong><br>
+                You have used all your 5 attempts for PB QUIZ
             </div>
 
-            <div class="result-container" id="resultContainer">
-                <div class="result-title">🎉 CHALLENGE COMPLETE! 🎉</div>
-                <div class="score-display" id="scoreDisplay">0/10</div>
-                <div class="reward-message" id="rewardMessage"></div>
-                <div class="coupon-code" id="couponCode" style="display: none;"></div>
-                <div class="action-buttons">
-                    <button class="action-btn" onclick="copyCode()" id="copyBtn" style="display: none;">📋 COPY REWARD CODE</button>
-                    <button class="action-btn" onclick="redeemNow()">🛒 REDEEM NOW</button>
-                    <button class="action-btn" onclick="shareResult()">📱 SHARE RESULTS</button>
-                    <button class="action-btn" onclick="tryAgain()">🔄 TRY AGAIN</button>
-                </div>
+            <div id="attemptsTableContainer">
+                <table class="attempts-table">
+                    <thead>
+                        <tr>
+                            <th>ATTEMPT</th>
+                            <th>SCORE</th>
+                            <th>TIME TAKEN</th>
+                            <th>OFFER</th>
+                            <th>COUPON CODE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attemptsTableBody">
+                        <!-- Attempts will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-row">
+                <a href="https://pinkblue.in/cart" class="pixel-btn btn-success" target="_top">
+                    🛒 REDEEM COUPONS
+                </a>
+                <a href="https://pinkblue.in" class="pixel-btn btn-warning" target="_top">
+                    📖 BROWSE PRODUCTS
+                </a>
+                <button class="pixel-btn btn-whatsapp" onclick="shareWhatsApp()">
+                    📱 SHARE RESULTS
+                </button>
             </div>
         </div>
 
-        <div class="rules">
-            <h3>🎯 CHALLENGE RULES</h3>
-            <p><strong>🦷 Test your dental knowledge:</strong> Answer 10 advanced dental questions within 2 minutes!</p>
-            <p><strong>🎁 REWARD SYSTEM:</strong></p>
-            <p>• <strong>1-2 Correct:</strong> Better luck next time! Keep learning! 📚</p>
-            <p>• <strong>3-4 Correct:</strong> Flat 5% Off Coupon on your order 🎊</p>
-            <p>• <strong>5-6 Correct:</strong> Flitt Diamond Burs Pack of 10 worth ₹499 FREE on orders above ₹2000 💎</p>
-            <p>• <strong>7-8 Correct:</strong> 10% PB CASHBACK on Order 💰</p>
-            <p>• <strong>9-10 Correct:</strong> FREE Speedendo Calcipro Rotary File worth ₹1250 on orders above ₹5k 🏆</p>
-            <p><strong>⏰ Time Limit:</strong> 2 minutes total</p>
-            <p><strong>🎯 Attempts:</strong> Maximum 5 attempts allowed</p>
-            <p><strong>🔥 Each question has one correct answer</strong></p>
-            <p><strong>💪 Higher scores unlock better rewards</strong></p>
-            <p><strong>🎁 Earn exclusive reward codes</strong></p>
+        <!-- Quiz Screen -->
+        <div class="retro-content hidden" id="quizScreen">
+            <div class="pixel-timer" id="timer">
+                ⏰ TIME: 2:00
+            </div>
+            
+            <div class="pixel-progress">
+                <div class="pixel-progress-bar" id="progressBar"></div>
+            </div>
+
+            <div class="pixel-question">
+                <div class="question-meta" id="questionMeta">Question 1 of 10</div>
+                <div class="question-text" id="questionText"></div>
+            </div>
+
+            <div class="pixel-options" id="optionsContainer"></div>
+
+            <button class="pixel-btn" id="nextBtn" onclick="nextQuestion()" disabled>
+                ➡️ NEXT QUESTION
+            </button>
+        </div>
+
+        <!-- Results Screen -->
+        <div class="retro-content hidden" id="resultsScreen">
+            <div class="pixel-results">
+                <div class="pixel-trophy" id="trophyIcon">🏆</div>
+                <h2 id="resultsTitle">CHALLENGE COMPLETE!</h2>
+                <div class="pixel-score" id="finalScore"></div>
+
+                <div class="pixel-reward">
+                    <h3 class="reward-title">
+                        🎁 YOUR PB QUIZ REWARD!
+                    </h3>
+                    <p id="rewardDescription"></p>
+                    <div class="pixel-coupon" id="couponCode" onclick="copyCodeDirect()"></div>
+                    <button class="pixel-btn" onclick="copyCode()">
+                        📋 COPY REWARD CODE
+                    </button>
+                </div>
+
+                <div class="button-row">
+                    <a href="https://pinkblue.in/cart" class="pixel-btn btn-success" target="_top">
+                        🛒 REDEEM NOW
+                    </a>
+                    <a href="https://pinkblue.in" class="pixel-btn btn-warning" target="_top">
+                        📖 BROWSE PRODUCTS
+                    </a>
+                    <button class="pixel-btn btn-whatsapp" onclick="shareWhatsApp()">
+                        📱 SHARE RESULTS
+                    </button>
+                    <button class="pixel-btn" id="tryAgainBtn" onclick="tryAgain()">
+                        🔄 TRY AGAIN
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Background Music -->
-    <audio id="bgMusic" loop preload="auto">
-        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+T1vWgeBy+F0PLUfSwFL33L9N2QQAoUXrPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAkUXbPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAoUXrTp66hUFAlFnt/0vWgfCCuBzPLYijgIGGq+8OCPOgUUXrHo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwU=" type="audio/wav">
-    </audio>
-    
-    <!-- Super Mario Button Sounds -->
-    <audio id="clickSound" preload="auto">
-        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+T1vWgeBy+F0PLUfSwFL33L9N2QQAoUXrPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAkUXbPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAoUXrTp66hUFAlFnt/0vWgfCCuBzPLYijgIGGq+8OCPOgUUXrHo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwU=" type="audio/wav">
-    </audio>
-    
-    <audio id="correctSound" preload="auto">
-        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+T1vWgeBy+F0PLUfSwFL33L9N2QQAoUXrPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAkUXbPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAoUXrTp66hUFAlFnt/0vWgfCCuBzPLYijgIGGq+8OCPOgUUXrHo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwU=" type="audio/wav">
-    </audio>
+    <!-- Pixelated Countdown -->
+    <div class="pixel-countdown" id="countdownOverlay">
+        <span id="countdownNumber">3</span>
+    </div>
+
+    <!-- Copy Success Indicator -->
+    <div class="copy-success" id="copySuccess">
+        📋 CODE COPIED!
+    </div>
 
     <script>
+        // Audio Context for sounds
+        let audioContext;
+        let backgroundMusicOscillator;
+        let isBackgroundMusicPlaying = false;
+
+        // Initialize audio context
+        function initAudioContext() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioContext;
+        }
+
+        // Create retro arcade background music
+        function startBackgroundMusic() {
+            if (isBackgroundMusicPlaying) return;
+            
+            const ctx = initAudioContext();
+            const gainNode = ctx.createGain();
+            gainNode.connect(ctx.destination);
+            gainNode.gain.value = 0.1;
+
+            // Create a simple arcade-style melody
+            const melody = [440, 523, 659, 784, 659, 523, 440, 349];
+            let noteIndex = 0;
+
+            function playNextNote() {
+                if (!isBackgroundMusicPlaying) return;
+
+                const oscillator = ctx.createOscillator();
+                const noteGain = ctx.createGain();
+                
+                oscillator.connect(noteGain);
+                noteGain.connect(gainNode);
+                
+                oscillator.frequency.value = melody[noteIndex];
+                oscillator.type = 'square';
+                
+                noteGain.gain.setValueAtTime(0.3, ctx.currentTime);
+                noteGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+                
+                oscillator.start(ctx.currentTime);
+                oscillator.stop(ctx.currentTime + 0.4);
+                
+                noteIndex = (noteIndex + 1) % melody.length;
+                setTimeout(playNextNote, 500);
+            }
+
+            isBackgroundMusicPlaying = true;
+            playNextNote();
+        }
+
+        // Stop background music
+        function stopBackgroundMusic() {
+            isBackgroundMusicPlaying = false;
+        }
+
+        // Super Mario bounce sound effect
+        function playMarioBounceSound() {
+            const ctx = initAudioContext();
+            const oscillator = ctx.createOscillator();
+            const gainNode = ctx.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(ctx.destination);
+            
+            // Mario-style bounce sound
+            oscillator.frequency.setValueAtTime(800, ctx.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.1);
+            oscillator.type = 'square';
+            
+            gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+            
+            oscillator.start(ctx.currentTime);
+            oscillator.stop(ctx.currentTime + 0.2);
+        }
+
+        // Success sound
+        function playSuccessSound() {
+            const ctx = initAudioContext();
+            const frequencies = [523, 659, 784, 1047];
+            
+            frequencies.forEach((freq, index) => {
+                setTimeout(() => {
+                    const oscillator = ctx.createOscillator();
+                    const gainNode = ctx.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(ctx.destination);
+                    
+                    oscillator.frequency.value = freq;
+                    oscillator.type = 'square';
+                    
+                    gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                    
+                    oscillator.start(ctx.currentTime);
+                    oscillator.stop(ctx.currentTime + 0.3);
+                }, index * 100);
+            });
+        }
+
+        // Simple fingerprinting for attempts
+        function generateUserID() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.textBaseline = 'top';
+            ctx.font = '14px Press Start 2P';
+            ctx.fillText('PBQuiz2025', 2, 2);
+            
+            const fingerprint = canvas.toDataURL() + navigator.userAgent + screen.width + screen.height;
+            let hash = 0;
+            for (let i = 0; i < fingerprint.length; i++) {
+                const char = fingerprint.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash).toString();
+        }
+
+        // Attempt tracking - 5 ATTEMPTS
+        function getAttempts() {
+            const userId = generateUserID();
+            const attempts = JSON.parse(localStorage.getItem('pbQuizAttempts') || '{}');
+            return attempts[userId] || 0;
+        }
+
+        function incrementAttempts() {
+            const userId = generateUserID();
+            const attempts = JSON.parse(localStorage.getItem('pbQuizAttempts') || '{}');
+            attempts[userId] = (attempts[userId] || 0) + 1;
+            localStorage.setItem('pbQuizAttempts', JSON.stringify(attempts));
+            return attempts[userId];
+        }
+
+        // ATTEMPTS HISTORY TRACKING
+        function saveAttemptHistory(attemptNumber, score, timeTaken, rewardDescription, couponCode) {
+            const userId = generateUserID();
+            const historyKey = 'pbQuizHistory_' + userId;
+            const history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+            
+            const attemptData = {
+                attempt: attemptNumber,
+                score: score,
+                timeTaken: timeTaken,
+                offer: rewardDescription,
+                couponCode: couponCode,
+                timestamp: new Date().toISOString()
+            };
+            
+            history.push(attemptData);
+            localStorage.setItem(historyKey, JSON.stringify(history));
+        }
+
+        function getAttemptHistory() {
+            const userId = generateUserID();
+            const historyKey = 'pbQuizHistory_' + userId;
+            return JSON.parse(localStorage.getItem(historyKey) || '[]');
+        }
+
+        function displayAttemptsHistory() {
+            const history = getAttemptHistory();
+            const tableBody = document.getElementById('attemptsTableBody');
+            
+            if (history.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 20px;">No attempts yet</td></tr>';
+                return;
+            }
+            
+            tableBody.innerHTML = '';
+            history.forEach(attempt => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>#${attempt.attempt}</strong></td>
+                    <td>${attempt.score}/10</td>
+                    <td>${attempt.timeTaken}</td>
+                    <td style="font-size: 0.5rem;">${attempt.offer}</td>
+                    <td><strong>${attempt.couponCode}</strong></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
         // Hard dental professional questions
-        const quizQuestions = [
+        const allQuestions = [
             {
                 question: "What is the most common cause of cracked tooth syndrome in posterior teeth?",
                 options: ["Bruxism and parafunctional habits", "Excessive sugar consumption", "Poor oral hygiene", "Fluoride deficiency"],
@@ -543,6 +1221,56 @@
                 question: "Which radiographic technique provides the highest resolution for detecting early periodontal bone loss?",
                 options: ["Panoramic radiography", "Bitewing radiography with digital subtraction", "Cone beam computed tomography", "Periapical radiography"],
                 correct: 1
+            },
+            {
+                question: "What is the recommended irrigation protocol for endodontic treatment using sodium hypochlorite?",
+                options: ["1% NaOCl followed by saline", "5.25% NaOCl followed by EDTA", "3% hydrogen peroxide only", "Saline irrigation only"],
+                correct: 1
+            },
+            {
+                question: "Which factor most influences the prognosis of a tooth with a vertical root fracture?",
+                options: ["Patient age", "Location and extent of the fracture", "Pulp vitality", "Crown-to-root ratio"],
+                correct: 1
+            },
+            {
+                question: "What is the most appropriate treatment for a Class II furcation involvement with adequate bone support?",
+                options: ["Extraction", "Guided tissue regeneration", "Root amputation", "Crown lengthening"],
+                correct: 1
+            },
+            {
+                question: "Which cement provides the best long-term retention for all-ceramic crowns?",
+                options: ["Zinc phosphate", "Glass ionomer", "Resin-modified glass ionomer", "Adhesive resin cement"],
+                correct: 3
+            },
+            {
+                question: "What is the primary indication for using rotary NiTi files in endodontics?",
+                options: ["Improved cutting efficiency", "Better tactile sensation", "Reduced procedural errors and faster preparation", "Lower cost"],
+                correct: 2
+            },
+            {
+                question: "Which periodontal maintenance interval is recommended for patients with moderate periodontitis?",
+                options: ["Every 6 months", "Every 3-4 months", "Every 2 months", "Annually"],
+                correct: 1
+            },
+            {
+                question: "What is the most common complication following third molar extraction?",
+                options: ["Infection", "Dry socket (alveolar osteitis)", "Nerve damage", "Excessive bleeding"],
+                correct: 1
+            },
+            {
+                question: "Which local anesthetic provides the longest duration of pulpal anesthesia?",
+                options: ["Lidocaine", "Articaine", "Bupivacaine", "Mepivacaine"],
+                correct: 2
+            },
+            {
+                question: "What is the recommended implant placement torque for optimal primary stability?",
+                options: ["15-25 Ncm", "35-45 Ncm", "55-65 Ncm", "Over 70 Ncm"],
+                correct: 1
+            },
+            {
+                question: "Which is the most reliable method for assessing pulp vitality in traumatized teeth?",
+                options: ["Cold test", "Electric pulp test", "Thermal test", "Laser Doppler flowmetry"],
+                correct: 3
             }
         ];
 
@@ -550,325 +1278,368 @@
         let currentQuestion = 0;
         let score = 0;
         let timeLeft = 120; // 2 minutes
-        let timerInterval;
-        let attemptsLeft = 5;
-        let isQuizActive = false;
-        let soundEnabled = true;
+        let startTime = 0;
+        let timer;
+        let selectedAnswer = null;
+        let gameQuestions = [];
 
-        // Initialize game
-        function initQuiz() {
-            loadGameStats();
-            updateAttemptsDisplay();
-            startBackgroundMusic();
+        // Get random questions
+        function getRandomQuestions(count = 10) {
+            const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        // Check if user should see attempts history
+        function checkUserStatus() {
+            const attempts = getAttempts();
+            if (attempts >= 5) {  // 5 ATTEMPTS
+                // Show attempts history instead of start screen
+                document.getElementById('startScreen').classList.add('hidden');
+                document.getElementById('attemptsHistoryScreen').classList.remove('hidden');
+                displayAttemptsHistory();
+                return false; // Don't allow quiz start
+            }
+            return true; // Allow quiz start
+        }
+
+        // Add sound to all button clicks
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('button') || e.target.matches('.pixel-btn') || e.target.matches('.pixel-option')) {
+                playMarioBounceSound();
+            }
+        });
+
+        // 3-2-1 Countdown
+        function startCountdown() {
+            if (!checkUserStatus()) {
+                return; // User has exhausted attempts
+            }
+
+            const overlay = document.getElementById('countdownOverlay');
+            const number = document.getElementById('countdownNumber');
+            let count = 3;
+            
+            overlay.style.display = 'flex';
+            
+            const interval = setInterval(() => {
+                number.textContent = count;
+                number.style.animation = 'pixelFlicker 1s ease-out';
+                playMarioBounceSound();
+                
+                if (count === 0) {
+                    number.textContent = 'GO!';
+                    playSuccessSound();
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                        startQuiz();
+                    }, 1000);
+                    clearInterval(interval);
+                }
+                count--;
+            }, 1000);
         }
 
         // Start quiz
         function startQuiz() {
-            if (attemptsLeft <= 0) return;
+            const currentAttempt = incrementAttempts();
+            document.getElementById('attemptsLeft').textContent = Math.max(0, 5 - getAttempts()); // 5 ATTEMPTS
 
-            playMarioSound('clickSound');
-            isQuizActive = true;
+            gameQuestions = getRandomQuestions(10);
             currentQuestion = 0;
             score = 0;
             timeLeft = 120;
+            startTime = Date.now(); // Track start time
+            selectedAnswer = null;
 
-            document.getElementById('startButton').style.display = 'none';
-            document.getElementById('questionContainer').classList.add('active');
-            
-            startTimer();
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.remove('hidden');
+
             loadQuestion();
+            startTimer();
+            startBackgroundMusic();
         }
 
-        // Load current question
-        function loadQuestion() {
-            if (currentQuestion >= quizQuestions.length) {
-                endQuiz();
-                return;
-            }
-
-            const question = quizQuestions[currentQuestion];
-            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of 10`;
-            document.getElementById('questionText').textContent = question.question;
-            
-            const optionsContainer = document.getElementById('optionsContainer');
-            optionsContainer.innerHTML = '';
-            
-            question.options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'option';
-                optionElement.textContent = option;
-                optionElement.onclick = () => selectOption(index);
-                optionsContainer.appendChild(optionElement);
-            });
-
-            document.getElementById('nextButton').style.display = 'none';
-        }
-
-        // Select an option
-        function selectOption(selectedIndex) {
-            if (!isQuizActive) return;
-
-            playMarioSound('clickSound');
-            
-            const options = document.querySelectorAll('.option');
-            const question = quizQuestions[currentQuestion];
-            
-            options.forEach((option, index) => {
-                option.onclick = null; // Disable further clicks
-                if (index === question.correct) {
-                    option.classList.add('correct');
-                } else if (index === selectedIndex) {
-                    option.classList.add('incorrect');
-                } else {
-                    option.style.opacity = '0.5';
-                }
-            });
-
-            if (selectedIndex === question.correct) {
-                score++;
-                playMarioSound('correctSound');
-            }
-
-            document.getElementById('nextButton').style.display = 'block';
-        }
-
-        // Next question
-        function nextQuestion() {
-            playMarioSound('clickSound');
-            currentQuestion++;
-            
-            if (currentQuestion >= quizQuestions.length) {
-                endQuiz();
-            } else {
-                loadQuestion();
-            }
+        // Format time taken
+        function formatTimeTaken(milliseconds) {
+            const totalSeconds = Math.floor(milliseconds / 1000);
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
         }
 
         // Start timer
         function startTimer() {
-            timerInterval = setInterval(() => {
+            timer = setInterval(() => {
                 timeLeft--;
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                document.getElementById('timer').textContent = 
-                    `⏰ TIME: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                updateTimerDisplay();
                 
                 if (timeLeft <= 0) {
+                    clearInterval(timer);
                     endQuiz();
                 }
             }, 1000);
         }
 
+        // Update timer display
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').innerHTML = 
+                `⏰ TIME: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Load question
+        function loadQuestion() {
+            const question = gameQuestions[currentQuestion];
+            document.getElementById('questionMeta').textContent = `Question ${currentQuestion + 1} of 10`;
+            document.getElementById('questionText').textContent = question.question;
+
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'pixel-option';
+                optionDiv.onclick = () => selectAnswer(index);
+                optionDiv.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <span style="font-size: 0.7rem;">${option}</span>
+                `;
+                container.appendChild(optionDiv);
+            });
+
+            updateProgress();
+            selectedAnswer = null;
+            document.getElementById('nextBtn').disabled = true;
+        }
+
+        // Select answer
+        function selectAnswer(index) {
+            const options = document.querySelectorAll('.pixel-option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            selectedAnswer = index;
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        // Next question
+        function nextQuestion() {
+            if (selectedAnswer === null) return;
+
+            const question = gameQuestions[currentQuestion];
+            const options = document.querySelectorAll('.pixel-option');
+
+            // Show correct/incorrect
+            options.forEach((option, index) => {
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedAnswer && index !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
+
+            if (selectedAnswer === question.correct) {
+                score++;
+                playSuccessSound();
+            }
+
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < gameQuestions.length) {
+                    loadQuestion();
+                } else {
+                    endQuiz();
+                }
+            }, 1500);
+        }
+
+        // Update progress
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / gameQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
         // End quiz
         function endQuiz() {
-            isQuizActive = false;
-            clearInterval(timerInterval);
-            attemptsLeft--;
+            clearInterval(timer);
+            stopBackgroundMusic();
             
-            document.getElementById('questionContainer').classList.remove('active');
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+            
             showResults();
-            saveGameStats();
         }
 
         // Show results with rewards
         function showResults() {
-            const resultContainer = document.getElementById('resultContainer');
-            const scoreDisplay = document.getElementById('scoreDisplay');
-            const rewardMessage = document.getElementById('rewardMessage');
-            const couponCode = document.getElementById('couponCode');
-            const copyBtn = document.getElementById('copyBtn');
+            const percentage = (score / gameQuestions.length) * 100;
+            const timeTaken = formatTimeTaken(Date.now() - startTime);
+            const currentAttempt = getAttempts();
             
-            scoreDisplay.textContent = `${score}/10`;
-            
-            let reward = getReward(score);
-            rewardMessage.innerHTML = reward.message;
-            
-            if (reward.code) {
-                couponCode.textContent = reward.code;
-                couponCode.style.display = 'block';
-                copyBtn.style.display = 'inline-block';
-            } else {
-                couponCode.style.display = 'none';
-                copyBtn.style.display = 'none';
-            }
-            
-            resultContainer.classList.add('show');
-            updateAttemptsDisplay();
-        }
+            document.getElementById('finalScore').textContent = `${score}/${gameQuestions.length} (${percentage.toFixed(0)}%)`;
 
-        // Get reward based on score
-        function getReward(score) {
+            const title = document.getElementById('resultsTitle');
+            const description = document.getElementById('rewardDescription');
+            const coupon = document.getElementById('couponCode');
+            const trophy = document.getElementById('trophyIcon');
+            const tryAgain = document.getElementById('tryAgainBtn');
+
+            if (getAttempts() >= 5) {  // 5 ATTEMPTS
+                tryAgain.style.display = 'none';
+            }
+
+            let rewardDesc = '';
+            let couponCode = '';
+
+            // Updated rewards
             if (score >= 9) {
-                return {
-                    message: "🏆 AMAZING! You're a dental expert!<br>You won a <strong>FREE Speedendo Calcipro Rotary File worth ₹1250</strong> on orders above ₹5k!",
-                    code: "CALCIPRO5K"
-                };
+                title.textContent = '🎉 EXCELLENT PERFORMANCE!';
+                trophy.textContent = '👑';
+                rewardDesc = 'FREE Speedendo Calcipro Rotary File worth ₹1250 on orders above ₹5k!';
+                couponCode = 'CALCIPRO5K';
+                playSuccessSound();
             } else if (score >= 7) {
-                return {
-                    message: "💰 EXCELLENT! Great dental knowledge!<br>You earned <strong>10% PB CASHBACK</strong> on your order!",
-                    code: "PBCASH124"
-                };
+                title.textContent = '🏆 GREAT WORK!';
+                trophy.textContent = '🏆';
+                rewardDesc = '10% PB CASHBACK on Order!';
+                couponCode = 'PBCASH124';
+                playSuccessSound();
             } else if (score >= 5) {
-                return {
-                    message: "💎 AWESOME! Well done!<br>You won a <strong>FREE Flitt Diamond Burs Pack of 10 worth ₹499</strong> on orders above ₹2000!",
-                    code: "FLITTBUR10"
-                };
+                title.textContent = '⭐ WELL DONE!';
+                trophy.textContent = '🥇';
+                rewardDesc = 'Flitt Diamond Burs Pack of 10 worth ₹499 FREE on orders above ₹2000!';
+                couponCode = 'FLITTBUR10';
             } else if (score >= 3) {
-                return {
-                    message: "🎊 GOOD JOB! Nice work!<br>You earned a <strong>Flat 5% Off Coupon</strong> on your order!",
-                    code: "CYUIP05"
-                };
+                title.textContent = '🎯 GOOD EFFORT!';
+                trophy.textContent = '🥈';
+                rewardDesc = 'Flat 5% Off Coupon on your order!';
+                couponCode = 'CYUIP05';
             } else {
-                return {
-                    message: "📚 Better luck next time! Keep learning about dental health and try again!<br><strong>Every attempt makes you smarter!</strong>",
-                    code: null
-                };
+                title.textContent = '💪 KEEP LEARNING!';
+                trophy.textContent = '🥉';
+                rewardDesc = 'Better luck next time! Keep learning about dental health and try again!';
+                couponCode = 'STUDY2025';
             }
+
+            description.textContent = rewardDesc;
+            coupon.textContent = couponCode;
+
+            // Save this attempt to history
+            saveAttemptHistory(currentAttempt, score, timeTaken, rewardDesc, couponCode);
         }
 
-        // Update attempts display
-        function updateAttemptsDisplay() {
-            document.getElementById('attemptsLeft').textContent = attemptsLeft;
-            document.getElementById('totalAttempts').textContent = attemptsLeft;
-            
-            if (attemptsLeft <= 0) {
-                document.getElementById('attemptsDisplay').innerHTML = 
-                    '🚫 <strong>All attempts completed!</strong> You have used all your 5 attempts for PB QUIZ';
-                document.getElementById('attemptsDisplay').style.background = 
-                    'linear-gradient(145deg, #e74c3c, #c0392b)';
-                document.getElementById('startButton').style.display = 'none';
-            }
-        }
-
-        // Audio functions
-        function playMarioSound(soundId) {
-            if (soundEnabled) {
-                const audio = document.getElementById(soundId);
-                if (audio) {
-                    audio.currentTime = 0;
-                    audio.volume = 0.4;
-                    audio.play().catch(() => {
-                        // Fallback: Web Audio API beep
-                        createMarioBeep(soundId);
-                    });
-                }
-            }
-        }
-
-        // Create Mario-style beep sounds
-        function createMarioBeep(soundType) {
-            if (typeof AudioContext !== 'undefined' || typeof webkitAudioContext !== 'undefined') {
-                const audioContext = new (AudioContext || webkitAudioContext)();
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                // Mario-style frequencies
-                const frequencies = {
-                    clickSound: 1000,   // High pitched click
-                    correctSound: 1600, // Success sound
-                    bgMusic: 440       // Background tone
-                };
-                
-                oscillator.frequency.value = frequencies[soundType] || 800;
-                oscillator.type = 'square'; // Mario-style square wave
-                
-                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
-                
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.15);
-            }
-        }
-
-        function startBackgroundMusic() {
-            if (soundEnabled) {
-                const bgMusic = document.getElementById('bgMusic');
-                bgMusic.volume = 0.1;
-                bgMusic.play().catch(() => {});
-            }
-        }
-
-        function toggleSound() {
-            soundEnabled = !soundEnabled;
-            const control = document.getElementById('soundControl');
-            const bgMusic = document.getElementById('bgMusic');
-            
-            if (soundEnabled) {
-                control.textContent = '🔊';
-                bgMusic.play().catch(() => {});
-            } else {
-                control.textContent = '🔇';
-                bgMusic.pause();
-            }
-        }
-
-        // Action functions
+        // Copy functions
         function copyCode() {
             const code = document.getElementById('couponCode').textContent;
-            navigator.clipboard.writeText(code).then(() => {
-                const btn = document.getElementById('copyBtn');
-                const originalText = btn.textContent;
-                btn.textContent = '📋 CODE COPIED!';
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                }, 2000);
-            });
+            copyToClipboard(code);
         }
 
-        function redeemNow() {
-            window.open('https://pinkblue.in', '_blank');
+        function copyCodeDirect() {
+            const code = document.getElementById('couponCode').textContent;
+            copyToClipboard(code);
         }
 
-        function shareResult() {
-            const scoreText = document.getElementById('scoreDisplay').textContent;
-            const text = `🦷 I just completed the PB QUIZ and scored ${scoreText}! Test your dental knowledge too! 🎯⚡`;
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: 'PB QUIZ Challenge Complete!',
-                    text: text,
-                    url: window.location.href
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showCopySuccess();
+                }).catch(() => {
+                    legacyCopyToClipboard(text);
                 });
             } else {
-                navigator.clipboard.writeText(text);
-                alert('Result copied to share! 🎉');
+                legacyCopyToClipboard(text);
             }
         }
 
+        function legacyCopyToClipboard(text) {
+            const tempInput = document.createElement('input');
+            tempInput.value = text;
+            tempInput.style.position = 'fixed';
+            tempInput.style.left = '-999999px';
+            tempInput.style.top = '-999999px';
+            document.body.appendChild(tempInput);
+            
+            tempInput.focus();
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999);
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showCopySuccess();
+                }
+            } catch (err) {
+                showCopySuccess();
+            }
+            
+            document.body.removeChild(tempInput);
+        }
+
+        function showCopySuccess() {
+            const copySuccessElement = document.getElementById('copySuccess');
+            copySuccessElement.style.display = 'block';
+            setTimeout(() => {
+                copySuccessElement.style.display = 'none';
+            }, 2000);
+        }
+
+        // Share on WhatsApp
+        function shareWhatsApp() {
+            const history = getAttemptHistory();
+            let bestScore = 0;
+            if (history.length > 0) {
+                bestScore = Math.max(...history.map(attempt => attempt.score));
+            }
+            
+            const message = `🎯 I just completed the PB QUIZ Dental Challenge!
+
+🏆 My Best Score: ${bestScore}/10
+📊 Total Attempts: ${history.length}/5
+
+🦷 Test your dental knowledge: https://pinkblue.in/pbquiz
+
+#PBQuiz #DentalChallenge #PinkBlue`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappWebUrl = `https://wa.me/?text=${encodedMessage}`;
+            const whatsappAppUrl = `whatsapp://send?text=${encodedMessage}`;
+            
+            try {
+                window.location.href = whatsappAppUrl;
+                setTimeout(() => {
+                    window.open(whatsappWebUrl, '_blank');
+                }, 1000);
+            } catch (error) {
+                window.open(whatsappWebUrl, '_blank');
+            }
+        }
+
+        // Try again
         function tryAgain() {
-            if (attemptsLeft > 0) {
-                document.getElementById('resultContainer').classList.remove('show');
-                document.getElementById('startButton').style.display = 'block';
-                currentQuestion = 0;
-                score = 0;
-                timeLeft = 120;
+            const attempts = getAttempts();
+            if (attempts >= 5) {  // 5 ATTEMPTS
+                // Show attempts history
+                document.getElementById('resultsScreen').classList.add('hidden');
+                document.getElementById('attemptsHistoryScreen').classList.remove('hidden');
+                displayAttemptsHistory();
+                return;
             }
+            
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
         }
 
-        // Load and save game stats
-        function loadGameStats() {
-            const savedAttempts = localStorage.getItem('pbQuizAttempts');
-            const lastPlayDate = localStorage.getItem('pbQuizDate');
-            const today = new Date().toDateString();
-
-            // Reset attempts daily
-            if (lastPlayDate !== today) {
-                attemptsLeft = 5;
-                localStorage.setItem('pbQuizDate', today);
-            } else if (savedAttempts) {
-                attemptsLeft = parseInt(savedAttempts);
+        // Initialize
+        window.addEventListener('load', function() {
+            // Check user status on page load
+            if (!checkUserStatus()) {
+                // User has exhausted attempts, show history
+                displayAttemptsHistory();
             }
-        }
-
-        function saveGameStats() {
-            localStorage.setItem('pbQuizAttempts', attemptsLeft.toString());
-        }
-
-        // Initialize when page loads
-        window.addEventListener('load', initQuiz);
+            
+            document.getElementById('attemptsLeft').textContent = Math.max(0, 5 - getAttempts()); // 5 ATTEMPTS
+        });
     </script>
 </body>
 </html>
