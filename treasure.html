@@ -22,90 +22,6 @@
             position: relative;
         }
 
-        /* Retro animated background */
-        .retro-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: 
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(66, 133, 244, 0.05) 2px,
-                    transparent 4px
-                ),
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    rgba(66, 133, 244, 0.05) 2px,
-                    transparent 4px
-                );
-            animation: retro-move 20s linear infinite;
-            z-index: -2;
-        }
-
-        @keyframes retro-move {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        /* Floating geometric shapes */
-        .geo-shape {
-            position: absolute;
-            animation: float-geo 8s ease-in-out infinite;
-            opacity: 0.1;
-        }
-
-        .geo-shape:nth-child(1) {
-            top: 10%;
-            left: 10%;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, #4285f4, #1976d2);
-            transform: rotate(45deg);
-            animation-delay: 0s;
-        }
-
-        .geo-shape:nth-child(2) {
-            top: 20%;
-            right: 15%;
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(45deg, #2196f3, #0d47a1);
-            border-radius: 50%;
-            animation-delay: 2s;
-        }
-
-        .geo-shape:nth-child(3) {
-            bottom: 30%;
-            left: 20%;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, #03a9f4, #0277bd);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            animation-delay: 4s;
-        }
-
-        @keyframes float-geo {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(180deg); }
-        }
-
-        /* Pulsing orbs */
-        .pulse-orb {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, #4285f4, transparent);
-            animation: pulse-glow 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.5); opacity: 0.7; }
-        }
-
         .container {
             max-width: 420px;
             margin: 0 auto;
@@ -121,28 +37,10 @@
             padding: 25px;
             border-radius: 25px;
             border: 2px solid #4285f4;
-            box-shadow: 
-                0 0 30px rgba(66, 133, 244, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(66, 133, 244, 0.3);
             backdrop-filter: blur(15px);
             position: relative;
             overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(66, 133, 244, 0.1), transparent);
-            animation: header-shine 4s ease-in-out infinite;
-        }
-
-        @keyframes header-shine {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(180deg); }
         }
 
         .logo {
@@ -151,29 +49,13 @@
             font-weight: 900;
             color: #4285f4;
             margin-bottom: 10px;
-            text-shadow: 
-                0 0 10px #4285f4,
-                0 0 20px #4285f4,
-                0 0 30px #4285f4;
+            text-shadow: 0 0 20px #4285f4;
             animation: neon-glow 2s ease-in-out infinite alternate;
-            position: relative;
-            z-index: 2;
         }
 
         @keyframes neon-glow {
-            from { 
-                text-shadow: 
-                    0 0 10px #4285f4,
-                    0 0 20px #4285f4,
-                    0 0 30px #4285f4;
-            }
-            to { 
-                text-shadow: 
-                    0 0 20px #4285f4,
-                    0 0 30px #4285f4,
-                    0 0 40px #4285f4,
-                    0 0 50px #4285f4;
-            }
+            from { text-shadow: 0 0 20px #4285f4; }
+            to { text-shadow: 0 0 30px #4285f4, 0 0 40px #4285f4; }
         }
 
         .title {
@@ -181,8 +63,6 @@
             color: #fff;
             margin-bottom: 15px;
             font-weight: 600;
-            position: relative;
-            z-index: 2;
         }
 
         .stats-container {
@@ -197,34 +77,15 @@
             padding: 20px 15px;
             border-radius: 20px;
             border: 2px solid #4285f4;
-            box-shadow: 
-                0 8px 25px rgba(66, 133, 244, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 25px rgba(66, 133, 244, 0.2);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .stat-card:hover::before {
-            left: 100%;
-        }
-
         .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 
-                0 12px 35px rgba(66, 133, 244, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 35px rgba(66, 133, 244, 0.3);
         }
 
         .stat-number {
@@ -248,28 +109,10 @@
             border-radius: 30px;
             padding: 40px 25px;
             margin-bottom: 30px;
-            box-shadow: 
-                0 15px 40px rgba(66, 133, 244, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 40px rgba(66, 133, 244, 0.2);
             border: 3px solid #4285f4;
             position: relative;
             overflow: hidden;
-        }
-
-        .quiz-machine::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(66, 133, 244, 0.1) 0%, transparent 70%);
-            animation: machine-pulse 6s ease-in-out infinite;
-        }
-
-        @keyframes machine-pulse {
-            0%, 100% { transform: scale(0.8) rotate(0deg); opacity: 0.3; }
-            50% { transform: scale(1.2) rotate(180deg); opacity: 0.6; }
         }
 
         .machine-title {
@@ -279,8 +122,6 @@
             margin-bottom: 25px;
             text-shadow: 0 0 15px #4285f4;
             animation: title-pulse 3s ease-in-out infinite;
-            position: relative;
-            z-index: 2;
         }
 
         @keyframes title-pulse {
@@ -297,11 +138,7 @@
             font-weight: 700;
             font-size: 16px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            box-shadow: 
-                0 5px 15px rgba(66, 133, 244, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            position: relative;
-            z-index: 2;
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.4);
         }
 
         .question-container {
@@ -311,8 +148,6 @@
             border-radius: 20px;
             margin-bottom: 25px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 2;
             display: none;
         }
 
@@ -374,21 +209,6 @@
             overflow: hidden;
         }
 
-        .option::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(66, 133, 244, 0.1), transparent);
-            transition: left 0.3s;
-        }
-
-        .option:hover::before {
-            left: 100%;
-        }
-
         .option:hover {
             border-color: #4285f4;
             transform: translateY(-2px);
@@ -424,36 +244,16 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin: 20px 10px;
-            box-shadow: 
-                0 8px 25px rgba(66, 133, 244, 0.4),
-                inset 0 1px 0 rgba(255,255,255,0.2);
+            box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
             font-family: 'Exo 2', sans-serif;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 2;
             overflow: hidden;
-        }
-
-        .start-button::before, .next-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .start-button:hover::before, .next-button:hover::before {
-            left: 100%;
+            position: relative;
         }
 
         .start-button:hover, .next-button:hover {
             transform: translateY(-3px);
-            box-shadow: 
-                0 12px 35px rgba(66, 133, 244, 0.6),
-                inset 0 1px 0 rgba(255,255,255,0.3);
+            box-shadow: 0 12px 35px rgba(66, 133, 244, 0.6);
         }
 
         .result-container {
@@ -463,12 +263,8 @@
             border-radius: 25px;
             padding: 40px 30px;
             margin-top: 25px;
-            box-shadow: 
-                0 15px 40px rgba(66, 133, 244, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(66, 133, 244, 0.3);
             color: #2c3e50;
-            position: relative;
-            z-index: 2;
         }
 
         .result-container.show {
@@ -524,9 +320,7 @@
             margin: 25px 0;
             letter-spacing: 3px;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            box-shadow: 
-                0 10px 30px rgba(66, 133, 244, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(66, 133, 244, 0.4);
         }
 
         .action-buttons {
@@ -598,42 +392,6 @@
             transform: scale(1.1);
         }
 
-        /* Retro particles */
-        .retro-particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #4285f4;
-            border-radius: 50%;
-            animation: retro-float 6s ease-in-out infinite;
-            box-shadow: 0 0 10px #4285f4;
-        }
-
-        @keyframes retro-float {
-            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.5; }
-            50% { transform: translateY(-30px) translateX(20px); opacity: 1; }
-        }
-
-        /* Celebration effects */
-        .celebration-particle {
-            position: fixed;
-            font-size: 24px;
-            animation: celebrate-float 3s ease-out infinite;
-            pointer-events: none;
-            z-index: 1000;
-        }
-
-        @keyframes celebrate-float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
         @media (max-width: 480px) {
             .container { padding: 15px; }
             .logo { font-size: 28px; }
@@ -645,19 +403,6 @@
     </style>
 </head>
 <body>
-    <!-- Retro animated background -->
-    <div class="retro-bg"></div>
-    
-    <!-- Geometric shapes -->
-    <div class="geo-shape"></div>
-    <div class="geo-shape"></div>
-    <div class="geo-shape"></div>
-    
-    <!-- Pulsing orbs -->
-    <div class="pulse-orb" style="top: 30%; left: 5%; width: 60px; height: 60px; animation-delay: 0s;"></div>
-    <div class="pulse-orb" style="bottom: 40%; right: 10%; width: 40px; height: 40px; animation-delay: 2s;"></div>
-    <div class="pulse-orb" style="top: 60%; left: 80%; width: 50px; height: 50px; animation-delay: 4s;"></div>
-    
     <!-- Sound control -->
     <div class="sound-control" onclick="toggleSound()" id="soundControl">🔊</div>
 
@@ -669,7 +414,7 @@
 
         <div class="stats-container">
             <div class="stat-card">
-                <div class="stat-number" id="totalAttempts">2</div>
+                <div class="stat-number" id="totalAttempts">5</div>
                 <div class="stat-label">ATTEMPTS</div>
             </div>
             <div class="stat-card">
@@ -679,20 +424,20 @@
         </div>
 
         <div class="quiz-machine" id="quizMachine">
-            <div class="machine-title">🎯 DENTAL CHALLENGE ZONE 🎯</div>
+            <div class="machine-title">🎯 PB QUIZ CHALLENGE</div>
             
             <div class="attempts-display" id="attemptsDisplay">
-                ⚡ Attempts Remaining: <span id="attemptsLeft">2</span>/2 ⚡
+                ⚡ Attempts Remaining: <span id="attemptsLeft">5</span>/5 ⚡
             </div>
 
             <button class="start-button" id="startButton" onclick="startQuiz()">
-                🚀 START CHALLENGE 🚀
+                🚀 START CHALLENGE
             </button>
 
             <div class="question-container" id="questionContainer">
                 <div class="question-header">
                     <div class="question-number" id="questionNumber">Question 1 of 10</div>
-                    <div class="timer" id="timer">2:00</div>
+                    <div class="timer" id="timer">⏰ TIME: 2:00</div>
                 </div>
                 <div class="question-text" id="questionText"></div>
                 <div class="options-container" id="optionsContainer"></div>
@@ -707,91 +452,96 @@
                 <div class="reward-message" id="rewardMessage"></div>
                 <div class="coupon-code" id="couponCode" style="display: none;"></div>
                 <div class="action-buttons">
-                    <button class="action-btn" onclick="copyCode()" id="copyBtn" style="display: none;">📋 COPY CODE</button>
-                    <button class="action-btn" onclick="redeemNow()">🛒 SHOP NOW</button>
-                    <button class="action-btn" onclick="shareResult()">📱 SHARE</button>
+                    <button class="action-btn" onclick="copyCode()" id="copyBtn" style="display: none;">📋 COPY REWARD CODE</button>
+                    <button class="action-btn" onclick="redeemNow()">🛒 REDEEM NOW</button>
+                    <button class="action-btn" onclick="shareResult()">📱 SHARE RESULTS</button>
                     <button class="action-btn" onclick="tryAgain()">🔄 TRY AGAIN</button>
                 </div>
             </div>
         </div>
 
         <div class="rules">
-            <h3>🎯 CHALLENGE RULES 🎯</h3>
-            <p><strong>🦷 How to Play:</strong> Answer 10 dental knowledge questions within 2 minutes!</p>
-            <p><strong>🎁 REWARDS SYSTEM:</strong></p>
+            <h3>🎯 CHALLENGE RULES</h3>
+            <p><strong>🦷 Test your dental knowledge:</strong> Answer 10 advanced dental questions within 2 minutes!</p>
+            <p><strong>🎁 REWARD SYSTEM:</strong></p>
             <p>• <strong>1-2 Correct:</strong> Better luck next time! Keep learning! 📚</p>
             <p>• <strong>3-4 Correct:</strong> Flat 5% Off Coupon on your order 🎊</p>
             <p>• <strong>5-6 Correct:</strong> Flitt Diamond Burs Pack of 10 worth ₹499 FREE on orders above ₹2000 💎</p>
             <p>• <strong>7-8 Correct:</strong> 10% PB CASHBACK on Order 💰</p>
             <p>• <strong>9-10 Correct:</strong> FREE Speedendo Calcipro Rotary File worth ₹1250 on orders above ₹5k 🏆</p>
             <p><strong>⏰ Time Limit:</strong> 2 minutes total</p>
-            <p><strong>🎯 Attempts:</strong> Maximum 2 attempts allowed</p>
-            <p><strong>🔥 Tips:</strong> Each question has one correct answer. Think fast!</p>
+            <p><strong>🎯 Attempts:</strong> Maximum 5 attempts allowed</p>
+            <p><strong>🔥 Each question has one correct answer</strong></p>
+            <p><strong>💪 Higher scores unlock better rewards</strong></p>
+            <p><strong>🎁 Earn exclusive reward codes</strong></p>
         </div>
     </div>
 
-    <!-- Retro Music -->
+    <!-- Background Music -->
     <audio id="bgMusic" loop preload="auto">
         <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+T1vWgeBy+F0PLUfSwFL33L9N2QQAoUXrPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAkUXbPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAoUXrTp66hUFAlFnt/0vWgfCCuBzPLYijgIGGq+8OCPOgUUXrHo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwU=" type="audio/wav">
     </audio>
+    
+    <!-- Super Mario Button Sounds -->
     <audio id="clickSound" preload="auto">
         <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+T1vWgeBy+F0PLUfSwFL33L9N2QQAoUXrPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAkUXbPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAoUXrTp66hUFAlFnt/0vWgfCCuBzPLYijgIGGq+8OCPOgUUXrHo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwU=" type="audio/wav">
     </audio>
+    
     <audio id="correctSound" preload="auto">
         <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+T1vWgeBy+F0PLUfSwFL33L9N2QQAoUXrPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAkUXbPo66hVFApGn+T1vWgeBy+E0fLSgCkHLX7M9t2QQAoUXrTp66hUFAlFnt/0vWgfCCuBzPLYijgIGGq+8OCPOgUUXrHo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwUUXrPo66hVEwlEnN/zv2kfCCuBzfPaizgIF2i87+OQOwU=" type="audio/wav">
     </audio>
 
     <script>
-        // Quiz questions (dental knowledge)
+        // Hard dental professional questions
         const quizQuestions = [
             {
-                question: "What is the hardest substance in the human body?",
-                options: ["Bone", "Tooth Enamel", "Cartilage", "Nail"],
+                question: "What is the most common cause of cracked tooth syndrome in posterior teeth?",
+                options: ["Bruxism and parafunctional habits", "Excessive sugar consumption", "Poor oral hygiene", "Fluoride deficiency"],
+                correct: 0
+            },
+            {
+                question: "Which periodontal pathogen is most strongly associated with aggressive periodontitis?",
+                options: ["Porphyromonas gingivalis", "Aggregatibacter actinomycetemcomitans", "Tannerella forsythia", "Treponema denticola"],
                 correct: 1
             },
             {
-                question: "How many teeth does a typical adult have?",
-                options: ["28", "30", "32", "34"],
+                question: "What is the primary mechanism of action of dentin bonding agents?",
+                options: ["Chemical chelation", "Micromechanical retention through hybrid layer formation", "Ionic bonding", "Van der Waals forces"],
+                correct: 1
+            },
+            {
+                question: "In endodontics, what does the term 'working length' refer to?",
+                options: ["Length of the root canal file", "Distance from incisal edge to anatomical apex", "Distance from reference point to apical constriction", "Total root length"],
                 correct: 2
             },
             {
-                question: "What causes tooth decay?",
-                options: ["Sugar directly", "Bacteria producing acid", "Cold drinks", "Hard foods"],
+                question: "Which classification system is used for furcation involvement in multirooted teeth?",
+                options: ["Miller's classification", "Glickman's classification", "Kennedy's classification", "Angle's classification"],
                 correct: 1
             },
             {
-                question: "What is the soft tissue inside the tooth called?",
-                options: ["Enamel", "Dentin", "Pulp", "Crown"],
-                correct: 2
-            },
-            {
-                question: "How often should you replace your toothbrush?",
-                options: ["Every month", "Every 3-4 months", "Every 6 months", "Every year"],
+                question: "What is the most critical factor determining the success of immediate implant placement?",
+                options: ["Implant surface texture", "Primary stability and adequate bone volume", "Patient age", "Implant diameter"],
                 correct: 1
             },
             {
-                question: "What is the best time to brush your teeth?",
-                options: ["Before meals", "After meals", "Before bed only", "Any time"],
+                question: "Which material property is most important for the longevity of posterior composite restorations?",
+                options: ["Radiopacity", "Wear resistance and flexural strength", "Color stability", "Thermal conductivity"],
                 correct: 1
             },
             {
-                question: "What is gingivitis?",
-                options: ["Tooth decay", "Gum inflammation", "Bad breath", "Tooth sensitivity"],
+                question: "What is the gold standard treatment for necrotizing ulcerative gingivitis (NUG)?",
+                options: ["Chlorhexidine rinse only", "Debridement with metronidazole", "Antibiotic therapy alone", "Surgical intervention"],
                 correct: 1
             },
             {
-                question: "Which vitamin is essential for healthy teeth and gums?",
-                options: ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin E"],
-                correct: 2
-            },
-            {
-                question: "What is the main component of tooth enamel?",
-                options: ["Calcium phosphate", "Hydroxyapatite", "Fluoride", "Keratin"],
+                question: "In orthodontics, what does the ANB angle measure?",
+                options: ["Mandibular plane angle", "Sagittal jaw relationship", "Dental inclination", "Facial height ratio"],
                 correct: 1
             },
             {
-                question: "At what age do permanent molars typically appear?",
-                options: ["4-5 years", "6-7 years", "8-9 years", "10-11 years"],
+                question: "Which radiographic technique provides the highest resolution for detecting early periodontal bone loss?",
+                options: ["Panoramic radiography", "Bitewing radiography with digital subtraction", "Cone beam computed tomography", "Periapical radiography"],
                 correct: 1
             }
         ];
@@ -801,35 +551,22 @@
         let score = 0;
         let timeLeft = 120; // 2 minutes
         let timerInterval;
-        let attemptsLeft = 2;
+        let attemptsLeft = 5;
         let isQuizActive = false;
         let soundEnabled = true;
 
         // Initialize game
         function initQuiz() {
             loadGameStats();
-            createRetroParticles();
             updateAttemptsDisplay();
-        }
-
-        // Create retro floating particles
-        function createRetroParticles() {
-            for (let i = 0; i < 20; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'retro-particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
-                document.body.appendChild(particle);
-            }
+            startBackgroundMusic();
         }
 
         // Start quiz
         function startQuiz() {
             if (attemptsLeft <= 0) return;
 
-            playSound('clickSound');
+            playMarioSound('clickSound');
             isQuizActive = true;
             currentQuestion = 0;
             score = 0;
@@ -871,7 +608,7 @@
         function selectOption(selectedIndex) {
             if (!isQuizActive) return;
 
-            playSound('clickSound');
+            playMarioSound('clickSound');
             
             const options = document.querySelectorAll('.option');
             const question = quizQuestions[currentQuestion];
@@ -889,8 +626,7 @@
 
             if (selectedIndex === question.correct) {
                 score++;
-                playSound('correctSound');
-                createCelebrationEffect();
+                playMarioSound('correctSound');
             }
 
             document.getElementById('nextButton').style.display = 'block';
@@ -898,7 +634,7 @@
 
         // Next question
         function nextQuestion() {
-            playSound('clickSound');
+            playMarioSound('clickSound');
             currentQuestion++;
             
             if (currentQuestion >= quizQuestions.length) {
@@ -915,7 +651,7 @@
                 const minutes = Math.floor(timeLeft / 60);
                 const seconds = timeLeft % 60;
                 document.getElementById('timer').textContent = 
-                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                    `⏰ TIME: ${minutes}:${seconds.toString().padStart(2, '0')}`;
                 
                 if (timeLeft <= 0) {
                     endQuiz();
@@ -957,7 +693,6 @@
             }
             
             resultContainer.classList.add('show');
-            createMegaCelebration();
             updateAttemptsDisplay();
         }
 
@@ -991,42 +726,6 @@
             }
         }
 
-        // Create celebration effects
-        function createCelebrationEffect() {
-            const emojis = ['✨', '⭐', '💫', '🎉'];
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    const particle = document.createElement('div');
-                    particle.className = 'celebration-particle';
-                    particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-                    particle.style.left = Math.random() * 100 + '%';
-                    particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                    document.body.appendChild(particle);
-                    
-                    setTimeout(() => particle.remove(), 3000);
-                }, i * 100);
-            }
-        }
-
-        // Create mega celebration for quiz end
-        function createMegaCelebration() {
-            const celebrationEmojis = ['🎉', '🎊', '✨', '⭐', '💫', '🌟', '🏆', '💎'];
-            for (let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    const particle = document.createElement('div');
-                    particle.className = 'celebration-particle';
-                    particle.textContent = celebrationEmojis[Math.floor(Math.random() * celebrationEmojis.length)];
-                    particle.style.left = Math.random() * 100 + '%';
-                    particle.style.fontSize = (Math.random() * 20 + 20) + 'px';
-                    particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                    particle.style.animationDelay = Math.random() * 1 + 's';
-                    document.body.appendChild(particle);
-                    
-                    setTimeout(() => particle.remove(), 5000);
-                }, i * 100);
-            }
-        }
-
         // Update attempts display
         function updateAttemptsDisplay() {
             document.getElementById('attemptsLeft').textContent = attemptsLeft;
@@ -1034,7 +733,7 @@
             
             if (attemptsLeft <= 0) {
                 document.getElementById('attemptsDisplay').innerHTML = 
-                    '🚫 <strong>All attempts completed!</strong> Come back tomorrow!';
+                    '🚫 <strong>All attempts completed!</strong> You have used all your 5 attempts for PB QUIZ';
                 document.getElementById('attemptsDisplay').style.background = 
                     'linear-gradient(145deg, #e74c3c, #c0392b)';
                 document.getElementById('startButton').style.display = 'none';
@@ -1042,22 +741,22 @@
         }
 
         // Audio functions
-        function playSound(soundId) {
+        function playMarioSound(soundId) {
             if (soundEnabled) {
                 const audio = document.getElementById(soundId);
                 if (audio) {
                     audio.currentTime = 0;
-                    audio.volume = 0.3;
+                    audio.volume = 0.4;
                     audio.play().catch(() => {
                         // Fallback: Web Audio API beep
-                        createRetroBeep(soundId);
+                        createMarioBeep(soundId);
                     });
                 }
             }
         }
 
-        // Create retro beep sounds
-        function createRetroBeep(soundType) {
+        // Create Mario-style beep sounds
+        function createMarioBeep(soundType) {
             if (typeof AudioContext !== 'undefined' || typeof webkitAudioContext !== 'undefined') {
                 const audioContext = new (AudioContext || webkitAudioContext)();
                 const oscillator = audioContext.createOscillator();
@@ -1066,21 +765,29 @@
                 oscillator.connect(gainNode);
                 gainNode.connect(audioContext.destination);
                 
-                // Different frequencies for different sounds
+                // Mario-style frequencies
                 const frequencies = {
-                    clickSound: 800,
-                    correctSound: 1200,
-                    bgMusic: 440
+                    clickSound: 1000,   // High pitched click
+                    correctSound: 1600, // Success sound
+                    bgMusic: 440       // Background tone
                 };
                 
-                oscillator.frequency.value = frequencies[soundType] || 600;
-                oscillator.type = 'square'; // Retro square wave
+                oscillator.frequency.value = frequencies[soundType] || 800;
+                oscillator.type = 'square'; // Mario-style square wave
                 
                 gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
                 
                 oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.2);
+                oscillator.stop(audioContext.currentTime + 0.15);
+            }
+        }
+
+        function startBackgroundMusic() {
+            if (soundEnabled) {
+                const bgMusic = document.getElementById('bgMusic');
+                bgMusic.volume = 0.1;
+                bgMusic.play().catch(() => {});
             }
         }
 
@@ -1104,7 +811,7 @@
             navigator.clipboard.writeText(code).then(() => {
                 const btn = document.getElementById('copyBtn');
                 const originalText = btn.textContent;
-                btn.textContent = '✅ COPIED!';
+                btn.textContent = '📋 CODE COPIED!';
                 setTimeout(() => {
                     btn.textContent = originalText;
                 }, 2000);
@@ -1149,7 +856,7 @@
 
             // Reset attempts daily
             if (lastPlayDate !== today) {
-                attemptsLeft = 2;
+                attemptsLeft = 5;
                 localStorage.setItem('pbQuizDate', today);
             } else if (savedAttempts) {
                 attemptsLeft = parseInt(savedAttempts);
@@ -1161,45 +868,7 @@
         }
 
         // Initialize when page loads
-        window.addEventListener('load', () => {
-            initQuiz();
-            
-            // Start background music
-            const bgMusic = document.getElementById('bgMusic');
-            bgMusic.volume = 0.2;
-            bgMusic.play().catch(() => {});
-        });
-
-        // Add retro click effects
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('.quiz-machine') || e.target.closest('.option')) {
-                const effect = document.createElement('div');
-                effect.style.position = 'absolute';
-                effect.style.left = e.pageX + 'px';
-                effect.style.top = e.pageY + 'px';
-                effect.style.width = '20px';
-                effect.style.height = '20px';
-                effect.style.background = '#4285f4';
-                effect.style.borderRadius = '50%';
-                effect.style.pointerEvents = 'none';
-                effect.style.animation = 'retro-click 0.6s ease-out forwards';
-                effect.style.zIndex = '1000';
-                document.body.appendChild(effect);
-                
-                setTimeout(() => effect.remove(), 600);
-            }
-        });
-
-        // Add retro click animation
-        const retroStyles = document.createElement('style');
-        retroStyles.textContent = `
-            @keyframes retro-click {
-                0% { transform: scale(0); opacity: 1; box-shadow: 0 0 0 0 #4285f4; }
-                50% { transform: scale(1); opacity: 0.7; box-shadow: 0 0 0 10px rgba(66, 133, 244, 0.3); }
-                100% { transform: scale(1.5); opacity: 0; box-shadow: 0 0 0 20px rgba(66, 133, 244, 0); }
-            }
-        `;
-        document.head.appendChild(retroStyles);
+        window.addEventListener('load', initQuiz);
     </script>
 </body>
 </html>
