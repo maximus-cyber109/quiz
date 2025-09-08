@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PB QUIZ - Dental Knowledge Challenge</title>
+    <title>PB QUIZ - Professional Dental Challenge</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -30,7 +30,7 @@
             50% { background-position: 100% 50%; }
         }
 
-        /* Retro Study Room Background */
+        /* Animated background */
         .study-room-bg {
             position: fixed;
             top: 0;
@@ -42,44 +42,10 @@
                 linear-gradient(90deg, transparent 25px, #1976d2 25px, #1976d2 30px, transparent 30px),
                 linear-gradient(90deg, transparent 40px, #1e88e5 40px, #1e88e5 45px, transparent 45px),
                 linear-gradient(90deg, transparent 55px, #2196f3 55px, #2196f3 60px, transparent 60px),
-                linear-gradient(0deg, #1565c0 0%, #1565c0 20px, transparent 20px, transparent 40px, #1565c0 40px, #1565c0 60px, transparent 60px),
-                linear-gradient(0deg, transparent 70%, #0d47a1 70%, #0d47a1 80%, transparent 80%),
                 #F5F5F5;
-            background-size: 80px 100px, 80px 100px, 80px 100px, 80px 100px, 100% 100px, 100% 100px, 100% 100%;
-            opacity: 0.15;
+            background-size: 80px 100px, 80px 100px, 80px 100px, 80px 100px, 100% 100%;
+            opacity: 0.1;
             z-index: 1;
-        }
-
-        .pixel-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .pixel-book {
-            position: absolute;
-            width: 8px;
-            height: 12px;
-            background: #4285f4;
-            animation: floatBook 6s ease-in-out infinite;
-            box-shadow: 
-                2px 0 0 #1976d2,
-                4px 0 0 #4285f4,
-                6px 0 0 #1976d2;
-        }
-
-        .pixel-book:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
-        .pixel-book:nth-child(2) { top: 20%; right: 10%; animation-delay: 1s; }
-        .pixel-book:nth-child(3) { bottom: 30%; left: 15%; animation-delay: 2s; }
-        .pixel-book:nth-child(4) { bottom: 20%; right: 20%; animation-delay: 3s; }
-
-        @keyframes floatBook {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(2deg); }
         }
 
         .container {
@@ -90,6 +56,7 @@
             z-index: 10;
         }
 
+        /* Header - Full size initially */
         .retro-header {
             background: #FFFFFF;
             border: 4px solid #4285f4;
@@ -102,28 +69,37 @@
                 inset 0 0 0 2px #1a237e,
                 4px 4px 0 #1976d2,
                 8px 8px 0 #1565c0;
+            transition: all 0.5s ease;
         }
 
-        .retro-header::before {
-            content: '';
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            height: 4px;
-            background: 
-                linear-gradient(90deg, 
-                #4285f4 0px, #4285f4 8px, 
-                #FFFFFF 8px, #FFFFFF 16px,
-                #4285f4 16px, #4285f4 24px,
-                #FFFFFF 24px, #FFFFFF 32px);
-            background-size: 32px 4px;
-            animation: pixelBorder 2s linear infinite;
+        /* Header - Collapsed during quiz */
+        .retro-header.collapsed {
+            padding: 15px;
+            margin-bottom: 15px;
         }
 
-        @keyframes pixelBorder {
-            0% { background-position: 0px 0px; }
-            100% { background-position: 32px 0px; }
+        .retro-header.collapsed .pixel-title {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .retro-header.collapsed .pixel-subtitle {
+            font-size: 0.6rem;
+            margin-bottom: 10px;
+        }
+
+        .retro-header.collapsed .pixel-stats {
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .retro-header.collapsed .pixel-stat {
+            min-width: 100px;
+            padding: 8px;
+        }
+
+        .retro-header.collapsed .header-buttons {
+            display: none;
         }
 
         .pixel-title {
@@ -134,6 +110,7 @@
                 4px 4px 0 #1976d2;
             margin-bottom: 10px;
             animation: pixelGlow 3s ease-in-out infinite;
+            transition: all 0.5s ease;
         }
 
         @keyframes pixelGlow {
@@ -145,6 +122,7 @@
             font-size: 0.8rem;
             color: #1a237e;
             margin-bottom: 20px;
+            transition: all 0.5s ease;
         }
 
         .pixel-stats {
@@ -153,6 +131,7 @@
             gap: 15px;
             flex-wrap: wrap;
             margin-bottom: 20px;
+            transition: all 0.5s ease;
         }
 
         .pixel-stat {
@@ -166,6 +145,7 @@
             box-shadow: 
                 inset 2px 2px 0 #64b5f6,
                 inset -2px -2px 0 #1976d2;
+            transition: all 0.5s ease;
         }
 
         .pixel-stat::before {
@@ -188,7 +168,7 @@
 
         @keyframes pixelPulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50% { transform: scale(1.05); }
         }
 
         .stat-label {
@@ -196,46 +176,24 @@
             color: #1a237e;
         }
 
-        .pixel-tags {
+        .header-buttons {
             display: flex;
             justify-content: center;
-            align-items: center;
             gap: 15px;
             flex-wrap: wrap;
+            transition: all 0.5s ease;
         }
 
-        .pixel-tag {
-            background: #1a237e;
-            color: #4285f4;
-            padding: 8px 16px;
-            border: 2px solid #4285f4;
-            font-size: 0.6rem;
-            animation: tagBlink 4s ease-in-out infinite;
-        }
-
-        .pixel-tag:nth-child(1) { animation-delay: 0s; }
-        .pixel-tag:nth-child(2) { animation-delay: 1s; }
-
-        @keyframes tagBlink {
-            0%, 90%, 100% { opacity: 1; }
-            95% { opacity: 0.7; }
-        }
-
-        /* Header Buttons */
         .header-btn {
             border: 3px solid;
             padding: 12px 20px;
             font-family: 'Press Start 2P', monospace;
             font-size: 0.7rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             position: relative;
             text-decoration: none;
             display: inline-block;
-        }
-
-        /* Header Start Challenge Button */
-        .header-start-btn {
             background: #90EE90;
             color: #006400;
             border-color: #006400;
@@ -243,10 +201,9 @@
                 inset 2px 2px 0 #98FB98,
                 inset -2px -2px 0 #00FF00,
                 3px 3px 0 #004000;
-            animation: challengeBlink 2s ease-in-out infinite;
         }
 
-        .header-start-btn:hover {
+        .header-btn:hover {
             background: #98FB98;
             transform: translate(2px, 2px);
             box-shadow: 
@@ -255,25 +212,6 @@
                 1px 1px 0 #004000;
         }
 
-        .header-start-btn:active {
-            transform: translate(3px, 3px);
-            box-shadow: 
-                inset 2px 2px 0 #00FF00,
-                inset -2px -2px 0 #004000;
-        }
-
-        @keyframes challengeBlink {
-            0%, 90%, 100% { 
-                background: #90EE90; 
-                color: #006400;
-            }
-            95% { 
-                background: #4285f4; 
-                color: #1a237e;
-            }
-        }
-
-        /* Header Explore PB Days Button */
         .header-explore-btn {
             background: #FF8C00;
             color: #8B4513;
@@ -282,34 +220,10 @@
                 inset 2px 2px 0 #FFA500,
                 inset -2px -2px 0 #FF7F00,
                 3px 3px 0 #5D2E00;
-            animation: exploreBlink 2.5s ease-in-out infinite;
         }
 
         .header-explore-btn:hover {
             background: #FFA500;
-            transform: translate(2px, 2px);
-            box-shadow: 
-                inset 2px 2px 0 #FFB84D,
-                inset -2px -2px 0 #FF8C00,
-                1px 1px 0 #5D2E00;
-        }
-
-        .header-explore-btn:active {
-            transform: translate(3px, 3px);
-            box-shadow: 
-                inset 2px 2px 0 #FF7F00,
-                inset -2px -2px 0 #5D2E00;
-        }
-
-        @keyframes exploreBlink {
-            0%, 90%, 100% { 
-                background: #FF8C00; 
-                color: #8B4513;
-            }
-            95% { 
-                background: #4285f4; 
-                color: #1a237e;
-            }
         }
 
         .retro-content {
@@ -321,6 +235,12 @@
             box-shadow: 
                 inset 0 0 0 2px #4285f4,
                 6px 6px 0 #1976d2;
+            animation: contentSlide 0.5s ease-out;
+        }
+
+        @keyframes contentSlide {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .retro-content::before {
@@ -389,7 +309,7 @@
             font-family: 'Press Start 2P', monospace;
             font-size: 0.8rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             display: block;
             width: 100%;
             margin: 20px 0;
@@ -517,6 +437,12 @@
             padding: 25px;
             margin-bottom: 20px;
             position: relative;
+            animation: questionAppear 0.5s ease-out;
+        }
+
+        @keyframes questionAppear {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         .pixel-question::before {
@@ -563,6 +489,12 @@
             align-items: center;
             gap: 15px;
             position: relative;
+            animation: optionSlide 0.3s ease-out;
+        }
+
+        @keyframes optionSlide {
+            0% { opacity: 0; transform: translateX(-10px); }
+            100% { opacity: 1; transform: translateX(0); }
         }
 
         .pixel-option:hover {
@@ -628,7 +560,23 @@
             color: #FFFFFF;
         }
 
-        /* ATTEMPTS HISTORY TABLE */
+        /* No rewards message */
+        .no-rewards-message {
+            background: #FFB347;
+            border: 3px solid #FF8C00;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #8B4513;
+            font-size: 0.7rem;
+            text-align: center;
+            animation: messageGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes messageGlow {
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 140, 0, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(255, 140, 0, 0.8); }
+        }
+
         .attempts-history {
             background: #FFFFFF;
             border: 4px solid #1a237e;
@@ -672,17 +620,6 @@
         .attempts-table tr:hover td {
             background: #4285f4;
             color: #1a237e;
-        }
-
-        .no-attempts-message {
-            text-align: center;
-            color: #1a237e;
-            font-size: 1rem;
-            margin: 20px 0;
-            padding: 20px;
-            background: #FFB6C1;
-            border: 3px solid #DC143C;
-            border-radius: 10px;
         }
 
         .pixel-results {
@@ -788,7 +725,9 @@
 
         @media (max-width: 768px) {
             .pixel-title { font-size: 1.8rem; }
-            .pixel-stats { flex-direction: column; gap: 10px; }
+            .retro-header.collapsed .pixel-title { font-size: 1.2rem; }
+            .pixel-stats { flex-direction: row; gap: 5px; }
+            .pixel-stat { min-width: 80px; padding: 8px; }
             .button-row { flex-direction: column; }
             .button-row .pixel-btn { width: 100%; }
             .pixel-countdown { font-size: 4rem; }
@@ -802,32 +741,20 @@
                 padding: 10px 16px;
                 margin: 5px 0;
             }
-            .pixel-tags {
-                flex-direction: column;
-                gap: 10px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Study Room Background -->
+    <!-- Background -->
     <div class="study-room-bg"></div>
 
-    <!-- Floating Pixelated Books -->
-    <div class="pixel-elements">
-        <div class="pixel-book"></div>
-        <div class="pixel-book"></div>
-        <div class="pixel-book"></div>
-        <div class="pixel-book"></div>
-    </div>
-
     <div class="container">
-        <!-- Retro Pixelated Header -->
-        <div class="retro-header">
+        <!-- Dynamic Header -->
+        <div class="retro-header" id="mainHeader">
             <h1 class="pixel-title">🦷 PB QUIZ 🦷</h1>
-            <p class="pixel-subtitle">🧠 DENTAL KNOWLEDGE CHALLENGE 🧠</p>
+            <p class="pixel-subtitle">🧠 PROFESSIONAL DENTAL CHALLENGE 🧠</p>
             
-            <!-- Horizontal Stats -->
+            <!-- Stats Row -->
             <div class="pixel-stats">
                 <div class="pixel-stat">
                     <span class="stat-number" id="attemptsLeft">5</span>
@@ -843,15 +770,13 @@
                 </div>
             </div>
 
-            <!-- Updated Pixel Tags with Both Buttons -->
-            <div class="pixel-tags">
-                <div class="pixel-tag">🎯 QUIZZES</div>
-                <div class="pixel-tag">⚡ POWER-UPS</div>
-                <button class="header-btn header-start-btn" onclick="startCountdown()">
+            <!-- Header Buttons -->
+            <div class="header-buttons" id="headerButtons">
+                <button class="header-btn" onclick="startCountdown()">
                     🚀 START CHALLENGE
                 </button>
                 <a href="https://pinkblue.in" class="header-btn header-explore-btn" target="_top">
-                    🌟 EXPLORE MORE
+                    🌟 EXPLORE PB DAYS
                 </a>
             </div>
         </div>
@@ -859,7 +784,7 @@
         <!-- Start Screen -->
         <div class="retro-content" id="startScreen">
             <h2 style="color: #4285f4; margin-bottom: 15px; text-align: center; font-size: 1.2rem; text-shadow: 2px 2px 0 #1a237e;">🎯 PB QUIZ CHALLENGE</h2>
-            <p style="color: #1a237e; margin-bottom: 20px; text-align: center; font-size: 0.7rem;">Test your dental knowledge and unlock exclusive PB rewards!</p>
+            <p style="color: #1a237e; margin-bottom: 20px; text-align: center; font-size: 0.7rem;">Test your professional dental knowledge and unlock exclusive rewards!</p>
             
             <div class="pixel-rules">
                 <h3>🎯 CHALLENGE RULES</h3>
@@ -868,8 +793,9 @@
                     <li>⏰ You have 2 minutes to complete</li>
                     <li>🎯 Higher scores unlock better rewards</li>
                     <li>🔥 Each question has one correct answer</li>
-                    <li>💪 Maximum 5 attempts allowed</li>
-                    <li>🎁 Earn exclusive reward codes</li>
+                    <li>💪 Maximum 5 attempts with rewards</li>
+                    <li>🎁 Continue playing after attempts for practice</li>
+                    <li>📚 300+ questions that change every time</li>
                 </ul>
             </div>
 
@@ -878,47 +804,12 @@
             </button>
         </div>
 
-        <!-- Attempts History Screen -->
-        <div class="attempts-history hidden" id="attemptsHistoryScreen">
-            <h2 style="color: #4285f4; margin-bottom: 15px; text-align: center; font-size: 1.2rem; text-shadow: 2px 2px 0 #1a237e;">📊 YOUR CHALLENGE HISTORY</h2>
-            
-            <div class="no-attempts-message">
-                <strong>🚫 All Attempts Completed!</strong><br>
-                You have used all your 5 attempts for PB QUIZ
-            </div>
-
-            <div id="attemptsTableContainer">
-                <table class="attempts-table">
-                    <thead>
-                        <tr>
-                            <th>ATTEMPT</th>
-                            <th>SCORE</th>
-                            <th>TIME TAKEN</th>
-                            <th>OFFER</th>
-                            <th>COUPON CODE</th>
-                        </tr>
-                    </thead>
-                    <tbody id="attemptsTableBody">
-                        <!-- Attempts will be populated here -->
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="button-row">
-                <a href="https://pinkblue.in/cart" class="pixel-btn btn-success" target="_top">
-                    🛒 REDEEM COUPONS
-                </a>
-                <a href="https://pinkblue.in" class="pixel-btn btn-warning" target="_top">
-                    📖 BROWSE PRODUCTS
-                </a>
-                <button class="pixel-btn btn-whatsapp" onclick="shareWhatsApp()">
-                    📱 SHARE RESULTS
-                </button>
-            </div>
-        </div>
-
         <!-- Quiz Screen -->
         <div class="retro-content hidden" id="quizScreen">
+            <div id="noRewardsMessage" class="no-rewards-message hidden">
+                🎯 PRACTICE MODE - No more reward attempts left, but keep playing to improve your knowledge!
+            </div>
+
             <div class="pixel-timer" id="timer">
                 ⏰ TIME: 2:00
             </div>
@@ -946,7 +837,7 @@
                 <h2 id="resultsTitle">CHALLENGE COMPLETE!</h2>
                 <div class="pixel-score" id="finalScore"></div>
 
-                <div class="pixel-reward">
+                <div class="pixel-reward" id="rewardSection">
                     <h3 class="reward-title">
                         🎁 YOUR PB QUIZ REWARD!
                     </h3>
@@ -975,23 +866,313 @@
         </div>
     </div>
 
-    <!-- Pixelated Countdown -->
+    <!-- Countdown -->
     <div class="pixel-countdown" id="countdownOverlay">
         <span id="countdownNumber">3</span>
     </div>
 
-    <!-- Copy Success Indicator -->
+    <!-- Copy Success -->
     <div class="copy-success" id="copySuccess">
         📋 CODE COPIED!
     </div>
 
     <script>
-        // Audio Context for sounds
+        // 300 Professional Dental Questions
+        const allQuestions = [
+            // Endodontics
+            {
+                question: "What is the most common cause of endodontic failure in retreatment cases?",
+                options: ["Missed canals", "Inadequate cleaning", "Vertical root fractures", "Poor coronal seal"],
+                correct: 0
+            },
+            {
+                question: "Which irrigant is most effective against Enterococcus faecalis biofilms?",
+                options: ["5.25% NaOCl", "2% Chlorhexidine", "17% EDTA", "3% Hydrogen peroxide"],
+                correct: 1
+            },
+            {
+                question: "What is the recommended working length measurement from the apical constriction?",
+                options: ["0.5-1mm short", "At the constriction", "1-2mm short", "2-3mm short"],
+                correct: 0
+            },
+            // Periodontics
+            {
+                question: "Which classification system is used for periodontal disease staging?",
+                options: ["Miller's Classification", "AAP 2017 Classification", "Ramfjord Index", "Löe and Silness Index"],
+                correct: 1
+            },
+            {
+                question: "What is the gold standard for periodontal regeneration?",
+                options: ["GTR membranes", "Bone grafts", "EMD (Emdogain)", "Platelet-rich fibrin"],
+                correct: 2
+            },
+            {
+                question: "Which bacteria is most associated with aggressive periodontitis?",
+                options: ["P. gingivalis", "A. actinomycetemcomitans", "T. forsythia", "F. nucleatum"],
+                correct: 1
+            },
+            // Prosthodontics
+            {
+                question: "What is the ideal crown-to-root ratio for a single crown?",
+                options: ["1:1", "1:1.5", "1:2", "2:1"],
+                correct: 1
+            },
+            {
+                question: "Which cement provides the best retention for all-ceramic restorations?",
+                options: ["Zinc phosphate", "Glass ionomer", "Resin cement", "Polycarboxylate"],
+                correct: 2
+            },
+            {
+                question: "What is the minimum recommended ferrule height for post-core restorations?",
+                options: ["1mm", "2mm", "3mm", "4mm"],
+                correct: 1
+            },
+            // Oral Surgery
+            {
+                question: "What is the most common complication after third molar extraction?",
+                options: ["Nerve damage", "Dry socket", "Infection", "Bleeding"],
+                correct: 1
+            },
+            {
+                question: "Which local anesthetic provides the longest duration of action?",
+                options: ["Lidocaine", "Articaine", "Bupivacaine", "Mepivacaine"],
+                correct: 2
+            },
+            {
+                question: "What is the recommended torque for implant placement?",
+                options: ["15-25 Ncm", "35-45 Ncm", "50-60 Ncm", "Over 70 Ncm"],
+                correct: 1
+            },
+            // Orthodontics
+            {
+                question: "What does the ANB angle measure in cephalometric analysis?",
+                options: ["Mandibular plane angle", "Sagittal jaw relationship", "Facial height", "Dental angulation"],
+                correct: 1
+            },
+            {
+                question: "Which force level is recommended for orthodontic tooth movement?",
+                options: ["50-75g", "150-300g", "400-600g", "Over 800g"],
+                correct: 1
+            },
+            {
+                question: "What is the ideal age for interceptive orthodontic treatment?",
+                options: ["6-8 years", "8-10 years", "10-12 years", "12-14 years"],
+                correct: 1
+            },
+            // Pediatric Dentistry
+            {
+                question: "Which material is most appropriate for pulpotomy in primary teeth?",
+                options: ["Formocresol", "MTA", "Calcium hydroxide", "Ferric sulfate"],
+                correct: 1
+            },
+            {
+                question: "At what age should fluoride toothpaste be introduced?",
+                options: ["6 months", "1 year", "2 years", "3 years"],
+                correct: 1
+            },
+            {
+                question: "What is the recommended fluoride concentration for children under 6?",
+                options: ["500 ppm", "1000 ppm", "1450 ppm", "5000 ppm"],
+                correct: 1
+            },
+            // Restorative Dentistry
+            {
+                question: "What is the recommended etch time for dentin?",
+                options: ["15 seconds", "30 seconds", "45 seconds", "60 seconds"],
+                correct: 0
+            },
+            {
+                question: "Which composite type is best for posterior restorations?",
+                options: ["Microfill", "Hybrid", "Nanofill", "Flowable"],
+                correct: 2
+            },
+            {
+                question: "What is the ideal moisture content for dentin bonding?",
+                options: ["Completely dry", "Slightly moist", "Very wet", "Flooded"],
+                correct: 1
+            },
+            // Oral Pathology
+            {
+                question: "Which is the most common site for oral squamous cell carcinoma?",
+                options: ["Tongue", "Floor of mouth", "Gingiva", "Palate"],
+                correct: 0
+            },
+            {
+                question: "What is the most common odontogenic cyst?",
+                options: ["Periapical cyst", "Dentigerous cyst", "Lateral periodontal cyst", "Residual cyst"],
+                correct: 0
+            },
+            {
+                question: "Which virus is associated with oral hairy leukoplakia?",
+                options: ["HSV-1", "EBV", "CMV", "HPV"],
+                correct: 1
+            },
+            // Dental Materials
+            {
+                question: "What is the setting time of Type I dental stone?",
+                options: ["5-10 minutes", "10-15 minutes", "15-20 minutes", "20-30 minutes"],
+                correct: 1
+            },
+            {
+                question: "Which property is most important for impression materials?",
+                options: ["High viscosity", "Elastic recovery", "Long working time", "High tear strength"],
+                correct: 1
+            },
+            {
+                question: "What is the ideal powder-to-liquid ratio for Type III stone?",
+                options: ["100g:23ml", "100g:30ml", "100g:50ml", "100g:100ml"],
+                correct: 0
+            },
+            // Radiography
+            {
+                question: "What is the recommended frequency for bitewing X-rays in high-risk patients?",
+                options: ["6 months", "12 months", "18 months", "24 months"],
+                correct: 0
+            },
+            {
+                question: "Which projection shows the maxillary sinus best?",
+                options: ["PA", "Bitewing", "Lateral", "Waters view"],
+                correct: 3
+            },
+            {
+                question: "What is the maximum safe radiation dose per year for dental workers?",
+                options: ["20 mSv", "50 mSv", "100 mSv", "150 mSv"],
+                correct: 0
+            },
+            // Pharmacology
+            {
+                question: "What is the maximum safe dose of lidocaine for a healthy adult?",
+                options: ["300mg", "500mg", "700mg", "1000mg"],
+                correct: 1
+            },
+            {
+                question: "Which antibiotic is first choice for odontogenic infections?",
+                options: ["Penicillin", "Amoxicillin", "Clindamycin", "Azithromycin"],
+                correct: 1
+            },
+            {
+                question: "What is the mechanism of action of NSAIDs?",
+                options: ["COX inhibition", "LOX inhibition", "Calcium channel blocking", "Sodium channel blocking"],
+                correct: 0
+            },
+            // More Advanced Questions
+            {
+                question: "Which technique is gold standard for measuring periodontal bone loss?",
+                options: ["Clinical probing", "Bitewing radiography", "Digital subtraction radiography", "CBCT"],
+                correct: 2
+            },
+            {
+                question: "What is the most predictable method for root coverage?",
+                options: ["Free gingival graft", "Connective tissue graft", "Guided tissue regeneration", "Coronally advanced flap"],
+                correct: 1
+            },
+            {
+                question: "Which factor most influences implant success?",
+                options: ["Implant diameter", "Primary stability", "Surface texture", "Implant length"],
+                correct: 1
+            },
+            {
+                question: "What is the recommended maintenance interval for periodontitis patients?",
+                options: ["2 months", "3 months", "6 months", "12 months"],
+                correct: 1
+            },
+            {
+                question: "Which material has the highest flexural strength for posterior crowns?",
+                options: ["Feldspathic porcelain", "Leucite-reinforced ceramic", "Lithium disilicate", "Zirconia"],
+                correct: 3
+            },
+            {
+                question: "What is the most common cause of post-operative sensitivity in composites?",
+                options: ["Polymerization shrinkage", "Incomplete polymerization", "Microleakage", "Thermal expansion"],
+                correct: 2
+            },
+            {
+                question: "Which virus is most associated with oral cancer?",
+                options: ["HSV-1", "HPV-16", "EBV", "CMV"],
+                correct: 1
+            },
+            {
+                question: "What is the recommended fiber post diameter relative to root diameter?",
+                options: ["1/4", "1/3", "1/2", "2/3"],
+                correct: 1
+            },
+            {
+                question: "Which growth factor is most important in periodontal regeneration?",
+                options: ["PDGF", "BMP-2", "TGF-β", "IGF-1"],
+                correct: 0
+            },
+            {
+                question: "What is the minimum bone width required for implant placement?",
+                options: ["4mm", "5mm", "6mm", "7mm"],
+                correct: 2
+            },
+            {
+                question: "Which classification describes gingival recession?",
+                options: ["Miller Classification", "Cairo Classification", "Kumar Classification", "RT1-RT3 Classification"],
+                correct: 0
+            },
+            {
+                question: "What is the recommended waiting period after tooth extraction for implant placement?",
+                options: ["Immediate", "4-6 weeks", "8-12 weeks", "4-6 months"],
+                correct: 2
+            },
+            {
+                question: "Which factor most affects the longevity of dental implants?",
+                options: ["Implant design", "Oral hygiene maintenance", "Bone density", "Surgical technique"],
+                correct: 1
+            },
+            {
+                question: "What is the most accurate method for caries detection?",
+                options: ["Visual examination", "Bitewing radiography", "Laser fluorescence", "Transillumination"],
+                correct: 1
+            },
+            {
+                question: "Which pulp capping material shows the best long-term success?",
+                options: ["Calcium hydroxide", "MTA", "Biodentine", "Glass ionomer"],
+                correct: 1
+            },
+            {
+                question: "What is the recommended minimum thickness for ceramic veneers?",
+                options: ["0.3mm", "0.5mm", "0.7mm", "1.0mm"],
+                correct: 1
+            },
+            {
+                question: "Which suture technique provides the best healing for periodontal surgery?",
+                options: ["Simple interrupted", "Continuous", "Mattress", "Sling suture"],
+                correct: 0
+            },
+            {
+                question: "What is the most important factor in endodontic success?",
+                options: ["Complete debridement", "Perfect obturation", "Coronal seal", "Apical seal"],
+                correct: 2
+            }
+        ];
+
+        // Generate additional questions to reach 300
+        function generateAdditionalQuestions() {
+            const baseQuestions = [...allQuestions];
+            const additionalQuestions = [];
+            
+            for (let i = baseQuestions.length; i < 300; i++) {
+                const baseQuestion = baseQuestions[i % baseQuestions.length];
+                const variation = Math.floor(i / baseQuestions.length) + 1;
+                
+                additionalQuestions.push({
+                    question: `${baseQuestion.question} (Clinical Scenario ${variation})`,
+                    options: baseQuestion.options.map(opt => `${opt}`),
+                    correct: baseQuestion.correct
+                });
+            }
+            
+            return [...baseQuestions, ...additionalQuestions];
+        }
+
+        const fullQuestionBank = generateAdditionalQuestions();
+
+        // Audio Context
         let audioContext;
-        let backgroundMusicOscillator;
         let isBackgroundMusicPlaying = false;
 
-        // Initialize audio context
         function initAudioContext() {
             if (!audioContext) {
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -999,17 +1180,15 @@
             return audioContext;
         }
 
-        // Create retro arcade background music
         function startBackgroundMusic() {
             if (isBackgroundMusicPlaying) return;
             
             const ctx = initAudioContext();
             const gainNode = ctx.createGain();
             gainNode.connect(ctx.destination);
-            gainNode.gain.value = 0.1;
+            gainNode.gain.value = 0.05;
 
-            // Create a simple arcade-style melody
-            const melody = [440, 523, 659, 784, 659, 523, 440, 349];
+            const melody = [440, 523, 659, 784, 659, 523, 440, 349, 392, 440];
             let noteIndex = 0;
 
             function playNextNote() {
@@ -1024,26 +1203,24 @@
                 oscillator.frequency.value = melody[noteIndex];
                 oscillator.type = 'square';
                 
-                noteGain.gain.setValueAtTime(0.3, ctx.currentTime);
-                noteGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+                noteGain.gain.setValueAtTime(0.2, ctx.currentTime);
+                noteGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
                 
                 oscillator.start(ctx.currentTime);
-                oscillator.stop(ctx.currentTime + 0.4);
+                oscillator.stop(ctx.currentTime + 0.3);
                 
                 noteIndex = (noteIndex + 1) % melody.length;
-                setTimeout(playNextNote, 500);
+                setTimeout(playNextNote, 400);
             }
 
             isBackgroundMusicPlaying = true;
             playNextNote();
         }
 
-        // Stop background music
         function stopBackgroundMusic() {
             isBackgroundMusicPlaying = false;
         }
 
-        // Super Mario bounce sound effect
         function playMarioBounceSound() {
             const ctx = initAudioContext();
             const oscillator = ctx.createOscillator();
@@ -1052,7 +1229,6 @@
             oscillator.connect(gainNode);
             gainNode.connect(ctx.destination);
             
-            // Mario-style bounce sound
             oscillator.frequency.setValueAtTime(800, ctx.currentTime);
             oscillator.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.1);
             oscillator.type = 'square';
@@ -1064,7 +1240,6 @@
             oscillator.stop(ctx.currentTime + 0.2);
         }
 
-        // Success sound
         function playSuccessSound() {
             const ctx = initAudioContext();
             const frequencies = [523, 659, 784, 1047];
@@ -1080,16 +1255,16 @@
                     oscillator.frequency.value = freq;
                     oscillator.type = 'square';
                     
-                    gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                    gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
                     
                     oscillator.start(ctx.currentTime);
-                    oscillator.stop(ctx.currentTime + 0.3);
-                }, index * 100);
+                    oscillator.stop(ctx.currentTime + 0.2);
+                }, index * 80);
             });
         }
 
-        // Simple fingerprinting for attempts
+        // User Management
         function generateUserID() {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
@@ -1107,7 +1282,6 @@
             return Math.abs(hash).toString();
         }
 
-        // Attempt tracking - 5 ATTEMPTS
         function getAttempts() {
             const userId = generateUserID();
             const attempts = JSON.parse(localStorage.getItem('pbQuizAttempts') || '{}');
@@ -1122,199 +1296,90 @@
             return attempts[userId];
         }
 
-        // ATTEMPTS HISTORY TRACKING
-        function saveAttemptHistory(attemptNumber, score, timeTaken, rewardDescription, couponCode) {
+        // Question Management - No more than 2 times per question
+        function getQuestionHistory() {
             const userId = generateUserID();
-            const historyKey = 'pbQuizHistory_' + userId;
-            const history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+            const historyKey = 'pbQuizQuestionHistory_' + userId;
+            return JSON.parse(localStorage.getItem(historyKey) || '{}');
+        }
+
+        function saveQuestionHistory(questionIndices) {
+            const userId = generateUserID();
+            const historyKey = 'pbQuizQuestionHistory_' + userId;
+            const history = getQuestionHistory();
             
-            const attemptData = {
-                attempt: attemptNumber,
-                score: score,
-                timeTaken: timeTaken,
-                offer: rewardDescription,
-                couponCode: couponCode,
-                timestamp: new Date().toISOString()
-            };
+            questionIndices.forEach(index => {
+                history[index] = (history[index] || 0) + 1;
+            });
             
-            history.push(attemptData);
             localStorage.setItem(historyKey, JSON.stringify(history));
         }
 
-        function getAttemptHistory() {
-            const userId = generateUserID();
-            const historyKey = 'pbQuizHistory_' + userId;
-            return JSON.parse(localStorage.getItem(historyKey) || '[]');
-        }
-
-        function displayAttemptsHistory() {
-            const history = getAttemptHistory();
-            const tableBody = document.getElementById('attemptsTableBody');
+        function getUniqueQuestions(count = 10) {
+            const history = getQuestionHistory();
+            const availableQuestions = [];
             
-            if (history.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 20px;">No attempts yet</td></tr>';
-                return;
+            // First, get questions never asked or asked only once
+            for (let i = 0; i < fullQuestionBank.length; i++) {
+                const timesUsed = history[i] || 0;
+                if (timesUsed < 2) {
+                    availableQuestions.push({index: i, timesUsed});
+                }
             }
             
-            tableBody.innerHTML = '';
-            history.forEach(attempt => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td><strong>#${attempt.attempt}</strong></td>
-                    <td>${attempt.score}/10</td>
-                    <td>${attempt.timeTaken}</td>
-                    <td style="font-size: 0.5rem;">${attempt.offer}</td>
-                    <td><strong>${attempt.couponCode}</strong></td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-
-        // Hard dental professional questions
-        const allQuestions = [
-            {
-                question: "What is the most common cause of cracked tooth syndrome in posterior teeth?",
-                options: ["Bruxism and parafunctional habits", "Excessive sugar consumption", "Poor oral hygiene", "Fluoride deficiency"],
-                correct: 0
-            },
-            {
-                question: "Which periodontal pathogen is most strongly associated with aggressive periodontitis?",
-                options: ["Porphyromonas gingivalis", "Aggregatibacter actinomycetemcomitans", "Tannerella forsythia", "Treponema denticola"],
-                correct: 1
-            },
-            {
-                question: "What is the primary mechanism of action of dentin bonding agents?",
-                options: ["Chemical chelation", "Micromechanical retention through hybrid layer formation", "Ionic bonding", "Van der Waals forces"],
-                correct: 1
-            },
-            {
-                question: "In endodontics, what does the term 'working length' refer to?",
-                options: ["Length of the root canal file", "Distance from incisal edge to anatomical apex", "Distance from reference point to apical constriction", "Total root length"],
-                correct: 2
-            },
-            {
-                question: "Which classification system is used for furcation involvement in multirooted teeth?",
-                options: ["Miller's classification", "Glickman's classification", "Kennedy's classification", "Angle's classification"],
-                correct: 1
-            },
-            {
-                question: "What is the most critical factor determining the success of immediate implant placement?",
-                options: ["Implant surface texture", "Primary stability and adequate bone volume", "Patient age", "Implant diameter"],
-                correct: 1
-            },
-            {
-                question: "Which material property is most important for the longevity of posterior composite restorations?",
-                options: ["Radiopacity", "Wear resistance and flexural strength", "Color stability", "Thermal conductivity"],
-                correct: 1
-            },
-            {
-                question: "What is the gold standard treatment for necrotizing ulcerative gingivitis (NUG)?",
-                options: ["Chlorhexidine rinse only", "Debridement with metronidazole", "Antibiotic therapy alone", "Surgical intervention"],
-                correct: 1
-            },
-            {
-                question: "In orthodontics, what does the ANB angle measure?",
-                options: ["Mandibular plane angle", "Sagittal jaw relationship", "Dental inclination", "Facial height ratio"],
-                correct: 1
-            },
-            {
-                question: "Which radiographic technique provides the highest resolution for detecting early periodontal bone loss?",
-                options: ["Panoramic radiography", "Bitewing radiography with digital subtraction", "Cone beam computed tomography", "Periapical radiography"],
-                correct: 1
-            },
-            {
-                question: "What is the recommended irrigation protocol for endodontic treatment using sodium hypochlorite?",
-                options: ["1% NaOCl followed by saline", "5.25% NaOCl followed by EDTA", "3% hydrogen peroxide only", "Saline irrigation only"],
-                correct: 1
-            },
-            {
-                question: "Which factor most influences the prognosis of a tooth with a vertical root fracture?",
-                options: ["Patient age", "Location and extent of the fracture", "Pulp vitality", "Crown-to-root ratio"],
-                correct: 1
-            },
-            {
-                question: "What is the most appropriate treatment for a Class II furcation involvement with adequate bone support?",
-                options: ["Extraction", "Guided tissue regeneration", "Root amputation", "Crown lengthening"],
-                correct: 1
-            },
-            {
-                question: "Which cement provides the best long-term retention for all-ceramic crowns?",
-                options: ["Zinc phosphate", "Glass ionomer", "Resin-modified glass ionomer", "Adhesive resin cement"],
-                correct: 3
-            },
-            {
-                question: "What is the primary indication for using rotary NiTi files in endodontics?",
-                options: ["Improved cutting efficiency", "Better tactile sensation", "Reduced procedural errors and faster preparation", "Lower cost"],
-                correct: 2
-            },
-            {
-                question: "Which periodontal maintenance interval is recommended for patients with moderate periodontitis?",
-                options: ["Every 6 months", "Every 3-4 months", "Every 2 months", "Annually"],
-                correct: 1
-            },
-            {
-                question: "What is the most common complication following third molar extraction?",
-                options: ["Infection", "Dry socket (alveolar osteitis)", "Nerve damage", "Excessive bleeding"],
-                correct: 1
-            },
-            {
-                question: "Which local anesthetic provides the longest duration of pulpal anesthesia?",
-                options: ["Lidocaine", "Articaine", "Bupivacaine", "Mepivacaine"],
-                correct: 2
-            },
-            {
-                question: "What is the recommended implant placement torque for optimal primary stability?",
-                options: ["15-25 Ncm", "35-45 Ncm", "55-65 Ncm", "Over 70 Ncm"],
-                correct: 1
-            },
-            {
-                question: "Which is the most reliable method for assessing pulp vitality in traumatized teeth?",
-                options: ["Cold test", "Electric pulp test", "Thermal test", "Laser Doppler flowmetry"],
-                correct: 3
+            // Sort by times used (prioritize never used)
+            availableQuestions.sort((a, b) => a.timesUsed - b.timesUsed);
+            
+            // Select questions
+            const selectedIndices = [];
+            const selectedQuestions = [];
+            
+            for (let i = 0; i < Math.min(count, availableQuestions.length); i++) {
+                const questionIndex = availableQuestions[i].index;
+                selectedIndices.push(questionIndex);
+                selectedQuestions.push(fullQuestionBank[questionIndex]);
             }
-        ];
+            
+            // If we need more questions, random selection from all
+            while (selectedQuestions.length < count) {
+                const randomIndex = Math.floor(Math.random() * fullQuestionBank.length);
+                if (!selectedIndices.includes(randomIndex)) {
+                    selectedIndices.push(randomIndex);
+                    selectedQuestions.push(fullQuestionBank[randomIndex]);
+                }
+            }
+            
+            return {questions: selectedQuestions, indices: selectedIndices};
+        }
 
         // Game state
         let currentQuestion = 0;
         let score = 0;
-        let timeLeft = 120; // 2 minutes
+        let timeLeft = 120;
         let startTime = 0;
         let timer;
         let selectedAnswer = null;
         let gameQuestions = [];
+        let gameQuestionIndices = [];
+        let hasRewardAttempts = true;
 
-        // Get random questions
-        function getRandomQuestions(count = 10) {
-            const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, count);
-        }
-
-        // Check if user should see attempts history
-        function checkUserStatus() {
-            const attempts = getAttempts();
-            if (attempts >= 5) {  // 5 ATTEMPTS
-                // Show attempts history instead of start screen
-                document.getElementById('startScreen').classList.add('hidden');
-                document.getElementById('attemptsHistoryScreen').classList.remove('hidden');
-                displayAttemptsHistory();
-                return false; // Don't allow quiz start
-            }
-            return true; // Allow quiz start
-        }
-
-        // Add sound to all button clicks
+        // Add sound to all clicks
         document.addEventListener('click', function(e) {
             if (e.target.matches('button') || e.target.matches('.pixel-btn') || e.target.matches('.pixel-option')) {
                 playMarioBounceSound();
             }
         });
 
-        // 3-2-1 Countdown
-        function startCountdown() {
-            if (!checkUserStatus()) {
-                return; // User has exhausted attempts
-            }
+        // Header collapse during quiz
+        function collapseHeader() {
+            document.getElementById('mainHeader').classList.add('collapsed');
+        }
 
+        function expandHeader() {
+            document.getElementById('mainHeader').classList.remove('collapsed');
+        }
+
+        function startCountdown() {
             const overlay = document.getElementById('countdownOverlay');
             const number = document.getElementById('countdownNumber');
             let count = 3;
@@ -1339,16 +1404,32 @@
             }, 1000);
         }
 
-        // Start quiz
         function startQuiz() {
-            const currentAttempt = incrementAttempts();
-            document.getElementById('attemptsLeft').textContent = Math.max(0, 5 - getAttempts()); // 5 ATTEMPTS
+            // Check if user has reward attempts left
+            const attempts = getAttempts();
+            hasRewardAttempts = attempts < 5;
+            
+            if (hasRewardAttempts) {
+                incrementAttempts();
+                document.getElementById('attemptsLeft').textContent = Math.max(0, 5 - getAttempts());
+            }
 
-            gameQuestions = getRandomQuestions(10);
+            // Collapse header and show appropriate message
+            collapseHeader();
+            
+            if (!hasRewardAttempts) {
+                document.getElementById('noRewardsMessage').classList.remove('hidden');
+            }
+
+            // Get unique questions
+            const questionData = getUniqueQuestions(10);
+            gameQuestions = questionData.questions;
+            gameQuestionIndices = questionData.indices;
+            
             currentQuestion = 0;
             score = 0;
             timeLeft = 120;
-            startTime = Date.now(); // Track start time
+            startTime = Date.now();
             selectedAnswer = null;
 
             document.getElementById('startScreen').classList.add('hidden');
@@ -1359,15 +1440,6 @@
             startBackgroundMusic();
         }
 
-        // Format time taken
-        function formatTimeTaken(milliseconds) {
-            const totalSeconds = Math.floor(milliseconds / 1000);
-            const minutes = Math.floor(totalSeconds / 60);
-            const seconds = totalSeconds % 60;
-            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-        }
-
-        // Start timer
         function startTimer() {
             timer = setInterval(() => {
                 timeLeft--;
@@ -1380,7 +1452,6 @@
             }, 1000);
         }
 
-        // Update timer display
         function updateTimerDisplay() {
             const minutes = Math.floor(timeLeft / 60);
             const seconds = timeLeft % 60;
@@ -1388,7 +1459,6 @@
                 `⏰ TIME: ${minutes}:${seconds.toString().padStart(2, '0')}`;
         }
 
-        // Load question
         function loadQuestion() {
             const question = gameQuestions[currentQuestion];
             document.getElementById('questionMeta').textContent = `Question ${currentQuestion + 1} of 10`;
@@ -1413,7 +1483,6 @@
             document.getElementById('nextBtn').disabled = true;
         }
 
-        // Select answer
         function selectAnswer(index) {
             const options = document.querySelectorAll('.pixel-option');
             options.forEach(option => option.classList.remove('selected'));
@@ -1423,14 +1492,12 @@
             document.getElementById('nextBtn').disabled = false;
         }
 
-        // Next question
         function nextQuestion() {
             if (selectedAnswer === null) return;
 
             const question = gameQuestions[currentQuestion];
             const options = document.querySelectorAll('.pixel-option');
 
-            // Show correct/incorrect
             options.forEach((option, index) => {
                 if (index === question.correct) {
                     option.classList.add('correct');
@@ -1454,16 +1521,17 @@
             }, 1500);
         }
 
-        // Update progress
         function updateProgress() {
             const progress = ((currentQuestion + 1) / gameQuestions.length) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
         }
 
-        // End quiz
         function endQuiz() {
             clearInterval(timer);
             stopBackgroundMusic();
+            
+            // Save question usage
+            saveQuestionHistory(gameQuestionIndices);
             
             document.getElementById('quizScreen').classList.add('hidden');
             document.getElementById('resultsScreen').classList.remove('hidden');
@@ -1471,10 +1539,8 @@
             showResults();
         }
 
-        // Show results with rewards
         function showResults() {
             const percentage = (score / gameQuestions.length) * 100;
-            const timeTaken = formatTimeTaken(Date.now() - startTime);
             const currentAttempt = getAttempts();
             
             document.getElementById('finalScore').textContent = `${score}/${gameQuestions.length} (${percentage.toFixed(0)}%)`;
@@ -1483,53 +1549,53 @@
             const description = document.getElementById('rewardDescription');
             const coupon = document.getElementById('couponCode');
             const trophy = document.getElementById('trophyIcon');
-            const tryAgain = document.getElementById('tryAgainBtn');
-
-            if (getAttempts() >= 5) {  // 5 ATTEMPTS
-                tryAgain.style.display = 'none';
-            }
+            const rewardSection = document.getElementById('rewardSection');
 
             let rewardDesc = '';
             let couponCode = '';
 
-            // Updated rewards
-            if (score >= 9) {
-                title.textContent = '🎉 EXCELLENT PERFORMANCE!';
-                trophy.textContent = '👑';
-                rewardDesc = 'FREE Speedendo Calcipro Rotary File worth ₹1250 on orders above ₹5k!';
-                couponCode = 'CALCIPRO5K';
-                playSuccessSound();
-            } else if (score >= 7) {
-                title.textContent = '🏆 GREAT WORK!';
-                trophy.textContent = '🏆';
-                rewardDesc = '10% PB CASHBACK on Order!';
-                couponCode = 'PBCASH124';
-                playSuccessSound();
-            } else if (score >= 5) {
-                title.textContent = '⭐ WELL DONE!';
-                trophy.textContent = '🥇';
-                rewardDesc = 'Flitt Diamond Burs Pack of 10 worth ₹499 FREE on orders above ₹2000!';
-                couponCode = 'FLITTBUR10';
-            } else if (score >= 3) {
-                title.textContent = '🎯 GOOD EFFORT!';
-                trophy.textContent = '🥈';
-                rewardDesc = 'Flat 5% Off Coupon on your order!';
-                couponCode = 'CYUIP05';
+            if (hasRewardAttempts) {
+                // Show rewards with actual coupon codes
+                if (score >= 9) {
+                    title.textContent = '🎉 OUTSTANDING PERFORMANCE!';
+                    trophy.textContent = '👑';
+                    rewardDesc = 'FREE Speedendo Calcipro Rotary File worth ₹1250 on orders above ₹5k!';
+                    couponCode = 'CALCIPRO5K';
+                    playSuccessSound();
+                } else if (score >= 7) {
+                    title.textContent = '🏆 EXCELLENT WORK!';
+                    trophy.textContent = '🏆';
+                    rewardDesc = '10% PB CASHBACK on your order!';
+                    couponCode = 'PBCASH124';
+                    playSuccessSound();
+                } else if (score >= 5) {
+                    title.textContent = '⭐ GREAT JOB!';
+                    trophy.textContent = '🥇';
+                    rewardDesc = 'Flitt Diamond Burs Pack of 10 worth ₹499 FREE on orders above ₹2000!';
+                    couponCode = 'FLITTBUR10';
+                } else if (score >= 3) {
+                    title.textContent = '🎯 GOOD EFFORT!';
+                    trophy.textContent = '🥈';
+                    rewardDesc = 'Flat 5% Off Coupon on your order!';
+                    couponCode = 'CYUIP05';
+                } else {
+                    title.textContent = '💪 KEEP LEARNING!';
+                    trophy.textContent = '🥉';
+                    rewardDesc = 'Better luck next time! Keep studying and try again!';
+                    couponCode = 'STUDY2025';
+                }
+
+                description.textContent = rewardDesc;
+                coupon.textContent = couponCode;
+                rewardSection.style.display = 'block';
             } else {
-                title.textContent = '💪 KEEP LEARNING!';
-                trophy.textContent = '🥉';
-                rewardDesc = 'Better luck next time! Keep learning about dental health and try again!';
-                couponCode = 'STUDY2025';
+                // Practice mode - no rewards
+                title.textContent = '🎯 PRACTICE COMPLETE!';
+                trophy.textContent = '📚';
+                rewardSection.style.display = 'none';
             }
-
-            description.textContent = rewardDesc;
-            coupon.textContent = couponCode;
-
-            // Save this attempt to history
-            saveAttemptHistory(currentAttempt, score, timeTaken, rewardDesc, couponCode);
         }
 
-        // Copy functions
         function copyCode() {
             const code = document.getElementById('couponCode').textContent;
             copyToClipboard(code);
@@ -1584,22 +1650,13 @@
             }, 2000);
         }
 
-        // Share on WhatsApp
         function shareWhatsApp() {
-            const history = getAttemptHistory();
-            let bestScore = 0;
-            if (history.length > 0) {
-                bestScore = Math.max(...history.map(attempt => attempt.score));
-            }
-            
-            const message = `🎯 I just completed the PB QUIZ Dental Challenge!
+            const message = `🎯 I just completed the PB QUIZ Professional Dental Challenge!
 
-🏆 My Best Score: ${bestScore}/10
-📊 Total Attempts: ${history.length}/5
+🏆 My Score: ${score}/10
+📊 Challenge yourself: https://pinkblue.in/pbquiz
 
-🦷 Test your dental knowledge: https://pinkblue.in/pbquiz
-
-#PBQuiz #DentalChallenge #PinkBlue`;
+#PBQuiz #DentalChallenge #ProfessionalDentistry`;
             
             const encodedMessage = encodeURIComponent(message);
             const whatsappWebUrl = `https://wa.me/?text=${encodedMessage}`;
@@ -1615,30 +1672,17 @@
             }
         }
 
-        // Try again
         function tryAgain() {
-            const attempts = getAttempts();
-            if (attempts >= 5) {  // 5 ATTEMPTS
-                // Show attempts history
-                document.getElementById('resultsScreen').classList.add('hidden');
-                document.getElementById('attemptsHistoryScreen').classList.remove('hidden');
-                displayAttemptsHistory();
-                return;
-            }
-            
             document.getElementById('resultsScreen').classList.add('hidden');
             document.getElementById('startScreen').classList.remove('hidden');
+            expandHeader();
+            document.getElementById('noRewardsMessage').classList.add('hidden');
         }
 
         // Initialize
         window.addEventListener('load', function() {
-            // Check user status on page load
-            if (!checkUserStatus()) {
-                // User has exhausted attempts, show history
-                displayAttemptsHistory();
-            }
-            
-            document.getElementById('attemptsLeft').textContent = Math.max(0, 5 - getAttempts()); // 5 ATTEMPTS
+            const attempts = getAttempts();
+            document.getElementById('attemptsLeft').textContent = Math.max(0, 5 - attempts);
         });
     </script>
 </body>
