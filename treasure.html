@@ -757,7 +757,7 @@
             <!-- Stats Row -->
             <div class="pixel-stats">
                 <div class="pixel-stat">
-                    <span class="stat-number" id="attemptsLeft">5</span>
+                    <span class="stat-number" id="attemptsLeft">2</span>
                     <span class="stat-label">ATTEMPTS</span>
                 </div>
                 <div class="pixel-stat">
@@ -793,7 +793,7 @@
                     <li>⏰ You have 2 minutes to complete</li>
                     <li>🎯 Higher scores unlock better rewards</li>
                     <li>🔥 Each question has one correct answer</li>
-                    <li>💪 Maximum 5 attempts with rewards</li>
+                    <li>💪 Maximum 2 attempts with rewards</li>
                     <li>🎁 Continue playing after attempts for practice</li>
                     <li>📚 300+ questions that change every time</li>
                 </ul>
@@ -1407,11 +1407,11 @@
         function startQuiz() {
             // Check if user has reward attempts left
             const attempts = getAttempts();
-            hasRewardAttempts = attempts < 5;
+            hasRewardAttempts = attempts < 2;
             
             if (hasRewardAttempts) {
                 incrementAttempts();
-                document.getElementById('attemptsLeft').textContent = Math.max(0, 5 - getAttempts());
+                document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - getAttempts());
             }
 
             // Collapse header and show appropriate message
@@ -1560,19 +1560,19 @@
                     title.textContent = '🎉 OUTSTANDING PERFORMANCE!';
                     trophy.textContent = '👑';
                     rewardDesc = 'FREE Speedendo Calcipro Rotary File worth ₹1250 on orders above ₹5k!';
-                    couponCode = 'CALCIPRO05';
+                    couponCode = 'MNQZL';
                     playSuccessSound();
                 } else if (score >= 7) {
                     title.textContent = '🏆 EXCELLENT WORK!';
                     trophy.textContent = '🏆';
                     rewardDesc = '10% PB CASHBACK on your order!';
-                    couponCode = 'PBCASH124';
+                    couponCode = 'ZUVXZ';
                     playSuccessSound();
                 } else if (score >= 5) {
                     title.textContent = '⭐ GREAT JOB!';
                     trophy.textContent = '🥇';
                     rewardDesc = 'Flitt Diamond Burs Pack of 10 worth ₹499 FREE on orders above ₹2000!';
-                    couponCode = 'FLITTBUR10';
+                    couponCode = 'AKMNV';
                 } else if (score >= 3) {
                     title.textContent = '🎯 GOOD EFFORT!';
                     trophy.textContent = '🥈';
@@ -1682,7 +1682,7 @@
         // Initialize
         window.addEventListener('load', function() {
             const attempts = getAttempts();
-            document.getElementById('attemptsLeft').textContent = Math.max(0, 5 - attempts);
+            document.getElementById('attemptsLeft').textContent = Math.max(0, 2 - attempts);
         });
     </script>
 </body>
